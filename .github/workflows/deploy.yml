@@ -20,6 +20,7 @@ jobs:
 
       - run: bun test
 
-      # - uses: JS-DevTools/npm-publish@v3
-      #   with:
-      #     token: ${{ secrets.NPM_TOKEN }}
+      # https://www.npmjs.com/settings/aabccd021/tokens/granular-access-tokens/new
+      - uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
