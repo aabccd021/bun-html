@@ -46,7 +46,7 @@ function serializeAttribute(
   if (value instanceof URL) {
     return `${key}="${value.href}"`;
   }
-  value satisfies never
+  value satisfies never;
   throw new Error(`Unsupported attribute: ${key}`);
 }
 
