@@ -1,0 +1,35 @@
+{
+  "name": "bun-html",
+  "description": "HTML DSL and renderer for Bun",
+  "version": "1.0.1",
+  "module": "index.ts",
+  "type": "module",
+  "author": "aabccd021",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabccd021/bun-html.git"
+  },
+  "keywords": [
+    "bun",
+    "html",
+    "web"
+  ],
+  "bugs": {
+    "url": "https://github.com/aabccd021/bun-html/issues"
+  },
+  "homepage": "https://github.com/aabccd021/bun-html#readme",
+  "files": [
+    "index.ts"
+  ],
+  "scripts": {
+    "prettier-check": "prettier --check .",
+    "typescript-check": "tsc"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "playwright": "1.47.2",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  }
+}
