@@ -6,14 +6,20 @@ type EventAttributes =
   | keyof michi.GlobalEvents<EventTarget>
   | keyof michi.WindowEvents<unknown>;
 
-// Exclude event attributes
+// Exclude event attributes and replace style with string
 type ElementAttributes = {
-  readonly [Tag in HTMLTags]: Omit<michi.HTMLElements[Tag], EventAttributes>;
+  readonly [Tag in HTMLTags]: Omit<
+    michi.HTMLElements[Tag],
+    EventAttributes | "style"
+  > & { style?: string };
 };
 
-type AttributeValues = michi.ValueSets[keyof michi.ValueSets];
+type AttributeValues = string | number | boolean | URL | null | undefined;
 
 export type Element =
+  | string
+  | false
+  | undefined
   | {
       readonly tag: HTMLTags;
       readonly attributes: Record<string, AttributeValues>;
@@ -22,20 +28,14 @@ export type Element =
   | {
       readonly tag: "unsafeHtml";
       readonly value: string;
-    }
-  | string
-  | false
-  | undefined;
+    };
 
-function serializeAttribute(key: string, value: AttributeValues): string {
+function serializeAttribute(
+  key: string,
+  value: Exclude<AttributeValues, false | undefined | null>,
+): string {
   if (value === true) {
     return key;
-  }
-  if (value === false) {
-    return "";
-  }
-  if (value === undefined) {
-    return "";
   }
   if (typeof value === "string") {
     return `${key}="${Bun.escapeHTML(value)}"`;
@@ -46,7 +46,8 @@ function serializeAttribute(key: string, value: AttributeValues): string {
   if (value instanceof URL) {
     return `${key}="${value.href}"`;
   }
-  throw new Error("Unsupported value");
+  value satisfies never
+  throw new Error(`Unsupported attribute: ${key}`);
 }
 
 export function render(element: Element): string {
@@ -63,7 +64,11 @@ export function render(element: Element): string {
     return element.value;
   }
   const attributes = Object.entries(element.attributes)
-    .map(([key, val]) => ` ${serializeAttribute(key, val)}`)
+    .map(([key, val]) =>
+      val === false || val === undefined || val === null
+        ? ""
+        : ` ${serializeAttribute(key, val)}`,
+    )
     .join("");
   if (element.children === undefined) {
     return `<${element.tag}${attributes}>`;
