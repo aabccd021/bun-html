@@ -1,5 +1,7 @@
 import type * as michi from "@michijs/htmltype";
 
+// TODO: generate directly from https://github.com/microsoft/vscode-custom-data/blob/main/web-data/data/browsers.html-data.json
+
 type HTMLTags = keyof michi.HTMLElements;
 
 type EventAttributes =
