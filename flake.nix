@@ -13,6 +13,8 @@
     devShells.x86_64-linux.default = pkgs.mkShellNoCC {
       buildInputs = [
         pkgs.bun
+        pkgs.biome
+        pkgs.typescript
       ];
     };
 

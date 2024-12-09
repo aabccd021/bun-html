@@ -24,6 +24,7 @@ test("escaped html", () => {
 });
 
 test("conditional", () => {
+  // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
   const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
   expect(render(element)).toBe("<p>Hello, world!</p>");
 });

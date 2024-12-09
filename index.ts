@@ -2,7 +2,7 @@ import type * as michi from "@michijs/htmltype";
 
 // TODO: generate directly from https://github.com/microsoft/vscode-custom-data/blob/main/web-data/data/browsers.html-data.json
 
-type HTMLTags = keyof michi.HTMLElements;
+type HtmlTags = keyof michi.HTMLElements;
 
 type EventAttributes =
   | keyof michi.GlobalEvents<EventTarget>
@@ -10,7 +10,7 @@ type EventAttributes =
 
 // Exclude event attributes and replace style with string
 type ElementAttributes = {
-  readonly [Tag in HTMLTags]: Omit<
+  readonly [Tag in HtmlTags]: Omit<
     michi.HTMLElements[Tag],
     EventAttributes | "style"
   > & { style?: string };
@@ -23,7 +23,7 @@ export type Element =
   | false
   | undefined
   | {
-      readonly tag: HTMLTags;
+      readonly tag: HtmlTags;
       readonly attributes: Record<string, AttributeValues>;
       readonly children: readonly Element[] | undefined;
     }
@@ -32,49 +32,55 @@ export type Element =
       readonly value: string;
     };
 
-function serializeAttribute(
-  key: string,
-  value: Exclude<AttributeValues, false | undefined | null>,
-): string {
+function serializeAttribute([key, value]: readonly [
+  string,
+  AttributeValues,
+]): string {
+  if (value === false || value === undefined || value === null) {
+    return "";
+  }
+
   if (value === true) {
-    return key;
+    return ` ${key}`;
   }
+
   if (typeof value === "string") {
-    return `${key}="${Bun.escapeHTML(value)}"`;
+    return ` ${key}="${Bun.escapeHTML(value)}"`;
   }
+
   if (typeof value === "number") {
-    return `${key}="${value}"`;
+    return ` ${key}="${value}"`;
   }
+
   if (value instanceof URL) {
-    return `${key}="${value.href}"`;
+    return ` ${key}="${value.href}"`;
   }
+
   value satisfies never;
   throw new Error(`Unsupported attribute: ${key}`);
 }
 
 export function render(element: Element): string {
+  if (element === false || element === undefined) {
+    return "";
+  }
+
   if (typeof element === "string") {
     return Bun.escapeHTML(element);
   }
-  if (element === false) {
-    return "";
-  }
-  if (element === undefined) {
-    return "";
-  }
+
   if (element.tag === "unsafeHtml") {
     return element.value;
   }
+
   const attributes = Object.entries(element.attributes)
-    .map(([key, val]) =>
-      val === false || val === undefined || val === null
-        ? ""
-        : ` ${serializeAttribute(key, val)}`,
-    )
+    .map(serializeAttribute)
     .join("");
+
   if (element.children === undefined) {
     return `<${element.tag}${attributes}>`;
   }
+
   const children = element.children.map(render).join("");
   return `<${element.tag}${attributes}>${children}</${element.tag}>`;
 }
@@ -85,7 +91,7 @@ export const unsafeHtml = (value: string): Element => ({
 });
 
 const el =
-  <Tag extends HTMLTags>(tag: Tag) =>
+  <Tag extends HtmlTags>(tag: Tag) =>
   (
     attributes: ElementAttributes[Tag],
     children: readonly Element[],
@@ -96,7 +102,7 @@ const el =
   });
 
 const voidEl =
-  <Tag extends HTMLTags>(tag: Tag) =>
+  <Tag extends HtmlTags>(tag: Tag) =>
   (attributes: ElementAttributes[Tag]): Element => ({
     tag,
     attributes,
