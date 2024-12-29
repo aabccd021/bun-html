@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { a, button, div, meta, p, render, unsafeHtml } from "./index.ts";
+import { a, button, div, html, meta, p, render, unsafeHtml } from "./index.ts";
 
 test("simple element", () => {
   const element = p({ "data-hello": "world" }, ["Hello, world!"]);
@@ -74,4 +74,9 @@ test("unsupported attribute", () => {
   // @ts-expect-error
   const element = p({ "data-boolean": { foo: "invalid" } }, ["Hello, world!"]);
   expect(() => render(element)).toThrow("Unsupported attribute: data-boolean");
+});
+
+test("html doctype shown", () => {
+  const element = html({}, ["Hello, world!"]);
+  expect(render(element)).toBe("<!DOCTYPE html><html>Hello, world!</html>");
 });

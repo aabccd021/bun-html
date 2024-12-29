@@ -26,6 +26,7 @@ export type Element =
       readonly tag: HtmlTags;
       readonly attributes: Record<string, AttributeValues>;
       readonly children: readonly Element[] | undefined;
+      readonly beforeTag: string;
     }
   | {
       readonly tag: "unsafeHtml";
@@ -78,11 +79,11 @@ export function render(element: Element): string {
     .join("");
 
   if (element.children === undefined) {
-    return `<${element.tag}${attributes}>`;
+    return `${element.beforeTag}<${element.tag}${attributes}>`;
   }
 
   const children = element.children.map(render).join("");
-  return `<${element.tag}${attributes}>${children}</${element.tag}>`;
+  return `${element.beforeTag}<${element.tag}${attributes}>${children}</${element.tag}>`;
 }
 
 export const unsafeHtml = (value: string): Element => ({
@@ -99,6 +100,7 @@ const el =
     tag,
     attributes,
     children,
+    beforeTag: "",
   });
 
 const voidEl =
@@ -107,7 +109,18 @@ const voidEl =
     tag,
     attributes,
     children: undefined,
+    beforeTag: "",
   });
+
+export const html = (
+  attributes: ElementAttributes["html"],
+  children: readonly Element[],
+): Element => ({
+  tag: "html",
+  attributes,
+  children,
+  beforeTag: "<!DOCTYPE html>",
+});
 
 export const a = el("a");
 export const address = el("address");
@@ -156,7 +169,6 @@ export const head = el("head");
 export const header = el("header");
 export const hgroup = el("hgroup");
 export const hr = voidEl("hr");
-export const html = el("html");
 export const i = el("i");
 export const iframe = el("iframe");
 export const img = voidEl("img");
