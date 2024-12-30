@@ -18,6 +18,13 @@ type ElementAttributes = {
 
 type AttributeValues = string | number | boolean | URL | null | undefined;
 
+type ExtraAttributes = readonly [string, string][];
+
+type AttributesWithExtra = { _extra?: ExtraAttributes } & Record<
+  string,
+  AttributeValues
+>;
+
 export type Element =
   | string
   | false
@@ -25,8 +32,9 @@ export type Element =
   | {
       readonly tag: HtmlTags;
       readonly attributes: Record<string, AttributeValues>;
-      readonly children: readonly Element[] | undefined;
-      readonly beforeTag: string;
+      readonly extraAttributes?: ExtraAttributes;
+      readonly children?: readonly Element[];
+      readonly beforeTag?: string;
     }
   | {
       readonly tag: "unsafeHtml";
@@ -75,6 +83,7 @@ export function render(element: Element): string {
   }
 
   const attributes = Object.entries(element.attributes)
+    .concat(element.extraAttributes ?? [])
     .map(serializeAttribute)
     .join("");
 
@@ -94,33 +103,47 @@ export const unsafeHtml = (value: string): Element => ({
 const el =
   <Tag extends HtmlTags>(tag: Tag) =>
   (
-    attributes: ElementAttributes[Tag],
+    attributes: ElementAttributes[Tag] & { _extra?: ExtraAttributes },
     children: readonly Element[],
-  ): Element => ({
-    tag,
-    attributes,
-    children,
-    beforeTag: "",
-  });
+  ): Element => {
+    const { _extra, ..._attributes }: AttributesWithExtra = attributes;
+    return {
+      tag,
+      attributes: _attributes,
+      extraAttributes: _extra,
+      children,
+      beforeTag: "",
+    };
+  };
 
 const voidEl =
   <Tag extends HtmlTags>(tag: Tag) =>
-  (attributes: ElementAttributes[Tag]): Element => ({
-    tag,
-    attributes,
-    children: undefined,
-    beforeTag: "",
-  });
+  (
+    attributes: ElementAttributes[Tag] & { _extra?: ExtraAttributes },
+  ): Element => {
+    const { _extra, ..._attributes }: AttributesWithExtra = attributes;
+    return {
+      tag,
+      attributes: _attributes,
+      extraAttributes: _extra,
+      children: undefined,
+      beforeTag: "",
+    };
+  };
 
 export const html = (
-  attributes: ElementAttributes["html"],
+  attributes: ElementAttributes["html"] & { _extra?: ExtraAttributes },
   children: readonly Element[],
-): Element => ({
-  tag: "html",
-  attributes,
-  children,
-  beforeTag: "<!DOCTYPE html>",
-});
+): Element => {
+  const { _extra, ..._attributes } = attributes;
+  return {
+    tag: "html",
+    attributes: _attributes,
+    extraAttributes: _extra,
+    children,
+    beforeTag: "<!DOCTYPE html>",
+  };
+};
 
 export const a = el("a");
 export const address = el("address");

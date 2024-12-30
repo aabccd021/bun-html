@@ -80,3 +80,11 @@ test("html doctype shown", () => {
   const element = html({}, ["Hello, world!"]);
   expect(render(element)).toBe("<!DOCTYPE html><html>Hello, world!</html>");
 });
+
+test("extra attributes", () => {
+  const element = meta({
+    charset: "utf-8",
+    _extra: [["og:title", "my title"]],
+  });
+  expect(render(element)).toBe('<meta charset="utf-8" og:title="my title">');
+});
