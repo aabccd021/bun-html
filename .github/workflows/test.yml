@@ -9,15 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - uses: DeterminateSystems/nix-installer-action@main
-
-      - uses: HatsuneMiku3939/direnv-action@v1
-
-      - run: bun install
-
-      - run: tsc
-
-      - run: biome check --error-on-warnings
-
-      - run: bun test
+      - run: nix flake check

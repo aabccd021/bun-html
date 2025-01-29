@@ -104,14 +104,14 @@ const el =
   <Tag extends HtmlTags>(tag: Tag) =>
   (
     attributes: ElementAttributes[Tag] & { _extra?: ExtraAttributes },
-    children: readonly Element[],
+    children?: readonly Element[],
   ): Element => {
     const { _extra, ..._attributes }: AttributesWithExtra = attributes;
     return {
       tag,
       attributes: _attributes,
       extraAttributes: _extra,
-      children,
+      children: children ?? [],
       beforeTag: "",
     };
   };
