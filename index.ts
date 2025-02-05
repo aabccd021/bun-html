@@ -100,12 +100,13 @@ export const unsafeHtml = (value: string): Element => ({
   value,
 });
 
+export type Attributes<Tag extends HtmlTags> = ElementAttributes[Tag] & {
+  _extra?: ExtraAttributes;
+};
+
 const el =
   <Tag extends HtmlTags>(tag: Tag) =>
-  (
-    attributes: ElementAttributes[Tag] & { _extra?: ExtraAttributes },
-    children?: readonly Element[],
-  ): Element => {
+  (attributes: Attributes<Tag>, children?: readonly Element[]): Element => {
     const { _extra, ..._attributes }: AttributesWithExtra = attributes;
     return {
       tag,
@@ -118,9 +119,7 @@ const el =
 
 const voidEl =
   <Tag extends HtmlTags>(tag: Tag) =>
-  (
-    attributes: ElementAttributes[Tag] & { _extra?: ExtraAttributes },
-  ): Element => {
+  (attributes: Attributes<Tag>): Element => {
     const { _extra, ..._attributes }: AttributesWithExtra = attributes;
     return {
       tag,

@@ -56,11 +56,32 @@
         touch $out
       '';
 
+      publish = pkgs.writeShellApplication {
+        name = "publish";
+        text = ''
+          published_version=$(npm view . version)
+          current_version=$(${pkgs.jq}/bin/jq -r .version package.json)
+          if [ "$published_version" = "$current_version" ]; then
+            echo "Version $current_version is already published"
+            exit 0
+          fi
+          echo "Publishing version $current_version"
+
+          nix flake check
+          NPM_TOKEN=''${NPM_TOKEN:-}
+          if [ -n "$NPM_TOKEN" ]; then
+            npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          fi
+          npm publish
+        '';
+      };
+
       packages = {
         formatting = treefmtEval.config.build.check self;
         tsc = tsc;
         biome = biome;
         nodeModules = nodeModules;
+        publish = publish;
         tests = tests;
       };
 
@@ -75,6 +96,11 @@
       packages.x86_64-linux = gcroot;
 
       formatter.x86_64-linux = treefmtEval.config.build.wrapper;
+
+      apps.x86_64-linux.publish = {
+        type = "app";
+        program = "${publish}/bin/publish";
+      };
 
       devShells.x86_64-linux.default = pkgs.mkShellNoCC {
         buildInputs = [
