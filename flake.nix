@@ -97,15 +97,5 @@
         type = "app";
         program = "${publish}/bin/publish";
       };
-
-      devShells.x86_64-linux.default = pkgs.mkShellNoCC {
-        buildInputs = [
-          pkgs.bun
-          pkgs.nodejs
-          pkgs.biome
-          pkgs.typescript
-        ];
-      };
-
     };
 }
