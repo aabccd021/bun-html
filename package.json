@@ -20,9 +20,9 @@
   "homepage": "https://github.com/aabccd021/bun-html#readme",
   "files": ["index.ts"],
   "devDependencies": {
-    "@types/bun": "^1.1.14"
+    "@types/bun": "latest"
   },
   "dependencies": {
-    "@michijs/htmltype": "^0.2.18"
+    "@michijs/htmltype": "latest"
   }
 }
