@@ -64,22 +64,21 @@
 
       publish = pkgs.writeShellApplication {
         name = "publish";
-        runtimeInputs = [ pkgs.jq ];
+        runtimeInputs = [ pkgs.jq pkgs.bun ];
         text = ''
-          published_version=$(npm view . version)
-          current_version=$(jq -r .version package.json)
+          repo_root=$(git rev-parse --show-toplevel)
+          current_version=$(jq --raw-output .version "$repo_root/package.json")
+          published_version=$(curl -s https://registry.npmjs.org/bun-html | 
+            jq --raw-output '.["dist-tags"].latest'
+          )
+
           if [ "$published_version" = "$current_version" ]; then
             echo "Version $current_version is already published"
             exit 0
           fi
-          echo "Publishing version $current_version"
-
+          
           nix flake check
-          NPM_TOKEN=''${NPM_TOKEN:-}
-          if [ -n "$NPM_TOKEN" ]; then
-            npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
-          fi
-          npm publish
+          bun publish
         '';
       };
 
