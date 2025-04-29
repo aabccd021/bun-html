@@ -1,7 +1,7 @@
 {
   "name": "bun-html",
   "description": "HTML DSL and renderer for Bun",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "module": "index.ts",
   "type": "module",
   "author": "aabccd021",
