@@ -70,12 +70,10 @@
           current_version=$(jq -r .version "$repo_root/package.json")
           name=$(jq -r .name "$repo_root/package.json")
           published_version=$(curl -s "https://registry.npmjs.org/$name" | jq -r '.["dist-tags"].latest')
-
           if [ "$published_version" = "$current_version" ]; then
             echo "Version $current_version is already published"
             exit 0
           fi
-          
           nix flake check
           bun publish
         '';
