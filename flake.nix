@@ -93,11 +93,8 @@
         ];
       };
 
-      scripts = {
+      packages = {
         publish = publish;
-      };
-
-      packages = scripts // {
         formatting = treefmtEval.config.build.check self;
         tsc = tsc;
         biome = biome;
@@ -116,14 +113,6 @@
       };
 
       formatter.x86_64-linux = treefmtEval.config.build.wrapper;
-
-      apps.x86_64-linux = builtins.mapAttrs
-        (name: script: {
-          type = "app";
-          program = pkgs.lib.getExe script;
-          meta.description = "Script ${name}";
-        })
-        scripts;
 
       devShells.x86_64-linux.default = devShell;
     };

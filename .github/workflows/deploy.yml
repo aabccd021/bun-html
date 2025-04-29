@@ -13,4 +13,4 @@ jobs:
       # https://www.npmjs.com/settings/aabccd021/tokens/granular-access-tokens/new
       - run: nix run .#publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_TOKEN: ${{ secrets.NPM_CONFIG_TOKEN }}
