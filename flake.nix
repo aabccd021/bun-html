@@ -64,7 +64,7 @@
 
       publish = pkgs.writeShellApplication {
         name = "publish";
-        runtimeInputs = [ pkgs.jq pkgs.bun ];
+        runtimeInputs = [ pkgs.jq pkgs.bun pkgs.curl ];
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
           current_version=$(jq -r .version "$repo_root/package.json")
