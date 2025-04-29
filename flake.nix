@@ -21,7 +21,7 @@
     let
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
-      nodeModules = (pkgs.callPackage ./bun.nix { }).nodeModules;
+      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules (import ./bun.nix);
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
