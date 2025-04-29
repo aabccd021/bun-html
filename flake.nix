@@ -1,20 +1,29 @@
 {
 
   nixConfig.allow-import-from-derivation = false;
+  nixConfig.extra-substituters = [
+    "https://cache.nixos.org"
+    "https://cache.garnix.io"
+    "https://nix-community.cachix.org"
+  ];
+  nixConfig.extra-trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  ];
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.bun2nix.url = "github:baileyluTCD/bun2nix";
+  inputs.netero-test.url = "github:aabccd021/netero-test";
 
-  outputs = { self, nixpkgs, treefmt-nix, bun2nix }:
+  outputs = { self, ... }@inputs:
     let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-      bun2nixPkgs = bun2nix.defaultPackage.x86_64-linux;
+      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
       nodeModules = (pkgs.callPackage ./bun.nix { }).nodeModules;
 
-      treefmtEval = treefmt-nix.lib.evalModule pkgs {
+      treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs.prettier.enable = true;
         programs.nixpkgs-fmt.enable = true;
@@ -76,18 +85,6 @@
         '';
       };
 
-      postinstall = pkgs.writeShellApplication {
-        name = "postinstall";
-        runtimeInputs = [ bun2nixPkgs.bin ];
-        text = ''
-          repo_root=$(git rev-parse --show-toplevel)
-
-          bun2nix \
-            --output-file "$repo_root/bun.nix" \
-            --lock-file "$repo_root/bun.lock"
-        '';
-      };
-
       devShell = pkgs.mkShellNoCC {
         buildInputs = [
           pkgs.bun
@@ -101,7 +98,6 @@
 
       scripts = {
         publish = publish;
-        postinstall = postinstall;
       };
 
       packages = scripts // {
@@ -110,6 +106,7 @@
         biome = biome;
         nodeModules = nodeModules;
         tests = tests;
+        bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
       };
 
     in
