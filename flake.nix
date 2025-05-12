@@ -84,7 +84,7 @@
         ];
       };
 
-      packages = {
+      packages = devShells // {
         publish = publish;
         formatting = treefmtEval.config.build.check self;
         formatter = formatter;
