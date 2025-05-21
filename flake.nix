@@ -7,7 +7,8 @@
   inputs.bun2nix.url = "github:baileyluTCD/bun2nix";
   inputs.netero-test.url = "github:aabccd021/netero-test";
 
-  outputs = { self, ... }@inputs:
+  outputs =
+    { self, ... }@inputs:
     let
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
@@ -16,12 +17,15 @@
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
         programs.prettier.enable = true;
-        programs.nixpkgs-fmt.enable = true;
+        programs.nixfmt.enable = true;
         programs.biome.enable = true;
         programs.shfmt.enable = true;
         settings.formatter.prettier.priority = 1;
         settings.formatter.biome.priority = 2;
-        settings.global.excludes = [ "LICENSE" "*.ico" ];
+        settings.global.excludes = [
+          "LICENSE"
+          "*.ico"
+        ];
       };
 
       formatter = treefmtEval.config.build.wrapper;
@@ -58,7 +62,11 @@
 
       publish = pkgs.writeShellApplication {
         name = "publish";
-        runtimeInputs = [ pkgs.jq pkgs.bun pkgs.curl ];
+        runtimeInputs = [
+          pkgs.jq
+          pkgs.bun
+          pkgs.curl
+        ];
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
           current_version=$(jq -r .version "$repo_root/package.json")
