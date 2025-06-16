@@ -10,6 +10,20 @@
   outputs =
     { self, ... }@inputs:
     let
+      lib = inputs.nixpkgs.lib;
+
+      collectInputs =
+        is:
+        pkgs.linkFarm "inputs" (
+          builtins.mapAttrs (
+            name: i:
+            pkgs.linkFarm name {
+              self = i.outPath;
+              deps = collectInputs (lib.attrByPath [ "inputs" ] { } i);
+            }
+          ) is
+        );
+
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
       nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules (import ./bun.nix);
@@ -96,6 +110,7 @@
         publish = publish;
         formatting = treefmtEval.config.build.check self;
         formatter = formatter;
+        allInputs = collectInputs inputs;
         tsc = tsc;
         biome = biome;
         nodeModules = nodeModules;
