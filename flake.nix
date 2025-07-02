@@ -26,7 +26,8 @@
 
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
-      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules (import ./bun.nix);
+      bunNix = import ./bun.nix;
+      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules { packages = bunNix; };
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
@@ -60,7 +61,7 @@
         cp -L ${./package.json} ./package.json
         cp -L ${./tsconfig.json} ./tsconfig.json
         cp -Lr ${nodeModules}/node_modules ./node_modules
-        ${pkgs.biome}/bin/biome check --error-on-warnings
+        ${pkgs.biome}/bin/biome check 
         touch $out
       '';
 

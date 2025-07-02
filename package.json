@@ -10,7 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/aabccd021/bun-html.git"
   },
-  "keywords": ["bun", "html", "web"],
+  "keywords": [
+    "bun",
+    "html",
+    "web"
+  ],
   "bugs": {
     "url": "https://github.com/aabccd021/bun-html/issues"
   },
@@ -18,7 +22,9 @@
     "postinstall": "cd $(dirname $npm_package_json) && nix run .#bun2nix -- --output-file bun.nix"
   },
   "homepage": "https://github.com/aabccd021/bun-html#readme",
-  "files": ["index.ts"],
+  "files": [
+    "index.ts"
+  ],
   "devDependencies": {
     "@types/bun": "latest"
   },
