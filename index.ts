@@ -41,13 +41,15 @@ export type Element =
       readonly value: string;
     };
 
-function serializeAttribute([key, value]: readonly [
+function serializeAttribute([unsafeKey, value]: readonly [
   string,
   AttributeValues,
 ]): string {
   if (value === false || value === undefined || value === null) {
     return "";
   }
+
+  const key = Bun.escapeHTML(unsafeKey);
 
   if (value === true) {
     return ` ${key}`;
@@ -82,24 +84,17 @@ export function render(element: Element): string {
     return element.value;
   }
 
-  const attributes = Object.entries(element.attributes).map(serializeAttribute);
-
-  if (element.extraAttributes !== undefined) {
-    for (const [unsafeKey, value] of element.extraAttributes) {
-      const key = Bun.escapeHTML(unsafeKey);
-      const attrStr = serializeAttribute([key, value]);
-      attributes.push(attrStr);
-    }
-  }
-
-  const attributesStr = attributes.join("");
+  const attributes = Object.entries(element.attributes)
+    .concat(element.extraAttributes ?? [])
+    .map(serializeAttribute)
+    .join("");
 
   if (element.children === undefined) {
-    return `${element.beforeTag}<${element.tag}${attributesStr}>`;
+    return `${element.beforeTag}<${element.tag}${attributes}>`;
   }
 
   const children = element.children.map(render).join("");
-  return `${element.beforeTag}<${element.tag}${attributesStr}>${children}</${element.tag}>`;
+  return `${element.beforeTag}<${element.tag}${attributes}>${children}</${element.tag}>`;
 }
 
 export const unsafeHtml = (value: string): Element => ({

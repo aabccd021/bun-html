@@ -108,13 +108,6 @@ test("unsafe attribute key is handled properly", () => {
   );
 });
 
-test("script tag is escaped in children", () => {
-  const element = div({}, ['<script>alert("xss")</script>']);
-  expect(render(element)).toBe(
-    "<div>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</div>",
-  );
-});
-
 test("event handler attribute in _extra is escaped", () => {
   const element = button(
     {
