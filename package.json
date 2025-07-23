@@ -1,7 +1,7 @@
 {
   "name": "bun-html",
   "description": "HTML DSL and renderer for Bun",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "module": "index.ts",
   "type": "module",
   "author": "aabccd021",
@@ -29,6 +29,6 @@
     "@types/bun": "latest"
   },
   "dependencies": {
-    "@michijs/htmltype": "0.3.0"
+    "@michijs/htmltype": "^0.4.0"
   }
 }

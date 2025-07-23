@@ -2,9 +2,9 @@
 {
   "@michijs/htmltype" = {
     out_path = "@michijs/htmltype";
-    name = "@michijs/htmltype@0.3.0";
-    url = "https://registry.npmjs.org/@michijs/htmltype/-/htmltype-0.3.0.tgz";
-    hash = "sha512-Ay1xevTANmty6WtVU7oOPyoVid7qaGJtRz9SUoCwLkag+BWc8DfI/qCcp2TCUv0nuvLeXWujq6GE9QObu+iZTw==";
+    name = "@michijs/htmltype@0.4.0";
+    url = "https://registry.npmjs.org/@michijs/htmltype/-/htmltype-0.4.0.tgz";
+    hash = "sha512-ZziZmyF4+aX+j2EWIdf9qFUz+Ej630UwNq1bH+EuKVVxv3Ur6l/PX6QvagA8sY5Q+aEkLgQxOO4vOzeWAyfHsw==";
   };
   "@michijs/vscode-mathml" = {
     out_path = "@michijs/vscode-mathml";

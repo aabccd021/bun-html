@@ -1,22 +1,16 @@
 import type * as michi from "@michijs/htmltype";
 
-// TODO: generate directly from https://github.com/microsoft/vscode-custom-data/blob/main/web-data/data/browsers.html-data.json
-
 type HtmlTags = keyof michi.HTMLElements;
 
-type EventAttributes =
-  | keyof michi.GlobalEvents<EventTarget>
-  | keyof michi.WindowEvents<unknown>;
+type AttributeValues = string | number | boolean | URL | null | undefined;
 
-// Exclude event attributes and replace style with string
-type ElementAttributes = {
-  readonly [Tag in HtmlTags]: Omit<
-    michi.HTMLElements[Tag],
-    EventAttributes | "style"
-  > & { style?: string };
+type OnlyAttributeValues<T> = {
+  [K in keyof T as T[K] extends AttributeValues ? K : never]: T[K];
 };
 
-type AttributeValues = string | number | boolean | URL | null | undefined;
+type ElementAttributes = {
+  readonly [Tag in HtmlTags]: OnlyAttributeValues<michi.HTMLElements[Tag]>;
+};
 
 type ExtraAttributes = readonly [string, string][];
 
