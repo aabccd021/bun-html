@@ -4,7 +4,7 @@
     "": {
       "name": "bun-html",
       "dependencies": {
-        "@michijs/htmltype": "^0.4.0",
+        "@michijs/htmltype": "^0.4.2",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -12,7 +12,7 @@
     },
   },
   "packages": {
-    "@michijs/htmltype": ["@michijs/htmltype@0.4.0", "", { "dependencies": { "@michijs/vscode-mathml": "1.1.0", "@michijs/vscode-svg": "2.1.0", "@vscode/web-custom-data": "0.5.2" }, "peerDependencies": { "csstype": "^3.1.2" } }, "sha512-ZziZmyF4+aX+j2EWIdf9qFUz+Ej630UwNq1bH+EuKVVxv3Ur6l/PX6QvagA8sY5Q+aEkLgQxOO4vOzeWAyfHsw=="],
+    "@michijs/htmltype": ["@michijs/htmltype@0.4.2", "", { "dependencies": { "@michijs/vscode-mathml": "1.1.0", "@michijs/vscode-svg": "2.1.0", "@vscode/web-custom-data": "0.5.2" }, "peerDependencies": { "csstype": "^3.1.2" } }, "sha512-xAD0X2NKc/OAriUO5lVFCEEMHMCXuir6eYsm6PQtjfiEX/tP8zXnxrURk/uegqEYdQgRaSyMjMZX4TZH6u5nQg=="],
 
     "@michijs/vscode-mathml": ["@michijs/vscode-mathml@1.1.0", "", {}, "sha512-4XTl/vXLUcVwF9XrCYDO/VAkXIWZxWxZpezhM5OykBHYeR3qUdAOw1V78HKLV6TgsedHC/aAk2HUky4ipKvZWg=="],
 
