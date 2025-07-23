@@ -2,21 +2,21 @@
 {
   "@michijs/htmltype" = {
     out_path = "@michijs/htmltype";
-    name = "@michijs/htmltype@0.2.18";
-    url = "https://registry.npmjs.org/@michijs/htmltype/-/htmltype-0.2.18.tgz";
-    hash = "sha512-mQUaW9TyMRM4zN+Ne8tGcuEb5WSQ/GxisMYuNzzjbzI/Q55GxQBUF0zwMN4w3gAj5F4nP8eQTnnkLwP7NyINcg==";
+    name = "@michijs/htmltype@0.3.0";
+    url = "https://registry.npmjs.org/@michijs/htmltype/-/htmltype-0.3.0.tgz";
+    hash = "sha512-Ay1xevTANmty6WtVU7oOPyoVid7qaGJtRz9SUoCwLkag+BWc8DfI/qCcp2TCUv0nuvLeXWujq6GE9QObu+iZTw==";
   };
   "@michijs/vscode-mathml" = {
     out_path = "@michijs/vscode-mathml";
-    name = "@michijs/vscode-mathml@1.0.4";
-    url = "https://registry.npmjs.org/@michijs/vscode-mathml/-/vscode-mathml-1.0.4.tgz";
-    hash = "sha512-ym9dbFVg9Rp1dsIcFJHxnM8RDlzFQodQ+55xPpG290yPQS9TFRF1vOk4vU6GBvzyVQxcEdtSFRIfvqc6LVw3ww==";
+    name = "@michijs/vscode-mathml@1.1.0";
+    url = "https://registry.npmjs.org/@michijs/vscode-mathml/-/vscode-mathml-1.1.0.tgz";
+    hash = "sha512-4XTl/vXLUcVwF9XrCYDO/VAkXIWZxWxZpezhM5OykBHYeR3qUdAOw1V78HKLV6TgsedHC/aAk2HUky4ipKvZWg==";
   };
   "@michijs/vscode-svg" = {
     out_path = "@michijs/vscode-svg";
-    name = "@michijs/vscode-svg@2.0.8";
-    url = "https://registry.npmjs.org/@michijs/vscode-svg/-/vscode-svg-2.0.8.tgz";
-    hash = "sha512-Et8dznYkatHGeLZ3xiHJneCNM0VF5F5bCFd1S4le0Ud+WHHdImi+funqCNiEuPbc9jT9K1GPzv1cKFUUld5G6g==";
+    name = "@michijs/vscode-svg@2.1.0";
+    url = "https://registry.npmjs.org/@michijs/vscode-svg/-/vscode-svg-2.1.0.tgz";
+    hash = "sha512-ZOunXtBYPOd8OfB3/LBCw/EOI99vg/XYFKUNIGOu4SnqjACAIh+z2mvG/ImI3DBKSzKKQmWtQCt2QYByJyifaA==";
   };
   "@types/bun" = {
     out_path = "@types/bun";
@@ -32,9 +32,9 @@
   };
   "@vscode/web-custom-data" = {
     out_path = "@vscode/web-custom-data";
-    name = "@vscode/web-custom-data@0.4.12";
-    url = "https://registry.npmjs.org/@vscode/web-custom-data/-/web-custom-data-0.4.12.tgz";
-    hash = "sha512-bCemuvwCC84wJQbJoaPou86sjz9DUvZgGa6sAWQwzw7oIELD7z+WnUj2Rdsu8/8XPhKLcg3IswQ2+Pm3OMinIg==";
+    name = "@vscode/web-custom-data@0.5.2";
+    url = "https://registry.npmjs.org/@vscode/web-custom-data/-/web-custom-data-0.5.2.tgz";
+    hash = "sha512-VamZXR5KPJVgMLUDMTNiBseKG4ahKNI8s2fpQXv3Wf++McEvZ0NQilshPP5RfYWlup734I4jTsTfEpcyrnBWNg==";
   };
   "bun-types" = {
     out_path = "bun-types";
