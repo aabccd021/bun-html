@@ -24,7 +24,6 @@ test("escaped html", () => {
 });
 
 test("conditional", () => {
-  // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
   const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
   expect(render(element)).toBe("<p>Hello, world!</p>");
 });
@@ -87,4 +86,14 @@ test("extra attributes", () => {
     _extra: [["og:title", "my title"]],
   });
   expect(render(element)).toBe('<meta charset="utf-8" og:title="my title">');
+});
+
+test("unsafe attribute key is handled properly", () => {
+  const element = meta({
+    charset: "utf-8",
+    _extra: [['onerror="alert(1)', "oops"]],
+  });
+  expect(render(element)).toBe(
+    '<meta charset=\"utf-8\" onerror=&quot;alert(1)=\"oops\">',
+  );
 });
