@@ -9,8 +9,11 @@ type OnlyAttributeValues<T> = {
 };
 
 type ElementAttributes = {
-  readonly [Tag in HtmlTags]: OnlyAttributeValues<michi.HTMLElements[Tag]>;
+  readonly [Tag in HtmlTags]: OnlyAttributeValues<michi.HTMLElements[Tag]> &
+    Record<string, AttributeValues>;
 };
+
+export type Attributes<Tag extends HtmlTags> = ElementAttributes[Tag];
 
 export type Element =
   | string
@@ -86,8 +89,6 @@ export const unsafeHtml = (value: string): Element => ({
   tag: "unsafeHtml",
   value,
 });
-
-export type Attributes<Tag extends HtmlTags> = ElementAttributes[Tag];
 
 const el =
   <Tag extends HtmlTags>(tag: Tag) =>
