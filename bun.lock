@@ -4,7 +4,7 @@
     "": {
       "name": "bun-html",
       "dependencies": {
-        "@michijs/htmltype": "latest",
+        "@michijs/htmltype": "0.2.18",
       },
       "devDependencies": {
         "@types/bun": "latest",

@@ -123,6 +123,7 @@
         formatting = treefmtEval.config.build.check self;
         formatter = formatter;
         allInputs = collectInputs inputs;
+        typescript = pkgs.typescript;
         check-tsc = check-tsc;
         check-biome = check-biome;
         check-tests = check-tests;
