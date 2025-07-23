@@ -26,8 +26,9 @@
 
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
-      bunNix = import ./bun.nix;
-      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules { packages = bunNix; };
+      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules {
+        packages = import ./bun.nix;
+      };
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
@@ -84,6 +85,16 @@
         ];
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
+
+          NPM_CONFIG_TOKEN=''${NPM_CONFIG_TOKEN:-}
+          if [ -z "$NPM_CONFIG_TOKEN" ]; then
+            export NPM_CONFIG_USERCONFIG="$repo_root/.npmrc"
+            auth_prefix="//registry.npmjs.org/:_authToken=npm_"
+            if ! grep -q "^$auth_prefix" "$NPM_CONFIG_USERCONFIG"; then
+              bunx npm login
+            fi
+          fi
+
           current_version=$(jq -r .version "$repo_root/package.json")
           name=$(jq -r .name "$repo_root/package.json")
           published_version=$(curl -s "https://registry.npmjs.org/$name" | jq -r '.["dist-tags"].latest')
