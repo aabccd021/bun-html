@@ -82,10 +82,10 @@ test("html doctype shown", () => {
   expect(render(element)).toBe("<!DOCTYPE html><html>Hello, world!</html>");
 });
 
-test("extra attributes", () => {
+test("unknown attributes", () => {
   const element = meta({
     charset: "utf-8",
-    _extra: [["og:title", "my title"]],
+    "og:title": "my title",
   });
   expect(render(element)).toBe('<meta charset="utf-8" og:title="my title">');
 });
@@ -108,19 +108,6 @@ test("xss on attribute key", () => {
   );
 });
 
-test("xss on extra attribute key", () => {
-  const element = head({}, [
-    meta({ content: "foo" }),
-    meta({
-      _extra: [["><script>console.log('orld')</script><meta", "og:type"]],
-    }),
-    meta({ content: "bar" }),
-  ]);
-  expect(render(element)).toBe(
-    '<head><meta content=\"foo\"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta=\"og:type\"><meta content=\"bar\"></head>',
-  );
-});
-
 test("xss on attribute value", () => {
   const element = head({}, [
     meta({ content: "foo" }),
@@ -129,18 +116,5 @@ test("xss on attribute value", () => {
   ]);
   expect(render(element)).toBe(
     '<head><meta content=\"foo\"><meta content=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>',
-  );
-});
-
-test("xss on extra attribute value", () => {
-  const element = head({}, [
-    meta({ content: "foo" }),
-    meta({
-      _extra: [["og:type", "><script>console.log('orld')</script><meta"]],
-    }),
-    meta({ content: "bar" }),
-  ]);
-  expect(render(element)).toBe(
-    '<head><meta content=\"foo\"><meta og:type=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>',
   );
 });

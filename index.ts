@@ -12,13 +12,6 @@ type ElementAttributes = {
   readonly [Tag in HtmlTags]: OnlyAttributeValues<michi.HTMLElements[Tag]>;
 };
 
-type ExtraAttributes = readonly [string, string][];
-
-type AttributesWithExtra = { _extra?: ExtraAttributes } & Record<
-  string,
-  AttributeValues
->;
-
 export type Element =
   | string
   | false
@@ -26,7 +19,6 @@ export type Element =
   | {
       readonly tag: HtmlTags;
       readonly attributes: Record<string, AttributeValues>;
-      readonly extraAttributes?: ExtraAttributes;
       readonly children?: readonly Element[];
       readonly beforeTag?: string;
     }
@@ -79,7 +71,6 @@ export function render(element: Element): string {
   }
 
   const attributes = Object.entries(element.attributes)
-    .concat(element.extraAttributes ?? [])
     .map(serializeAttribute)
     .join("");
 
@@ -96,18 +87,14 @@ export const unsafeHtml = (value: string): Element => ({
   value,
 });
 
-export type Attributes<Tag extends HtmlTags> = ElementAttributes[Tag] & {
-  _extra?: ExtraAttributes;
-};
+export type Attributes<Tag extends HtmlTags> = ElementAttributes[Tag];
 
 const el =
   <Tag extends HtmlTags>(tag: Tag) =>
   (attributes: Attributes<Tag>, children?: readonly Element[]): Element => {
-    const { _extra, ..._attributes }: AttributesWithExtra = attributes;
     return {
       tag,
-      attributes: _attributes,
-      extraAttributes: _extra,
+      attributes,
       children: children ?? [],
       beforeTag: "",
     };
@@ -116,25 +103,21 @@ const el =
 const voidEl =
   <Tag extends HtmlTags>(tag: Tag) =>
   (attributes: Attributes<Tag>): Element => {
-    const { _extra, ..._attributes }: AttributesWithExtra = attributes;
     return {
       tag,
-      attributes: _attributes,
-      extraAttributes: _extra,
+      attributes,
       children: undefined,
       beforeTag: "",
     };
   };
 
 export const html = (
-  attributes: ElementAttributes["html"] & { _extra?: ExtraAttributes },
+  attributes: ElementAttributes["html"],
   children: readonly Element[],
 ): Element => {
-  const { _extra, ..._attributes } = attributes;
   return {
     tag: "html",
-    attributes: _attributes,
-    extraAttributes: _extra,
+    attributes,
     children,
     beforeTag: "<!DOCTYPE html>",
   };
