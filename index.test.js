@@ -1,5 +1,16 @@
 import { expect, test } from "bun:test";
-import { a, button, div, html, meta, p, render, unsafeHtml } from "./index.ts";
+import {
+  a,
+  button,
+  div,
+  html,
+  img,
+  meta,
+  p,
+  render,
+  script,
+  unsafeHtml,
+} from "./index.ts";
 
 test("simple element", () => {
   const element = p({ "data-hello": "world" }, ["Hello, world!"]);
@@ -117,7 +128,6 @@ test("event handler attribute in _extra is escaped", () => {
 });
 
 test("disallowed tag in unsafeHtml is rendered as-is", () => {
-  // unsafeHtml disables escaping, so XSS is possible if user input is passed
   const element = div({}, [unsafeHtml("<img src=x onerror=\"alert('xss')\">")]);
   expect(render(element)).toBe(
     "<div><img src=x onerror=\"alert('xss')\"></div>",
@@ -126,7 +136,6 @@ test("disallowed tag in unsafeHtml is rendered as-is", () => {
 
 test("object prototype pollution in attribute keys is handled", () => {
   const element = p({ __proto__: "polluted" }, ["Test"]);
-  // Should ignore prototype pollution keys and not output __proto__
   expect(render(element)).toBe("<p>Test</p>");
 });
 
@@ -164,8 +173,6 @@ test("child array with null, false, and empty string", () => {
   expect(render(element)).toBe("<div>x</div>");
 });
 
-// Additional Security Tests
-
 test("CRLF injection in attribute values", () => {
   const element = meta({
     name: "description",
@@ -174,7 +181,6 @@ test("CRLF injection in attribute values", () => {
   expect(render(element)).toBe(
     '<meta name="description" content="Some content\r\nSet-Cookie: malicious=value">',
   );
-  // Should not contain unescaped CRLF that could inject headers
   expect(render(element)).not.toContain("\r\n>");
 });
 
@@ -485,4 +491,478 @@ test("mixed array of elements with dangerous content", () => {
   expect(result).not.toContain("Hidden text");
   expect(result).not.toContain("<script>");
   expect(result).not.toContain("<img");
+});
+
+test("XSS via attribute name with HTML entities", () => {
+  const element = div(
+    {
+      _extra: [["&lt;script&gt;alert(1)&lt;/script&gt;", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain("&amp;lt;script&amp;gt;");
+  expect(result).not.toContain("<script>");
+});
+
+test("XSS via attribute name with angle brackets", () => {
+  const element = div(
+    {
+      _extra: [["<script>alert(1)</script>", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('&lt;script&gt;alert(1)&lt;/script&gt;="value"');
+  expect(result).not.toContain("<script>alert(1)</script>");
+});
+
+test("XSS via attribute name with quotes", () => {
+  const element = div(
+    {
+      _extra: [['" onmouseover="alert(1)', "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('&quot; onmouseover=&quot;alert(1)="value"');
+  expect(result).not.toContain('" onmouseover="alert(1)');
+});
+
+test("XSS via attribute name with single quotes", () => {
+  const element = div(
+    {
+      _extra: [["' onclick='alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('&#x27; onclick=&#x27;alert(1)="value"');
+  expect(result).not.toContain("' onclick='alert(1)");
+});
+
+test("XSS via attribute name with backticks", () => {
+  const element = div(
+    {
+      _extra: [["`-alert(1)-`", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('`-alert(1)-`="value"');
+});
+
+test("XSS via attribute name with unicode escapes", () => {
+  const element = div(
+    {
+      _extra: [["javascript\u003Aalert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('javascript:alert(1)="value"');
+});
+
+test("XSS via attribute name with null bytes", () => {
+  const element = div(
+    {
+      _extra: [["on\u0000click=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('on\u0000click=alert(1)="value"');
+});
+
+test("XSS via attribute name with line breaks", () => {
+  const element = div(
+    {
+      _extra: [["on\nclick=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('on\nclick=alert(1)="value"');
+});
+
+test("XSS via attribute name with multiple vectors combined", () => {
+  const element = div(
+    {
+      _extra: [['" onclick="alert(1)" onmouseover="alert(2)"', "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    '&quot; onclick=&quot;alert(1)&quot; onmouseover=&quot;alert(2)&quot;="value"',
+  );
+});
+
+test("Very long attribute name in _extra", () => {
+  const longName = "a".repeat(10000);
+  const element = div(
+    {
+      _extra: [[longName, "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(`${longName}="value"`);
+});
+
+test("Attribute name with spaces and special chars in _extra", () => {
+  const element = div(
+    {
+      _extra: [["data test!@#$%^&*()_+-={}[]|\\:;\"'<>,.?/~`", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain("data test!@#$%^&amp;*()_+-={}[]|\\:;");
+});
+
+test("SVG-specific XSS vectors in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["onload=alert(1)><svg/onload=alert(2)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'onload=alert(1)&gt;&lt;svg/onload=alert(2)="value"',
+  );
+  expect(result).not.toContain("<svg");
+});
+
+test("Data URI in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["data:text/html,<script>alert(1)</script>", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;="value"',
+  );
+});
+
+test("JavaScript protocol in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["javascript:alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('javascript:alert(1)="value"');
+});
+
+test("CSS expression in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["style=expression(alert(1))", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('style=expression(alert(1))="value"');
+});
+
+test("Event handler in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["onclick=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('onclick=alert(1)="value"');
+});
+
+test("HTML comment in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["<!-- comment -->", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('&lt;!-- comment --&gt;="value"');
+});
+
+test("CDATA section in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["<![CDATA[<script>alert(1)</script>]]>", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    '&lt;![CDATA[&lt;script&gt;alert(1)&lt;/script&gt;]]&gt;="value"',
+  );
+});
+
+test("Cross-origin resource in attribute name", () => {
+  const element = img({
+    src: "valid.jpg",
+    _extra: [["onerror=fetch('https://evil.com')", "value"]],
+  });
+
+  const result = render(element);
+  expect(result).toContain(
+    'onerror=fetch(&#x27;https://evil.com&#x27;)="value"',
+  );
+});
+
+test("Object injection attempt in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["__proto__", "polluted"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('__proto__="polluted"');
+});
+
+test("Mixed case event handler in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["OnMoUsEoVeR=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('OnMoUsEoVeR=alert(1)="value"');
+});
+
+test("HTML5 custom data attribute with XSS in name", () => {
+  const element = div(
+    {
+      _extra: [['data-x="><script>alert(1)</script>', "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'data-x=&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;="value"',
+  );
+});
+
+test("Attribute name attempting to close current element", () => {
+  const element = div(
+    {
+      _extra: [["\"'><script>alert(1)</script>", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    '&quot;&#x27;&gt;&lt;script&gt;alert(1)&lt;/script&gt;="value"',
+  );
+  expect(result).not.toContain("<script>");
+});
+
+test("Nested attribute via attribute name", () => {
+  const element = div(
+    {
+      _extra: [['x y="z"', "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('x y=&quot;z&quot;="value"');
+});
+
+test("iframe srcdoc injection via attribute name", () => {
+  const element = div(
+    {
+      _extra: [["srcdoc=<script>alert(1)</script>", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'srcdoc=&lt;script&gt;alert(1)&lt;/script&gt;="value"',
+  );
+});
+
+test("Mutation XSS via attribute name", () => {
+  const element = div(
+    {
+      _extra: [["data-x=\"accesskey='x' onclick='alert(1)'\"", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'data-x=&quot;accesskey=&#x27;x&#x27; onclick=&#x27;alert(1)&#x27;&quot;="value"',
+  );
+});
+
+test("CSP bypass attempt in attribute name", () => {
+  const element = script(
+    {
+      _extra: [["nonce=\"'/*'-'*/'\" onerror='javascript:alert(1)'", "value"]],
+    },
+    ["console.log('test')"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'nonce=&quot;&#x27;/*&#x27;-&#x27;*/&#x27;&quot; onerror=&#x27;javascript:alert(1)&#x27;="value"',
+  );
+});
+
+test("Multiple _extra attributes with various XSS vectors", () => {
+  const element = div(
+    {
+      _extra: [
+        ["onclick", "alert(1)"],
+        ['" onmouseover="alert(2)', "value"],
+        ["<script>alert(3)</script>", "value"],
+        ["javascript:alert(4)", "value"],
+        ["data-x=<img src=x onerror=alert(5)>", "value"],
+      ],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('onclick="alert(1)"');
+  expect(result).toContain('&quot; onmouseover=&quot;alert(2)="value"');
+  expect(result).toContain('&lt;script&gt;alert(3)&lt;/script&gt;="value"');
+  expect(result).toContain('javascript:alert(4)="value"');
+  expect(result).toContain('data-x=&lt;img src=x onerror=alert(5)&gt;="value"');
+});
+
+test("DOM clobbering via attribute name", () => {
+  const element = div(
+    {
+      id: "safe",
+      _extra: [["name=getElementById", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('name=getElementById="value"');
+});
+
+test("AngularJS template injection via attribute name", () => {
+  const element = div(
+    {
+      _extra: [
+        ["ng-app ng-csp id={{constructor.constructor('alert(1)')()}}", "value"],
+      ],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    'ng-app ng-csp id={{constructor.constructor(&#x27;alert(1)&#x27;)()}}="value"',
+  );
+});
+
+test("Unicode normalization in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["оnclick=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('оnclick=alert(1)="value"');
+});
+
+test("Character encoding in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["%3Cscript%3Ealert(1)%3C/script%3E", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('%3Cscript%3Ealert(1)%3C/script%3E="value"');
+});
+
+test("Embedded newlines in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["on\nclick=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('on\nclick=alert(1)="value"');
+});
+
+test("HTML encoded entities in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["&#111;&#110;&#99;&#108;&#105;&#99;&#107;=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain(
+    '&amp;#111;&amp;#110;&amp;#99;&amp;#108;&amp;#105;&amp;#99;&amp;#107;=alert(1)="value"',
+  );
+});
+
+test("Typo-squatting attribute names", () => {
+  const element = div(
+    {
+      _extra: [["srcdoc", "javascript:alert(1)"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('srcdoc="javascript:alert(1)"');
+});
+
+test("Unusual separator characters in attribute name", () => {
+  const element = div(
+    {
+      _extra: [["on\u200Cclick=alert(1)", "value"]],
+    },
+    ["Content"],
+  );
+
+  const result = render(element);
+  expect(result).toContain('on\u200Cclick=alert(1)="value"');
 });
