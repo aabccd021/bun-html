@@ -97,3 +97,71 @@ test("unsafe attribute key is handled properly", () => {
     '<meta charset=\"utf-8\" onerror=&quot;alert(1)=\"oops\">',
   );
 });
+
+test("script tag is escaped in children", () => {
+  const element = div({}, ['<script>alert("xss")</script>']);
+  expect(render(element)).toBe(
+    "<div>&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;</div>",
+  );
+});
+
+test("event handler attribute in _extra is escaped", () => {
+  const element = button(
+    {
+      _extra: [["onmouseover", 'alert("x")']],
+    },
+    ["Hover"],
+  );
+  expect(render(element)).toBe(
+    '<button onmouseover="alert(&quot;x&quot;)">Hover</button>',
+  );
+});
+
+test("disallowed tag in unsafeHtml is rendered as-is", () => {
+  // unsafeHtml disables escaping, so XSS is possible if user input is passed
+  const element = div({}, [unsafeHtml("<img src=x onerror=\"alert('xss')\">")]);
+  expect(render(element)).toBe(
+    "<div><img src=x onerror=\"alert('xss')\"></div>",
+  );
+});
+
+test("object prototype pollution in attribute keys is handled", () => {
+  // @ts-expect-error
+  const element = p({ __proto__: "polluted" }, ["Test"]);
+  // Should ignore prototype pollution keys and not output __proto__
+  expect(render(element)).toBe("<p>Test</p>");
+});
+
+test("nested dangerous script in unsafeHtml", () => {
+  const element = div({}, [
+    unsafeHtml('<svg><script>alert("xss")</script></svg>'),
+  ]);
+  expect(render(element)).toBe(
+    '<div><svg><script>alert("xss")</script></svg></div>',
+  );
+});
+
+test("malformed attribute names in _extra are escaped", () => {
+  const element = meta({
+    charset: "utf-8",
+    _extra: [['"><img src=x onerror=alert(1)>', "oops"]],
+  });
+  expect(render(element)).toContain(
+    '&quot;&gt;&lt;img src=x onerror=alert(1)&gt;="oops"',
+  );
+});
+
+test("attribute value with angle brackets is escaped", () => {
+  const element = meta({
+    name: "viewport",
+    content: 'width=device-width, initial-scale=1.0"><script>alert(1)</script>',
+  });
+  expect(render(element)).toBe(
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;">',
+  );
+});
+
+test("child array with null, false, and empty string", () => {
+  const element = div({}, [false, "", "x"]);
+  expect(render(element)).toBe("<div>x</div>");
+});
