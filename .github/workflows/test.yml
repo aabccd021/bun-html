@@ -1,8 +1,6 @@
 on:
-  workflow_dispatch:
   push:
-    branches-ignore:
-      - main
+    branches: main
 
 jobs:
   publish:
