@@ -35,9 +35,10 @@
         programs.prettier.enable = true;
         programs.nixfmt.enable = true;
         programs.biome.enable = true;
+        programs.biome.settings = builtins.fromJSON (builtins.readFile ./biome.json);
+        programs.biome.formatUnsafe = true;
+        settings.formatter.biome.options = [ "--vcs-enabled=false" ];
         programs.shfmt.enable = true;
-        settings.formatter.prettier.priority = 1;
-        settings.formatter.biome.priority = 2;
         settings.global.excludes = [
           "LICENSE"
           "*.ico"
@@ -56,13 +57,13 @@
       '';
 
       check-biome = pkgs.runCommand "biome" { } ''
-        cp -L ${./biome.jsonc} ./biome.jsonc
+        cp -L ${./biome.json} ./biome.json
         cp -L ${./index.ts} ./index.ts
         cp -L ${./index.test.js} ./index.test.js
         cp -L ${./package.json} ./package.json
         cp -L ${./tsconfig.json} ./tsconfig.json
         cp -Lr ${nodeModules}/node_modules ./node_modules
-        ${pkgs.biome}/bin/biome check 
+        ${pkgs.biome}/bin/biome check --vcs-enabled=false
         touch $out
       '';
 
@@ -125,6 +126,7 @@
         check-tests = check-tests;
         nodeModules = nodeModules;
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
+        biome = pkgs.biome;
       };
 
     in
