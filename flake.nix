@@ -34,10 +34,10 @@
         projectRootFile = "flake.nix";
         programs.prettier.enable = true;
         programs.nixfmt.enable = true;
-        # programs.biome.enable = true;
+        programs.biome.enable = true;
         programs.shfmt.enable = true;
         settings.formatter.prettier.priority = 1;
-        # settings.formatter.biome.priority = 2;
+        settings.formatter.biome.priority = 2;
         settings.global.excludes = [
           "LICENSE"
           "*.ico"
@@ -106,7 +106,7 @@
       devShells.default = pkgs.mkShellNoCC {
         buildInputs = [
           pkgs.bun
-          # pkgs.biome
+          pkgs.biome
           pkgs.typescript
           pkgs.vscode-langservers-extracted
           pkgs.nixd
@@ -121,11 +121,10 @@
         allInputs = collectInputs inputs;
         typescript = pkgs.typescript;
         check-tsc = check-tsc;
-        # check-biome = check-biome;
+        check-biome = check-biome;
         check-tests = check-tests;
         nodeModules = nodeModules;
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
-        # biome = pkgs.biome;
       };
 
     in
