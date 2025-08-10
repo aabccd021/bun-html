@@ -5,7 +5,7 @@
   "module": "index.ts",
   "type": "module",
   "author": "aabccd021",
-  "license": "MIT",
+  "license": "0BSD",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aabccd021/bun-html.git"
@@ -15,13 +15,9 @@
     "html",
     "web"
   ],
-  "bugs": {
-    "url": "https://github.com/aabccd021/bun-html/issues"
-  },
   "scripts": {
     "postinstall": "cd $(dirname $npm_package_json) && nix run .#bun2nix -- --output-file bun.nix"
   },
-  "homepage": "https://github.com/aabccd021/bun-html#readme",
   "files": [
     "index.ts"
   ],
@@ -29,6 +25,6 @@
     "@types/bun": "latest"
   },
   "dependencies": {
-    "@michijs/htmltype": "^0.4.2"
+    "@michijs/htmltype": "latest"
   }
 }

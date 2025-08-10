@@ -10,19 +10,6 @@
   outputs =
     { self, ... }@inputs:
     let
-      lib = inputs.nixpkgs.lib;
-
-      collectInputs =
-        is:
-        pkgs.linkFarm "inputs" (
-          builtins.mapAttrs (
-            name: i:
-            pkgs.linkFarm name {
-              self = i.outPath;
-              deps = collectInputs (lib.attrByPath [ "inputs" ] { } i);
-            }
-          ) is
-        );
 
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
@@ -35,14 +22,9 @@
         programs.prettier.enable = true;
         programs.nixfmt.enable = true;
         programs.biome.enable = true;
-        programs.biome.settings = builtins.fromJSON (builtins.readFile ./biome.json);
         programs.biome.formatUnsafe = true;
-        settings.formatter.biome.options = [ "--vcs-enabled=false" ];
-        programs.shfmt.enable = true;
-        settings.global.excludes = [
-          "LICENSE"
-          "*.ico"
-        ];
+        programs.biome.settings.formatter.indentStyle = "space";
+        programs.biome.settings.formatter.lineWidth = 100;
       };
 
       formatter = treefmtEval.config.build.wrapper;
@@ -68,25 +50,12 @@
 
       publish = pkgs.writeShellApplication {
         name = "publish";
-        runtimeInputs = [
-          pkgs.jq
-          pkgs.bun
-          pkgs.curl
-        ];
+        runtimeInputs = [ pkgs.bun ];
         text = ''
           repo_root=$(git rev-parse --show-toplevel)
-
           export NPM_CONFIG_USERCONFIG="$repo_root/.npmrc"
-          if ! grep -q "_authToken" "$NPM_CONFIG_USERCONFIG"; then
+          if [ ! -f "$NPM_CONFIG_USERCONFIG" ]; then
             bunx npm login
-          fi
-
-          current_version=$(jq -r .version "$repo_root/package.json")
-          name=$(jq -r .name "$repo_root/package.json")
-          published_version=$(curl -s "https://registry.npmjs.org/$name" | jq -r '.["dist-tags"].latest')
-          if [ "$published_version" = "$current_version" ]; then
-            echo "Version $current_version is already published"
-            exit 0
           fi
           nix flake check
           bun publish
@@ -108,7 +77,6 @@
         publish = publish;
         formatting = treefmtEval.config.build.check self;
         formatter = formatter;
-        allInputs = collectInputs inputs;
         typescript = pkgs.typescript;
         check-tsc = check-tsc;
         check-tests = check-tests;
