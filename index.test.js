@@ -16,6 +16,11 @@ test("simple element", () => {
   expect(render(element)).toBe('<p data-hello="world">Hello, world!</p>');
 });
 
+test("no child", () => {
+  const element = p({ "data-hello": "world" });
+  expect(render(element)).toBe('<p data-hello="world"></p>');
+});
+
 test("void element", () => {
   const element = meta({ charset: "utf-8" });
   expect(render(element)).toBe('<meta charset="utf-8">');
