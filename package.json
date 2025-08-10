@@ -2,7 +2,7 @@
   "name": "bun-html",
   "description": "HTML DSL and renderer for Bun",
   "version": "1.0.17",
-  "module": "index.ts",
+  "module": "bun-html.ts",
   "type": "module",
   "author": "aabccd021",
   "license": "0BSD",
@@ -19,7 +19,7 @@
     "postinstall": "cd $(dirname $npm_package_json) && nix run .#bun2nix -- --output-file bun.nix"
   },
   "files": [
-    "index.ts"
+    "bun-html.ts"
   ],
   "devDependencies": {
     "@types/bun": "latest"

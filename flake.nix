@@ -30,8 +30,8 @@
       formatter = treefmtEval.config.build.wrapper;
 
       check-tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./index.ts} ./index.ts
-        cp -L ${./index.test.js} ./index.test.js
+        cp -L ${./bun-html.ts} ./bun-html.ts
+        cp -L ${./test.js} ./test.js
         cp -L ${./tsconfig.json} ./tsconfig.json
         cp -Lr ${nodeModules}/node_modules ./node_modules
         ${pkgs.typescript}/bin/tsc
@@ -39,12 +39,12 @@
       '';
 
       check-tests = pkgs.runCommand "tests" { } ''
-        cp -L ${./index.ts} ./index.ts
-        cp -L ${./index.test.js} ./index.test.js
+        cp -L ${./bun-html.ts} ./bun-html.ts
+        cp -L ${./test.js} ./test.js
         cp -L ${./package.json} ./package.json
         cp -L ${./tsconfig.json} ./tsconfig.json
         cp -Lr ${nodeModules}/node_modules ./node_modules
-        ${pkgs.bun}/bin/bun test
+        ${pkgs.bun}/bin/bun test ./test.js
         touch $out
       '';
 

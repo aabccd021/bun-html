@@ -9,7 +9,7 @@ import {
   p,
   render,
   unsafeHtml,
-} from "./index.ts";
+} from "./bun-html.ts";
 
 test("simple element", () => {
   const element = p({ "data-hello": "world" }, ["Hello, world!"]);
