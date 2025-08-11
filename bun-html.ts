@@ -91,7 +91,10 @@ export const unsafeHtml = (value: string): Element => ({
 });
 
 export const a = (
-  attributes: Attributes<"a">,
+  attributes: {
+    href?: string;
+    // ... other attributes
+  },
   children: readonly Element[],
 ): Element => ({
   tag: "a",

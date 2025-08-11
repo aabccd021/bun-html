@@ -42,9 +42,11 @@ test("undefined", () => {
 });
 
 test("deeply nested", () => {
-  const element = p({}, [div({}, [button({}, ["Hello, world!"])])]);
+  const element = p({}, [
+    div({ class: "container" }, [button({}, ["Hello, world!"])]),
+  ]);
   expect(render(element)).toBe(
-    "<p><div><button>Hello, world!</button></div></p>",
+    '<p><div class="container"><button>Hello, world!</button></div></p>',
   );
 });
 
