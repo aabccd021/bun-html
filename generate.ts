@@ -88,15 +88,14 @@ ${attributes}
 ${tag.void === true ? "" : " * @param {readonly Element[]} [ children ]"}
  * @returns {Element}
  */
-export function ${funcName}(attributes${tag.void === true ? "" : ", children"}) { 
-  return { tag: "${tag.name}", attributes${tag.void === true ? "" : ", children"} }; 
-};`;
+export function ${funcName}(attributes${tag.void === true ? "" : ", children"}) {
+  return { tag: "${tag.name}", attributes${tag.void === true ? "" : ", children"} };
+}`;
   })
   .join("\n");
 
 const result = `/** @import { Element, DataAttribute } from './html.ts';
-${builders}
-`;
+${builders}`;
 
 console.log(result);
 
