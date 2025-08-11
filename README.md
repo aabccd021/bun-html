@@ -1,5 +1,9 @@
 # bun-html
 
+## TODO
+
+- handle void
+
 Simple HTML DSL and renderer for Bun.
 
 ## LICENCE

@@ -13,37 +13,38 @@ import {
 {
   console.info("simple element");
   const element = p({ "data-hello": "world" }, ["Hello, world!"]);
-  render(element) === '<p data-hello="world">Hello, world!</p>';
+  if (render(element) !== '<p data-hello="world">Hello, world!</p>')
+    throw new Error();
 }
 
 {
   console.info("no child");
   const element = p({ "data-hello": "world" }, []);
-  render(element) === '<p data-hello="world"></p>';
+  if (render(element) !== '<p data-hello="world"></p>') throw new Error();
 }
 
 {
   console.info("void element");
   const element = meta({ charset: "utf-8" });
-  render(element) === '<meta charset="utf-8">';
+  if (render(element) !== '<meta charset="utf-8">') throw new Error();
 }
 
 {
   console.info("unsafe html");
   const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
-  render(element) === "<p><strong>Hello, world!</strong></p>";
+  if (render(element) !== "<p><strong>Hello, world!</strong></p>") thro;
 }
 
 {
   console.info("conditional");
   const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
-  render(element) === "<p>Hello, world!</p>";
+  if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
   console.info("undefined");
   const element = p({}, [undefined, "Hello, world!"]);
-  render(element) === "<p>Hello, world!</p>";
+  if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
@@ -51,26 +52,29 @@ import {
   const element = p({}, [
     div({ class: "container" }, [button({}, ["Hello, world!"])]),
   ]);
-  render(element) ===
-    '<p><div class="container"><button>Hello, world!</button></div></p>';
+  if (
+    render(element) !==
+    '<p><div class="container"><button>Hello, world!</button></div></p>'
+  )
+    throw new Error();
 }
 
 {
   console.info("number attribute");
   const element = p({ "data-number": 42 }, ["Hello, world!"]);
-  render(element) === '<p data-number="42">Hello, world!</p>';
+  if (render(element) !== '<p data-number="42">Hello, world!</p>') thro;
 }
 
 {
   console.info("true attribute");
   const element = p({ "data-boolean": true }, ["Hello, world!"]);
-  render(element) === "<p data-boolean>Hello, world!</p>";
+  if (render(element) !== "<p data-boolean>Hello, world!</p>") thro;
 }
 
 {
   console.info("false attribute");
   const element = p({ "data-boolean": false }, ["Hello, world!"]);
-  render(element) === "<p>Hello, world!</p>";
+  if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
@@ -78,19 +82,20 @@ import {
   const element = a({ href: new URL("https://example.com") }, [
     "Hello, world!",
   ]);
-  render(element) === '<a href="https://example.com/">Hello, world!</a>';
+  if (render(element) !== '<a href="https://example.com/">Hello, world!</a>')
+    throw new Error();
 }
 
 {
   console.info("style attribute");
   const element = p({ style: "color: red;" }, ["Hello, world!"]);
-  render(element) === '<p style="color: red;">Hello, world!</p>';
+  if (render(element) !== '<p style="color: red;">Hello, world!</p>')
+    throw new Error();
 }
 
 {
   console.info("unsupported attribute");
   const element = p({ "data-boolean": { foo: "invalid" } }, ["Hello, world!"]);
-  // (() render(element)).toThrow("Unsupported attribute: data-boolean";
   try {
     render(element);
   } catch (e) {
@@ -106,7 +111,7 @@ import {
 {
   console.info("html doctype shown");
   const element = html({}, ["Hello, world!"]);
-  render(element) === "<!DOCTYPE html><html>Hello, world!</html>";
+  if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>") thro;
 }
 
 {
@@ -115,14 +120,18 @@ import {
     charset: "utf-8",
     "og:title": "my title",
   });
-  render(element) === '<meta charset="utf-8" og:title="my title">';
+  if (render(element) !== '<meta charset="utf-8" og:title="my title">')
+    throw new Error();
 }
 
 {
   console.info("xss on content");
   const element = p({}, ["<script>console.log('Hello World!')</script>"]);
-  render(element) ===
-    "<p>&lt;script&gt;console.log(&#x27;Hello World!&#x27;)&lt;/script&gt;</p>";
+  if (
+    render(element) !==
+    "<p>&lt;script&gt;console.log(&#x27;Hello World!&#x27;)&lt;/script&gt;</p>"
+  )
+    thro;
 }
 
 {
@@ -132,8 +141,11 @@ import {
     meta({ "><script>console.log('orld')</script><meta": "og:type" }),
     meta({ content: "bar" }),
   ]);
-  render(element) ===
-    '<head><meta content=\"foo\"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta=\"og:type\"><meta content=\"bar\"></head>';
+  if (
+    render(element) !==
+    '<head><meta content=\"foo\"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta=\"og:type\"><meta content=\"bar\"></head>'
+  )
+    throw new Error();
 }
 
 {
@@ -143,12 +155,16 @@ import {
     meta({ content: "><script>console.log('orld')</script><meta" }),
     meta({ content: "bar" }),
   ]);
-  render(element) ===
-    '<head><meta content=\"foo\"><meta content=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>';
+  if (
+    render(element) !==
+    '<head><meta content=\"foo\"><meta content=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>'
+  )
+    throw new Error();
 }
 
 {
   console.info("all character escaped");
   const element = p({}, [`"&'<>\``]);
-  render(element) === "<p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>";
+  if (render(element) !== "<p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>")
+    throw new Error();
 }

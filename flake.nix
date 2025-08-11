@@ -4,18 +4,12 @@
 
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
-  inputs.bun2nix.url = "github:baileyluTCD/bun2nix";
-  inputs.netero-test.url = "github:aabccd021/netero-test";
 
   outputs =
     { self, ... }@inputs:
     let
 
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-
-      nodeModules = inputs.bun2nix.lib.x86_64-linux.mkBunNodeModules {
-        packages = import ./bun.nix;
-      };
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
@@ -27,24 +21,20 @@
         programs.biome.settings.formatter.lineWidth = 100;
       };
 
-      formatter = treefmtEval.config.build.wrapper;
-
       tsc = pkgs.runCommand "tsc" { } ''
         cp -L ${./html.ts} ./html.ts
         cp -L ${./test.js} ./test.js
+        cp -L ${./gen.ts} ./gen.ts
         cp -L ${./tsconfig.json} ./tsconfig.json
-        cp -Lr ${nodeModules}/node_modules ./node_modules
         ${pkgs.typescript}/bin/tsc
         touch $out
       '';
 
       test = pkgs.runCommand "tests" { } ''
         cp -L ${./html.ts} ./html.ts
+        cp -L ${./gen.ts} ./gen.ts
         cp -L ${./test.js} ./test.js
-        cp -L ${./package.json} ./package.json
-        cp -L ${./tsconfig.json} ./tsconfig.json
-        cp -Lr ${nodeModules}/node_modules ./node_modules
-        ${pkgs.bun}/bin/bun test ./test.js
+        ${pkgs.bun}/bin/bun ./test.js
         touch $out
       '';
 
@@ -62,7 +52,22 @@
         '';
       };
 
-      devShells.default = pkgs.mkShellNoCC {
+      packages = {
+        formatting = treefmtEval.config.build.check self;
+        typescript = pkgs.typescript;
+        publish = publish;
+        tsc = tsc;
+        test = test;
+      };
+
+    in
+    {
+
+      packages.x86_64-linux = packages;
+      checks.x86_64-linux = packages;
+
+      formatter.x86_64-linux = treefmtEval.config.build.wrapper;
+      devShells.x86_64-linux.default = pkgs.mkShellNoCC {
         buildInputs = [
           pkgs.bun
           pkgs.biome
@@ -72,29 +77,6 @@
           pkgs.typescript-language-server
         ];
       };
-
-      packages = devShells // {
-        publish = publish;
-        formatting = treefmtEval.config.build.check self;
-        formatter = formatter;
-        typescript = pkgs.typescript;
-        tsc = tsc;
-        test = test;
-        nodeModules = nodeModules;
-        bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
-        biome = pkgs.biome;
-      };
-
-    in
-    {
-
-      packages.x86_64-linux = packages // {
-        gcroot = pkgs.linkFarm "gcroot" packages;
-      };
-
-      checks.x86_64-linux = packages;
-      formatter.x86_64-linux = formatter;
-      devShells.x86_64-linux = devShells;
 
     };
 }
