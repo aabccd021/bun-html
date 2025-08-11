@@ -11,45 +11,45 @@ import {
 } from "./html.ts";
 
 {
-  console.info("simple element");
+  console.info("> simple element");
   const element = p({ data: { hello: "world" } }, ["Hello, world!"]);
   if (render(element) !== '<p data-hello="world">Hello, world!</p>')
     throw new Error();
 }
 
 {
-  console.info("no child");
+  console.info("> no child");
   const element = p({ data: { hello: "world" } }, []);
   if (render(element) !== '<p data-hello="world"></p>') throw new Error();
 }
 
 {
-  console.info("void element");
+  console.info("> void element");
   const element = meta({ charset: "utf-8" });
   if (render(element) !== '<meta charset="utf-8">') throw new Error();
 }
 
 {
-  console.info("unsafe html");
+  console.info("> unsafe html");
   const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
   if (render(element) !== "<p><strong>Hello, world!</strong></p>")
     throw new Error();
 }
 
 {
-  console.info("conditional");
+  console.info("> conditional");
   const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
   if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
-  console.info("undefined");
+  console.info("> undefined");
   const element = p({}, [undefined, "Hello, world!"]);
   if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
-  console.info("deeply nested");
+  console.info("> deeply nested");
   const element = p({}, [
     div({ class: "container" }, [button({}, ["Hello, world!"])]),
   ]);
@@ -61,27 +61,27 @@ import {
 }
 
 {
-  console.info("number attribute");
+  console.info("> number attribute");
   const element = p({ data: { number: 42 } }, ["Hello, world!"]);
   if (render(element) !== '<p data-number="42">Hello, world!</p>')
     throw new Error();
 }
 
 {
-  console.info("true attribute");
+  console.info("> true attribute");
   const element = p({ data: { boolean: true } }, ["Hello, world!"]);
   if (render(element) !== "<p data-boolean>Hello, world!</p>")
     throw new Error();
 }
 
 {
-  console.info("false attribute");
+  console.info("> false attribute");
   const element = p({ data: { boolean: false } }, ["Hello, world!"]);
   if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
 {
-  console.info("URL attribute");
+  console.info("> URL attribute");
   // @ts-ignore
   const element = a({ href: new URL("https://example.com") }, [
     "Hello, world!",
@@ -91,14 +91,14 @@ import {
 }
 
 {
-  console.info("style attribute");
+  console.info("> style attribute");
   const element = p({ style: "color: red;" }, ["Hello, world!"]);
   if (render(element) !== '<p style="color: red;">Hello, world!</p>')
     throw new Error();
 }
 
 {
-  console.info("unsupported attribute");
+  console.info("> unsupported attribute");
   // @ts-ignore
   const element = p({ "data-boolean": { foo: "invalid" } }, ["Hello, world!"]);
   try {
@@ -114,14 +114,14 @@ import {
 }
 
 {
-  console.info("html doctype shown");
+  console.info("> html doctype shown");
   const element = html({}, ["Hello, world!"]);
   if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>")
     throw new Error();
 }
 
 {
-  console.info("unknown attributes");
+  console.info("> unknown attributes");
   const element = meta({
     charset: "utf-8",
     // @ts-ignore
@@ -132,7 +132,7 @@ import {
 }
 
 {
-  console.info("xss on content");
+  console.info("> xss on content");
   const element = p({}, ["<script>console.log('Hello World!')</script>"]);
   if (
     render(element) !==
@@ -142,7 +142,7 @@ import {
 }
 
 {
-  console.info("xss on attribute key");
+  console.info("> xss on attribute key");
   const element = head({}, [
     meta({ content: "foo" }),
     // @ts-ignore
@@ -157,7 +157,7 @@ import {
 }
 
 {
-  console.info("xss on attribute value");
+  console.info("> xss on attribute value");
   const element = head({}, [
     meta({ content: "foo" }),
     meta({ content: "><script>console.log('orld')</script><meta" }),
@@ -171,7 +171,7 @@ import {
 }
 
 {
-  console.info("xss on data attribute key");
+  console.info("> xss on data attribute key");
   const element = p({}, [
     meta({ data: { "><script>console.log('orld')</script><meta": "bar" } }),
   ]);
@@ -183,7 +183,7 @@ import {
 }
 
 {
-  console.info("xss on data attribute value");
+  console.info("> xss on data attribute value");
   const element = p({}, [
     meta({ data: { foo: "><script>console.log('orld')</script><meta" } }),
   ]);
@@ -195,7 +195,7 @@ import {
 }
 
 {
-  console.info("all character escaped");
+  console.info("> all character escaped");
   const element = p({}, [`"&'<>\``]);
   if (render(element) !== "<p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>")
     throw new Error();
