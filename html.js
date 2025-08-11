@@ -14,14 +14,22 @@ export * from "./gen.js";
  */
 
 /**
+ * An element with a tag, attributes, and optional children.
+ * @typedef {Object} TaggedElement
+ * @property {string} tag - The HTML tag name
+ * @property {Object<string, AttributeValues|Object<string, AttributeValues>>} attributes - Element attributes
+ * @property {Array<Element>} [children] - Optional child elements
+ */
+
+/**
+ * A raw HTML element with unescaped content.
+ * @typedef {Object} RawElement
+ * @property {string} value - Raw HTML content
+ */
+
+/**
  * Represents an HTML element or a component that can be rendered to HTML.
- * @typedef {string|false|undefined|{
- *   readonly tag: string,
- *   readonly attributes: Record<string, AttributeValues|Record<string, AttributeValues>>,
- *   readonly children?: readonly Element[]
- * }|{
- *   readonly value: string
- * }} Element
+ * @typedef {string|false|undefined|TaggedElement|RawElement} Element
  */
 
 /**
@@ -33,7 +41,7 @@ const reUnescapedHtml = /[&<>"'`]/g;
 
 /**
  * Mapping of special HTML characters to their escaped equivalents.
- * @type {Record<string, string>}
+ * @type {Object<string, string>}
  * @private
  */
 const escapeMap = {
@@ -61,7 +69,7 @@ function escapeHTML(value) {
 /**
  * Serializes an attribute key-value pair into HTML attribute syntax.
  * @param {string} unsafeKey - The attribute name (will be escaped)
- * @param {AttributeValues|Record<string, AttributeValues>} value - The attribute value
+ * @param {AttributeValues|Object<string, AttributeValues>} value - The attribute value
  * @returns {string} The serialized HTML attribute string
  * @private
  */
@@ -131,6 +139,6 @@ export function render(element) {
  * Creates an Element from an unescaped HTML string.
  * Use with caution as this bypasses HTML escaping.
  * @param {string} value - Raw HTML string to include
- * @returns {Element} An Element that will render the raw HTML
+ * @returns {RawElement} An Element that will render the raw HTML
  */
 export const unsafeHtml = (value) => ({ value });

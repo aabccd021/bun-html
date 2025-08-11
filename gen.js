@@ -160,7 +160,7 @@
 
 /**
  * @param {HtmlAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function html(attributes, children) {
@@ -325,7 +325,7 @@ export function html(attributes, children) {
 
 /**
  * @param {HeadAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function head(attributes, children) {
@@ -489,7 +489,7 @@ export function head(attributes, children) {
 
 /**
  * @param {TitleAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function title(attributes, children) {
@@ -1166,7 +1166,7 @@ export function meta(attributes) {
 
 /**
  * @param {StyleAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function style(attributes, children) {
@@ -1355,7 +1355,7 @@ export function style(attributes, children) {
 
 /**
  * @param {BodyAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function body(attributes, children) {
@@ -1519,7 +1519,7 @@ export function body(attributes, children) {
 
 /**
  * @param {ArticleAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function article(attributes, children) {
@@ -1683,7 +1683,7 @@ export function article(attributes, children) {
 
 /**
  * @param {SectionAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function section(attributes, children) {
@@ -1847,7 +1847,7 @@ export function section(attributes, children) {
 
 /**
  * @param {NavAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function nav(attributes, children) {
@@ -2011,7 +2011,7 @@ export function nav(attributes, children) {
 
 /**
  * @param {AsideAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function aside(attributes, children) {
@@ -2175,7 +2175,7 @@ export function aside(attributes, children) {
 
 /**
  * @param {H1Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h1(attributes, children) {
@@ -2339,7 +2339,7 @@ export function h1(attributes, children) {
 
 /**
  * @param {H2Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h2(attributes, children) {
@@ -2503,7 +2503,7 @@ export function h2(attributes, children) {
 
 /**
  * @param {H3Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h3(attributes, children) {
@@ -2667,7 +2667,7 @@ export function h3(attributes, children) {
 
 /**
  * @param {H4Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h4(attributes, children) {
@@ -2831,7 +2831,7 @@ export function h4(attributes, children) {
 
 /**
  * @param {H5Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h5(attributes, children) {
@@ -2995,7 +2995,7 @@ export function h5(attributes, children) {
 
 /**
  * @param {H6Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function h6(attributes, children) {
@@ -3159,7 +3159,7 @@ export function h6(attributes, children) {
 
 /**
  * @param {HeaderAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function header(attributes, children) {
@@ -3323,7 +3323,7 @@ export function header(attributes, children) {
 
 /**
  * @param {FooterAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function footer(attributes, children) {
@@ -3487,7 +3487,7 @@ export function footer(attributes, children) {
 
 /**
  * @param {AddressAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function address(attributes, children) {
@@ -3651,7 +3651,7 @@ export function address(attributes, children) {
 
 /**
  * @param {PAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function p(attributes, children) {
@@ -3987,7 +3987,7 @@ export function hr(attributes) {
 
 /**
  * @param {PreAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function pre(attributes, children) {
@@ -4152,7 +4152,7 @@ export function pre(attributes, children) {
 
 /**
  * @param {BlockquoteAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function blockquote(attributes, children) {
@@ -4320,7 +4320,7 @@ export function blockquote(attributes, children) {
 
 /**
  * @param {OlAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function ol(attributes, children) {
@@ -4485,7 +4485,7 @@ export function ol(attributes, children) {
 
 /**
  * @param {UlAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function ul(attributes, children) {
@@ -4651,7 +4651,7 @@ export function ul(attributes, children) {
 
 /**
  * @param {LiAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function li(attributes, children) {
@@ -4815,7 +4815,7 @@ export function li(attributes, children) {
 
 /**
  * @param {DlAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function dl(attributes, children) {
@@ -4979,7 +4979,7 @@ export function dl(attributes, children) {
 
 /**
  * @param {DtAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function dt(attributes, children) {
@@ -5144,7 +5144,7 @@ export function dt(attributes, children) {
 
 /**
  * @param {DdAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function dd(attributes, children) {
@@ -5308,7 +5308,7 @@ export function dd(attributes, children) {
 
 /**
  * @param {FigureAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function figure(attributes, children) {
@@ -5472,7 +5472,7 @@ export function figure(attributes, children) {
 
 /**
  * @param {FigcaptionAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function figcaption(attributes, children) {
@@ -5636,7 +5636,7 @@ export function figcaption(attributes, children) {
 
 /**
  * @param {MainAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function main(attributes, children) {
@@ -5800,7 +5800,7 @@ export function main(attributes, children) {
 
 /**
  * @param {DivAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function div(attributes, children) {
@@ -5972,7 +5972,7 @@ export function div(attributes, children) {
 
 /**
  * @param {AAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function a(attributes, children) {
@@ -6136,7 +6136,7 @@ export function a(attributes, children) {
 
 /**
  * @param {EmAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function em(attributes, children) {
@@ -6300,7 +6300,7 @@ export function em(attributes, children) {
 
 /**
  * @param {StrongAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function strong(attributes, children) {
@@ -6464,7 +6464,7 @@ export function strong(attributes, children) {
 
 /**
  * @param {SmallAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function small(attributes, children) {
@@ -6628,7 +6628,7 @@ export function small(attributes, children) {
 
 /**
  * @param {SAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function s(attributes, children) {
@@ -6792,7 +6792,7 @@ export function s(attributes, children) {
 
 /**
  * @param {CiteAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function cite(attributes, children) {
@@ -6957,7 +6957,7 @@ export function cite(attributes, children) {
 
 /**
  * @param {QAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function q(attributes, children) {
@@ -7121,7 +7121,7 @@ export function q(attributes, children) {
 
 /**
  * @param {DfnAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function dfn(attributes, children) {
@@ -7285,7 +7285,7 @@ export function dfn(attributes, children) {
 
 /**
  * @param {AbbrAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function abbr(attributes, children) {
@@ -7449,7 +7449,7 @@ export function abbr(attributes, children) {
 
 /**
  * @param {RubyAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function ruby(attributes, children) {
@@ -7613,7 +7613,7 @@ export function ruby(attributes, children) {
 
 /**
  * @param {RbAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function rb(attributes, children) {
@@ -7777,7 +7777,7 @@ export function rb(attributes, children) {
 
 /**
  * @param {RtAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function rt(attributes, children) {
@@ -7941,7 +7941,7 @@ export function rt(attributes, children) {
 
 /**
  * @param {RpAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function rp(attributes, children) {
@@ -8106,7 +8106,7 @@ export function rp(attributes, children) {
 
 /**
  * @param {TimeAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function time(attributes, children) {
@@ -8270,7 +8270,7 @@ export function time(attributes, children) {
 
 /**
  * @param {CodeAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function code(attributes, children) {
@@ -8434,7 +8434,7 @@ export function code(attributes, children) {
 
 /**
  * @param {VarAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function var_(attributes, children) {
@@ -8598,7 +8598,7 @@ export function var_(attributes, children) {
 
 /**
  * @param {SampAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function samp(attributes, children) {
@@ -8762,7 +8762,7 @@ export function samp(attributes, children) {
 
 /**
  * @param {KbdAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function kbd(attributes, children) {
@@ -8926,7 +8926,7 @@ export function kbd(attributes, children) {
 
 /**
  * @param {SubAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function sub(attributes, children) {
@@ -9090,7 +9090,7 @@ export function sub(attributes, children) {
 
 /**
  * @param {SupAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function sup(attributes, children) {
@@ -9254,7 +9254,7 @@ export function sup(attributes, children) {
 
 /**
  * @param {IAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function i(attributes, children) {
@@ -9418,7 +9418,7 @@ export function i(attributes, children) {
 
 /**
  * @param {BAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function b(attributes, children) {
@@ -9582,7 +9582,7 @@ export function b(attributes, children) {
 
 /**
  * @param {UAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function u(attributes, children) {
@@ -9746,7 +9746,7 @@ export function u(attributes, children) {
 
 /**
  * @param {MarkAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function mark(attributes, children) {
@@ -9910,7 +9910,7 @@ export function mark(attributes, children) {
 
 /**
  * @param {BdiAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function bdi(attributes, children) {
@@ -10074,7 +10074,7 @@ export function bdi(attributes, children) {
 
 /**
  * @param {BdoAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function bdo(attributes, children) {
@@ -10238,7 +10238,7 @@ export function bdo(attributes, children) {
 
 /**
  * @param {SpanAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function span(attributes, children) {
@@ -10733,7 +10733,7 @@ export function wbr(attributes) {
 
 /**
  * @param {InsAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function ins(attributes, children) {
@@ -10899,7 +10899,7 @@ export function ins(attributes, children) {
 
 /**
  * @param {DelAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function del(attributes, children) {
@@ -11063,7 +11063,7 @@ export function del(attributes, children) {
 
 /**
  * @param {PictureAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function picture(attributes, children) {
@@ -11419,7 +11419,7 @@ export function img(attributes) {
 
 /**
  * @param {IframeAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function iframe(attributes, children) {
@@ -11766,7 +11766,7 @@ export function embed(attributes) {
 
 /**
  * @param {ObjectAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function object(attributes, children) {
@@ -12109,7 +12109,7 @@ export function param(attributes) {
 
 /**
  * @param {VideoAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function video(attributes, children) {
@@ -12281,7 +12281,7 @@ export function video(attributes, children) {
 
 /**
  * @param {AudioAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function audio(attributes, children) {
@@ -12784,7 +12784,7 @@ export function track(attributes) {
 
 /**
  * @param {MapAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function map(attributes, children) {
@@ -13124,7 +13124,7 @@ export function area(attributes) {
 
 /**
  * @param {TableAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function table(attributes, children) {
@@ -13289,7 +13289,7 @@ export function table(attributes, children) {
 
 /**
  * @param {CaptionAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function caption(attributes, children) {
@@ -13455,7 +13455,7 @@ export function caption(attributes, children) {
 
 /**
  * @param {ColgroupAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function colgroup(attributes, children) {
@@ -13786,7 +13786,7 @@ export function col(attributes) {
 
 /**
  * @param {TbodyAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function tbody(attributes, children) {
@@ -13951,7 +13951,7 @@ export function tbody(attributes, children) {
 
 /**
  * @param {TheadAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function thead(attributes, children) {
@@ -14116,7 +14116,7 @@ export function thead(attributes, children) {
 
 /**
  * @param {TfootAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function tfoot(attributes, children) {
@@ -14281,7 +14281,7 @@ export function tfoot(attributes, children) {
 
 /**
  * @param {TrAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function tr(attributes, children) {
@@ -14452,7 +14452,7 @@ export function tr(attributes, children) {
 
 /**
  * @param {TdAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function td(attributes, children) {
@@ -14625,7 +14625,7 @@ export function td(attributes, children) {
 
 /**
  * @param {ThAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function th(attributes, children) {
@@ -14798,7 +14798,7 @@ export function th(attributes, children) {
 
 /**
  * @param {FormAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function form(attributes, children) {
@@ -14964,7 +14964,7 @@ export function form(attributes, children) {
 
 /**
  * @param {LabelAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function label(attributes, children) {
@@ -15337,7 +15337,7 @@ export function input(attributes) {
 
 /**
  * @param {ButtonAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function button(attributes, children) {
@@ -15508,7 +15508,7 @@ export function button(attributes, children) {
 
 /**
  * @param {SelectAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function select(attributes, children) {
@@ -15672,7 +15672,7 @@ export function select(attributes, children) {
 
 /**
  * @param {DatalistAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function datalist(attributes, children) {
@@ -15838,7 +15838,7 @@ export function datalist(attributes, children) {
 
 /**
  * @param {OptgroupAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function optgroup(attributes, children) {
@@ -16006,7 +16006,7 @@ export function optgroup(attributes, children) {
 
 /**
  * @param {OptionAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function option(attributes, children) {
@@ -16183,7 +16183,7 @@ export function option(attributes, children) {
 
 /**
  * @param {TextareaAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function textarea(attributes, children) {
@@ -16350,7 +16350,7 @@ export function textarea(attributes, children) {
 
 /**
  * @param {OutputAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function output(attributes, children) {
@@ -16516,7 +16516,7 @@ export function output(attributes, children) {
 
 /**
  * @param {ProgressAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function progress(attributes, children) {
@@ -16687,7 +16687,7 @@ export function progress(attributes, children) {
 
 /**
  * @param {MeterAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function meter(attributes, children) {
@@ -16854,7 +16854,7 @@ export function meter(attributes, children) {
 
 /**
  * @param {FieldsetAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function fieldset(attributes, children) {
@@ -17018,7 +17018,7 @@ export function fieldset(attributes, children) {
 
 /**
  * @param {LegendAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function legend(attributes, children) {
@@ -17183,7 +17183,7 @@ export function legend(attributes, children) {
 
 /**
  * @param {DetailsAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function details(attributes, children) {
@@ -17347,7 +17347,7 @@ export function details(attributes, children) {
 
 /**
  * @param {SummaryAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function summary(attributes, children) {
@@ -17512,7 +17512,7 @@ export function summary(attributes, children) {
 
 /**
  * @param {DialogAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function dialog(attributes, children) {
@@ -17686,7 +17686,7 @@ export function dialog(attributes, children) {
 
 /**
  * @param {ScriptAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function script(attributes, children) {
@@ -17850,7 +17850,7 @@ export function script(attributes, children) {
 
 /**
  * @param {NoscriptAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function noscript(attributes, children) {
@@ -18014,7 +18014,7 @@ export function noscript(attributes, children) {
 
 /**
  * @param {TemplateAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function template(attributes, children) {
@@ -18181,7 +18181,7 @@ export function template(attributes, children) {
 
 /**
  * @param {CanvasAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function canvas(attributes, children) {
@@ -18346,7 +18346,7 @@ export function canvas(attributes, children) {
 
 /**
  * @param {SlotAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function slot(attributes, children) {
@@ -18511,7 +18511,7 @@ export function slot(attributes, children) {
 
 /**
  * @param {DataAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function data(attributes, children) {
@@ -18675,7 +18675,7 @@ export function data(attributes, children) {
 
 /**
  * @param {HgroupAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function hgroup(attributes, children) {
@@ -18839,7 +18839,7 @@ export function hgroup(attributes, children) {
 
 /**
  * @param {MenuAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function menu(attributes, children) {
@@ -19003,7 +19003,7 @@ export function menu(attributes, children) {
 
 /**
  * @param {SearchAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function search(attributes, children) {
@@ -19170,7 +19170,7 @@ export function search(attributes, children) {
 
 /**
  * @param {FencedframeAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function fencedframe(attributes, children) {
@@ -19334,7 +19334,7 @@ export function fencedframe(attributes, children) {
 
 /**
  * @param {SelectedcontentAttributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {Element[]} [ children ]
  * @returns {Element}
  */
 export function selectedcontent(attributes, children) {

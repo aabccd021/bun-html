@@ -85,7 +85,7 @@ ${attributes}
 
 /**
  * @param {${capName}Attributes} attributes
-${tag.void === true ? "" : " * @param {readonly Element[]} [ children ]"}
+${tag.void === true ? "" : " * @param {Element[]} [ children ]"}
  * @returns {Element}
  */
 export function ${funcName}(attributes${tag.void === true ? "" : ", children"}) {
