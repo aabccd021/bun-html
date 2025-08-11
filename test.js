@@ -17,7 +17,7 @@ test("simple element", () => {
 });
 
 test("no child", () => {
-  const element = p({ "data-hello": "world" });
+  const element = p({ "data-hello": "world" }, []);
   expect(render(element)).toBe('<p data-hello="world"></p>');
 });
 

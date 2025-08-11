@@ -22,7 +22,6 @@ export type Element =
       readonly tag: HtmlTags;
       readonly attributes: Record<string, AttributeValues>;
       readonly children?: readonly Element[];
-      readonly beforeTag?: string;
     }
   | {
       readonly tag: "unsafeHtml";
@@ -76,12 +75,14 @@ export function render(element: Element): string {
     .map(serializeAttribute)
     .join("");
 
+  const beforeTag = element.tag === "html" ? "<!DOCTYPE html>" : "";
+
   if (element.children === undefined) {
-    return `${element.beforeTag}<${element.tag}${attributes}>`;
+    return `${beforeTag}<${element.tag}${attributes}>`;
   }
 
   const children = element.children.map(render).join("");
-  return `${element.beforeTag}<${element.tag}${attributes}>${children}</${element.tag}>`;
+  return `${beforeTag}<${element.tag}${attributes}>${children}</${element.tag}>`;
 }
 
 export const unsafeHtml = (value: string): Element => ({
@@ -89,146 +90,703 @@ export const unsafeHtml = (value: string): Element => ({
   value,
 });
 
-const el =
-  <Tag extends HtmlTags>(tag: Tag) =>
-  (attributes: Attributes<Tag>, children?: readonly Element[]): Element => {
-    return {
-      tag,
-      attributes,
-      children: children ?? [],
-      beforeTag: "",
-    };
-  };
-
-const voidEl =
-  <Tag extends HtmlTags>(tag: Tag) =>
-  (attributes: Attributes<Tag>): Element => {
-    return {
-      tag,
-      attributes,
-      children: undefined,
-      beforeTag: "",
-    };
-  };
-
-export const html = (
-  attributes: ElementAttributes["html"],
+export const a = (
+  attributes: Attributes<"a">,
   children: readonly Element[],
-): Element => {
-  return {
-    tag: "html",
-    attributes,
-    children,
-    beforeTag: "<!DOCTYPE html>",
-  };
-};
-
-export const a = el("a");
-export const address = el("address");
-export const area = voidEl("area");
-export const article = el("article");
-export const aside = el("aside");
-export const audio = el("audio");
-export const b = el("b");
-export const base = voidEl("base");
-export const bdi = el("bdi");
-export const bdo = el("bdo");
-export const blockquote = el("blockquote");
-export const body = el("body");
-export const br = voidEl("br");
-export const button = el("button");
-export const canvas = el("canvas");
-export const caption = el("caption");
-export const cite = el("cite");
-export const code = el("code");
-export const col = voidEl("col");
-export const colgroup = el("colgroup");
-export const data = el("data");
-export const datalist = el("datalist");
-export const dd = el("dd");
-export const del = el("del");
-export const details = el("details");
-export const dfn = el("dfn");
-export const dialog = el("dialog");
-export const div = el("div");
-export const dl = el("dl");
-export const dt = el("dt");
-export const em = el("em");
-export const embed = voidEl("embed");
-export const fieldset = el("fieldset");
-export const figcaption = el("figcaption");
-export const figure = el("figure");
-export const footer = el("footer");
-export const form = el("form");
-export const h1 = el("h1");
-export const h2 = el("h2");
-export const h3 = el("h3");
-export const h4 = el("h4");
-export const h5 = el("h5");
-export const h6 = el("h6");
-export const head = el("head");
-export const header = el("header");
-export const hgroup = el("hgroup");
-export const hr = voidEl("hr");
-export const i = el("i");
-export const iframe = el("iframe");
-export const img = voidEl("img");
-export const input = voidEl("input");
-export const ins = el("ins");
-export const kbd = el("kbd");
-export const label = el("label");
-export const legend = el("legend");
-export const li = el("li");
-export const link = voidEl("link");
-export const main = el("main");
-export const map = el("map");
-export const mark = el("mark");
-export const menu = el("menu");
-export const meta = voidEl("meta");
-export const meter = el("meter");
-export const nav = el("nav");
-export const noscript = el("noscript");
-export const object = el("object");
-export const ol = el("ol");
-export const optgroup = el("optgroup");
-export const option = el("option");
-export const output = el("output");
-export const p = el("p");
-export const param = el("param");
-export const picture = el("picture");
-export const pre = el("pre");
-export const progress = el("progress");
-export const q = el("q");
-export const rp = el("rp");
-export const rt = el("rt");
-export const ruby = el("ruby");
-export const s = el("s");
-export const samp = el("samp");
-export const script = el("script");
-export const slot = el("slot");
-export const section = el("section");
-export const select = el("select");
-export const small = el("small");
-export const source = voidEl("source");
-export const span = el("span");
-export const strong = el("strong");
-export const sub = el("sub");
-export const summary = el("summary");
-export const sup = el("sup");
-export const table = el("table");
-export const tbody = el("tbody");
-export const td = el("td");
-export const template = el("template");
-export const textarea = el("textarea");
-export const tfoot = el("tfoot");
-export const th = el("th");
-export const thead = el("thead");
-export const time = el("time");
-export const title = el("title");
-export const tr = el("tr");
-export const track = voidEl("track");
-export const u = el("u");
-export const ul = el("ul");
-export const vartag = el("var");
-export const video = el("video");
-export const wbr = voidEl("wbr");
+): Element => ({
+  tag: "a",
+  attributes,
+  children,
+});
+export const address = (
+  attributes: Attributes<"address">,
+  children: readonly Element[],
+): Element => ({ tag: "address", attributes, children });
+export const area = (attributes: Attributes<"area">): Element => ({
+  tag: "area",
+  attributes,
+});
+export const article = (
+  attributes: Attributes<"article">,
+  children: readonly Element[],
+): Element => ({ tag: "article", attributes, children });
+export const aside = (
+  attributes: Attributes<"aside">,
+  children: readonly Element[],
+): Element => ({
+  tag: "aside",
+  attributes,
+  children,
+});
+export const audio = (
+  attributes: Attributes<"audio">,
+  children: readonly Element[],
+): Element => ({
+  tag: "audio",
+  attributes,
+  children,
+});
+export const b = (
+  attributes: Attributes<"b">,
+  children: readonly Element[],
+): Element => ({
+  tag: "b",
+  attributes,
+  children,
+});
+export const base = (attributes: Attributes<"base">): Element => ({
+  tag: "base",
+  attributes,
+});
+export const bdi = (
+  attributes: Attributes<"bdi">,
+  children: readonly Element[],
+): Element => ({
+  tag: "bdi",
+  attributes,
+  children,
+});
+export const bdo = (
+  attributes: Attributes<"bdo">,
+  children: readonly Element[],
+): Element => ({
+  tag: "bdo",
+  attributes,
+  children,
+});
+export const blockquote = (
+  attributes: Attributes<"blockquote">,
+  children: readonly Element[],
+): Element => ({ tag: "blockquote", attributes, children });
+export const body = (
+  attributes: Attributes<"body">,
+  children: readonly Element[],
+): Element => ({
+  tag: "body",
+  attributes,
+  children,
+});
+export const br = (attributes: Attributes<"br">): Element => ({
+  tag: "br",
+  attributes,
+});
+export const button = (
+  attributes: Attributes<"button">,
+  children: readonly Element[],
+): Element => ({ tag: "button", attributes, children });
+export const canvas = (
+  attributes: Attributes<"canvas">,
+  children: readonly Element[],
+): Element => ({ tag: "canvas", attributes, children });
+export const caption = (
+  attributes: Attributes<"caption">,
+  children: readonly Element[],
+): Element => ({ tag: "caption", attributes, children });
+export const cite = (
+  attributes: Attributes<"cite">,
+  children: readonly Element[],
+): Element => ({
+  tag: "cite",
+  attributes,
+  children,
+});
+export const code = (
+  attributes: Attributes<"code">,
+  children: readonly Element[],
+): Element => ({
+  tag: "code",
+  attributes,
+  children,
+});
+export const col = (attributes: Attributes<"col">): Element => ({
+  tag: "col",
+  attributes,
+});
+export const colgroup = (
+  attributes: Attributes<"colgroup">,
+  children: readonly Element[],
+): Element => ({ tag: "colgroup", attributes, children });
+export const data = (
+  attributes: Attributes<"data">,
+  children: readonly Element[],
+): Element => ({
+  tag: "data",
+  attributes,
+  children,
+});
+export const datalist = (
+  attributes: Attributes<"datalist">,
+  children: readonly Element[],
+): Element => ({ tag: "datalist", attributes, children });
+export const dd = (
+  attributes: Attributes<"dd">,
+  children: readonly Element[],
+): Element => ({
+  tag: "dd",
+  attributes,
+  children,
+});
+export const del = (
+  attributes: Attributes<"del">,
+  children: readonly Element[],
+): Element => ({
+  tag: "del",
+  attributes,
+  children,
+});
+export const details = (
+  attributes: Attributes<"details">,
+  children: readonly Element[],
+): Element => ({ tag: "details", attributes, children });
+export const dfn = (
+  attributes: Attributes<"dfn">,
+  children: readonly Element[],
+): Element => ({
+  tag: "dfn",
+  attributes,
+  children,
+});
+export const dialog = (
+  attributes: Attributes<"dialog">,
+  children: readonly Element[],
+): Element => ({ tag: "dialog", attributes, children });
+export const div = (
+  attributes: Attributes<"div">,
+  children: readonly Element[],
+): Element => ({
+  tag: "div",
+  attributes,
+  children,
+});
+export const dl = (
+  attributes: Attributes<"dl">,
+  children: readonly Element[],
+): Element => ({
+  tag: "dl",
+  attributes,
+  children,
+});
+export const dt = (
+  attributes: Attributes<"dt">,
+  children: readonly Element[],
+): Element => ({
+  tag: "dt",
+  attributes,
+  children,
+});
+export const em = (
+  attributes: Attributes<"em">,
+  children: readonly Element[],
+): Element => ({
+  tag: "em",
+  attributes,
+  children,
+});
+export const embed = (attributes: Attributes<"embed">): Element => ({
+  tag: "embed",
+  attributes,
+});
+export const fieldset = (
+  attributes: Attributes<"fieldset">,
+  children: readonly Element[],
+): Element => ({ tag: "fieldset", attributes, children });
+export const figcaption = (
+  attributes: Attributes<"figcaption">,
+  children: readonly Element[],
+): Element => ({ tag: "figcaption", attributes, children });
+export const figure = (
+  attributes: Attributes<"figure">,
+  children: readonly Element[],
+): Element => ({ tag: "figure", attributes, children });
+export const footer = (
+  attributes: Attributes<"footer">,
+  children: readonly Element[],
+): Element => ({ tag: "footer", attributes, children });
+export const form = (
+  attributes: Attributes<"form">,
+  children: readonly Element[],
+): Element => ({
+  tag: "form",
+  attributes,
+  children,
+});
+export const h1 = (
+  attributes: Attributes<"h1">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h1",
+  attributes,
+  children,
+});
+export const h2 = (
+  attributes: Attributes<"h2">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h2",
+  attributes,
+  children,
+});
+export const h3 = (
+  attributes: Attributes<"h3">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h3",
+  attributes,
+  children,
+});
+export const h4 = (
+  attributes: Attributes<"h4">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h4",
+  attributes,
+  children,
+});
+export const h5 = (
+  attributes: Attributes<"h5">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h5",
+  attributes,
+  children,
+});
+export const h6 = (
+  attributes: Attributes<"h6">,
+  children: readonly Element[],
+): Element => ({
+  tag: "h6",
+  attributes,
+  children,
+});
+export const head = (
+  attributes: Attributes<"head">,
+  children: readonly Element[],
+): Element => ({
+  tag: "head",
+  attributes,
+  children,
+});
+export const header = (
+  attributes: Attributes<"header">,
+  children: readonly Element[],
+): Element => ({ tag: "header", attributes, children });
+export const hgroup = (
+  attributes: Attributes<"hgroup">,
+  children: readonly Element[],
+): Element => ({ tag: "hgroup", attributes, children });
+export const hr = (attributes: Attributes<"hr">): Element => ({
+  tag: "hr",
+  attributes,
+});
+export const html = (
+  attributes: Attributes<"html">,
+  children: readonly Element[],
+): Element => ({
+  tag: "html",
+  attributes,
+  children,
+});
+export const i = (
+  attributes: Attributes<"i">,
+  children: readonly Element[],
+): Element => ({
+  tag: "i",
+  attributes,
+  children,
+});
+export const iframe = (
+  attributes: Attributes<"iframe">,
+  children: readonly Element[],
+): Element => ({ tag: "iframe", attributes, children });
+export const img = (attributes: Attributes<"img">): Element => ({
+  tag: "img",
+  attributes,
+});
+export const input = (attributes: Attributes<"input">): Element => ({
+  tag: "input",
+  attributes,
+});
+export const ins = (
+  attributes: Attributes<"ins">,
+  children: readonly Element[],
+): Element => ({
+  tag: "ins",
+  attributes,
+  children,
+});
+export const kbd = (
+  attributes: Attributes<"kbd">,
+  children: readonly Element[],
+): Element => ({
+  tag: "kbd",
+  attributes,
+  children,
+});
+export const label = (
+  attributes: Attributes<"label">,
+  children: readonly Element[],
+): Element => ({
+  tag: "label",
+  attributes,
+  children,
+});
+export const legend = (
+  attributes: Attributes<"legend">,
+  children: readonly Element[],
+): Element => ({ tag: "legend", attributes, children });
+export const li = (
+  attributes: Attributes<"li">,
+  children: readonly Element[],
+): Element => ({
+  tag: "li",
+  attributes,
+  children,
+});
+export const link = (attributes: Attributes<"link">): Element => ({
+  tag: "link",
+  attributes,
+});
+export const main = (
+  attributes: Attributes<"main">,
+  children: readonly Element[],
+): Element => ({
+  tag: "main",
+  attributes,
+  children,
+});
+export const map = (
+  attributes: Attributes<"map">,
+  children: readonly Element[],
+): Element => ({
+  tag: "map",
+  attributes,
+  children,
+});
+export const mark = (
+  attributes: Attributes<"mark">,
+  children: readonly Element[],
+): Element => ({
+  tag: "mark",
+  attributes,
+  children,
+});
+export const menu = (
+  attributes: Attributes<"menu">,
+  children: readonly Element[],
+): Element => ({
+  tag: "menu",
+  attributes,
+  children,
+});
+export const meta = (attributes: Attributes<"meta">): Element => ({
+  tag: "meta",
+  attributes,
+});
+export const meter = (
+  attributes: Attributes<"meter">,
+  children: readonly Element[],
+): Element => ({
+  tag: "meter",
+  attributes,
+  children,
+});
+export const nav = (
+  attributes: Attributes<"nav">,
+  children: readonly Element[],
+): Element => ({
+  tag: "nav",
+  attributes,
+  children,
+});
+export const noscript = (
+  attributes: Attributes<"noscript">,
+  children: readonly Element[],
+): Element => ({ tag: "noscript", attributes, children });
+export const object = (
+  attributes: Attributes<"object">,
+  children: readonly Element[],
+): Element => ({ tag: "object", attributes, children });
+export const ol = (
+  attributes: Attributes<"ol">,
+  children: readonly Element[],
+): Element => ({
+  tag: "ol",
+  attributes,
+  children,
+});
+export const optgroup = (
+  attributes: Attributes<"optgroup">,
+  children: readonly Element[],
+): Element => ({ tag: "optgroup", attributes, children });
+export const option = (
+  attributes: Attributes<"option">,
+  children: readonly Element[],
+): Element => ({ tag: "option", attributes, children });
+export const output = (
+  attributes: Attributes<"output">,
+  children: readonly Element[],
+): Element => ({ tag: "output", attributes, children });
+export const p = (
+  attributes: Attributes<"p">,
+  children: readonly Element[],
+): Element => ({
+  tag: "p",
+  attributes,
+  children,
+});
+export const param = (
+  attributes: Attributes<"param">,
+  children: readonly Element[],
+): Element => ({
+  tag: "param",
+  attributes,
+  children,
+});
+export const picture = (
+  attributes: Attributes<"picture">,
+  children: readonly Element[],
+): Element => ({ tag: "picture", attributes, children });
+export const pre = (
+  attributes: Attributes<"pre">,
+  children: readonly Element[],
+): Element => ({
+  tag: "pre",
+  attributes,
+  children,
+});
+export const progress = (
+  attributes: Attributes<"progress">,
+  children: readonly Element[],
+): Element => ({ tag: "progress", attributes, children });
+export const q = (
+  attributes: Attributes<"q">,
+  children: readonly Element[],
+): Element => ({
+  tag: "q",
+  attributes,
+  children,
+});
+export const rp = (
+  attributes: Attributes<"rp">,
+  children: readonly Element[],
+): Element => ({
+  tag: "rp",
+  attributes,
+  children,
+});
+export const rt = (
+  attributes: Attributes<"rt">,
+  children: readonly Element[],
+): Element => ({
+  tag: "rt",
+  attributes,
+  children,
+});
+export const ruby = (
+  attributes: Attributes<"ruby">,
+  children: readonly Element[],
+): Element => ({
+  tag: "ruby",
+  attributes,
+  children,
+});
+export const s = (
+  attributes: Attributes<"s">,
+  children: readonly Element[],
+): Element => ({
+  tag: "s",
+  attributes,
+  children,
+});
+export const samp = (
+  attributes: Attributes<"samp">,
+  children: readonly Element[],
+): Element => ({
+  tag: "samp",
+  attributes,
+  children,
+});
+export const script = (
+  attributes: Attributes<"script">,
+  children: readonly Element[],
+): Element => ({ tag: "script", attributes, children });
+export const slot = (
+  attributes: Attributes<"slot">,
+  children: readonly Element[],
+): Element => ({
+  tag: "slot",
+  attributes,
+  children,
+});
+export const section = (
+  attributes: Attributes<"section">,
+  children: readonly Element[],
+): Element => ({ tag: "section", attributes, children });
+export const select = (
+  attributes: Attributes<"select">,
+  children: readonly Element[],
+): Element => ({ tag: "select", attributes, children });
+export const small = (
+  attributes: Attributes<"small">,
+  children: readonly Element[],
+): Element => ({
+  tag: "small",
+  attributes,
+  children,
+});
+export const source = (attributes: Attributes<"source">): Element => ({
+  tag: "source",
+  attributes,
+});
+export const span = (
+  attributes: Attributes<"span">,
+  children: readonly Element[],
+): Element => ({
+  tag: "span",
+  attributes,
+  children,
+});
+export const strong = (
+  attributes: Attributes<"strong">,
+  children: readonly Element[],
+): Element => ({ tag: "strong", attributes, children });
+export const sub = (
+  attributes: Attributes<"sub">,
+  children: readonly Element[],
+): Element => ({
+  tag: "sub",
+  attributes,
+  children,
+});
+export const summary = (
+  attributes: Attributes<"summary">,
+  children: readonly Element[],
+): Element => ({ tag: "summary", attributes, children });
+export const sup = (
+  attributes: Attributes<"sup">,
+  children: readonly Element[],
+): Element => ({
+  tag: "sup",
+  attributes,
+  children,
+});
+export const table = (
+  attributes: Attributes<"table">,
+  children: readonly Element[],
+): Element => ({
+  tag: "table",
+  attributes,
+  children,
+});
+export const tbody = (
+  attributes: Attributes<"tbody">,
+  children: readonly Element[],
+): Element => ({
+  tag: "tbody",
+  attributes,
+  children,
+});
+export const td = (
+  attributes: Attributes<"td">,
+  children: readonly Element[],
+): Element => ({
+  tag: "td",
+  attributes,
+  children,
+});
+export const template = (
+  attributes: Attributes<"template">,
+  children: readonly Element[],
+): Element => ({ tag: "template", attributes, children });
+export const textarea = (
+  attributes: Attributes<"textarea">,
+  children: readonly Element[],
+): Element => ({ tag: "textarea", attributes, children });
+export const tfoot = (
+  attributes: Attributes<"tfoot">,
+  children: readonly Element[],
+): Element => ({
+  tag: "tfoot",
+  attributes,
+  children,
+});
+export const th = (
+  attributes: Attributes<"th">,
+  children: readonly Element[],
+): Element => ({
+  tag: "th",
+  attributes,
+  children,
+});
+export const thead = (
+  attributes: Attributes<"thead">,
+  children: readonly Element[],
+): Element => ({
+  tag: "thead",
+  attributes,
+  children,
+});
+export const time = (
+  attributes: Attributes<"time">,
+  children: readonly Element[],
+): Element => ({
+  tag: "time",
+  attributes,
+  children,
+});
+export const title = (
+  attributes: Attributes<"title">,
+  children: readonly Element[],
+): Element => ({
+  tag: "title",
+  attributes,
+  children,
+});
+export const tr = (
+  attributes: Attributes<"tr">,
+  children: readonly Element[],
+): Element => ({
+  tag: "tr",
+  attributes,
+  children,
+});
+export const track = (attributes: Attributes<"track">): Element => ({
+  tag: "track",
+  attributes,
+});
+export const u = (
+  attributes: Attributes<"u">,
+  children: readonly Element[],
+): Element => ({
+  tag: "u",
+  attributes,
+  children,
+});
+export const ul = (
+  attributes: Attributes<"ul">,
+  children: readonly Element[],
+): Element => ({
+  tag: "ul",
+  attributes,
+  children,
+});
+export const var_ = (
+  attributes: Attributes<"var">,
+  children: readonly Element[],
+): Element => ({
+  tag: "var",
+  attributes,
+  children,
+});
+export const video = (
+  attributes: Attributes<"video">,
+  children: readonly Element[],
+): Element => ({
+  tag: "video",
+  attributes,
+  children,
+});
+export const wbr = (attributes: Attributes<"wbr">): Element => ({
+  tag: "wbr",
+  attributes,
+});

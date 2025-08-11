@@ -38,7 +38,7 @@
         touch $out
       '';
 
-      check-tests = pkgs.runCommand "tests" { } ''
+      test = pkgs.runCommand "tests" { } ''
         cp -L ${./bun-html.ts} ./bun-html.ts
         cp -L ${./test.js} ./test.js
         cp -L ${./package.json} ./package.json
@@ -79,7 +79,7 @@
         formatter = formatter;
         typescript = pkgs.typescript;
         check-tsc = check-tsc;
-        check-tests = check-tests;
+        test = test;
         nodeModules = nodeModules;
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
         biome = pkgs.biome;
