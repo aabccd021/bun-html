@@ -125,3 +125,8 @@ test("xss on attribute value", () => {
     '<head><meta content=\"foo\"><meta content=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>',
   );
 });
+
+test("xss on attribute value", () => {
+  const element = p({}, [`"&'<>`]);
+  expect(render(element)).toBe("<p>&quot;&amp;&#x27;&lt;&gt;</p>");
+});
