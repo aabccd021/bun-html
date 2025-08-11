@@ -36,7 +36,7 @@ const escapeMap: Record<string, string> = {
   "'": "&#x27;",
   "<": "&lt;",
   ">": "&gt;",
-  "`": "&#x60;",
+  "`": "&#x60;", // http://html5sec.org/#102, http://html5sec.org/#108, and http://html5sec.org/#133
 };
 
 function escapeHTML(value: string): string {
