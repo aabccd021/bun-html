@@ -5,7 +5,7 @@ export * from "./gen.js";
 
 /**
  * Represents a record of data attributes with string, number, or boolean values.
- * @typedef {Record<string, string|number|boolean>} DataAttribute
+ * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
  */
 
 /**
@@ -35,14 +35,12 @@ export * from "./gen.js";
 /**
  * Regular expression for detecting unescaped HTML characters.
  * @type {RegExp}
- * @private
  */
 const reUnescapedHtml = /[&<>"'`]/g;
 
 /**
  * Mapping of special HTML characters to their escaped equivalents.
  * @type {Object<string, string>}
- * @private
  */
 const escapeMap = {
   '"': "&quot;",
@@ -57,7 +55,6 @@ const escapeMap = {
  * Escapes HTML special characters in a string to prevent XSS.
  * @param {string} value - The string to escape
  * @returns {string} The escaped string
- * @private
  */
 function escapeHTML(value) {
   if (!reUnescapedHtml.test(value)) {
@@ -71,7 +68,6 @@ function escapeHTML(value) {
  * @param {string} unsafeKey - The attribute name (will be escaped)
  * @param {AttributeValues|Object<string, AttributeValues>} value - The attribute value
  * @returns {string} The serialized HTML attribute string
- * @private
  */
 function serializeAttribute(unsafeKey, value) {
   if (value === false || value === undefined || value === null) {
