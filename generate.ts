@@ -29,17 +29,27 @@ const res = await fetch(
 );
 const data: HTMLDataV1 = await res.json();
 
-const valueSets: string = data.valueSets
-  .map((valueSet) => {
-    const values = valueSet.values
-      .map((value) => `"${value.name}"`)
-      .join(" | ");
-    return `  "${valueSet.name}": ${values};`;
-  })
-  .join("\n");
+const valueSets = Object.fromEntries(
+  data.valueSets.map(({ name, values }) => {
+    return [name, values.map((value) => `"${value.name}"`).join(" | ")];
+  }),
+);
 
-function attrType(attr: IAttributeData): string {
-  return `  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"]`;
+function attrValue(attr: string | undefined): string {
+  if (attr === undefined) {
+    return "string | number | boolean | null";
+  }
+
+  if (attr === "v") {
+    return "boolean";
+  }
+
+  const valueSet = valueSets[attr];
+  if (valueSet) {
+    return valueSet;
+  }
+
+  throw new Error();
 }
 
 function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
@@ -53,36 +63,44 @@ function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
   });
 }
 
-const globalAttributes: string = data.globalAttributes.map(attrType).join("\n");
-
 const builders: string = data.tags
   .map((tag) => {
-    const attributes = uniqueAttributes(tag.attributes)
-      .map(attrType)
-      .join("\n  ");
-    const attributesStr = attributes === "" ? "" : ` & {\n  ${attributes}\n  }`;
+    const allAttributes = uniqueAttributes([
+      ...data.globalAttributes,
+      ...tag.attributes,
+    ]);
+    const attributes = allAttributes
+      .map(
+        (attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`,
+      )
+      .join("\n");
+    const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
     const funcName = tag.name === "var" ? "var_" : tag.name;
-    return `export const ${funcName} = (
-  attributes: GlobalAttributes${attributesStr},${tag.void === true ? "" : "\n  children?: readonly Element[]"}
-): Element => ({ tag: "${tag.name}", attributes${tag.void === true ? "" : ",children"} });`;
+    return `
+/**
+ * @typedef {Object} ${capName}Attributes
+ * @property {DataAttribute} [data]
+${attributes}
+ */
+
+/**
+ * @param {${capName}Attributes} attributes
+${tag.void === true ? "" : " * @param {readonly Element[]} [ children ]"}
+ * @returns {Element}
+ */
+export function ${funcName}(attributes${tag.void === true ? "" : ", children"}) { 
+  return { tag: "${tag.name}", attributes${tag.void === true ? "" : ", children"} }; 
+};`;
   })
-  .join("\n\n");
+  .join("\n");
 
-const result = `import type { Element } from "./html.ts";
-
-type ValueSets = {
-  "default": string | number | boolean | null;
-  "v": boolean;
-${valueSets}
-}
-
-type GlobalAttributes = {
-  [k in \`data-\${string}\`]?: ValueSets["default"];
-} & {
-${globalAttributes}
-}
-
+const result = `/** @import { Element, DataAttribute } from './html.ts';
 ${builders}
 `;
 
 console.log(result);
+
+/**
+ * A record with string keys and string values
+ * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
+ */
