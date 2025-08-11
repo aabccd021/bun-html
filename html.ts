@@ -28,6 +28,24 @@ export type Element =
       readonly value: string;
     };
 
+const reUnescapedHtml = /[&<>"'`]/g;
+
+const escapeMap: Record<string, string> = {
+  '"': "&quot;",
+  "&": "&amp;",
+  "'": "&#x27;",
+  "<": "&lt;",
+  ">": "&gt;",
+  "`": "&#x60;",
+};
+
+function escapeHTML(value: string): string {
+  if (!reUnescapedHtml.test(value)) {
+    return value;
+  }
+  return value.replace(reUnescapedHtml, (match) => escapeMap[match] ?? match);
+}
+
 function serializeAttribute([unsafeKey, value]: readonly [
   string,
   AttributeValues,
@@ -36,14 +54,14 @@ function serializeAttribute([unsafeKey, value]: readonly [
     return "";
   }
 
-  const key = Bun.escapeHTML(unsafeKey);
+  const key = escapeHTML(unsafeKey);
 
   if (value === true) {
     return ` ${key}`;
   }
 
   if (typeof value === "string") {
-    return ` ${key}="${Bun.escapeHTML(value)}"`;
+    return ` ${key}="${escapeHTML(value)}"`;
   }
 
   if (typeof value === "number") {
@@ -64,7 +82,7 @@ export function render(element: Element): string {
   }
 
   if (typeof element === "string") {
-    return Bun.escapeHTML(element);
+    return escapeHTML(element);
   }
 
   if (element.tag === "unsafeHtml") {
