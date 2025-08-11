@@ -37,10 +37,10 @@ function escapeHTML(value: string): string {
   return value.replace(reUnescapedHtml, (match) => escapeMap[match] ?? match);
 }
 
-function serializeAttribute([unsafeKey, value]: readonly [
-  string,
-  AttributeValues | Record<string, AttributeValues>,
-]): string {
+function serializeAttribute(
+  unsafeKey: string,
+  value: AttributeValues | Record<string, AttributeValues>,
+): string {
   if (value === false || value === undefined || value === null) {
     return "";
   }
@@ -65,7 +65,7 @@ function serializeAttribute([unsafeKey, value]: readonly [
 
   return Object.entries(value)
     .map(([dataKey, dataValue]) =>
-      serializeAttribute([`data-${dataKey}`, dataValue]),
+      serializeAttribute(`data-${dataKey}`, dataValue),
     )
     .join("");
 }
@@ -84,7 +84,7 @@ export function render(element: Element): string {
   }
 
   const attributes = Object.entries(element.attributes)
-    .map(serializeAttribute)
+    .map(([key, value]) => serializeAttribute(key, value))
     .join("");
 
   const beforeTag = element.tag === "html" ? "<!DOCTYPE html>" : "";
