@@ -3,6 +3,8 @@
     "allowImportingTsExtensions": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "allowJs": true,
+    "checkJs": true,
     "module": "Preserve",
     "moduleDetection": "force",
     "moduleResolution": "bundler",

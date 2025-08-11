@@ -49,7 +49,7 @@ function attrValueSet(valueSet: string | undefined): string {
 }
 
 function attrType(attr: IAttributeData): string {
-  return `  "${attr.name}": ${attrValueSet(attr.valueSet)}`;
+  return `  "${attr.name}"?: ${attrValueSet(attr.valueSet)}`;
 }
 
 function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
@@ -79,7 +79,7 @@ const builders: string = data.tags
     const funcName = tag.name === "var" ? "var_" : tag.name;
     return `export const ${funcName} = (
   attributes: GlobalAttributes${attributesStr}, 
-  children: readonly Element[]
+  children?: readonly Element[]
 ): Element => ({ tag: "${tag.name}", attributes, children });`;
   })
   .join("\n\n");
@@ -91,6 +91,8 @@ ${valueSets}
 }
 
 type GlobalAttributes = {
+  [k in \`data-\${string}\`]?: string | number | boolean | null
+} & {
 ${globalAttributes}
 }
 

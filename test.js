@@ -32,7 +32,8 @@ import {
 {
   console.info("unsafe html");
   const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
-  if (render(element) !== "<p><strong>Hello, world!</strong></p>") thro;
+  if (render(element) !== "<p><strong>Hello, world!</strong></p>")
+    throw new Error();
 }
 
 {
@@ -62,13 +63,15 @@ import {
 {
   console.info("number attribute");
   const element = p({ "data-number": 42 }, ["Hello, world!"]);
-  if (render(element) !== '<p data-number="42">Hello, world!</p>') thro;
+  if (render(element) !== '<p data-number="42">Hello, world!</p>')
+    throw new Error();
 }
 
 {
   console.info("true attribute");
   const element = p({ "data-boolean": true }, ["Hello, world!"]);
-  if (render(element) !== "<p data-boolean>Hello, world!</p>") thro;
+  if (render(element) !== "<p data-boolean>Hello, world!</p>")
+    throw new Error();
 }
 
 {
@@ -79,6 +82,7 @@ import {
 
 {
   console.info("URL attribute");
+  // @ts-ignore
   const element = a({ href: new URL("https://example.com") }, [
     "Hello, world!",
   ]);
@@ -95,6 +99,7 @@ import {
 
 {
   console.info("unsupported attribute");
+  // @ts-ignore
   const element = p({ "data-boolean": { foo: "invalid" } }, ["Hello, world!"]);
   try {
     render(element);
@@ -111,13 +116,15 @@ import {
 {
   console.info("html doctype shown");
   const element = html({}, ["Hello, world!"]);
-  if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>") thro;
+  if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>")
+    throw new Error();
 }
 
 {
   console.info("unknown attributes");
   const element = meta({
     charset: "utf-8",
+    // @ts-ignore
     "og:title": "my title",
   });
   if (render(element) !== '<meta charset="utf-8" og:title="my title">')
@@ -131,13 +138,14 @@ import {
     render(element) !==
     "<p>&lt;script&gt;console.log(&#x27;Hello World!&#x27;)&lt;/script&gt;</p>"
   )
-    thro;
+    throw new Error();
 }
 
 {
   console.info("xss on attribute key");
   const element = head({}, [
     meta({ content: "foo" }),
+    // @ts-ignore
     meta({ "><script>console.log('orld')</script><meta": "og:type" }),
     meta({ content: "bar" }),
   ]);

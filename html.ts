@@ -1,5 +1,4 @@
-import type { HtmlTags } from "./gen";
-
+// export * from "./gen2.js";
 export * from "./gen";
 
 type AttributeValues = string | number | boolean | URL | null | undefined;
@@ -9,12 +8,11 @@ export type Element =
   | false
   | undefined
   | {
-      readonly tag: HtmlTags;
+      readonly tag: string;
       readonly attributes: Record<string, AttributeValues>;
       readonly children?: readonly Element[];
     }
   | {
-      readonly tag: "unsafeHtml";
       readonly value: string;
     };
 
@@ -75,7 +73,7 @@ export function render(element: Element): string {
     return escapeHTML(element);
   }
 
-  if (element.tag === "unsafeHtml") {
+  if ("value" in element) {
     return element.value;
   }
 
@@ -93,7 +91,4 @@ export function render(element: Element): string {
   return `${beforeTag}<${element.tag}${attributes}>${children}</${element.tag}>`;
 }
 
-export const unsafeHtml = (value: string): Element => ({
-  tag: "unsafeHtml",
-  value,
-});
+export const unsafeHtml = (value: string): Element => ({ value });
