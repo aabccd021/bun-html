@@ -29,15 +29,6 @@ const res = await fetch(
 );
 const data: HTMLDataV1 = await res.json();
 
-// const valueSets: string = data.valueSets
-//   .map((valueSet) => {
-//     const values = valueSet.values
-//       .map((value) => `"${value.name}"`)
-//       .join(" | ");
-//     return `  "${valueSet.name}": ${values};`;
-//   })
-//   .join("\n");
-
 const valueSets = Object.fromEntries(
   data.valueSets.map(({ name, values }) => {
     return [name, values.map((value) => `"${value.name}"`).join(" | ")];
@@ -61,10 +52,6 @@ function attrValue(attr: string | undefined): string {
   throw new Error();
 }
 
-function attrType(attr: IAttributeData): string {
-  return `  * @param {${attrValue(attr.valueSet)}} [ '${attr.name}' ]`;
-}
-
 function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
   const seen: Set<string> = new Set();
   return tags.filter((attr) => {
@@ -76,35 +63,44 @@ function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
   });
 }
 
-const globalAttributes: string = data.globalAttributes.map(attrType).join("\n");
-
 const builders: string = data.tags
   .map((tag) => {
-    const attributes = uniqueAttributes(tag.attributes)
-      .map((v) => `\n${attrType(v)}`)
-      .join("");
+    const allAttributes = uniqueAttributes([
+      ...data.globalAttributes,
+      ...tag.attributes,
+    ]);
+    const attributes = allAttributes
+      .map(
+        (attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`,
+      )
+      .join("\n");
+    const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
     const funcName = tag.name === "var" ? "var_" : tag.name;
-    const capitalizedName =
-      tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
     return `
 /**
-  * @typedef {Object} ${capitalizedName}Attributes
-${globalAttributes}${attributes}
-  */
+ * @typedef {Object} ${capName}Attributes
+ * @property {DataAttribute} [data]
+${attributes}
+ */
 
 /**
- * @param {${capitalizedName}Attributes} attributes
- * @param {readonly Element[]} [ children ]
+ * @param {${capName}Attributes} attributes
+${tag.void === true ? "" : " * @param {readonly Element[]} [ children ]"}
  * @returns {Element}
  */
 export function ${funcName}(attributes${tag.void === true ? "" : ", children"}) { 
-  return { tag: "${tag.name}", attributes${tag.void === true ? "" : ",children"} }; 
+  return { tag: "${tag.name}", attributes${tag.void === true ? "" : ", children"} }; 
 };`;
   })
   .join("\n");
 
-const result = `/** @import { Element } from './html.ts';
+const result = `/** @import { Element, DataAttribute } from './html.ts';
 ${builders}
 `;
 
 console.log(result);
+
+/**
+ * A record with string keys and string values
+ * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
+ */

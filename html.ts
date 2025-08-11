@@ -1,5 +1,7 @@
-// export * from "./gen2.js";
-export * from "./gen";
+export * from "./gen.js";
+// export * from "./gen";
+
+export type DataAttribute = Record<string, string | number | boolean>;
 
 type AttributeValues = string | number | boolean | URL | null | undefined;
 

@@ -81,11 +81,8 @@ import {
 }
 
 {
-  console.info("> URL attribute");
-  // @ts-ignore
-  const element = a({ href: new URL("https://example.com") }, [
-    "Hello, world!",
-  ]);
+  console.info("> url attribute");
+  const element = a({ href: "https://example.com/" }, ["Hello, world!"]);
   if (render(element) !== '<a href="https://example.com/">Hello, world!</a>')
     throw new Error();
 }
