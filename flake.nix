@@ -29,8 +29,8 @@
 
       formatter = treefmtEval.config.build.wrapper;
 
-      check-tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./bun-html.ts} ./bun-html.ts
+      tsc = pkgs.runCommand "tsc" { } ''
+        cp -L ${./html.ts} ./html.ts
         cp -L ${./test.js} ./test.js
         cp -L ${./tsconfig.json} ./tsconfig.json
         cp -Lr ${nodeModules}/node_modules ./node_modules
@@ -39,7 +39,7 @@
       '';
 
       test = pkgs.runCommand "tests" { } ''
-        cp -L ${./bun-html.ts} ./bun-html.ts
+        cp -L ${./html.ts} ./html.ts
         cp -L ${./test.js} ./test.js
         cp -L ${./package.json} ./package.json
         cp -L ${./tsconfig.json} ./tsconfig.json
@@ -78,7 +78,7 @@
         formatting = treefmtEval.config.build.check self;
         formatter = formatter;
         typescript = pkgs.typescript;
-        check-tsc = check-tsc;
+        tsc = tsc;
         test = test;
         nodeModules = nodeModules;
         bun2nix = inputs.bun2nix.packages.x86_64-linux.default;
