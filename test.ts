@@ -8,7 +8,7 @@ import {
   p,
   render,
   unsafeHtml,
-} from "./html.ts";
+} from "./html.js";
 
 {
   console.info("> simple element");
