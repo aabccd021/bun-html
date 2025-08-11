@@ -63,9 +63,8 @@ const builders: string = data.tags
     const attributesStr = attributes === "" ? "" : ` & {\n  ${attributes}\n  }`;
     const funcName = tag.name === "var" ? "var_" : tag.name;
     return `export const ${funcName} = (
-  attributes: GlobalAttributes${attributesStr}, 
-  children?: readonly Element[]
-): Element => ({ tag: "${tag.name}", attributes, children });`;
+  attributes: GlobalAttributes${attributesStr},${tag.void === true ? "" : "\n  children?: readonly Element[]"}
+): Element => ({ tag: "${tag.name}", attributes${tag.void === true ? "" : ",children"} });`;
   })
   .join("\n\n");
 
@@ -78,7 +77,7 @@ ${valueSets}
 }
 
 type GlobalAttributes = {
-  [k in \`data-\${string}\`]?: string | number | boolean | null
+  [k in \`data-\${string}\`]?: ValueSets["default"];
 } & {
 ${globalAttributes}
 }

@@ -291,7 +291,7 @@ type ValueSets = {
 };
 
 type GlobalAttributes = {
-  [k in `data-${string}`]?: string | number | boolean | null;
+  [k in `data-${string}`]?: ValueSets["default"];
 } & {
   accesskey?: ValueSets["default"];
   autocapitalize?: ValueSets["default"];
@@ -475,8 +475,7 @@ export const base = (
     href?: ValueSets["default"];
     target?: ValueSets["target"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "base", attributes, children });
+): Element => ({ tag: "base", attributes });
 
 export const link = (
   attributes: GlobalAttributes & {
@@ -493,8 +492,7 @@ export const link = (
     referrerpolicy?: ValueSets["default"];
     title?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "link", attributes, children });
+): Element => ({ tag: "link", attributes });
 
 export const meta = (
   attributes: GlobalAttributes & {
@@ -504,8 +502,7 @@ export const meta = (
     charset?: ValueSets["default"];
     scheme?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "meta", attributes, children });
+): Element => ({ tag: "meta", attributes });
 
 export const style = (
   attributes: GlobalAttributes & {
@@ -688,8 +685,7 @@ export const hr = (
     size?: ValueSets["default"];
     width?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "hr", attributes, children });
+): Element => ({ tag: "hr", attributes });
 
 export const pre = (
   attributes: GlobalAttributes & {
@@ -1035,16 +1031,11 @@ export const br = (
   attributes: GlobalAttributes & {
     clear?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "br", attributes, children });
+): Element => ({ tag: "br", attributes });
 
-export const wbr = (
-  attributes: GlobalAttributes,
-  children?: readonly Element[],
-): Element => ({
+export const wbr = (attributes: GlobalAttributes): Element => ({
   tag: "wbr",
   attributes,
-  children,
 });
 
 export const ins = (
@@ -1090,8 +1081,7 @@ export const img = (
     importance?: ValueSets["default"];
     intrinsicsize?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "img", attributes, children });
+): Element => ({ tag: "img", attributes });
 
 export const iframe = (
   attributes: GlobalAttributes & {
@@ -1119,8 +1109,7 @@ export const embed = (
     width?: ValueSets["default"];
     height?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "embed", attributes, children });
+): Element => ({ tag: "embed", attributes });
 
 export const object = (
   attributes: GlobalAttributes & {
@@ -1151,8 +1140,7 @@ export const param = (
     type?: ValueSets["default"];
     valuetype?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "param", attributes, children });
+): Element => ({ tag: "param", attributes });
 
 export const video = (
   attributes: GlobalAttributes & {
@@ -1193,8 +1181,7 @@ export const source = (
     srcset?: ValueSets["default"];
     media?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "source", attributes, children });
+): Element => ({ tag: "source", attributes });
 
 export const track = (
   attributes: GlobalAttributes & {
@@ -1204,8 +1191,7 @@ export const track = (
     src?: ValueSets["default"];
     srclang?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "track", attributes, children });
+): Element => ({ tag: "track", attributes });
 
 export const map = (
   attributes: GlobalAttributes & {
@@ -1228,8 +1214,7 @@ export const area = (
     type?: ValueSets["default"];
     accesskey?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "area", attributes, children });
+): Element => ({ tag: "area", attributes });
 
 export const table = (
   attributes: GlobalAttributes & {
@@ -1259,8 +1244,7 @@ export const col = (
     span?: ValueSets["default"];
     align?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "col", attributes, children });
+): Element => ({ tag: "col", attributes });
 
 export const tbody = (
   attributes: GlobalAttributes & {
@@ -1379,8 +1363,7 @@ export const input = (
     value?: ValueSets["default"];
     width?: ValueSets["default"];
   },
-  children?: readonly Element[],
-): Element => ({ tag: "input", attributes, children });
+): Element => ({ tag: "input", attributes });
 
 export const button = (
   attributes: GlobalAttributes & {

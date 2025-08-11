@@ -5,24 +5,26 @@
 
 /**
  * @typedef {Object} GlobalAttributes
- * @property {string | number | boolean | null} [ accesskey ]
  * @property {ValueSetO} [ autocorrect ]
  * @property {ValueSetD} [ dir ]
+ */
+
+/**
+ * @typedef {Object} AreaAttributes
+ * @property {string | number | boolean | null} [ type ]
+ * @property {string | number | boolean | null} [ accesskey ]
  */
 
 /**
  * @typedef {Object} Element
  * @property {string} tag
  * @property {Object} attributes
- * @property {readonly Element[]} children
+ * @property {readonly Element[]} [ children ]
  */
 
 /**
- * @param {GlobalAttributes & {
- *   type?: string | number | boolean | null,
- *   accesskey?: string | number | boolean | null
- * }} attributes
- * @param {readonly Element[]} children
+ * @param {AreaAttributes} attributes
+ * @param {readonly Element[]} [ children ]
  * @returns {Element}
  */
 export const area = (attributes, children) => ({
@@ -30,3 +32,12 @@ export const area = (attributes, children) => ({
   attributes,
   children,
 });
+
+area(
+  {
+    // href: new URL("https://example.com"),
+    // style: "color: red;",
+    type: "text/html",
+  },
+  [],
+);
