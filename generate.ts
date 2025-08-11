@@ -38,18 +38,8 @@ const valueSets: string = data.valueSets
   })
   .join("\n");
 
-function attrValueSet(valueSet: string | undefined): string {
-  if (valueSet === undefined) {
-    return "string | number | boolean | null";
-  }
-  if (valueSet === "v") {
-    return "boolean";
-  }
-  return `ValueSets["${valueSet}"]`;
-}
-
 function attrType(attr: IAttributeData): string {
-  return `  "${attr.name}"?: ${attrValueSet(attr.valueSet)}`;
+  return `  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"]`;
 }
 
 function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
@@ -65,16 +55,11 @@ function uniqueAttributes(tags: IAttributeData[]): IAttributeData[] {
 
 const globalAttributes: string = data.globalAttributes.map(attrType).join("\n");
 
-const tags: string = data.tags
-  .map((tag) => tag.name)
-  .map((name) => `"${name}"`)
-  .join(" | ");
-
 const builders: string = data.tags
   .map((tag) => {
     const attributes = uniqueAttributes(tag.attributes)
       .map(attrType)
-      .join(",\n  ");
+      .join("\n  ");
     const attributesStr = attributes === "" ? "" : ` & {\n  ${attributes}\n  }`;
     const funcName = tag.name === "var" ? "var_" : tag.name;
     return `export const ${funcName} = (
@@ -87,6 +72,8 @@ const builders: string = data.tags
 const result = `import type { Element } from "./html.ts";
 
 type ValueSets = {
+  "default": string | number | boolean | null;
+  "v": boolean;
 ${valueSets}
 }
 
@@ -95,8 +82,6 @@ type GlobalAttributes = {
 } & {
 ${globalAttributes}
 }
-
-export type HtmlTags = ${tags}
 
 ${builders}
 `;

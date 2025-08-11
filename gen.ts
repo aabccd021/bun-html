@@ -1,6 +1,8 @@
 import type { Element } from "./html.ts";
 
 type ValueSets = {
+  default: string | number | boolean | null;
+  v: boolean;
   b: "true" | "false";
   u: "true" | "false" | "undefined";
   o: "on" | "off";
@@ -291,288 +293,170 @@ type ValueSets = {
 type GlobalAttributes = {
   [k in `data-${string}`]?: string | number | boolean | null;
 } & {
-  accesskey?: string | number | boolean | null;
-  autocapitalize?: string | number | boolean | null;
+  accesskey?: ValueSets["default"];
+  autocapitalize?: ValueSets["default"];
   autocorrect?: ValueSets["o"];
-  autofocus?: string | number | boolean | null;
-  class?: string | number | boolean | null;
-  contenteditable?: string | number | boolean | null;
-  contextmenu?: string | number | boolean | null;
+  autofocus?: ValueSets["default"];
+  class?: ValueSets["default"];
+  contenteditable?: ValueSets["default"];
+  contextmenu?: ValueSets["default"];
   dir?: ValueSets["d"];
   draggable?: ValueSets["b"];
-  dropzone?: string | number | boolean | null;
+  dropzone?: ValueSets["default"];
   enterkeyhint?: ValueSets["enterkeyhint"];
-  exportparts?: string | number | boolean | null;
-  hidden?: boolean;
-  id?: string | number | boolean | null;
-  inert?: string | number | boolean | null;
-  inputmode?: string | number | boolean | null;
-  is?: string | number | boolean | null;
-  itemid?: string | number | boolean | null;
-  itemprop?: string | number | boolean | null;
-  itemref?: string | number | boolean | null;
-  itemscope?: boolean;
-  itemtype?: string | number | boolean | null;
-  lang?: string | number | boolean | null;
-  nonce?: string | number | boolean | null;
-  part?: string | number | boolean | null;
+  exportparts?: ValueSets["default"];
+  hidden?: ValueSets["v"];
+  id?: ValueSets["default"];
+  inert?: ValueSets["default"];
+  inputmode?: ValueSets["default"];
+  is?: ValueSets["default"];
+  itemid?: ValueSets["default"];
+  itemprop?: ValueSets["default"];
+  itemref?: ValueSets["default"];
+  itemscope?: ValueSets["v"];
+  itemtype?: ValueSets["default"];
+  lang?: ValueSets["default"];
+  nonce?: ValueSets["default"];
+  part?: ValueSets["default"];
   popover?: ValueSets["popover"];
   role?: ValueSets["roles"];
-  slot?: string | number | boolean | null;
+  slot?: ValueSets["default"];
   spellcheck?: ValueSets["b"];
-  style?: string | number | boolean | null;
-  tabindex?: string | number | boolean | null;
-  title?: string | number | boolean | null;
+  style?: ValueSets["default"];
+  tabindex?: ValueSets["default"];
+  title?: ValueSets["default"];
   translate?: ValueSets["y"];
   virtualkeyboardpolicy?: ValueSets["b"];
-  onabort?: string | number | boolean | null;
-  onblur?: string | number | boolean | null;
-  oncanplay?: string | number | boolean | null;
-  oncanplaythrough?: string | number | boolean | null;
-  onchange?: string | number | boolean | null;
-  onclick?: string | number | boolean | null;
-  oncontextmenu?: string | number | boolean | null;
-  ondblclick?: string | number | boolean | null;
-  ondrag?: string | number | boolean | null;
-  ondragend?: string | number | boolean | null;
-  ondragenter?: string | number | boolean | null;
-  ondragleave?: string | number | boolean | null;
-  ondragover?: string | number | boolean | null;
-  ondragstart?: string | number | boolean | null;
-  ondrop?: string | number | boolean | null;
-  ondurationchange?: string | number | boolean | null;
-  onemptied?: string | number | boolean | null;
-  onended?: string | number | boolean | null;
-  onerror?: string | number | boolean | null;
-  onfocus?: string | number | boolean | null;
-  onformchange?: string | number | boolean | null;
-  onforminput?: string | number | boolean | null;
-  oninput?: string | number | boolean | null;
-  oninvalid?: string | number | boolean | null;
-  onkeydown?: string | number | boolean | null;
-  onkeypress?: string | number | boolean | null;
-  onkeyup?: string | number | boolean | null;
-  onload?: string | number | boolean | null;
-  onloadeddata?: string | number | boolean | null;
-  onloadedmetadata?: string | number | boolean | null;
-  onloadstart?: string | number | boolean | null;
-  onmousedown?: string | number | boolean | null;
-  onmousemove?: string | number | boolean | null;
-  onmouseout?: string | number | boolean | null;
-  onmouseover?: string | number | boolean | null;
-  onmouseup?: string | number | boolean | null;
-  onmousewheel?: string | number | boolean | null;
-  onmouseenter?: string | number | boolean | null;
-  onmouseleave?: string | number | boolean | null;
-  onpause?: string | number | boolean | null;
-  onplay?: string | number | boolean | null;
-  onplaying?: string | number | boolean | null;
-  onprogress?: string | number | boolean | null;
-  onratechange?: string | number | boolean | null;
-  onreset?: string | number | boolean | null;
-  onresize?: string | number | boolean | null;
-  onreadystatechange?: string | number | boolean | null;
-  onscroll?: string | number | boolean | null;
-  onseeked?: string | number | boolean | null;
-  onseeking?: string | number | boolean | null;
-  onselect?: string | number | boolean | null;
-  onshow?: string | number | boolean | null;
-  onstalled?: string | number | boolean | null;
-  onsubmit?: string | number | boolean | null;
-  onsuspend?: string | number | boolean | null;
-  ontimeupdate?: string | number | boolean | null;
-  onvolumechange?: string | number | boolean | null;
-  onwaiting?: string | number | boolean | null;
-  onpointercancel?: string | number | boolean | null;
-  onpointerdown?: string | number | boolean | null;
-  onpointerenter?: string | number | boolean | null;
-  onpointerleave?: string | number | boolean | null;
-  onpointerlockchange?: string | number | boolean | null;
-  onpointerlockerror?: string | number | boolean | null;
-  onpointermove?: string | number | boolean | null;
-  onpointerout?: string | number | boolean | null;
-  onpointerover?: string | number | boolean | null;
-  onpointerup?: string | number | boolean | null;
-  "aria-activedescendant"?: string | number | boolean | null;
+  onabort?: ValueSets["default"];
+  onblur?: ValueSets["default"];
+  oncanplay?: ValueSets["default"];
+  oncanplaythrough?: ValueSets["default"];
+  onchange?: ValueSets["default"];
+  onclick?: ValueSets["default"];
+  oncontextmenu?: ValueSets["default"];
+  ondblclick?: ValueSets["default"];
+  ondrag?: ValueSets["default"];
+  ondragend?: ValueSets["default"];
+  ondragenter?: ValueSets["default"];
+  ondragleave?: ValueSets["default"];
+  ondragover?: ValueSets["default"];
+  ondragstart?: ValueSets["default"];
+  ondrop?: ValueSets["default"];
+  ondurationchange?: ValueSets["default"];
+  onemptied?: ValueSets["default"];
+  onended?: ValueSets["default"];
+  onerror?: ValueSets["default"];
+  onfocus?: ValueSets["default"];
+  onformchange?: ValueSets["default"];
+  onforminput?: ValueSets["default"];
+  oninput?: ValueSets["default"];
+  oninvalid?: ValueSets["default"];
+  onkeydown?: ValueSets["default"];
+  onkeypress?: ValueSets["default"];
+  onkeyup?: ValueSets["default"];
+  onload?: ValueSets["default"];
+  onloadeddata?: ValueSets["default"];
+  onloadedmetadata?: ValueSets["default"];
+  onloadstart?: ValueSets["default"];
+  onmousedown?: ValueSets["default"];
+  onmousemove?: ValueSets["default"];
+  onmouseout?: ValueSets["default"];
+  onmouseover?: ValueSets["default"];
+  onmouseup?: ValueSets["default"];
+  onmousewheel?: ValueSets["default"];
+  onmouseenter?: ValueSets["default"];
+  onmouseleave?: ValueSets["default"];
+  onpause?: ValueSets["default"];
+  onplay?: ValueSets["default"];
+  onplaying?: ValueSets["default"];
+  onprogress?: ValueSets["default"];
+  onratechange?: ValueSets["default"];
+  onreset?: ValueSets["default"];
+  onresize?: ValueSets["default"];
+  onreadystatechange?: ValueSets["default"];
+  onscroll?: ValueSets["default"];
+  onseeked?: ValueSets["default"];
+  onseeking?: ValueSets["default"];
+  onselect?: ValueSets["default"];
+  onshow?: ValueSets["default"];
+  onstalled?: ValueSets["default"];
+  onsubmit?: ValueSets["default"];
+  onsuspend?: ValueSets["default"];
+  ontimeupdate?: ValueSets["default"];
+  onvolumechange?: ValueSets["default"];
+  onwaiting?: ValueSets["default"];
+  onpointercancel?: ValueSets["default"];
+  onpointerdown?: ValueSets["default"];
+  onpointerenter?: ValueSets["default"];
+  onpointerleave?: ValueSets["default"];
+  onpointerlockchange?: ValueSets["default"];
+  onpointerlockerror?: ValueSets["default"];
+  onpointermove?: ValueSets["default"];
+  onpointerout?: ValueSets["default"];
+  onpointerover?: ValueSets["default"];
+  onpointerup?: ValueSets["default"];
+  "aria-activedescendant"?: ValueSets["default"];
   "aria-atomic"?: ValueSets["b"];
   "aria-autocomplete"?: ValueSets["autocomplete"];
   "aria-busy"?: ValueSets["b"];
   "aria-checked"?: ValueSets["tristate"];
-  "aria-colcount"?: string | number | boolean | null;
-  "aria-colindex"?: string | number | boolean | null;
-  "aria-colspan"?: string | number | boolean | null;
-  "aria-controls"?: string | number | boolean | null;
+  "aria-colcount"?: ValueSets["default"];
+  "aria-colindex"?: ValueSets["default"];
+  "aria-colspan"?: ValueSets["default"];
+  "aria-controls"?: ValueSets["default"];
   "aria-current"?: ValueSets["current"];
-  "aria-describedby"?: string | number | boolean | null;
+  "aria-describedby"?: ValueSets["default"];
   "aria-disabled"?: ValueSets["b"];
   "aria-dropeffect"?: ValueSets["dropeffect"];
-  "aria-errormessage"?: string | number | boolean | null;
+  "aria-errormessage"?: ValueSets["default"];
   "aria-expanded"?: ValueSets["u"];
-  "aria-flowto"?: string | number | boolean | null;
+  "aria-flowto"?: ValueSets["default"];
   "aria-grabbed"?: ValueSets["u"];
   "aria-haspopup"?: ValueSets["haspopup"];
   "aria-hidden"?: ValueSets["b"];
   "aria-invalid"?: ValueSets["invalid"];
-  "aria-label"?: string | number | boolean | null;
-  "aria-labelledby"?: string | number | boolean | null;
-  "aria-level"?: string | number | boolean | null;
+  "aria-label"?: ValueSets["default"];
+  "aria-labelledby"?: ValueSets["default"];
+  "aria-level"?: ValueSets["default"];
   "aria-live"?: ValueSets["live"];
   "aria-modal"?: ValueSets["b"];
   "aria-multiline"?: ValueSets["b"];
   "aria-multiselectable"?: ValueSets["b"];
   "aria-orientation"?: ValueSets["orientation"];
-  "aria-owns"?: string | number | boolean | null;
-  "aria-placeholder"?: string | number | boolean | null;
-  "aria-posinset"?: string | number | boolean | null;
+  "aria-owns"?: ValueSets["default"];
+  "aria-placeholder"?: ValueSets["default"];
+  "aria-posinset"?: ValueSets["default"];
   "aria-pressed"?: ValueSets["tristate"];
   "aria-readonly"?: ValueSets["b"];
   "aria-relevant"?: ValueSets["relevant"];
   "aria-required"?: ValueSets["b"];
-  "aria-roledescription"?: string | number | boolean | null;
-  "aria-rowcount"?: string | number | boolean | null;
-  "aria-rowindex"?: string | number | boolean | null;
-  "aria-rowspan"?: string | number | boolean | null;
+  "aria-roledescription"?: ValueSets["default"];
+  "aria-rowcount"?: ValueSets["default"];
+  "aria-rowindex"?: ValueSets["default"];
+  "aria-rowspan"?: ValueSets["default"];
   "aria-selected"?: ValueSets["u"];
-  "aria-setsize"?: string | number | boolean | null;
+  "aria-setsize"?: ValueSets["default"];
   "aria-sort"?: ValueSets["sort"];
-  "aria-valuemax"?: string | number | boolean | null;
-  "aria-valuemin"?: string | number | boolean | null;
-  "aria-valuenow"?: string | number | boolean | null;
-  "aria-valuetext"?: string | number | boolean | null;
-  "aria-details"?: string | number | boolean | null;
-  "aria-keyshortcuts"?: string | number | boolean | null;
+  "aria-valuemax"?: ValueSets["default"];
+  "aria-valuemin"?: ValueSets["default"];
+  "aria-valuenow"?: ValueSets["default"];
+  "aria-valuetext"?: ValueSets["default"];
+  "aria-details"?: ValueSets["default"];
+  "aria-keyshortcuts"?: ValueSets["default"];
 };
-
-export type HtmlTags =
-  | "html"
-  | "head"
-  | "title"
-  | "base"
-  | "link"
-  | "meta"
-  | "style"
-  | "body"
-  | "article"
-  | "section"
-  | "nav"
-  | "aside"
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "header"
-  | "footer"
-  | "address"
-  | "p"
-  | "hr"
-  | "pre"
-  | "blockquote"
-  | "ol"
-  | "ul"
-  | "li"
-  | "dl"
-  | "dt"
-  | "dd"
-  | "figure"
-  | "figcaption"
-  | "main"
-  | "div"
-  | "a"
-  | "em"
-  | "strong"
-  | "small"
-  | "s"
-  | "cite"
-  | "q"
-  | "dfn"
-  | "abbr"
-  | "ruby"
-  | "rb"
-  | "rt"
-  | "rp"
-  | "time"
-  | "code"
-  | "var"
-  | "samp"
-  | "kbd"
-  | "sub"
-  | "sup"
-  | "i"
-  | "b"
-  | "u"
-  | "mark"
-  | "bdi"
-  | "bdo"
-  | "span"
-  | "br"
-  | "wbr"
-  | "ins"
-  | "del"
-  | "picture"
-  | "img"
-  | "iframe"
-  | "embed"
-  | "object"
-  | "param"
-  | "video"
-  | "audio"
-  | "source"
-  | "track"
-  | "map"
-  | "area"
-  | "table"
-  | "caption"
-  | "colgroup"
-  | "col"
-  | "tbody"
-  | "thead"
-  | "tfoot"
-  | "tr"
-  | "td"
-  | "th"
-  | "form"
-  | "label"
-  | "input"
-  | "button"
-  | "select"
-  | "datalist"
-  | "optgroup"
-  | "option"
-  | "textarea"
-  | "output"
-  | "progress"
-  | "meter"
-  | "fieldset"
-  | "legend"
-  | "details"
-  | "summary"
-  | "dialog"
-  | "script"
-  | "noscript"
-  | "template"
-  | "canvas"
-  | "slot"
-  | "data"
-  | "hgroup"
-  | "menu"
-  | "search"
-  | "fencedframe"
-  | "selectedcontent";
 
 export const html = (
   attributes: GlobalAttributes & {
-    manifest?: string | number | boolean | null;
-    version?: string | number | boolean | null;
-    xmlns?: string | number | boolean | null;
+    manifest?: ValueSets["default"];
+    version?: ValueSets["default"];
+    xmlns?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "html", attributes, children });
 
 export const head = (
   attributes: GlobalAttributes & {
-    profile?: string | number | boolean | null;
+    profile?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "head", attributes, children });
@@ -588,7 +472,7 @@ export const title = (
 
 export const base = (
   attributes: GlobalAttributes & {
-    href?: string | number | boolean | null;
+    href?: ValueSets["default"];
     target?: ValueSets["target"];
   },
   children?: readonly Element[],
@@ -596,76 +480,76 @@ export const base = (
 
 export const link = (
   attributes: GlobalAttributes & {
-    href?: string | number | boolean | null;
+    href?: ValueSets["default"];
     crossorigin?: ValueSets["xo"];
-    rel?: string | number | boolean | null;
-    media?: string | number | boolean | null;
-    hreflang?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    sizes?: string | number | boolean | null;
-    as?: string | number | boolean | null;
-    importance?: string | number | boolean | null;
-    integrity?: string | number | boolean | null;
-    referrerpolicy?: string | number | boolean | null;
-    title?: string | number | boolean | null;
+    rel?: ValueSets["default"];
+    media?: ValueSets["default"];
+    hreflang?: ValueSets["default"];
+    type?: ValueSets["default"];
+    sizes?: ValueSets["default"];
+    as?: ValueSets["default"];
+    importance?: ValueSets["default"];
+    integrity?: ValueSets["default"];
+    referrerpolicy?: ValueSets["default"];
+    title?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "link", attributes, children });
 
 export const meta = (
   attributes: GlobalAttributes & {
-    name?: string | number | boolean | null;
-    "http-equiv"?: string | number | boolean | null;
-    content?: string | number | boolean | null;
-    charset?: string | number | boolean | null;
-    scheme?: string | number | boolean | null;
+    name?: ValueSets["default"];
+    "http-equiv"?: ValueSets["default"];
+    content?: ValueSets["default"];
+    charset?: ValueSets["default"];
+    scheme?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "meta", attributes, children });
 
 export const style = (
   attributes: GlobalAttributes & {
-    media?: string | number | boolean | null;
-    nonce?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    scoped?: boolean;
-    title?: string | number | boolean | null;
+    media?: ValueSets["default"];
+    nonce?: ValueSets["default"];
+    type?: ValueSets["default"];
+    scoped?: ValueSets["v"];
+    title?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "style", attributes, children });
 
 export const body = (
   attributes: GlobalAttributes & {
-    onafterprint?: string | number | boolean | null;
-    onbeforeprint?: string | number | boolean | null;
-    onbeforeunload?: string | number | boolean | null;
-    onhashchange?: string | number | boolean | null;
-    onlanguagechange?: string | number | boolean | null;
-    onmessage?: string | number | boolean | null;
-    onoffline?: string | number | boolean | null;
-    ononline?: string | number | boolean | null;
-    onpagehide?: string | number | boolean | null;
-    onpageshow?: string | number | boolean | null;
-    onpopstate?: string | number | boolean | null;
-    onstorage?: string | number | boolean | null;
-    onunload?: string | number | boolean | null;
-    alink?: string | number | boolean | null;
-    background?: string | number | boolean | null;
-    bgcolor?: string | number | boolean | null;
-    bottommargin?: string | number | boolean | null;
-    leftmargin?: string | number | boolean | null;
-    link?: string | number | boolean | null;
-    onblur?: string | number | boolean | null;
-    onerror?: string | number | boolean | null;
-    onfocus?: string | number | boolean | null;
-    onload?: string | number | boolean | null;
-    onredo?: string | number | boolean | null;
-    onresize?: string | number | boolean | null;
-    onundo?: string | number | boolean | null;
-    rightmargin?: string | number | boolean | null;
-    text?: string | number | boolean | null;
-    topmargin?: string | number | boolean | null;
-    vlink?: string | number | boolean | null;
+    onafterprint?: ValueSets["default"];
+    onbeforeprint?: ValueSets["default"];
+    onbeforeunload?: ValueSets["default"];
+    onhashchange?: ValueSets["default"];
+    onlanguagechange?: ValueSets["default"];
+    onmessage?: ValueSets["default"];
+    onoffline?: ValueSets["default"];
+    ononline?: ValueSets["default"];
+    onpagehide?: ValueSets["default"];
+    onpageshow?: ValueSets["default"];
+    onpopstate?: ValueSets["default"];
+    onstorage?: ValueSets["default"];
+    onunload?: ValueSets["default"];
+    alink?: ValueSets["default"];
+    background?: ValueSets["default"];
+    bgcolor?: ValueSets["default"];
+    bottommargin?: ValueSets["default"];
+    leftmargin?: ValueSets["default"];
+    link?: ValueSets["default"];
+    onblur?: ValueSets["default"];
+    onerror?: ValueSets["default"];
+    onfocus?: ValueSets["default"];
+    onload?: ValueSets["default"];
+    onredo?: ValueSets["default"];
+    onresize?: ValueSets["default"];
+    onundo?: ValueSets["default"];
+    rightmargin?: ValueSets["default"];
+    text?: ValueSets["default"];
+    topmargin?: ValueSets["default"];
+    vlink?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "body", attributes, children });
@@ -798,52 +682,52 @@ export const p = (
 
 export const hr = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
-    color?: string | number | boolean | null;
-    noshade?: string | number | boolean | null;
-    size?: string | number | boolean | null;
-    width?: string | number | boolean | null;
+    align?: ValueSets["default"];
+    color?: ValueSets["default"];
+    noshade?: ValueSets["default"];
+    size?: ValueSets["default"];
+    width?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "hr", attributes, children });
 
 export const pre = (
   attributes: GlobalAttributes & {
-    cols?: string | number | boolean | null;
-    width?: string | number | boolean | null;
-    wrap?: string | number | boolean | null;
+    cols?: ValueSets["default"];
+    width?: ValueSets["default"];
+    wrap?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "pre", attributes, children });
 
 export const blockquote = (
   attributes: GlobalAttributes & {
-    cite?: string | number | boolean | null;
+    cite?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "blockquote", attributes, children });
 
 export const ol = (
   attributes: GlobalAttributes & {
-    reversed?: boolean;
-    start?: string | number | boolean | null;
+    reversed?: ValueSets["v"];
+    start?: ValueSets["default"];
     type?: ValueSets["lt"];
-    compact?: string | number | boolean | null;
+    compact?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "ol", attributes, children });
 
 export const ul = (
   attributes: GlobalAttributes & {
-    compact?: string | number | boolean | null;
+    compact?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "ul", attributes, children });
 
 export const li = (
   attributes: GlobalAttributes & {
-    value?: string | number | boolean | null;
-    type?: string | number | boolean | null;
+    value?: ValueSets["default"];
+    type?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "li", attributes, children });
@@ -868,7 +752,7 @@ export const dt = (
 
 export const dd = (
   attributes: GlobalAttributes & {
-    nowrap?: string | number | boolean | null;
+    nowrap?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "dd", attributes, children });
@@ -907,14 +791,14 @@ export const div = (
 
 export const a = (
   attributes: GlobalAttributes & {
-    href?: string | number | boolean | null;
+    href?: ValueSets["default"];
     target?: ValueSets["target"];
-    download?: string | number | boolean | null;
-    ping?: string | number | boolean | null;
-    rel?: string | number | boolean | null;
-    hreflang?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    referrerpolicy?: string | number | boolean | null;
+    download?: ValueSets["default"];
+    ping?: ValueSets["default"];
+    rel?: ValueSets["default"];
+    hreflang?: ValueSets["default"];
+    type?: ValueSets["default"];
+    referrerpolicy?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "a", attributes, children });
@@ -966,7 +850,7 @@ export const cite = (
 
 export const q = (
   attributes: GlobalAttributes & {
-    cite?: string | number | boolean | null;
+    cite?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "q", attributes, children });
@@ -1027,7 +911,7 @@ export const rp = (
 
 export const time = (
   attributes: GlobalAttributes & {
-    datetime?: string | number | boolean | null;
+    datetime?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "time", attributes, children });
@@ -1133,7 +1017,7 @@ export const bdi = (
 
 export const bdo = (
   attributes: GlobalAttributes & {
-    dir?: string | number | boolean | null;
+    dir?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "bdo", attributes, children });
@@ -1149,7 +1033,7 @@ export const span = (
 
 export const br = (
   attributes: GlobalAttributes & {
-    clear?: string | number | boolean | null;
+    clear?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "br", attributes, children });
@@ -1165,16 +1049,16 @@ export const wbr = (
 
 export const ins = (
   attributes: GlobalAttributes & {
-    cite?: string | number | boolean | null;
-    datetime?: string | number | boolean | null;
+    cite?: ValueSets["default"];
+    datetime?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "ins", attributes, children });
 
 export const del = (
   attributes: GlobalAttributes & {
-    cite?: string | number | boolean | null;
-    datetime?: string | number | boolean | null;
+    cite?: ValueSets["default"];
+    datetime?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "del", attributes, children });
@@ -1190,330 +1074,330 @@ export const picture = (
 
 export const img = (
   attributes: GlobalAttributes & {
-    alt?: string | number | boolean | null;
-    src?: string | number | boolean | null;
-    srcset?: string | number | boolean | null;
+    alt?: ValueSets["default"];
+    src?: ValueSets["default"];
+    srcset?: ValueSets["default"];
     crossorigin?: ValueSets["xo"];
-    usemap?: string | number | boolean | null;
-    ismap?: boolean;
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
+    usemap?: ValueSets["default"];
+    ismap?: ValueSets["v"];
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
     decoding?: ValueSets["decoding"];
     loading?: ValueSets["loading"];
     fetchpriority?: ValueSets["fetchpriority"];
     referrerpolicy?: ValueSets["referrerpolicy"];
-    sizes?: string | number | boolean | null;
-    importance?: string | number | boolean | null;
-    intrinsicsize?: string | number | boolean | null;
+    sizes?: ValueSets["default"];
+    importance?: ValueSets["default"];
+    intrinsicsize?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "img", attributes, children });
 
 export const iframe = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
-    srcdoc?: string | number | boolean | null;
-    name?: string | number | boolean | null;
+    src?: ValueSets["default"];
+    srcdoc?: ValueSets["default"];
+    name?: ValueSets["default"];
     sandbox?: ValueSets["sb"];
-    seamless?: boolean;
-    allowfullscreen?: boolean;
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
-    allow?: string | number | boolean | null;
-    allowpaymentrequest?: string | number | boolean | null;
-    csp?: string | number | boolean | null;
-    importance?: string | number | boolean | null;
-    referrerpolicy?: string | number | boolean | null;
+    seamless?: ValueSets["v"];
+    allowfullscreen?: ValueSets["v"];
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
+    allow?: ValueSets["default"];
+    allowpaymentrequest?: ValueSets["default"];
+    csp?: ValueSets["default"];
+    importance?: ValueSets["default"];
+    referrerpolicy?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "iframe", attributes, children });
 
 export const embed = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
+    src?: ValueSets["default"];
+    type?: ValueSets["default"];
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "embed", attributes, children });
 
 export const object = (
   attributes: GlobalAttributes & {
-    data?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    typemustmatch?: boolean;
-    name?: string | number | boolean | null;
-    usemap?: string | number | boolean | null;
-    form?: string | number | boolean | null;
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
-    archive?: string | number | boolean | null;
-    border?: string | number | boolean | null;
-    classid?: string | number | boolean | null;
-    codebase?: string | number | boolean | null;
-    codetype?: string | number | boolean | null;
-    declare?: string | number | boolean | null;
-    standby?: string | number | boolean | null;
-    tabindex?: string | number | boolean | null;
+    data?: ValueSets["default"];
+    type?: ValueSets["default"];
+    typemustmatch?: ValueSets["v"];
+    name?: ValueSets["default"];
+    usemap?: ValueSets["default"];
+    form?: ValueSets["default"];
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
+    archive?: ValueSets["default"];
+    border?: ValueSets["default"];
+    classid?: ValueSets["default"];
+    codebase?: ValueSets["default"];
+    codetype?: ValueSets["default"];
+    declare?: ValueSets["default"];
+    standby?: ValueSets["default"];
+    tabindex?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "object", attributes, children });
 
 export const param = (
   attributes: GlobalAttributes & {
-    name?: string | number | boolean | null;
-    value?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    valuetype?: string | number | boolean | null;
+    name?: ValueSets["default"];
+    value?: ValueSets["default"];
+    type?: ValueSets["default"];
+    valuetype?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "param", attributes, children });
 
 export const video = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
+    src?: ValueSets["default"];
     crossorigin?: ValueSets["xo"];
-    poster?: string | number | boolean | null;
+    poster?: ValueSets["default"];
     preload?: ValueSets["pl"];
-    autoplay?: boolean;
-    mediagroup?: string | number | boolean | null;
-    loop?: boolean;
-    muted?: boolean;
-    controls?: boolean;
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
+    autoplay?: ValueSets["v"];
+    mediagroup?: ValueSets["default"];
+    loop?: ValueSets["v"];
+    muted?: ValueSets["v"];
+    controls?: ValueSets["v"];
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "video", attributes, children });
 
 export const audio = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
+    src?: ValueSets["default"];
     crossorigin?: ValueSets["xo"];
     preload?: ValueSets["pl"];
-    autoplay?: boolean;
-    mediagroup?: string | number | boolean | null;
-    loop?: boolean;
-    muted?: boolean;
-    controls?: boolean;
+    autoplay?: ValueSets["v"];
+    mediagroup?: ValueSets["default"];
+    loop?: ValueSets["v"];
+    muted?: ValueSets["v"];
+    controls?: ValueSets["v"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "audio", attributes, children });
 
 export const source = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    sizes?: string | number | boolean | null;
-    srcset?: string | number | boolean | null;
-    media?: string | number | boolean | null;
+    src?: ValueSets["default"];
+    type?: ValueSets["default"];
+    sizes?: ValueSets["default"];
+    srcset?: ValueSets["default"];
+    media?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "source", attributes, children });
 
 export const track = (
   attributes: GlobalAttributes & {
-    default?: boolean;
+    default?: ValueSets["v"];
     kind?: ValueSets["tk"];
-    label?: string | number | boolean | null;
-    src?: string | number | boolean | null;
-    srclang?: string | number | boolean | null;
+    label?: ValueSets["default"];
+    src?: ValueSets["default"];
+    srclang?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "track", attributes, children });
 
 export const map = (
   attributes: GlobalAttributes & {
-    name?: string | number | boolean | null;
+    name?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "map", attributes, children });
 
 export const area = (
   attributes: GlobalAttributes & {
-    alt?: string | number | boolean | null;
-    coords?: string | number | boolean | null;
+    alt?: ValueSets["default"];
+    coords?: ValueSets["default"];
     shape?: ValueSets["sh"];
-    href?: string | number | boolean | null;
+    href?: ValueSets["default"];
     target?: ValueSets["target"];
-    download?: string | number | boolean | null;
-    ping?: string | number | boolean | null;
-    rel?: string | number | boolean | null;
-    hreflang?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    accesskey?: string | number | boolean | null;
+    download?: ValueSets["default"];
+    ping?: ValueSets["default"];
+    rel?: ValueSets["default"];
+    hreflang?: ValueSets["default"];
+    type?: ValueSets["default"];
+    accesskey?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "area", attributes, children });
 
 export const table = (
   attributes: GlobalAttributes & {
-    border?: string | number | boolean | null;
-    align?: string | number | boolean | null;
+    border?: ValueSets["default"];
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "table", attributes, children });
 
 export const caption = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "caption", attributes, children });
 
 export const colgroup = (
   attributes: GlobalAttributes & {
-    span?: string | number | boolean | null;
-    align?: string | number | boolean | null;
+    span?: ValueSets["default"];
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "colgroup", attributes, children });
 
 export const col = (
   attributes: GlobalAttributes & {
-    span?: string | number | boolean | null;
-    align?: string | number | boolean | null;
+    span?: ValueSets["default"];
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "col", attributes, children });
 
 export const tbody = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "tbody", attributes, children });
 
 export const thead = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "thead", attributes, children });
 
 export const tfoot = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "tfoot", attributes, children });
 
 export const tr = (
   attributes: GlobalAttributes & {
-    align?: string | number | boolean | null;
+    align?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "tr", attributes, children });
 
 export const td = (
   attributes: GlobalAttributes & {
-    colspan?: string | number | boolean | null;
-    rowspan?: string | number | boolean | null;
-    headers?: string | number | boolean | null;
-    abbr?: string | number | boolean | null;
-    align?: string | number | boolean | null;
-    axis?: string | number | boolean | null;
-    bgcolor?: string | number | boolean | null;
+    colspan?: ValueSets["default"];
+    rowspan?: ValueSets["default"];
+    headers?: ValueSets["default"];
+    abbr?: ValueSets["default"];
+    align?: ValueSets["default"];
+    axis?: ValueSets["default"];
+    bgcolor?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "td", attributes, children });
 
 export const th = (
   attributes: GlobalAttributes & {
-    colspan?: string | number | boolean | null;
-    rowspan?: string | number | boolean | null;
-    headers?: string | number | boolean | null;
+    colspan?: ValueSets["default"];
+    rowspan?: ValueSets["default"];
+    headers?: ValueSets["default"];
     scope?: ValueSets["s"];
-    sorted?: string | number | boolean | null;
-    abbr?: string | number | boolean | null;
-    align?: string | number | boolean | null;
-    axis?: string | number | boolean | null;
-    bgcolor?: string | number | boolean | null;
+    sorted?: ValueSets["default"];
+    abbr?: ValueSets["default"];
+    align?: ValueSets["default"];
+    axis?: ValueSets["default"];
+    bgcolor?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "th", attributes, children });
 
 export const form = (
   attributes: GlobalAttributes & {
-    "accept-charset"?: string | number | boolean | null;
-    action?: string | number | boolean | null;
+    "accept-charset"?: ValueSets["default"];
+    action?: ValueSets["default"];
     autocomplete?: ValueSets["o"];
     enctype?: ValueSets["et"];
     method?: ValueSets["m"];
-    name?: string | number | boolean | null;
-    novalidate?: boolean;
+    name?: ValueSets["default"];
+    novalidate?: ValueSets["v"];
     target?: ValueSets["target"];
-    accept?: string | number | boolean | null;
-    autocapitalize?: string | number | boolean | null;
+    accept?: ValueSets["default"];
+    autocapitalize?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "form", attributes, children });
 
 export const label = (
   attributes: GlobalAttributes & {
-    form?: string | number | boolean | null;
-    for?: string | number | boolean | null;
+    form?: ValueSets["default"];
+    for?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "label", attributes, children });
 
 export const input = (
   attributes: GlobalAttributes & {
-    accept?: string | number | boolean | null;
-    alt?: string | number | boolean | null;
+    accept?: ValueSets["default"];
+    alt?: ValueSets["default"];
     autocomplete?: ValueSets["inputautocomplete"];
-    autofocus?: boolean;
-    checked?: boolean;
-    dirname?: string | number | boolean | null;
-    disabled?: boolean;
-    form?: string | number | boolean | null;
-    formaction?: string | number | boolean | null;
+    autofocus?: ValueSets["v"];
+    checked?: ValueSets["v"];
+    dirname?: ValueSets["default"];
+    disabled?: ValueSets["v"];
+    form?: ValueSets["default"];
+    formaction?: ValueSets["default"];
     formenctype?: ValueSets["et"];
     formmethod?: ValueSets["fm"];
-    formnovalidate?: boolean;
-    formtarget?: string | number | boolean | null;
-    height?: string | number | boolean | null;
+    formnovalidate?: ValueSets["v"];
+    formtarget?: ValueSets["default"];
+    height?: ValueSets["default"];
     inputmode?: ValueSets["im"];
-    list?: string | number | boolean | null;
-    max?: string | number | boolean | null;
-    maxlength?: string | number | boolean | null;
-    min?: string | number | boolean | null;
-    minlength?: string | number | boolean | null;
-    multiple?: boolean;
-    name?: string | number | boolean | null;
-    pattern?: string | number | boolean | null;
-    placeholder?: string | number | boolean | null;
-    popovertarget?: string | number | boolean | null;
-    popovertargetaction?: string | number | boolean | null;
-    readonly?: boolean;
-    required?: boolean;
-    size?: string | number | boolean | null;
-    src?: string | number | boolean | null;
-    step?: string | number | boolean | null;
+    list?: ValueSets["default"];
+    max?: ValueSets["default"];
+    maxlength?: ValueSets["default"];
+    min?: ValueSets["default"];
+    minlength?: ValueSets["default"];
+    multiple?: ValueSets["v"];
+    name?: ValueSets["default"];
+    pattern?: ValueSets["default"];
+    placeholder?: ValueSets["default"];
+    popovertarget?: ValueSets["default"];
+    popovertargetaction?: ValueSets["default"];
+    readonly?: ValueSets["v"];
+    required?: ValueSets["v"];
+    size?: ValueSets["default"];
+    src?: ValueSets["default"];
+    step?: ValueSets["default"];
     type?: ValueSets["t"];
-    value?: string | number | boolean | null;
-    width?: string | number | boolean | null;
+    value?: ValueSets["default"];
+    width?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "input", attributes, children });
 
 export const button = (
   attributes: GlobalAttributes & {
-    autofocus?: boolean;
-    disabled?: boolean;
-    form?: string | number | boolean | null;
-    formaction?: string | number | boolean | null;
+    autofocus?: ValueSets["v"];
+    disabled?: ValueSets["v"];
+    form?: ValueSets["default"];
+    formaction?: ValueSets["default"];
     formenctype?: ValueSets["et"];
     formmethod?: ValueSets["fm"];
-    formnovalidate?: boolean;
-    formtarget?: string | number | boolean | null;
-    name?: string | number | boolean | null;
-    popovertarget?: string | number | boolean | null;
-    popovertargetaction?: string | number | boolean | null;
+    formnovalidate?: ValueSets["v"];
+    formtarget?: ValueSets["default"];
+    name?: ValueSets["default"];
+    popovertarget?: ValueSets["default"];
+    popovertargetaction?: ValueSets["default"];
     type?: ValueSets["bt"];
-    value?: string | number | boolean | null;
-    autocomplete?: string | number | boolean | null;
+    value?: ValueSets["default"];
+    autocomplete?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "button", attributes, children });
@@ -1521,13 +1405,13 @@ export const button = (
 export const select = (
   attributes: GlobalAttributes & {
     autocomplete?: ValueSets["inputautocomplete"];
-    autofocus?: boolean;
-    disabled?: boolean;
-    form?: string | number | boolean | null;
-    multiple?: boolean;
-    name?: string | number | boolean | null;
-    required?: boolean;
-    size?: string | number | boolean | null;
+    autofocus?: ValueSets["v"];
+    disabled?: ValueSets["v"];
+    form?: ValueSets["default"];
+    multiple?: ValueSets["v"];
+    name?: ValueSets["default"];
+    required?: ValueSets["v"];
+    size?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "select", attributes, children });
@@ -1543,18 +1427,18 @@ export const datalist = (
 
 export const optgroup = (
   attributes: GlobalAttributes & {
-    disabled?: boolean;
-    label?: string | number | boolean | null;
+    disabled?: ValueSets["v"];
+    label?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "optgroup", attributes, children });
 
 export const option = (
   attributes: GlobalAttributes & {
-    disabled?: boolean;
-    label?: string | number | boolean | null;
-    selected?: boolean;
-    value?: string | number | boolean | null;
+    disabled?: ValueSets["v"];
+    label?: ValueSets["default"];
+    selected?: ValueSets["v"];
+    value?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "option", attributes, children });
@@ -1562,61 +1446,61 @@ export const option = (
 export const textarea = (
   attributes: GlobalAttributes & {
     autocomplete?: ValueSets["inputautocomplete"];
-    autofocus?: boolean;
-    cols?: string | number | boolean | null;
-    dirname?: string | number | boolean | null;
-    disabled?: boolean;
-    form?: string | number | boolean | null;
+    autofocus?: ValueSets["v"];
+    cols?: ValueSets["default"];
+    dirname?: ValueSets["default"];
+    disabled?: ValueSets["v"];
+    form?: ValueSets["default"];
     inputmode?: ValueSets["im"];
-    maxlength?: string | number | boolean | null;
-    minlength?: string | number | boolean | null;
-    name?: string | number | boolean | null;
-    placeholder?: string | number | boolean | null;
-    readonly?: boolean;
-    required?: boolean;
-    rows?: string | number | boolean | null;
+    maxlength?: ValueSets["default"];
+    minlength?: ValueSets["default"];
+    name?: ValueSets["default"];
+    placeholder?: ValueSets["default"];
+    readonly?: ValueSets["v"];
+    required?: ValueSets["v"];
+    rows?: ValueSets["default"];
     wrap?: ValueSets["w"];
-    autocapitalize?: string | number | boolean | null;
-    spellcheck?: string | number | boolean | null;
+    autocapitalize?: ValueSets["default"];
+    spellcheck?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "textarea", attributes, children });
 
 export const output = (
   attributes: GlobalAttributes & {
-    for?: string | number | boolean | null;
-    form?: string | number | boolean | null;
-    name?: string | number | boolean | null;
+    for?: ValueSets["default"];
+    form?: ValueSets["default"];
+    name?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "output", attributes, children });
 
 export const progress = (
   attributes: GlobalAttributes & {
-    value?: string | number | boolean | null;
-    max?: string | number | boolean | null;
+    value?: ValueSets["default"];
+    max?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "progress", attributes, children });
 
 export const meter = (
   attributes: GlobalAttributes & {
-    value?: string | number | boolean | null;
-    min?: string | number | boolean | null;
-    max?: string | number | boolean | null;
-    low?: string | number | boolean | null;
-    high?: string | number | boolean | null;
-    optimum?: string | number | boolean | null;
-    form?: string | number | boolean | null;
+    value?: ValueSets["default"];
+    min?: ValueSets["default"];
+    max?: ValueSets["default"];
+    low?: ValueSets["default"];
+    high?: ValueSets["default"];
+    optimum?: ValueSets["default"];
+    form?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "meter", attributes, children });
 
 export const fieldset = (
   attributes: GlobalAttributes & {
-    disabled?: boolean;
-    form?: string | number | boolean | null;
-    name?: string | number | boolean | null;
+    disabled?: ValueSets["v"];
+    form?: ValueSets["default"];
+    name?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "fieldset", attributes, children });
@@ -1632,7 +1516,7 @@ export const legend = (
 
 export const details = (
   attributes: GlobalAttributes & {
-    open?: boolean;
+    open?: ValueSets["v"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "details", attributes, children });
@@ -1648,24 +1532,24 @@ export const summary = (
 
 export const dialog = (
   attributes: GlobalAttributes & {
-    open?: string | number | boolean | null;
+    open?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "dialog", attributes, children });
 
 export const script = (
   attributes: GlobalAttributes & {
-    src?: string | number | boolean | null;
-    type?: string | number | boolean | null;
-    charset?: string | number | boolean | null;
-    async?: boolean;
-    defer?: boolean;
+    src?: ValueSets["default"];
+    type?: ValueSets["default"];
+    charset?: ValueSets["default"];
+    async?: ValueSets["v"];
+    defer?: ValueSets["v"];
     crossorigin?: ValueSets["xo"];
-    nonce?: string | number | boolean | null;
-    integrity?: string | number | boolean | null;
-    nomodule?: string | number | boolean | null;
-    referrerpolicy?: string | number | boolean | null;
-    text?: string | number | boolean | null;
+    nonce?: ValueSets["default"];
+    integrity?: ValueSets["default"];
+    nomodule?: ValueSets["default"];
+    referrerpolicy?: ValueSets["default"];
+    text?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "script", attributes, children });
@@ -1690,23 +1574,23 @@ export const template = (
 
 export const canvas = (
   attributes: GlobalAttributes & {
-    width?: string | number | boolean | null;
-    height?: string | number | boolean | null;
-    "moz-opaque"?: string | number | boolean | null;
+    width?: ValueSets["default"];
+    height?: ValueSets["default"];
+    "moz-opaque"?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "canvas", attributes, children });
 
 export const slot = (
   attributes: GlobalAttributes & {
-    name?: string | number | boolean | null;
+    name?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "slot", attributes, children });
 
 export const data = (
   attributes: GlobalAttributes & {
-    value?: string | number | boolean | null;
+    value?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "data", attributes, children });
@@ -1740,9 +1624,9 @@ export const search = (
 
 export const fencedframe = (
   attributes: GlobalAttributes & {
-    allow?: string | number | boolean | null;
-    height?: string | number | boolean | null;
-    width?: string | number | boolean | null;
+    allow?: ValueSets["default"];
+    height?: ValueSets["default"];
+    width?: ValueSets["default"];
   },
   children?: readonly Element[],
 ): Element => ({ tag: "fencedframe", attributes, children });
