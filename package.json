@@ -6,6 +6,7 @@
   "type": "module",
   "module": "html.ts",
   "files": [
-    "html.ts"
+    "html.ts",
+    "gen.ts"
   ]
 }
