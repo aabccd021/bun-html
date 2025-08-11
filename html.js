@@ -23,13 +23,13 @@ export * from "./gen.js";
 
 /**
  * A raw HTML element with unescaped content.
- * @typedef {Object} RawElement
+ * @typedef {Object} UnsafeElement
  * @property {string} value - Raw HTML content
  */
 
 /**
  * Represents an HTML element or a component that can be rendered to HTML.
- * @typedef {string|false|undefined|TaggedElement|RawElement} Element
+ * @typedef {string|false|undefined|TaggedElement|UnsafeElement} Element
  */
 
 /**
@@ -139,6 +139,6 @@ export function render(element) {
  * Creates an Element from an unescaped HTML string.
  * Use with caution as this bypasses HTML escaping.
  * @param {string} value - Raw HTML string to include
- * @returns {RawElement} An Element that will render the raw HTML
+ * @returns {UnsafeElement} An Element that will render the raw HTML
  */
 export const unsafeHtml = (value) => ({ value });
