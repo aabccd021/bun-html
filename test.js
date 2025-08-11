@@ -126,7 +126,7 @@ test("xss on attribute value", () => {
   );
 });
 
-test("xss on attribute value", () => {
+test("all character escaped", () => {
   const element = p({}, [`"&'<>`]);
   expect(render(element)).toBe("<p>&quot;&amp;&#x27;&lt;&gt;</p>");
 });
