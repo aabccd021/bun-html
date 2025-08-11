@@ -9,7 +9,10 @@ export type Element =
   | undefined
   | {
       readonly tag: string;
-      readonly attributes: Record<string, AttributeValues>;
+      readonly attributes: Record<
+        string,
+        AttributeValues | Record<string, AttributeValues>
+      >;
       readonly children?: readonly Element[];
     }
   | {
@@ -36,7 +39,7 @@ function escapeHTML(value: string): string {
 
 function serializeAttribute([unsafeKey, value]: readonly [
   string,
-  AttributeValues,
+  AttributeValues | Record<string, AttributeValues>,
 ]): string {
   if (value === false || value === undefined || value === null) {
     return "";
@@ -60,8 +63,11 @@ function serializeAttribute([unsafeKey, value]: readonly [
     return ` ${key}="${value.href}"`;
   }
 
-  value satisfies never;
-  throw new Error(`Unsupported attribute: ${key}`);
+  return Object.entries(value)
+    .map(([dataKey, dataValue]) =>
+      serializeAttribute([`data-${dataKey}`, dataValue]),
+    )
+    .join("");
 }
 
 export function render(element: Element): string {

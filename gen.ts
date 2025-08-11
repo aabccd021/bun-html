@@ -291,8 +291,7 @@ type ValueSets = {
 };
 
 type GlobalAttributes = {
-  [k in `data-${string}`]?: ValueSets["default"];
-} & {
+  data?: Record<string, ValueSets["default"]>;
   accesskey?: ValueSets["default"];
   autocapitalize?: ValueSets["default"];
   autocorrect?: ValueSets["o"];
