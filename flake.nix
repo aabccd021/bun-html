@@ -21,8 +21,8 @@
       };
 
       tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./html.js} ./html.js
-        cp -L ${./test.js} ./test.js
+        cp -L ${./tiny-html.js} ./tiny-html.js
+        cp -L ${./tiny-html.test.js} ./tiny-html.test.js
         cp -L ${./gen.js} ./gen.js
         cp -L ${./tsconfig.json} ./tsconfig.json
         ${pkgs.typescript}/bin/tsc
@@ -30,10 +30,10 @@
       '';
 
       test = pkgs.runCommand "tests" { } ''
-        cp -L ${./html.js} ./html.js
+        cp -L ${./tiny-html.js} ./tiny-html.js
         cp -L ${./gen.js} ./gen.js
-        cp -L ${./test.js} ./test.js
-        ${pkgs.bun}/bin/bun ./test.js
+        cp -L ${./tiny-html.test.js} ./tiny-html.test.js
+        ${pkgs.bun}/bin/bun ./tiny-html.test.js
         touch $out
       '';
 

@@ -1,4 +1,4 @@
-/** @import { Element, DataAttribute } from './html.ts';
+/** @import { Element, DataAttribute } from './tiny-html.js';
 
 /**
  * @typedef {Object} HtmlAttributes
