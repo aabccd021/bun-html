@@ -65,7 +65,7 @@ function attrValue(attr) {
 /**
  * @param {IAttributeData[]} tags
  */
-function uniqueAttributes(tags) {
+function unique(tags) {
   const seen = new Set();
   return tags.filter((attr) => {
     if (seen.has(attr.name)) {
@@ -78,7 +78,7 @@ function uniqueAttributes(tags) {
 
 const builders = data.tags
   .map((tag) => {
-    const attributes = [...data.globalAttributes, ...uniqueAttributes(tag.attributes)]
+    const attributes = [...data.globalAttributes, ...unique(tag.attributes)]
       .map((attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`)
       .join("\n");
     const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
