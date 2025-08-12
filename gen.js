@@ -826,6 +826,7 @@ export function base(attributes) {
  * @property {string | number | boolean | null} [importance]
  * @property {string | number | boolean | null} [integrity]
  * @property {string | number | boolean | null} [referrerpolicy]
+ * @property {string | number | boolean | null} [title]
  */
 
 /**
@@ -1160,8 +1161,10 @@ export function meta(attributes) {
  * @property {string | number | boolean | null} [aria-details]
  * @property {string | number | boolean | null} [aria-keyshortcuts]
  * @property {string | number | boolean | null} [media]
+ * @property {string | number | boolean | null} [nonce]
  * @property {string | number | boolean | null} [type]
  * @property {boolean} [scoped]
+ * @property {string | number | boolean | null} [title]
  */
 
 /**
@@ -1345,7 +1348,12 @@ export function style(attributes, children) {
  * @property {string | number | boolean | null} [bottommargin]
  * @property {string | number | boolean | null} [leftmargin]
  * @property {string | number | boolean | null} [link]
+ * @property {string | number | boolean | null} [onblur]
+ * @property {string | number | boolean | null} [onerror]
+ * @property {string | number | boolean | null} [onfocus]
+ * @property {string | number | boolean | null} [onload]
  * @property {string | number | boolean | null} [onredo]
+ * @property {string | number | boolean | null} [onresize]
  * @property {string | number | boolean | null} [onundo]
  * @property {string | number | boolean | null} [rightmargin]
  * @property {string | number | boolean | null} [text]
@@ -10070,6 +10078,7 @@ export function bdi(attributes, children) {
  * @property {string | number | boolean | null} [aria-valuetext]
  * @property {string | number | boolean | null} [aria-details]
  * @property {string | number | boolean | null} [aria-keyshortcuts]
+ * @property {string | number | boolean | null} [dir]
  */
 
 /**
@@ -11762,6 +11771,7 @@ export function embed(attributes) {
  * @property {string | number | boolean | null} [codetype]
  * @property {string | number | boolean | null} [declare]
  * @property {string | number | boolean | null} [standby]
+ * @property {string | number | boolean | null} [tabindex]
  */
 
 /**
@@ -12954,6 +12964,7 @@ export function map(attributes, children) {
  * @property {string | number | boolean | null} [rel]
  * @property {string | number | boolean | null} [hreflang]
  * @property {string | number | boolean | null} [type]
+ * @property {string | number | boolean | null} [accesskey]
  */
 
 /**
@@ -14794,6 +14805,7 @@ export function th(attributes, children) {
  * @property {boolean} [novalidate]
  * @property {"_self" | "_blank" | "_parent" | "_top"} [target]
  * @property {string | number | boolean | null} [accept]
+ * @property {string | number | boolean | null} [autocapitalize]
  */
 
 /**
@@ -15127,6 +15139,7 @@ export function label(attributes, children) {
  * @property {string | number | boolean | null} [accept]
  * @property {string | number | boolean | null} [alt]
  * @property {"additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work"} [autocomplete]
+ * @property {boolean} [autofocus]
  * @property {boolean} [checked]
  * @property {string | number | boolean | null} [dirname]
  * @property {boolean} [disabled]
@@ -15137,6 +15150,7 @@ export function label(attributes, children) {
  * @property {boolean} [formnovalidate]
  * @property {string | number | boolean | null} [formtarget]
  * @property {string | number | boolean | null} [height]
+ * @property {"verbatim" | "latin" | "latin-name" | "latin-prose" | "full-width-latin" | "kana" | "kana-name" | "katakana" | "numeric" | "tel" | "email" | "url"} [inputmode]
  * @property {string | number | boolean | null} [list]
  * @property {string | number | boolean | null} [max]
  * @property {string | number | boolean | null} [maxlength]
@@ -15320,6 +15334,7 @@ export function input(attributes) {
  * @property {string | number | boolean | null} [aria-valuetext]
  * @property {string | number | boolean | null} [aria-details]
  * @property {string | number | boolean | null} [aria-keyshortcuts]
+ * @property {boolean} [autofocus]
  * @property {boolean} [disabled]
  * @property {string | number | boolean | null} [form]
  * @property {string | number | boolean | null} [formaction]
@@ -15498,6 +15513,7 @@ export function button(attributes, children) {
  * @property {string | number | boolean | null} [aria-details]
  * @property {string | number | boolean | null} [aria-keyshortcuts]
  * @property {"additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work"} [autocomplete]
+ * @property {boolean} [autofocus]
  * @property {boolean} [disabled]
  * @property {string | number | boolean | null} [form]
  * @property {boolean} [multiple]
@@ -16167,10 +16183,12 @@ export function option(attributes, children) {
  * @property {string | number | boolean | null} [aria-details]
  * @property {string | number | boolean | null} [aria-keyshortcuts]
  * @property {"additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work"} [autocomplete]
+ * @property {boolean} [autofocus]
  * @property {string | number | boolean | null} [cols]
  * @property {string | number | boolean | null} [dirname]
  * @property {boolean} [disabled]
  * @property {string | number | boolean | null} [form]
+ * @property {"verbatim" | "latin" | "latin-name" | "latin-prose" | "full-width-latin" | "kana" | "kana-name" | "katakana" | "numeric" | "tel" | "email" | "url"} [inputmode]
  * @property {string | number | boolean | null} [maxlength]
  * @property {string | number | boolean | null} [minlength]
  * @property {string | number | boolean | null} [name]
@@ -16179,6 +16197,8 @@ export function option(attributes, children) {
  * @property {boolean} [required]
  * @property {string | number | boolean | null} [rows]
  * @property {"soft" | "hard"} [wrap]
+ * @property {string | number | boolean | null} [autocapitalize]
+ * @property {string | number | boolean | null} [spellcheck]
  */
 
 /**
@@ -17678,6 +17698,7 @@ export function dialog(attributes, children) {
  * @property {boolean} [async]
  * @property {boolean} [defer]
  * @property {"anonymous" | "use-credentials"} [crossorigin]
+ * @property {string | number | boolean | null} [nonce]
  * @property {string | number | boolean | null} [integrity]
  * @property {string | number | boolean | null} [nomodule]
  * @property {string | number | boolean | null} [referrerpolicy]
