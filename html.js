@@ -17,8 +17,8 @@ export * from "./gen.js";
  * An element with a tag, attributes, and optional children.
  * @typedef {Object} TaggedElement
  * @property {string} tag - The HTML tag name
- * @property {Object<string, AttributeValues|Object<string, AttributeValues>>} attributes - Element attributes
- * @property {Array<Element>} [children] - Optional child elements
+ * @property {Object.<string, AttributeValues|Object.<string, AttributeValues>>} attributes - Element attributes
+ * @property {Array.<Element>} [children] - Optional child elements
  */
 
 /**
@@ -40,7 +40,7 @@ const reUnescapedHtml = /[&<>"'`]/g;
 
 /**
  * Mapping of special HTML characters to their escaped equivalents.
- * @type {Object<string, string>}
+ * @type {Object.<string, string>}
  */
 const escapeMap = {
   '"': "&quot;",
@@ -66,7 +66,7 @@ function escapeHTML(value) {
 /**
  * Serializes an attribute key-value pair into HTML attribute syntax.
  * @param {string} unsafeKey - The attribute name (will be escaped)
- * @param {AttributeValues|Object<string, AttributeValues>} value - The attribute value
+ * @param {AttributeValues|Object.<string, AttributeValues>} value - The attribute value
  * @returns {string} The serialized HTML attribute string
  */
 function serializeAttribute(unsafeKey, value) {

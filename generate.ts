@@ -98,8 +98,3 @@ const result = `/** @import { Element, DataAttribute } from './html.ts';
 ${builders}`;
 
 console.log(result);
-
-/**
- * A record with string keys and string values
- * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
- */
