@@ -18,7 +18,7 @@ export * from "./gen.js";
  * @typedef {Object} TaggedElement
  * @property {string} tag - The HTML tag name
  * @property {Object.<string, AttributeValues|Object.<string, AttributeValues>>} attributes - Element attributes
- * @property {Array.<Element>} [children] - Optional child elements
+ * @property {Array.<Element>|undefined} [children] - Optional child elements
  */
 
 /**

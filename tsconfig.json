@@ -1,24 +1,33 @@
 {
   "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "allowJs": true,
+    // Environment Settings
+    "target": "esnext",
     "checkJs": true,
-    "module": "Preserve",
+    "module": "preserve",
     "moduleDetection": "force",
     "moduleResolution": "bundler",
+
+    // Outputs
     "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noPropertyAccessFromIndexSignature": true,
+
+    // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+
+    // Style Options
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    // Recommended Options
     "strict": true,
-    "target": "ESNext",
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true
   }
 }
