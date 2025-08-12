@@ -110,7 +110,7 @@ console.log(render(element));
 // <!DOCTYPE html><html>Hello, world!</html>
 ```
 
-## Security: XSS Protection
+## XSS Protection
 
 All content and attribute values are safely escaped:
 
