@@ -1,6 +1,166 @@
-# bun-html
+# tiny-html
 
-Simple HTML DSL and renderer for Bun.
+**tiny-html** is a tiny HTML DSL and renderer.
+
+## Installation
+
+```bash
+npm install tiny-html
+```
+
+Or include `html.js` directly in your project.
+
+## Usage
+
+Import the element helpers and renderer:
+
+```js
+import { a, button, div, head, html, meta, p, render, unsafeHtml } from "tiny-html";
+```
+
+### Basic Element Creation
+
+```js
+const element = p({ data: { hello: "world" } }, ["Hello, world!"]);
+console.log(render(element)); 
+// <p data-hello="world">Hello, world!</p>
+```
+
+### No Children
+
+```js
+const element = p({ data: { hello: "world" } }, []);
+console.log(render(element));
+// <p data-hello="world"></p>
+```
+
+### Void Elements
+
+```js
+const element = meta({ charset: "utf-8" });
+console.log(render(element));
+// <meta charset="utf-8">
+```
+
+### Unsafe HTML Injection
+
+```js
+const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
+console.log(render(element));
+// <p><strong>Hello, world!</strong></p>
+```
+
+### Conditional Children
+
+```js
+const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
+console.log(render(element));
+// <p>Hello, world!</p>
+```
+
+### Ignoring Undefined Children
+
+```js
+const element = p({}, [undefined, "Hello, world!"]);
+console.log(render(element));
+// <p>Hello, world!</p>
+```
+
+### Nesting Elements
+
+```js
+const element = p({}, [div({ class: "container" }, [button({}, ["Hello, world!"])])]);
+console.log(render(element));
+// <p><div class="container"><button>Hello, world!</button></div></p>
+```
+
+### Attribute Types
+
+```js
+p({ data: { number: 42 } }, ["Hello, world!"]);  // <p data-number="42">Hello, world!</p>
+p({ data: { boolean: true } }, ["Hello, world!"]); // <p data-boolean>Hello, world!</p>
+p({ data: { boolean: false } }, ["Hello, world!"]); // <p>Hello, world!</p>
+```
+
+### URLs and Styles
+
+```js
+a({ href: "https://example.com/" }, ["Hello, world!"]);
+// <a href="https://example.com/">Hello, world!</a>
+
+p({ style: "color: red;" }, ["Hello, world!"]);
+// <p style="color: red;">Hello, world!</p>
+```
+
+### Unknown/Custom Attributes
+
+```js
+meta({
+  charset: "utf-8",
+  "og:title": "my title"
+});
+// <meta charset="utf-8" og:title="my title">
+```
+
+### Rendering `<html>` with Doctype
+
+```js
+const element = html({}, ["Hello, world!"]);
+console.log(render(element));
+// <!DOCTYPE html><html>Hello, world!</html>
+```
+
+## Security: XSS Protection
+
+All content and attribute values are safely escaped:
+
+```js
+p({}, ["<script>console.log('Hello World!')</script>"]);
+// <p>&lt;script&gt;console.log(&#x27;Hello World!&#x27;)&lt;/script&gt;</p>
+
+head({}, [
+  meta({ content: "foo" }),
+  // @ts-ignore
+  meta({ "><script>console.log('orld')</script><meta": "og:type" }),
+  meta({ content: "bar" }),
+]);
+// <head><meta content="foo"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta="og:type"><meta content="bar"></head>
+```
+
+All dangerous characters are escaped:
+
+```js
+p({}, [`"&'<>\``]);
+// <p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>
+```
+
+## API Reference
+
+### Element Functions
+
+Each HTML tag has a corresponding function:
+
+```js
+div(props, children)
+p(props, children)
+a(props, children)
+button(props, children)
+meta(props)
+html(props, children)
+head(props, children)
+...
+```
+
+- `props`: Object with attributes, `data`, `style`, etc.
+- `children`: Array of child elements, strings, or results from other element functions.
+
+### `render(element)`
+
+Converts an element tree into a safe HTML string.
+
+### `unsafeHtml(string)`
+
+Marks a string as trusted and injects it as raw HTML.
 
 ## LICENCE
 
