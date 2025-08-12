@@ -1,10 +1,8 @@
 const res = await fetch(
   "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
 );
-/** @type {HTMLDataV1} */
 const data = await res.json();
 
-/** @type {Object.<string, string>} */
 const valueSets = Object.fromEntries(
   data.valueSets.map(({ name, values }) => {
     return [name, values.map((value) => `"${value.name}"`).join(" | ")];
