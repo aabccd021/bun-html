@@ -101,7 +101,4 @@ export function ${funcName}(attributes${tag.void ? "" : ", children"}) {
   })
   .join("\n");
 
-const result = `/** @import { Element, DataAttribute } from './tiny-html.js';
-${builders}`;
-
-console.log(result);
+console.log(`/** @import { Element, DataAttribute } from './tiny-html.js';\n${builders}`);
