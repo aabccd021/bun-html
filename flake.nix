@@ -53,7 +53,6 @@
 
       packages = {
         formatting = treefmtEval.config.build.check self;
-        typescript = pkgs.typescript;
         publish = publish;
         tsc = tsc;
         test = test;
@@ -64,8 +63,8 @@
 
       packages.x86_64-linux = packages;
       checks.x86_64-linux = packages;
-
       formatter.x86_64-linux = treefmtEval.config.build.wrapper;
+
       devShells.x86_64-linux.default = pkgs.mkShellNoCC {
         buildInputs = [
           pkgs.nixd
