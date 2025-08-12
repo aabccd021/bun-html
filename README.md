@@ -134,34 +134,6 @@ p({}, [`"&'<>\``]);
 // <p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>
 ```
 
-## API Reference
-
-### Element Functions
-
-Each HTML tag has a corresponding function:
-
-```js
-div(props, children)
-p(props, children)
-a(props, children)
-button(props, children)
-meta(props)
-html(props, children)
-head(props, children)
-...
-```
-
-- `props`: Object with attributes, `data`, `style`, etc.
-- `children`: Array of child elements, strings, or results from other element functions.
-
-### `render(element)`
-
-Converts an element tree into a safe HTML string.
-
-### `unsafeHtml(string)`
-
-Marks a string as trusted and injects it as raw HTML.
-
 ## LICENCE
 
 ```
