@@ -4,9 +4,9 @@
   "author": "aabccd021",
   "license": "0BSD",
   "type": "module",
-  "module": "html.ts",
+  "module": "html.js",
   "files": [
-    "html.ts",
-    "gen.ts"
+    "tiny-html.js",
+    "gen.js"
   ]
 }
