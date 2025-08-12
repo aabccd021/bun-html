@@ -1,10 +1,10 @@
 {
-  "name": "tiny-html",
-  "version": "1.0.17",
+  "name": "bun-html",
+  "version": "1.0.18",
   "author": "aabccd021",
   "license": "0BSD",
   "type": "module",
-  "module": "html.js",
+  "module": "tiny-html.js",
   "files": [
     "tiny-html.js",
     "gen.js"
