@@ -78,13 +78,8 @@ function uniqueAttributes(tags) {
 
 const builders = data.tags
   .map((tag) => {
-    const attributes = [
-      ...data.globalAttributes,
-      ...uniqueAttributes(tag.attributes),
-    ]
-      .map(
-        (attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`,
-      )
+    const attributes = [...data.globalAttributes, ...uniqueAttributes(tag.attributes)]
+      .map((attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`)
       .join("\n");
     const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
     const funcName = tag.name === "var" ? "var_" : tag.name;

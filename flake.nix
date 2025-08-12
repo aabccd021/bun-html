@@ -13,7 +13,6 @@
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
-        programs.prettier.enable = true;
         programs.nixfmt.enable = true;
         programs.biome.enable = true;
         programs.biome.formatUnsafe = true;
@@ -69,11 +68,8 @@
       formatter.x86_64-linux = treefmtEval.config.build.wrapper;
       devShells.x86_64-linux.default = pkgs.mkShellNoCC {
         buildInputs = [
-          pkgs.bun
-          pkgs.biome
-          pkgs.typescript
-          pkgs.vscode-langservers-extracted
           pkgs.nixd
+          pkgs.typescript
           pkgs.typescript-language-server
         ];
       };

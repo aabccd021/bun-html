@@ -93,9 +93,7 @@ function serializeAttribute(unsafeKey, value) {
   }
 
   return Object.entries(value)
-    .map(([dataKey, dataValue]) =>
-      serializeAttribute(`data-${dataKey}`, dataValue),
-    )
+    .map(([dataKey, dataValue]) => serializeAttribute(`data-${dataKey}`, dataValue))
     .join("");
 }
 
