@@ -1,33 +1,4 @@
 /**
- * @module ./gen.js
- */
-export * from "./gen.js";
-
-/**
- * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
- */
-
-/**
- * @typedef {string|number|boolean|URL|null|undefined} AttributeValues
- */
-
-/**
- * @typedef {Object} TaggedElement
- * @property {string} tag
- * @property {Object.<string, AttributeValues|Object.<string, AttributeValues>>} attributes
- * @property {Array.<Element>|undefined} [children]
- */
-
-/**
- * @typedef {Object} UnsafeElement
- * @property {string} value
- */
-
-/**
- * @typedef {string|false|undefined|TaggedElement|UnsafeElement} Element
- */
-
-/**
  * @type {Object.<string, string>}
  */
 const escapeMap = {
@@ -52,11 +23,10 @@ function escapeHTML(value) {
 }
 
 /**
- * @param {string} unsafeKey
- * @param {AttributeValues|Object.<string, AttributeValues>} value
+ * @param {[string, string|number|boolean|null|undefined]} value
  * @returns {string}
  */
-function serializeAttribute(unsafeKey, value) {
+function serializeAttribute([ unsafeKey, value ]) {
   if (value === false || value === undefined || value === null) {
     return "";
   }
@@ -75,20 +45,14 @@ function serializeAttribute(unsafeKey, value) {
     return ` ${key}="${value}"`;
   }
 
-  if (value instanceof URL) {
-    return ` ${key}="${value.href}"`;
-  }
-
-  return Object.entries(value)
-    .map(([dataKey, dataValue]) => serializeAttribute(`data-${dataKey}`, dataValue))
-    .join("");
+  throw new Error(`Unsupported attribute value type for key "${key}": ${typeof value}`);
 }
 
+
 /**
- * @param {Element} element
- * @returns {string}
+ * @type {import("./tiny-html").RenderFn}
  */
-export function render(element) {
+export const render = (element) => {
   if (element === false || element === undefined) {
     return "";
   }
@@ -102,7 +66,7 @@ export function render(element) {
   }
 
   const attributes = Object.entries(element.attributes)
-    .map(([key, value]) => serializeAttribute(key, value))
+    .map(serializeAttribute)
     .join("");
 
   const beforeTag = element.tag === "html" ? "<!DOCTYPE html>" : "";
@@ -116,7 +80,6 @@ export function render(element) {
 }
 
 /**
- * @param {string} value
- * @returns {UnsafeElement}
+ * @type {import("./tiny-html").UnsafeHtmlFn}
  */
 export const unsafeHtml = (value) => ({ value });
