@@ -4,11 +4,9 @@
 
 ## Installation
 
-```bash
+```sh
 npm install tiny-html
 ```
-
-Or include `html.js` directly in your project.
 
 ## Usage
 
@@ -18,7 +16,7 @@ Import the element helpers and renderer:
 import { a, button, div, head, html, meta, p, render, unsafeHtml } from "tiny-html";
 ```
 
-### Basic Element Creation
+### Creating Basic Elements
 
 ```js
 const element = p({ data: { hello: "world" } }, ["Hello, world!"]);
@@ -26,7 +24,7 @@ console.log(render(element));
 // <p data-hello="world">Hello, world!</p>
 ```
 
-### No Children
+### Creating Elements Without Children
 
 ```js
 const element = p({ data: { hello: "world" } }, []);
@@ -34,7 +32,7 @@ console.log(render(element));
 // <p data-hello="world"></p>
 ```
 
-### Void Elements
+### Working with Void Elements
 
 ```js
 const element = meta({ charset: "utf-8" });
@@ -42,7 +40,7 @@ console.log(render(element));
 // <meta charset="utf-8">
 ```
 
-### Unsafe HTML Injection
+### Inserting Raw HTML Content
 
 ```js
 const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
@@ -50,7 +48,7 @@ console.log(render(element));
 // <p><strong>Hello, world!</strong></p>
 ```
 
-### Conditional Children
+### Using Conditional Rendering
 
 ```js
 const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
@@ -58,7 +56,7 @@ console.log(render(element));
 // <p>Hello, world!</p>
 ```
 
-### Ignoring Undefined Children
+### Handling Undefined Children
 
 ```js
 const element = p({}, [undefined, "Hello, world!"]);
@@ -66,7 +64,7 @@ console.log(render(element));
 // <p>Hello, world!</p>
 ```
 
-### Nesting Elements
+### Nesting Multiple Elements
 
 ```js
 const element = p({}, [div({ class: "container" }, [button({}, ["Hello, world!"])])]);
@@ -74,7 +72,7 @@ console.log(render(element));
 // <p><div class="container"><button>Hello, world!</button></div></p>
 ```
 
-### Attribute Types
+### Setting Non-String Attribute Values
 
 ```js
 p({ data: { number: 42 } }, ["Hello, world!"]);  // <p data-number="42">Hello, world!</p>
@@ -82,7 +80,7 @@ p({ data: { boolean: true } }, ["Hello, world!"]); // <p data-boolean>Hello, wor
 p({ data: { boolean: false } }, ["Hello, world!"]); // <p>Hello, world!</p>
 ```
 
-### URLs and Styles
+### Working with URLs and Styles
 
 ```js
 a({ href: "https://example.com/" }, ["Hello, world!"]);
@@ -92,7 +90,7 @@ p({ style: "color: red;" }, ["Hello, world!"]);
 // <p style="color: red;">Hello, world!</p>
 ```
 
-### Unknown/Custom Attributes
+### Adding Custom Attributes
 
 ```js
 meta({
@@ -102,7 +100,7 @@ meta({
 // <meta charset="utf-8" og:title="my title">
 ```
 
-### Rendering `<html>` with Doctype
+### Generating Complete HTML Documents
 
 ```js
 const element = html({}, ["Hello, world!"]);
@@ -143,7 +141,7 @@ Zero-Clause BSD
 Permission to use, copy, modify, and/or distribute this software for
 any purpose with or without fee is hereby granted.
 
-THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
 WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
 OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLEs
 FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
