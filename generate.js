@@ -1,32 +1,32 @@
 /**
  * @typedef {Object} ITagData
- * @property {string} name - The tag name.
- * @property {IAttributeData[]} attributes - The attributes for the tag.
- * @property {true} [void] - Whether the tag is a void element (self-closing).
+ * @property {string} name
+ * @property {IAttributeData[]} attributes
+ * @property {true} [void]
  */
 
 /**
  * @typedef {Object} IAttributeData
- * @property {string} name - The attribute name.
- * @property {string} [valueSet] - The name of the value set for this attribute, if any.
+ * @property {string} name
+ * @property {string} [valueSet]
  */
 
 /**
  * @typedef {Object} IValueData
- * @property {string} name - The value name.
+ * @property {string} name
  */
 
 /**
  * @typedef {Object} IValueSet
- * @property {string} name - The name of the value set.
- * @property {IValueData[]} values - The possible values for the set.
+ * @property {string} name
+ * @property {IValueData[]} values
  */
 
 /**
  * @typedef {Object} HTMLDataV1
- * @property {ITagData[]} tags - All HTML tags.
- * @property {IAttributeData[]} globalAttributes - Attributes that apply globally.
- * @property {IValueSet[]} valueSets - All value sets.
+ * @property {ITagData[]} tags
+ * @property {IAttributeData[]} globalAttributes
+ * @property {IValueSet[]} valueSets
  */
 
 const res = await fetch(
