@@ -68,7 +68,7 @@ function element(tag) {
 /**
  * @typedef {Object} ${capName}Attributes
  * @property {DataAttribute} [data]
-${attributes}
+${attributes.join("")}
  */
 
 /**
