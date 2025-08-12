@@ -69,14 +69,16 @@ function unique(tags) {
   });
 }
 
-const builders = data.tags
-  .map((tag) => {
-    const attributes = [...data.globalAttributes, ...unique(tag.attributes)]
-      .map((attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`)
-      .join("\n");
-    const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
-    const funcName = tag.name === "var" ? "var_" : tag.name;
-    return `
+/**
+ * @param {ITagData} tag
+ */
+function element(tag) {
+  const attributes = [...data.globalAttributes, ...unique(tag.attributes)]
+    .map((attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`)
+    .join("\n");
+  const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
+  const funcName = tag.name === "var" ? "var_" : tag.name;
+  return `
 /**
  * @typedef {Object} ${capName}Attributes
  * @property {DataAttribute} [data]
@@ -91,7 +93,8 @@ ${tag.void ? "" : " * @param {Element[]} [ children ]"}
 export function ${funcName}(attributes${tag.void ? "" : ", children"}) {
   return { tag: "${tag.name}", attributes${tag.void ? "" : ", children"} };
 }`;
-  })
-  .join("\n");
+}
 
-console.log(`/** @import { Element, DataAttribute } from './tiny-html.js';\n${builders}`);
+const elements = data.tags.map(element).join("\n");
+
+console.log(`/** @import { Element, DataAttribute } from './tiny-html.js';\n${elements}`);
