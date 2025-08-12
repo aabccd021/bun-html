@@ -43,7 +43,6 @@ const valueSets = Object.fromEntries(
 );
 
 /**
- * Returns the JSDoc type for an attribute value.
  * @param {string|undefined} attr
  */
 function attrValue(attr) {
@@ -64,7 +63,6 @@ function attrValue(attr) {
 }
 
 /**
- * Deduplicates attributes by name.
  * @param {IAttributeData[]} tags
  */
 function uniqueAttributes(tags) {
