@@ -75,7 +75,7 @@ ${attributes.join("")}
 
 /**
  * @param {${capName}Attributes} attributes
-${tag.void ? "" : " * @param {Element[]} [ children ]"}
+${tag.void ? "" : " * @param {Element[]} children"}
  * @returns {Element}
  */
 export function ${funcName}(attributes${tag.void ? "" : ", children"}) {
