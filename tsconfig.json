@@ -2,10 +2,9 @@
   "compilerOptions": {
     // Environment Settings
     "target": "esnext",
-    "checkJs": true,
     "module": "preserve",
     "moduleDetection": "force",
-    "moduleResolution": "bundler",
+    "checkJs": true,
 
     // Outputs
     "noEmit": true,
