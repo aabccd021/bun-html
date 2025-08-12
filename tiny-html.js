@@ -28,11 +28,6 @@ export * from "./gen.js";
  */
 
 /**
- * @type {RegExp}
- */
-const reUnescapedHtml = /[&<>"'`]/g;
-
-/**
  * @type {Object.<string, string>}
  */
 const escapeMap = {
@@ -44,9 +39,10 @@ const escapeMap = {
   "`": "&#x60;", // http://html5sec.org/#102, http://html5sec.org/#108, http://html5sec.org/#133
 };
 
+const reUnescapedHtml = /[&<>"'`]/g;
+
 /**
  * @param {string} value
- * @returns {string}
  */
 function escapeHTML(value) {
   if (!reUnescapedHtml.test(value)) {
