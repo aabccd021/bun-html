@@ -148,7 +148,7 @@ import {
   ]);
   if (
     render(element) !==
-    '<head><meta content=\"foo\"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta=\"og:type\"><meta content=\"bar\"></head>'
+    '<head><meta content="foo"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta="og:type"><meta content="bar"></head>'
   )
     throw new Error();
 }
@@ -162,7 +162,7 @@ import {
   ]);
   if (
     render(element) !==
-    '<head><meta content=\"foo\"><meta content=\"&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta\"><meta content=\"bar\"></head>'
+    '<head><meta content="foo"><meta content="&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta"><meta content="bar"></head>'
   )
     throw new Error();
 }

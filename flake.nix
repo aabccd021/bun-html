@@ -23,7 +23,7 @@
 
       tsc = pkgs.runCommand "tsc" { } ''
         cp -L ${./html.js} ./html.js
-        cp -L ${./test.ts} ./test.ts
+        cp -L ${./test.js} ./test.js
         cp -L ${./gen.js} ./gen.js
         cp -L ${./tsconfig.json} ./tsconfig.json
         ${pkgs.typescript}/bin/tsc
@@ -33,8 +33,8 @@
       test = pkgs.runCommand "tests" { } ''
         cp -L ${./html.js} ./html.js
         cp -L ${./gen.js} ./gen.js
-        cp -L ${./test.ts} ./test.ts
-        ${pkgs.bun}/bin/bun ./test.ts
+        cp -L ${./test.js} ./test.js
+        ${pkgs.bun}/bin/bun ./test.js
         touch $out
       '';
 
