@@ -56,26 +56,16 @@ function attrValue(attr) {
 }
 
 /**
- * @param {IAttributeData[]} tags
- */
-function unique(tags) {
-  const seen = new Set();
-  return tags.filter((attr) => {
-    if (seen.has(attr.name)) {
-      return false;
-    }
-    seen.add(attr.name);
-    return true;
-  });
-}
-
-/**
  * @param {ITagData} tag
  */
 function element(tag) {
-  const attributes = [...data.globalAttributes, ...unique(tag.attributes)]
-    .map((attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`)
-    .join("\n");
+  const seen = new Set();
+  const attributes = [];
+  for (const attr of [...tag.attributes, ...data.globalAttributes]) {
+    if (seen.has(attr.name)) continue;
+    seen.add(attr.name);
+    attributes.push(` * @property {${attrValue(attr.valueSet)}} [${attr.name}]\n`);
+  }
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
   const funcName = tag.name === "var" ? "var_" : tag.name;
   return `
