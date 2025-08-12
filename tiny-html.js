@@ -4,42 +4,35 @@
 export * from "./gen.js";
 
 /**
- * Represents a record of data attributes with string, number, or boolean values.
  * @typedef {Object.<string, string | number | boolean | null>} DataAttribute
  */
 
 /**
- * Values that can be used as HTML attributes.
  * @typedef {string|number|boolean|URL|null|undefined} AttributeValues
  */
 
 /**
- * An element with a tag, attributes, and optional children.
  * @typedef {Object} TaggedElement
- * @property {string} tag - The HTML tag name
- * @property {Object.<string, AttributeValues|Object.<string, AttributeValues>>} attributes - Element attributes
- * @property {Array.<Element>|undefined} [children] - Optional child elements
+ * @property {string} tag
+ * @property {Object.<string, AttributeValues|Object.<string, AttributeValues>>} attributes
+ * @property {Array.<Element>|undefined} [children]
  */
 
 /**
- * A raw HTML element with unescaped content.
  * @typedef {Object} UnsafeElement
- * @property {string} value - Raw HTML content
+ * @property {string} value
  */
 
 /**
- * Represents an HTML element or a component that can be rendered to HTML.
  * @typedef {string|false|undefined|TaggedElement|UnsafeElement} Element
  */
 
 /**
- * Regular expression for detecting unescaped HTML characters.
  * @type {RegExp}
  */
 const reUnescapedHtml = /[&<>"'`]/g;
 
 /**
- * Mapping of special HTML characters to their escaped equivalents.
  * @type {Object.<string, string>}
  */
 const escapeMap = {
@@ -52,9 +45,8 @@ const escapeMap = {
 };
 
 /**
- * Escapes HTML special characters in a string to prevent XSS.
- * @param {string} value - The string to escape
- * @returns {string} The escaped string
+ * @param {string} value
+ * @returns {string}
  */
 function escapeHTML(value) {
   if (!reUnescapedHtml.test(value)) {
@@ -64,10 +56,9 @@ function escapeHTML(value) {
 }
 
 /**
- * Serializes an attribute key-value pair into HTML attribute syntax.
- * @param {string} unsafeKey - The attribute name (will be escaped)
- * @param {AttributeValues|Object.<string, AttributeValues>} value - The attribute value
- * @returns {string} The serialized HTML attribute string
+ * @param {string} unsafeKey
+ * @param {AttributeValues|Object.<string, AttributeValues>} value
+ * @returns {string}
  */
 function serializeAttribute(unsafeKey, value) {
   if (value === false || value === undefined || value === null) {
@@ -98,9 +89,8 @@ function serializeAttribute(unsafeKey, value) {
 }
 
 /**
- * Renders an Element to its HTML string representation.
- * @param {Element} element - The element to render
- * @returns {string} The rendered HTML string
+ * @param {Element} element
+ * @returns {string}
  */
 export function render(element) {
   if (element === false || element === undefined) {
@@ -130,9 +120,7 @@ export function render(element) {
 }
 
 /**
- * Creates an Element from an unescaped HTML string.
- * Use with caution as this bypasses HTML escaping.
- * @param {string} value - Raw HTML string to include
- * @returns {UnsafeElement} An Element that will render the raw HTML
+ * @param {string} value
+ * @returns {UnsafeElement}
  */
 export const unsafeHtml = (value) => ({ value });
