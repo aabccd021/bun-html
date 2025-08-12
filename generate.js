@@ -51,7 +51,7 @@ function attrValue(attr) {
   if (attr === "v") return "boolean";
 
   const valueSet = valueSets[attr];
-  if (valueSet) return valueSet;
+  if (valueSet !== undefined) return valueSet;
 
   throw new Error();
 }
