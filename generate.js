@@ -46,18 +46,12 @@ const valueSets = Object.fromEntries(
  * @param {string|undefined} attr
  */
 function attrValue(attr) {
-  if (attr === undefined) {
-    return "string | number | boolean | null";
-  }
+  if (attr === undefined) return "string | number | boolean | null";
 
-  if (attr === "v") {
-    return "boolean";
-  }
+  if (attr === "v") return "boolean";
 
   const valueSet = valueSets[attr];
-  if (valueSet) {
-    return valueSet;
-  }
+  if (valueSet) return valueSet;
 
   throw new Error();
 }
