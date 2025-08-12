@@ -41,8 +41,7 @@
         name = "publish";
         runtimeInputs = [ pkgs.nodejs ];
         text = ''
-          repo_root=$(git rev-parse --show-toplevel)
-          export NPM_CONFIG_USERCONFIG="$repo_root/.npmrc"
+          export NPM_CONFIG_USERCONFIG="/tmp/.npmrc"
           if [ ! -f "$NPM_CONFIG_USERCONFIG" ]; then
             npm login
           fi
