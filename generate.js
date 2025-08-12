@@ -39,11 +39,10 @@ function uniqueAttributes(tags) {
 
 const builders = data.tags
   .map((tag) => {
-    const allAttributes = uniqueAttributes([
+    const attributes = [
       ...data.globalAttributes,
-      ...tag.attributes,
-    ]);
-    const attributes = allAttributes
+      ...uniqueAttributes(tag.attributes),
+    ]
       .map(
         (attr) => ` * @property {${attrValue(attr.valueSet)}} [${attr.name}]`,
       )
