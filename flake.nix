@@ -21,25 +21,15 @@
         settings.global.excludes = [ "index.d.ts" ];
       };
 
-      tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./index.js} ./index.js
-        cp -L ${./index.test.js} ./index.test.js
-        cp -L ${./index.d.ts} ./index.d.ts
-        cp -L ${./tsconfig.json} ./tsconfig.json
-        ${pkgs.typescript}/bin/tsc
-        touch $out
-      '';
-
       test = pkgs.runCommand "tests" { } ''
-        cp -L ${./index.js} ./index.js
-        cp -L ${./index.test.js} ./index.test.js
+        cd ${./.}
+        ${pkgs.typescript}/bin/tsc
         ${pkgs.nodejs}/bin/node ./index.test.js
         touch $out
       '';
 
       packages = {
         formatting = treefmtEval.config.build.check self;
-        tsc = tsc;
         test = test;
       };
 
