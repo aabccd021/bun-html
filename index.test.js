@@ -1,4 +1,4 @@
-import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from "./tiny-html.js";
+import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from "./index.js";
 
 {
   console.log("simple element with attribute and text");

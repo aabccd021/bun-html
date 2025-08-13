@@ -23,7 +23,7 @@ function escapeHTML(value) {
 }
 
 /**
- * @param {[string, import("./tiny-html").AttributeValues]} value
+ * @param {[string, import("./index").AttributeValues]} value
  * @returns {string}
  */
 function serializeAttribute([unsafeKey, value]) {
@@ -49,7 +49,7 @@ function serializeAttribute([unsafeKey, value]) {
 }
 
 /**
- * @type {import("./tiny-html").Render}
+ * @type {import("./index").Render}
  */
 export const render = (element) => {
   if (element === false || element === undefined) {
@@ -77,587 +77,587 @@ export const render = (element) => {
 };
 
 /**
- * @type {import("./tiny-html").UnsafeHtml}
+ * @type {import("./index").UnsafeHtml}
  */
 export const unsafeHtml = (value) => ({ value });
 
 /**
- * @type {import("./tiny-html").Html}
+ * @type {import("./index").Html}
  */
 export const html = (attributes, children) => ({ tag: "html", attributes, children });
 
 /**
- * @type {import("./tiny-html").Head}
+ * @type {import("./index").Head}
  */
 export const head = (attributes, children) => ({ tag: "head", attributes, children });
 
 /**
- * @type {import("./tiny-html").Title}
+ * @type {import("./index").Title}
  */
 export const title = (attributes, children) => ({ tag: "title", attributes, children });
 
 /**
- * @type {import("./tiny-html").Base}
+ * @type {import("./index").Base}
  */
 export const base = (attributes) => ({ tag: "base", attributes });
 
 /**
- * @type {import("./tiny-html").Link}
+ * @type {import("./index").Link}
  */
 export const link = (attributes) => ({ tag: "link", attributes });
 
 /**
- * @type {import("./tiny-html").Meta}
+ * @type {import("./index").Meta}
  */
 export const meta = (attributes) => ({ tag: "meta", attributes });
 
 /**
- * @type {import("./tiny-html").Style}
+ * @type {import("./index").Style}
  */
 export const style = (attributes, children) => ({ tag: "style", attributes, children });
 
 /**
- * @type {import("./tiny-html").Body}
+ * @type {import("./index").Body}
  */
 export const body = (attributes, children) => ({ tag: "body", attributes, children });
 
 /**
- * @type {import("./tiny-html").Article}
+ * @type {import("./index").Article}
  */
 export const article = (attributes, children) => ({ tag: "article", attributes, children });
 
 /**
- * @type {import("./tiny-html").Section}
+ * @type {import("./index").Section}
  */
 export const section = (attributes, children) => ({ tag: "section", attributes, children });
 
 /**
- * @type {import("./tiny-html").Nav}
+ * @type {import("./index").Nav}
  */
 export const nav = (attributes, children) => ({ tag: "nav", attributes, children });
 
 /**
- * @type {import("./tiny-html").Aside}
+ * @type {import("./index").Aside}
  */
 export const aside = (attributes, children) => ({ tag: "aside", attributes, children });
 
 /**
- * @type {import("./tiny-html").H1}
+ * @type {import("./index").H1}
  */
 export const h1 = (attributes, children) => ({ tag: "h1", attributes, children });
 
 /**
- * @type {import("./tiny-html").H2}
+ * @type {import("./index").H2}
  */
 export const h2 = (attributes, children) => ({ tag: "h2", attributes, children });
 
 /**
- * @type {import("./tiny-html").H3}
+ * @type {import("./index").H3}
  */
 export const h3 = (attributes, children) => ({ tag: "h3", attributes, children });
 
 /**
- * @type {import("./tiny-html").H4}
+ * @type {import("./index").H4}
  */
 export const h4 = (attributes, children) => ({ tag: "h4", attributes, children });
 
 /**
- * @type {import("./tiny-html").H5}
+ * @type {import("./index").H5}
  */
 export const h5 = (attributes, children) => ({ tag: "h5", attributes, children });
 
 /**
- * @type {import("./tiny-html").H6}
+ * @type {import("./index").H6}
  */
 export const h6 = (attributes, children) => ({ tag: "h6", attributes, children });
 
 /**
- * @type {import("./tiny-html").Header}
+ * @type {import("./index").Header}
  */
 export const header = (attributes, children) => ({ tag: "header", attributes, children });
 
 /**
- * @type {import("./tiny-html").Footer}
+ * @type {import("./index").Footer}
  */
 export const footer = (attributes, children) => ({ tag: "footer", attributes, children });
 
 /**
- * @type {import("./tiny-html").Address}
+ * @type {import("./index").Address}
  */
 export const address = (attributes, children) => ({ tag: "address", attributes, children });
 
 /**
- * @type {import("./tiny-html").P}
+ * @type {import("./index").P}
  */
 export const p = (attributes, children) => ({ tag: "p", attributes, children });
 
 /**
- * @type {import("./tiny-html").Hr}
+ * @type {import("./index").Hr}
  */
 export const hr = (attributes) => ({ tag: "hr", attributes });
 
 /**
- * @type {import("./tiny-html").Pre}
+ * @type {import("./index").Pre}
  */
 export const pre = (attributes, children) => ({ tag: "pre", attributes, children });
 
 /**
- * @type {import("./tiny-html").Blockquote}
+ * @type {import("./index").Blockquote}
  */
 export const blockquote = (attributes, children) => ({ tag: "blockquote", attributes, children });
 
 /**
- * @type {import("./tiny-html").Ol}
+ * @type {import("./index").Ol}
  */
 export const ol = (attributes, children) => ({ tag: "ol", attributes, children });
 
 /**
- * @type {import("./tiny-html").Ul}
+ * @type {import("./index").Ul}
  */
 export const ul = (attributes, children) => ({ tag: "ul", attributes, children });
 
 /**
- * @type {import("./tiny-html").Li}
+ * @type {import("./index").Li}
  */
 export const li = (attributes, children) => ({ tag: "li", attributes, children });
 
 /**
- * @type {import("./tiny-html").Dl}
+ * @type {import("./index").Dl}
  */
 export const dl = (attributes, children) => ({ tag: "dl", attributes, children });
 
 /**
- * @type {import("./tiny-html").Dt}
+ * @type {import("./index").Dt}
  */
 export const dt = (attributes, children) => ({ tag: "dt", attributes, children });
 
 /**
- * @type {import("./tiny-html").Dd}
+ * @type {import("./index").Dd}
  */
 export const dd = (attributes, children) => ({ tag: "dd", attributes, children });
 
 /**
- * @type {import("./tiny-html").Figure}
+ * @type {import("./index").Figure}
  */
 export const figure = (attributes, children) => ({ tag: "figure", attributes, children });
 
 /**
- * @type {import("./tiny-html").Figcaption}
+ * @type {import("./index").Figcaption}
  */
 export const figcaption = (attributes, children) => ({ tag: "figcaption", attributes, children });
 
 /**
- * @type {import("./tiny-html").Main}
+ * @type {import("./index").Main}
  */
 export const main = (attributes, children) => ({ tag: "main", attributes, children });
 
 /**
- * @type {import("./tiny-html").Div}
+ * @type {import("./index").Div}
  */
 export const div = (attributes, children) => ({ tag: "div", attributes, children });
 
 /**
- * @type {import("./tiny-html").A}
+ * @type {import("./index").A}
  */
 export const a = (attributes, children) => ({ tag: "a", attributes, children });
 
 /**
- * @type {import("./tiny-html").Em}
+ * @type {import("./index").Em}
  */
 export const em = (attributes, children) => ({ tag: "em", attributes, children });
 
 /**
- * @type {import("./tiny-html").Strong}
+ * @type {import("./index").Strong}
  */
 export const strong = (attributes, children) => ({ tag: "strong", attributes, children });
 
 /**
- * @type {import("./tiny-html").Small}
+ * @type {import("./index").Small}
  */
 export const small = (attributes, children) => ({ tag: "small", attributes, children });
 
 /**
- * @type {import("./tiny-html").S}
+ * @type {import("./index").S}
  */
 export const s = (attributes, children) => ({ tag: "s", attributes, children });
 
 /**
- * @type {import("./tiny-html").Cite}
+ * @type {import("./index").Cite}
  */
 export const cite = (attributes, children) => ({ tag: "cite", attributes, children });
 
 /**
- * @type {import("./tiny-html").Q}
+ * @type {import("./index").Q}
  */
 export const q = (attributes, children) => ({ tag: "q", attributes, children });
 
 /**
- * @type {import("./tiny-html").Dfn}
+ * @type {import("./index").Dfn}
  */
 export const dfn = (attributes, children) => ({ tag: "dfn", attributes, children });
 
 /**
- * @type {import("./tiny-html").Abbr}
+ * @type {import("./index").Abbr}
  */
 export const abbr = (attributes, children) => ({ tag: "abbr", attributes, children });
 
 /**
- * @type {import("./tiny-html").Ruby}
+ * @type {import("./index").Ruby}
  */
 export const ruby = (attributes, children) => ({ tag: "ruby", attributes, children });
 
 /**
- * @type {import("./tiny-html").Rb}
+ * @type {import("./index").Rb}
  */
 export const rb = (attributes, children) => ({ tag: "rb", attributes, children });
 
 /**
- * @type {import("./tiny-html").Rt}
+ * @type {import("./index").Rt}
  */
 export const rt = (attributes, children) => ({ tag: "rt", attributes, children });
 
 /**
- * @type {import("./tiny-html").Rp}
+ * @type {import("./index").Rp}
  */
 export const rp = (attributes, children) => ({ tag: "rp", attributes, children });
 
 /**
- * @type {import("./tiny-html").Time}
+ * @type {import("./index").Time}
  */
 export const time = (attributes, children) => ({ tag: "time", attributes, children });
 
 /**
- * @type {import("./tiny-html").Code}
+ * @type {import("./index").Code}
  */
 export const code = (attributes, children) => ({ tag: "code", attributes, children });
 
 /**
- * @type {import("./tiny-html").Var}
+ * @type {import("./index").Var}
  */
 export const var_ = (attributes, children) => ({ tag: "var", attributes, children });
 
 /**
- * @type {import("./tiny-html").Samp}
+ * @type {import("./index").Samp}
  */
 export const samp = (attributes, children) => ({ tag: "samp", attributes, children });
 
 /**
- * @type {import("./tiny-html").Kbd}
+ * @type {import("./index").Kbd}
  */
 export const kbd = (attributes, children) => ({ tag: "kbd", attributes, children });
 
 /**
- * @type {import("./tiny-html").Sub}
+ * @type {import("./index").Sub}
  */
 export const sub = (attributes, children) => ({ tag: "sub", attributes, children });
 
 /**
- * @type {import("./tiny-html").Sup}
+ * @type {import("./index").Sup}
  */
 export const sup = (attributes, children) => ({ tag: "sup", attributes, children });
 
 /**
- * @type {import("./tiny-html").I}
+ * @type {import("./index").I}
  */
 export const i = (attributes, children) => ({ tag: "i", attributes, children });
 
 /**
- * @type {import("./tiny-html").B}
+ * @type {import("./index").B}
  */
 export const b = (attributes, children) => ({ tag: "b", attributes, children });
 
 /**
- * @type {import("./tiny-html").U}
+ * @type {import("./index").U}
  */
 export const u = (attributes, children) => ({ tag: "u", attributes, children });
 
 /**
- * @type {import("./tiny-html").Mark}
+ * @type {import("./index").Mark}
  */
 export const mark = (attributes, children) => ({ tag: "mark", attributes, children });
 
 /**
- * @type {import("./tiny-html").Bdi}
+ * @type {import("./index").Bdi}
  */
 export const bdi = (attributes, children) => ({ tag: "bdi", attributes, children });
 
 /**
- * @type {import("./tiny-html").Bdo}
+ * @type {import("./index").Bdo}
  */
 export const bdo = (attributes, children) => ({ tag: "bdo", attributes, children });
 
 /**
- * @type {import("./tiny-html").Span}
+ * @type {import("./index").Span}
  */
 export const span = (attributes, children) => ({ tag: "span", attributes, children });
 
 /**
- * @type {import("./tiny-html").Br}
+ * @type {import("./index").Br}
  */
 export const br = (attributes) => ({ tag: "br", attributes });
 
 /**
- * @type {import("./tiny-html").Wbr}
+ * @type {import("./index").Wbr}
  */
 export const wbr = (attributes) => ({ tag: "wbr", attributes });
 
 /**
- * @type {import("./tiny-html").Ins}
+ * @type {import("./index").Ins}
  */
 export const ins = (attributes, children) => ({ tag: "ins", attributes, children });
 
 /**
- * @type {import("./tiny-html").Del}
+ * @type {import("./index").Del}
  */
 export const del = (attributes, children) => ({ tag: "del", attributes, children });
 
 /**
- * @type {import("./tiny-html").Picture}
+ * @type {import("./index").Picture}
  */
 export const picture = (attributes, children) => ({ tag: "picture", attributes, children });
 
 /**
- * @type {import("./tiny-html").Img}
+ * @type {import("./index").Img}
  */
 export const img = (attributes) => ({ tag: "img", attributes });
 
 /**
- * @type {import("./tiny-html").Iframe}
+ * @type {import("./index").Iframe}
  */
 export const iframe = (attributes, children) => ({ tag: "iframe", attributes, children });
 
 /**
- * @type {import("./tiny-html").Embed}
+ * @type {import("./index").Embed}
  */
 export const embed = (attributes) => ({ tag: "embed", attributes });
 
 /**
- * @type {import("./tiny-html").Object}
+ * @type {import("./index").Object}
  */
 export const object = (attributes, children) => ({ tag: "object", attributes, children });
 
 /**
- * @type {import("./tiny-html").Param}
+ * @type {import("./index").Param}
  */
 export const param = (attributes) => ({ tag: "param", attributes });
 
 /**
- * @type {import("./tiny-html").Video}
+ * @type {import("./index").Video}
  */
 export const video = (attributes, children) => ({ tag: "video", attributes, children });
 
 /**
- * @type {import("./tiny-html").Audio}
+ * @type {import("./index").Audio}
  */
 export const audio = (attributes, children) => ({ tag: "audio", attributes, children });
 
 /**
- * @type {import("./tiny-html").Source}
+ * @type {import("./index").Source}
  */
 export const source = (attributes) => ({ tag: "source", attributes });
 
 /**
- * @type {import("./tiny-html").Track}
+ * @type {import("./index").Track}
  */
 export const track = (attributes) => ({ tag: "track", attributes });
 
 /**
- * @type {import("./tiny-html").Map}
+ * @type {import("./index").Map}
  */
 export const map = (attributes, children) => ({ tag: "map", attributes, children });
 
 /**
- * @type {import("./tiny-html").Area}
+ * @type {import("./index").Area}
  */
 export const area = (attributes) => ({ tag: "area", attributes });
 
 /**
- * @type {import("./tiny-html").Table}
+ * @type {import("./index").Table}
  */
 export const table = (attributes, children) => ({ tag: "table", attributes, children });
 
 /**
- * @type {import("./tiny-html").Caption}
+ * @type {import("./index").Caption}
  */
 export const caption = (attributes, children) => ({ tag: "caption", attributes, children });
 
 /**
- * @type {import("./tiny-html").Colgroup}
+ * @type {import("./index").Colgroup}
  */
 export const colgroup = (attributes, children) => ({ tag: "colgroup", attributes, children });
 
 /**
- * @type {import("./tiny-html").Col}
+ * @type {import("./index").Col}
  */
 export const col = (attributes) => ({ tag: "col", attributes });
 
 /**
- * @type {import("./tiny-html").Tbody}
+ * @type {import("./index").Tbody}
  */
 export const tbody = (attributes, children) => ({ tag: "tbody", attributes, children });
 
 /**
- * @type {import("./tiny-html").Thead}
+ * @type {import("./index").Thead}
  */
 export const thead = (attributes, children) => ({ tag: "thead", attributes, children });
 
 /**
- * @type {import("./tiny-html").Tfoot}
+ * @type {import("./index").Tfoot}
  */
 export const tfoot = (attributes, children) => ({ tag: "tfoot", attributes, children });
 
 /**
- * @type {import("./tiny-html").Tr}
+ * @type {import("./index").Tr}
  */
 export const tr = (attributes, children) => ({ tag: "tr", attributes, children });
 
 /**
- * @type {import("./tiny-html").Td}
+ * @type {import("./index").Td}
  */
 export const td = (attributes, children) => ({ tag: "td", attributes, children });
 
 /**
- * @type {import("./tiny-html").Th}
+ * @type {import("./index").Th}
  */
 export const th = (attributes, children) => ({ tag: "th", attributes, children });
 
 /**
- * @type {import("./tiny-html").Form}
+ * @type {import("./index").Form}
  */
 export const form = (attributes, children) => ({ tag: "form", attributes, children });
 
 /**
- * @type {import("./tiny-html").Label}
+ * @type {import("./index").Label}
  */
 export const label = (attributes, children) => ({ tag: "label", attributes, children });
 
 /**
- * @type {import("./tiny-html").Input}
+ * @type {import("./index").Input}
  */
 export const input = (attributes) => ({ tag: "input", attributes });
 
 /**
- * @type {import("./tiny-html").Button}
+ * @type {import("./index").Button}
  */
 export const button = (attributes, children) => ({ tag: "button", attributes, children });
 
 /**
- * @type {import("./tiny-html").Select}
+ * @type {import("./index").Select}
  */
 export const select = (attributes, children) => ({ tag: "select", attributes, children });
 
 /**
- * @type {import("./tiny-html").Datalist}
+ * @type {import("./index").Datalist}
  */
 export const datalist = (attributes, children) => ({ tag: "datalist", attributes, children });
 
 /**
- * @type {import("./tiny-html").Optgroup}
+ * @type {import("./index").Optgroup}
  */
 export const optgroup = (attributes, children) => ({ tag: "optgroup", attributes, children });
 
 /**
- * @type {import("./tiny-html").Option}
+ * @type {import("./index").Option}
  */
 export const option = (attributes, children) => ({ tag: "option", attributes, children });
 
 /**
- * @type {import("./tiny-html").Textarea}
+ * @type {import("./index").Textarea}
  */
 export const textarea = (attributes, children) => ({ tag: "textarea", attributes, children });
 
 /**
- * @type {import("./tiny-html").Output}
+ * @type {import("./index").Output}
  */
 export const output = (attributes, children) => ({ tag: "output", attributes, children });
 
 /**
- * @type {import("./tiny-html").Progress}
+ * @type {import("./index").Progress}
  */
 export const progress = (attributes, children) => ({ tag: "progress", attributes, children });
 
 /**
- * @type {import("./tiny-html").Meter}
+ * @type {import("./index").Meter}
  */
 export const meter = (attributes, children) => ({ tag: "meter", attributes, children });
 
 /**
- * @type {import("./tiny-html").Fieldset}
+ * @type {import("./index").Fieldset}
  */
 export const fieldset = (attributes, children) => ({ tag: "fieldset", attributes, children });
 
 /**
- * @type {import("./tiny-html").Legend}
+ * @type {import("./index").Legend}
  */
 export const legend = (attributes, children) => ({ tag: "legend", attributes, children });
 
 /**
- * @type {import("./tiny-html").Details}
+ * @type {import("./index").Details}
  */
 export const details = (attributes, children) => ({ tag: "details", attributes, children });
 
 /**
- * @type {import("./tiny-html").Summary}
+ * @type {import("./index").Summary}
  */
 export const summary = (attributes, children) => ({ tag: "summary", attributes, children });
 
 /**
- * @type {import("./tiny-html").Dialog}
+ * @type {import("./index").Dialog}
  */
 export const dialog = (attributes, children) => ({ tag: "dialog", attributes, children });
 
 /**
- * @type {import("./tiny-html").Script}
+ * @type {import("./index").Script}
  */
 export const script = (attributes, children) => ({ tag: "script", attributes, children });
 
 /**
- * @type {import("./tiny-html").Noscript}
+ * @type {import("./index").Noscript}
  */
 export const noscript = (attributes, children) => ({ tag: "noscript", attributes, children });
 
 /**
- * @type {import("./tiny-html").Template}
+ * @type {import("./index").Template}
  */
 export const template = (attributes, children) => ({ tag: "template", attributes, children });
 
 /**
- * @type {import("./tiny-html").Canvas}
+ * @type {import("./index").Canvas}
  */
 export const canvas = (attributes, children) => ({ tag: "canvas", attributes, children });
 
 /**
- * @type {import("./tiny-html").Slot}
+ * @type {import("./index").Slot}
  */
 export const slot = (attributes, children) => ({ tag: "slot", attributes, children });
 
 /**
- * @type {import("./tiny-html").Data}
+ * @type {import("./index").Data}
  */
 export const data = (attributes, children) => ({ tag: "data", attributes, children });
 
 /**
- * @type {import("./tiny-html").Hgroup}
+ * @type {import("./index").Hgroup}
  */
 export const hgroup = (attributes, children) => ({ tag: "hgroup", attributes, children });
 
 /**
- * @type {import("./tiny-html").Menu}
+ * @type {import("./index").Menu}
  */
 export const menu = (attributes, children) => ({ tag: "menu", attributes, children });
 
 /**
- * @type {import("./tiny-html").Search}
+ * @type {import("./index").Search}
  */
 export const search = (attributes, children) => ({ tag: "search", attributes, children });
 
 /**
- * @type {import("./tiny-html").Fencedframe}
+ * @type {import("./index").Fencedframe}
  */
 export const fencedframe = (attributes, children) => ({ tag: "fencedframe", attributes, children });
 
 /**
- * @type {import("./tiny-html").Selectedcontent}
+ * @type {import("./index").Selectedcontent}
  */
 export const selectedcontent = (attributes, children) => ({
   tag: "selectedcontent",

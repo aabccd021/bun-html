@@ -18,22 +18,22 @@
         programs.biome.formatUnsafe = true;
         programs.biome.settings.formatter.indentStyle = "space";
         programs.biome.settings.formatter.lineWidth = 100;
-        settings.global.excludes = [ "tiny-html.d.ts" ];
+        settings.global.excludes = [ "index.d.ts" ];
       };
 
       tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./tiny-html.js} ./tiny-html.js
-        cp -L ${./tiny-html.test.js} ./tiny-html.test.js
-        cp -L ${./tiny-html.d.ts} ./tiny-html.d.ts
+        cp -L ${./index.js} ./index.js
+        cp -L ${./index.test.js} ./index.test.js
+        cp -L ${./index.d.ts} ./index.d.ts
         cp -L ${./tsconfig.json} ./tsconfig.json
         ${pkgs.typescript}/bin/tsc
         touch $out
       '';
 
       test = pkgs.runCommand "tests" { } ''
-        cp -L ${./tiny-html.js} ./tiny-html.js
-        cp -L ${./tiny-html.test.js} ./tiny-html.test.js
-        ${pkgs.bun}/bin/bun ./tiny-html.test.js
+        cp -L ${./index.js} ./index.js
+        cp -L ${./index.test.js} ./index.test.js
+        ${pkgs.bun}/bin/bun ./index.test.js
         touch $out
       '';
 
