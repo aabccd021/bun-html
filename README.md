@@ -28,10 +28,9 @@ const element = html({}, [
   meta({ "data-xss": `"&'<>\`` }),
   input({ type: "checkbox", checked: true }),
   input({ type: "checkbox", checked: false }),
-  meta({ "data-undefined": undefined }),
-  undefined,
-  false,
+  meta({ "data-defined": "defined", "data-undefined": undefined }),
   unsafeHtml("<strong>this is unsafe</strong>"),
+  undefined,
   showHeader && div({}, ["Header"]),
   showSidebar && div({}, ["Sidebar"]),
 ]);
@@ -39,7 +38,7 @@ const element = html({}, [
 console.log(render(element));
 ```
 
-Output:
+Above code will output:
 
 ```html
 <!DOCTYPE html>
@@ -51,13 +50,18 @@ Output:
   <meta data-xss="&quot;&amp;&#x27;&lt;&gt;&#x60;">
   <input type="checkbox" checked>
   <input type="checkbox">
-  <meta>
+  <meta data-defined="defined">
   <strong>this is unsafe</strong>
   <div>Header</div>
 </html>
 ```
 
 ## Type Safety
+
+Valid attribute names and values are enforced by TypeScript, generated from 
+[vscode-custom-data]("https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json")
+.
+
 
 ```ts
 ol({ type: "1" }, []);
