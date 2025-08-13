@@ -2,139 +2,58 @@
 
 **bun-html** is a tiny HTML DSL and renderer.
 
-## TODO
-- fix readme examples
-- add tips to readme
-- use git dependencies
-
 ## Installation
 
 ```sh
+# nodejs + npm
 npm install bun-html
+
+# bun + git
+bun install git@github.com:aabccd021/bun-html.git
 ```
 
 ## Usage
 
-Import the element helpers and renderer:
 
 ```js
-import { a, button, div, head, html, meta, p, render, unsafeHtml } from "bun-html";
-```
+import { div, input, meta, p, render, unsafeHtml } from "bun-html";
 
-### Creating Basic Elements
+{
+  console.log("example");
 
-```js
-const element = p({ data: { hello: "world" } }, ["Hello, world!"]);
-console.log(render(element)); 
-// <p data-hello="world">Hello, world!</p>
-```
+  const showSidebar = false;
+  const showHeader = true;
 
-### Creating Elements Without Children
+  const element = div({}, [
+    meta({ "data-note": "No child" }),
+    p({}, [p({}, ["Grand child"])]),
+    meta({ "data-xss": `"&'<>\`` }),
+    input({ type: "checkbox", checked: true }),
+    input({ type: "checkbox", checked: false }),
+    meta({ "data-undefined": undefined }),
+    undefined,
+    false,
+    unsafeHtml("<strong>this is unsafe</strong>"),
+    showHeader && div({}, ["Header"]),
+    showSidebar && div({}, ["Sidebar"]),
+  ]);
+  const expected = [
+    "<div>",
+      '<meta data-note="No child">',
+      "<p>",
+          "<p>Grand child</p>",
+      "</p>",
+      '<meta data-xss="&quot;&amp;&#x27;&lt;&gt;&#x60;">',
+      '<input type="checkbox" checked>',
+      '<input type="checkbox">',
+      "<meta>",
+      "<strong>this is unsafe</strong>",
+      "<div>Header</div>",
+    "</div>",
+  ].join("");
 
-```js
-const element = p({ data: { hello: "world" } }, []);
-console.log(render(element));
-// <p data-hello="world"></p>
-```
-
-### Working with Void Elements
-
-```js
-const element = meta({ charset: "utf-8" });
-console.log(render(element));
-// <meta charset="utf-8">
-```
-
-### Inserting Raw HTML Content
-
-```js
-const element = p({}, [unsafeHtml("<strong>Hello, world!</strong>")]);
-console.log(render(element));
-// <p><strong>Hello, world!</strong></p>
-```
-
-### Using Conditional Rendering
-
-```js
-const element = p({}, [true && "Hello, world!", false && "Goodbye, world!"]);
-console.log(render(element));
-// <p>Hello, world!</p>
-```
-
-### Handling Undefined Children
-
-```js
-const element = p({}, [undefined, "Hello, world!"]);
-console.log(render(element));
-// <p>Hello, world!</p>
-```
-
-### Nesting Multiple Elements
-
-```js
-const element = p({}, [div({ class: "container" }, [button({}, ["Hello, world!"])])]);
-console.log(render(element));
-// <p><div class="container"><button>Hello, world!</button></div></p>
-```
-
-### Setting Non-String Attribute Values
-
-```js
-p({ data: { number: 42 } }, ["Hello, world!"]);  // <p data-number="42">Hello, world!</p>
-p({ data: { boolean: true } }, ["Hello, world!"]); // <p data-boolean>Hello, world!</p>
-p({ data: { boolean: false } }, ["Hello, world!"]); // <p>Hello, world!</p>
-```
-
-### Working with URLs and Styles
-
-```js
-a({ href: "https://example.com/" }, ["Hello, world!"]);
-// <a href="https://example.com/">Hello, world!</a>
-
-p({ style: "color: red;" }, ["Hello, world!"]);
-// <p style="color: red;">Hello, world!</p>
-```
-
-### Adding Custom Attributes
-
-```js
-meta({
-  charset: "utf-8",
-  "og:title": "my title"
-});
-// <meta charset="utf-8" og:title="my title">
-```
-
-### Generating Complete HTML Documents
-
-```js
-const element = html({}, ["Hello, world!"]);
-console.log(render(element));
-// <!DOCTYPE html><html>Hello, world!</html>
-```
-
-## XSS Protection
-
-All content and attribute values are safely escaped:
-
-```js
-p({}, ["<script>console.log('Hello World!')</script>"]);
-// <p>&lt;script&gt;console.log(&#x27;Hello World!&#x27;)&lt;/script&gt;</p>
-
-head({}, [
-  meta({ content: "foo" }),
-  // @ts-ignore
-  meta({ "><script>console.log('orld')</script><meta": "og:type" }),
-  meta({ content: "bar" }),
-]);
-// <head><meta content="foo"><meta &gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta="og:type"><meta content="bar"></head>
-```
-
-All dangerous characters are escaped:
-
-```js
-p({}, [`"&'<>\``]);
-// <p>&quot;&amp;&#x27;&lt;&gt;&#x60;</p>
+  if (render(element) !== expected) throw new Error();
+}
 ```
 
 ## LICENCE

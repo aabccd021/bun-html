@@ -15,6 +15,43 @@ import {
 } from "./index.js";
 
 {
+  console.log("example");
+
+  const showSidebar = false;
+  const showHeader = true;
+
+  const element = div({}, [
+    meta({ "data-note": "No child" }),
+    p({}, [p({}, ["Grand child"])]),
+    meta({ "data-xss": `"&'<>\`` }),
+    meta({ "data-undefined": undefined }),
+    input({ type: "checkbox", checked: true }),
+    input({ type: "checkbox", checked: false }),
+    undefined,
+    false,
+    unsafeHtml("<strong>this is unsafe</strong>"),
+    showHeader && div({}, ["Header"]),
+    showSidebar && div({}, ["Sidebar"]),
+  ]);
+  const expected = [
+    "<div>",
+    '<meta data-note="No child">',
+    "<p>",
+    "<p>Grand child</p>",
+    "</p>",
+    '<meta data-xss="&quot;&amp;&#x27;&lt;&gt;&#x60;">',
+    "<meta>",
+    '<input type="checkbox" checked>',
+    '<input type="checkbox">',
+    "<strong>this is unsafe</strong>",
+    "<div>Header</div>",
+    "</div>",
+  ].join("");
+
+  if (render(element) !== expected) throw new Error();
+}
+
+{
   console.log("simple element with attribute and text");
   const element = p({ "data-hello": "world" }, ["Hello, world!"]);
   if (render(element) !== '<p data-hello="world">Hello, world!</p>') throw new Error();
