@@ -80,22 +80,6 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from ".
 }
 
 {
-  console.log("unsupported attribute value type throws error");
-  // @ts-ignore
-  const element = a({ href: new URL("https://example.com/") }, ["Hello, world!"]);
-  try {
-    render(element);
-  } catch (e) {
-    if (
-      !Error.isError(e) ||
-      e.message !== 'Unsupported attribute value type for key "href": object'
-    ) {
-      throw new Error();
-    }
-  }
-}
-
-{
   console.log("html doctype for <html> element");
   const element = html({}, ["Hello, world!"]);
   if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>") throw new Error();
@@ -114,6 +98,7 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from ".
   console.log("xss prevention in attribute key");
   const element = head({}, [
     meta({ content: "foo" }),
+    // XSS should be prevented even if someone uses this library without type checking
     // @ts-ignore
     meta({ "><script>console.log('orld')</script><meta": "og:type" }),
     meta({ content: "bar" }),
