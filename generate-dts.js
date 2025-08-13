@@ -3,6 +3,21 @@ const res = await fetch(
 );
 const data = await res.json();
 
+const valueSets = Object.fromEntries([
+  ...data.valueSets.map((vs) => [vs.name, vs.values.map((item) => `"${item.name}"`).join(" | ")]),
+  ["default", "string | number | boolean | null"],
+  ["v", "boolean"],
+]);
+
+function attrsStr(attrs) {
+  if (attrs.length === 0) return "{}";
+  const uniqueAttrs = Object.fromEntries(attrs.map(({ name, valueSet }) => [name, valueSet]));
+  const res = Object.entries(uniqueAttrs)
+    .map(([name, valueSet]) => `  "${name}"?: ${valueSets[valueSet ?? "default"]};`)
+    .join("\n");
+  return `{\n${res}\n}`;
+}
+
 let result = `type render = (element: Element) => string;
 
 export const render: render;
@@ -29,21 +44,6 @@ type El<A> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 
 type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
 `;
-
-const valueSets = Object.fromEntries([
-  ...data.valueSets.map((vs) => [vs.name, vs.values.map((item) => `"${item.name}"`).join(" | ")]),
-  ["default", "string | number | boolean | null"],
-  ["v", "boolean"],
-]);
-
-function attrsStr(attrs) {
-  if (attrs.length === 0) return "{}";
-  const uniqueAttrs = Object.fromEntries(attrs.map(({ name, valueSet }) => [name, valueSet]));
-  const res = Object.entries(uniqueAttrs)
-    .map(([name, valueSet]) => `  "${name}"?: ${valueSets[valueSet ?? "default"]};`)
-    .join("\n");
-  return `{\n${res}\n}`;
-}
 
 result += `\ntype GlobalAttributes = ${attrsStr(data.globalAttributes)};`;
 
