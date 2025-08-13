@@ -17,15 +17,13 @@ function attrsStr(attrs) {
   return `{\n${result}\n}`;
 }
 
-const tagsStr = data.tags
-  .map((tag) => {
-    const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-    return (
-      `type ${name} = ${tag.void ? "VoidEl" : "El"}<${attrsStr(tag.attributes)}>;` +
-      `\nexport const ${name}: ${name};`
-    );
-  })
-  .join("\n\n");
+function tagStr(tag) {
+  const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
+  return (
+    `type ${name} = ${tag.void ? "VoidEl" : "El"}<${attrsStr(tag.attributes)}>;` +
+    `\nexport const ${name}: ${name};`
+  );
+}
 
 console.log(`type render = (element: Element) => string;
 export const render: render;
@@ -58,4 +56,4 @@ type ValueSet = {
 
 type GlobalAttributes = ${attrsStr(data.globalAttributes)};
 
-${tagsStr}`);
+${data.tags.map(tagStr).join("\n\n")}`);
