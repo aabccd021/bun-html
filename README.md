@@ -6,7 +6,7 @@
 
 ```sh
 pnpm install bun-html@github:aabccd021/bun-html
-yarn install bun-html@github:aabccd021/bun-html
+yarn add bun-html@github:aabccd021/bun-html
 bun install bun-html@github:aabccd021/bun-html
 ```
 
