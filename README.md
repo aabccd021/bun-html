@@ -76,6 +76,9 @@ p({ foo: "bar" }, []);
 ## Development
 
 ```sh
+# install nix with flake enabled
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
+
 # format everything
 nix fmt
 
