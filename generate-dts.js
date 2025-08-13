@@ -46,6 +46,7 @@ const allAttributes = [
   ...data.globalAttributes.map((a) => [a.name, a.valueSet]),
   ...data.tags.flatMap((tag) => tag.attributes.map((a) => [a.name, a.valueSet])),
 ];
+
 const mergedAttributes = {};
 for (const [name, newValue] of allAttributes) {
   const oldValue = mergedAttributes[name];
