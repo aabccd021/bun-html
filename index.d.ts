@@ -23,6 +23,9 @@ type El<A> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
 
 type ValueSet = {
+  "default": string | number | boolean | null;
+  "v": boolean;
+} & {
   "b": "true" | "false";
   "u": "true" | "false" | "undefined";
   "o": "on" | "off";
@@ -64,8 +67,6 @@ type ValueSet = {
   "enterkeyhint": "enter" | "done" | "go" | "next" | "previous" | "search" | "send";
   "popover": "auto" | "hint" | "manual";
   "fetchpriority": "high" | "low" | "auto";
-  "default": string | number | boolean | null;
-  "v": boolean;
 }
 
 type GlobalAttributes = {
