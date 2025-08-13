@@ -1,0 +1,10 @@
+{
+  "name": "bun-html",
+  "version": "1.0.22",
+  "license": "BSD-0",
+  "type": "module",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ]
+}
