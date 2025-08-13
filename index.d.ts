@@ -177,6 +177,7 @@ type GlobalAttributes = {
   "aria-keyshortcuts"?: string | number | boolean | null;
 };
 
+
 type html = El<{
   "manifest"?: string | number | boolean | null;
   "version"?: string | number | boolean | null;
