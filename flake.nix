@@ -33,7 +33,7 @@
       test = pkgs.runCommand "tests" { } ''
         cp -L ${./index.js} ./index.js
         cp -L ${./index.test.js} ./index.test.js
-        ${pkgs.bun}/bin/bun ./index.test.js
+        ${pkgs.nodejs}/bin/node ./index.test.js
         touch $out
       '';
 
