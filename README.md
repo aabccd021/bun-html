@@ -59,7 +59,7 @@ Above code will output:
 ## Type Safety
 
 Valid attribute names and values are enforced by TypeScript, generated from 
-[vscode-custom-data]("https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json")
+[vscode-custom-data](https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json)
 .
 
 
