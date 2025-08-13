@@ -12,7 +12,7 @@ import {
   source,
   unsafeHtml,
   var_,
-} from "./index.mjs";
+} from "./index.js";
 
 {
   console.log("simple element with attribute and text");

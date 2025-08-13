@@ -22,7 +22,7 @@
       };
 
       tsc = pkgs.runCommand "tsc" { } ''
-        cp -L ${./index.mjs} ./index.mjs
+        cp -L ${./index.js} ./index.js
         cp -L ${./index.test.js} ./index.test.js
         cp -L ${./index.d.ts} ./index.d.ts
         cp -L ${./tsconfig.json} ./tsconfig.json
@@ -31,7 +31,7 @@
       '';
 
       test = pkgs.runCommand "tests" { } ''
-        cp -L ${./index.mjs} ./index.mjs
+        cp -L ${./index.js} ./index.js
         cp -L ${./index.test.js} ./index.test.js
         ${pkgs.nodejs}/bin/node ./index.test.js
         touch $out

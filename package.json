@@ -2,7 +2,7 @@
   "name": "bun-html",
   "version": "1.0.26",
   "files": [
-    "index.mjs",
+    "index.js",
     "index.d.ts"
   ]
 }
