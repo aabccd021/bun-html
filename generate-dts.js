@@ -33,7 +33,6 @@ console.log(`
 type ValueSets = {
   "default": string | number | boolean | null;
   "v": boolean;`);
-
 for (const valueSet of data.valueSets) {
   console.log(`  "${valueSet.name}": `);
   for (const value of valueSet.values) {
@@ -45,13 +44,11 @@ console.log("}");
 const seen = new Set();
 
 console.log(`type Attributes = {`);
-
 for (const attr of data.globalAttributes) {
   if (seen.has(attr.name)) continue;
   seen.add(attr.name);
   console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
 }
-
 for (const tag of data.tags) {
   for (const attr of tag.attributes) {
     if (seen.has(attr.name)) continue;
@@ -59,7 +56,6 @@ for (const tag of data.tags) {
     console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
   }
 }
-
 console.log(`}`);
 
 console.log(`\ntype GlobalAttributes = `);
