@@ -16,15 +16,13 @@ type Element = string | false | undefined | {
     value: string;
 };
 
-type DataAttributes = { [k in `data-${string}`]?: ValueSets["default"]; };
+type ElAttributes<A extends keyof Attributes> = Pick<Attributes, GlobalAttributeNames | A> & {
+  [k in `data-${string}`]?: ValueSets["default"]; 
+}
 
-type AttributeNames = keyof Attributes;
+type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 
-type ElAttributes<A extends AttributeNames> = Pick<Attributes, GlobalAttributeNames | A> & DataAttributes;
-
-type El<A extends AttributeNames> = (attributes: ElAttributes<A>, children: Element[]) => Element;
-
-type VoidEl<A extends AttributeNames> = (attributes: ElAttributes<A>) => Element;
+type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;
 
 type ValueSets = {
   "default": string | number | boolean | null;
