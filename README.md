@@ -79,6 +79,10 @@ p({ foo: "bar" }, []);
 # install nix with flake enabled
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 
+# clone and enter the repository
+git clone --depth 1 https://github.com/aabccd021/bun-html.git
+cd bun-html
+
 # format everything
 nix fmt
 
