@@ -39,8 +39,7 @@ type ValueSets = {
   "default": string | number | boolean | null;
   "v": boolean;
   ${data.valueSets.map((vs) => `"${vs.name}": ${union(vs.values)};`).join("\n  ")}
-}
-`;
+}`;
 
 const allAttributes = [
   ...data.globalAttributes.map((a) => [a.name, a.valueSet]),
@@ -55,15 +54,11 @@ for (const [name, newValue] of allAttributes) {
 }
 
 const attributesStr = Object.entries(attributes)
-  .map(([name, vs]) => `"${name}"?: ValueSets["${vs}"]`)
-  .join(";\n  ");
+  .map(([name, vs]) => `  "${name}"?: ValueSets["${vs}"];`)
+  .join("\n");
 
-result += `
-type Attributes = {
-  ${attributesStr}
-}
-
-type GlobalAttributeNames = ${union(data.globalAttributes)};`;
+result += `\n\ntype Attributes = {\n${attributesStr}\n}`;
+result += `\n\ntype GlobalAttributeNames = ${union(data.globalAttributes)};`;
 
 for (const tag of data.tags) {
   const attrs = tag.attributes.length > 0 ? union(tag.attributes) : "never";
