@@ -34,10 +34,11 @@ type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: El
 type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;
 `;
 
-result += `\ntype ValueSets = {`;
-result += `"default": string | number | boolean | null;`;
-result += `"v": boolean;`;
+result += "\ntype ValueSets = {";
+result += '\n  "default": string | number | boolean | null;';
+result += '\n  "v": boolean;';
 result += data.valueSets.map((vs) => `"${vs.name}": ${union(vs.values)};`).join("\n  ");
+result += "\n}";
 
 const allAttributes = [
   ...data.globalAttributes.map((a) => [a.name, a.valueSet]),

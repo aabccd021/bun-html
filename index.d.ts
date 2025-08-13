@@ -26,8 +26,7 @@ type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Eleme
 
 type ValueSets = {
   "default": string | number | boolean | null;
-  "v": boolean;
-  "b": "true" | "false";
+  "v": boolean;"b": "true" | "false";
   "u": "true" | "false" | "undefined";
   "o": "on" | "off";
   "y": "yes" | "no";
