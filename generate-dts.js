@@ -63,7 +63,8 @@ result += `\n\ntype GlobalAttributeNames = ${union(data.globalAttributes)}`;
 for (const tag of data.tags) {
   const attrs = tag.attributes.length > 0 ? union(tag.attributes) : "never";
   const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrs}>`;
+  const funcType = tag.void ? "VoidEl" : "El";
+  result += `\n\ntype ${name} = ${funcType}<${attrs}>`;
   result += `\nexport const ${name}: ${name}`;
 }
 
