@@ -21,17 +21,14 @@
         settings.global.excludes = [ "index.d.ts" ];
       };
 
-      test = pkgs.runCommand "tests" { } ''
+      packages.test = pkgs.runCommand "tests" { } ''
         cd ${./.}
         ${pkgs.typescript}/bin/tsc
         ${pkgs.nodejs}/bin/node ./index.test.js
         touch $out
       '';
 
-      packages = {
-        formatting = treefmtEval.config.build.check self;
-        test = test;
-      };
+      packages.format = treefmtEval.config.build.check self;
 
     in
     {
