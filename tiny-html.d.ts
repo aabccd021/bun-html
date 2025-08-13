@@ -16,13 +16,15 @@ type Element = string | false | undefined | {
     value: string;
 };
 
-type ElAttributes<A extends keyof Attributes> = {
-  [k in `data-${string}`]?: ValueSets["default"];
-} & Pick<Attributes, GlobalAttributes | A>
+type DataAttrs = { [k in `data-${string}`]?: ValueSets["default"]; };
 
-type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
+type AttrNames = keyof Attrs;
 
-type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;
+type ElAttrs<A extends AttrNames> = Pick<Attrs, GlobalAttrNames | A> & DataAttrs;
+
+type El<A extends AttrNames> = (attributes: ElAttrs<A>, children: Element[]) => Element;
+
+type VoidEl<A extends AttrNames> = (attributes: ElAttrs<A>) => Element;
 
 type ValueSets = {
   "default": string | number | boolean | null;
@@ -425,7 +427,7 @@ type ValueSets = {
       | "low"
       | "auto"
 }
-type Attributes = {
+type Attrs = {
   "accesskey"?: ValueSets["default"];
   "autocapitalize"?: ValueSets["default"];
   "autocorrect"?: ValueSets["o"];
@@ -730,7 +732,7 @@ type Attributes = {
   "moz-opaque"?: ValueSets["default"];
 }
 
-type GlobalAttributes = 
+type GlobalAttrNames = 
   | "accesskey"
   | "autocapitalize"
   | "autocorrect"

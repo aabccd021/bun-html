@@ -16,13 +16,15 @@ type Element = string | false | undefined | {
     value: string;
 };
 
-type ElAttributes<A extends keyof Attributes> = {
-  [k in \`data-\${string}\`]?: ValueSets["default"];
-} & Pick<Attributes, GlobalAttributes | A>
+type DataAttrs = { [k in \`data-\${string}\`]?: ValueSets["default"]; };
 
-type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
+type AttrNames = keyof Attrs;
 
-type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;`);
+type ElAttrs<A extends AttrNames> = Pick<Attrs, GlobalAttrNames | A> & DataAttrs;
+
+type El<A extends AttrNames> = (attributes: ElAttrs<A>, children: Element[]) => Element;
+
+type VoidEl<A extends AttrNames> = (attributes: ElAttrs<A>) => Element;`);
 
 const res = await fetch(
   "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
@@ -43,7 +45,7 @@ console.log("}");
 
 const seen = new Set();
 
-console.log(`type Attributes = {`);
+console.log(`type Attrs = {`);
 for (const attr of data.globalAttributes) {
   if (seen.has(attr.name)) continue;
   seen.add(attr.name);
@@ -58,7 +60,7 @@ for (const tag of data.tags) {
 }
 console.log(`}`);
 
-console.log(`\ntype GlobalAttributes = `);
+console.log(`\ntype GlobalAttrNames = `);
 for (const attr of data.globalAttributes) {
   console.log(`  | "${attr.name}"`);
 }
