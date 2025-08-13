@@ -15,7 +15,7 @@ bun install git@github.com:aabccd021/bun-html.git
 ## Basic Usage
 
 ```js
-import { div, input, meta, p, render, unsafeHtml } from "bun-html";
+import { div, html, input, meta, p, render, unsafeHtml } from "bun-html";
 
 const showSidebar = false;
 const showHeader = true;
