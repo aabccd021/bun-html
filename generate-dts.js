@@ -47,11 +47,14 @@ type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
 type GlobalAttributes = ${attrsStr(data.globalAttributes)};
 `;
 
+const escapedNames = {
+  var: "var_",
+  object: "object_",
+};
+
 for (const tag of data.tags) {
-  const attrs = attrsStr(tag.attributes);
-  const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-  const funcType = tag.void ? "VoidEl" : "El";
-  result += `\n\ntype ${name} = ${funcType}<${attrs}>;`;
+  const name = escapedNames[tag.name] ?? tag.name;
+  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrsStr(tag.attributes)}>;`;
   result += `\nexport const ${name}: ${name};`;
 }
 
