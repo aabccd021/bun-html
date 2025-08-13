@@ -1,8 +1,8 @@
 {
   "name": "bun-html",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "author": "aabccd021",
-  "license": "0BSD",
+  "license": "BSD-0",
   "type": "module",
   "main": "tiny-html.js",
   "files": [
