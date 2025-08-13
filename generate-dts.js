@@ -12,10 +12,10 @@ const valueSets = Object.fromEntries([
 function attrsStr(attrs) {
   if (attrs.length === 0) return "{}";
   const uniqueAttrs = Object.fromEntries(attrs.map(({ name, valueSet }) => [name, valueSet]));
-  const res = Object.entries(uniqueAttrs)
+  const result = Object.entries(uniqueAttrs)
     .map(([name, valueSet]) => `  "${name}"?: ${valueSets[valueSet ?? "default"]};`)
     .join("\n");
-  return `{\n${res}\n}`;
+  return `{\n${result}\n}`;
 }
 
 let result = `type render = (element: Element) => string;
