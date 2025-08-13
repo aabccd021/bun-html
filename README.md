@@ -1,6 +1,6 @@
 # bun-html
 
-**bun-html** is a tiny HTML DSL and renderer.
+**bun-html** is a tiny and type-safe HTML templating library.
 
 ## Installation
 
