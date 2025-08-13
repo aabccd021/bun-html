@@ -30,12 +30,10 @@ const tagsStr = data.tags
   })
   .join("\n\n");
 
-const result = `type render = (element: Element) => string;
-
+console.log(`type render = (element: Element) => string;
 export const render: render;
 
 type unsafeHtml = (value: string) => Element;
-
 export const unsafeHtml: unsafeHtml;
 
 type AttributeValues = string | number | boolean | null | undefined;
@@ -60,6 +58,4 @@ type ValueSet = {\n${valueSets}\n}
 
 type GlobalAttributes = ${attrsStr(data.globalAttributes)};
 
-${tagsStr}`;
-
-console.log(result);
+${tagsStr}`);

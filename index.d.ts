@@ -1,9 +1,7 @@
 type render = (element: Element) => string;
-
 export const render: render;
 
 type unsafeHtml = (value: string) => Element;
-
 export const unsafeHtml: unsafeHtml;
 
 type AttributeValues = string | number | boolean | null | undefined;
