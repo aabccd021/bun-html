@@ -13,6 +13,7 @@
 
       treefmtEval = inputs.treefmt-nix.lib.evalModule pkgs {
         projectRootFile = "flake.nix";
+        programs.mdformat.enable = true;
         programs.nixfmt.enable = true;
         programs.biome.enable = true;
         programs.biome.formatUnsafe = true;

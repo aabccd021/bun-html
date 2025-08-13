@@ -56,10 +56,9 @@ Above code will output:
 
 ## Type Safety
 
-Valid attribute names and values are enforced by TypeScript, generated from 
+Valid attribute names and values are enforced by TypeScript, generated from
 [vscode-custom-data](https://github.com/microsoft/vscode-custom-data/blob/main/web-data/data/browsers.html-data.json)
 .
-
 
 ```ts
 ol({ type: "1" }, []);
