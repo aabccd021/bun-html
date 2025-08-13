@@ -40,26 +40,24 @@ type DefaultValueSets = {
 `;
 
 const valueSetStr = data.valueSets.map((vs) => `  "${vs.name}": ${union(vs.values)}`).join("\n");
-
 result += `\ntype ValueSets = DefaultValueSets & {\n${valueSetStr}\n}`;
 
 const allAttributes = [
   ...data.globalAttributes.map((a) => [a.name, a.valueSet]),
   ...data.tags.flatMap((tag) => tag.attributes.map((a) => [a.name, a.valueSet])),
 ];
-
-const attributes = {};
+const mergedAttributes = {};
 for (const [name, newValue] of allAttributes) {
-  const oldValue = attributes[name];
-  attributes[name] =
+  const oldValue = mergedAttributes[name];
+  mergedAttributes[name] =
     oldValue === undefined || oldValue === "default" ? (newValue ?? "default") : oldValue;
 }
 
-const attributesStr = Object.entries(attributes)
+const attributesStr = Object.entries(mergedAttributes)
   .map(([name, vs]) => `  "${name}"?: ValueSets["${vs}"]`)
   .join("\n");
-
 result += `\n\ntype Attributes = {\n${attributesStr}\n}`;
+
 result += `\n\ntype GlobalAttributeNames = ${union(data.globalAttributes)}`;
 
 for (const tag of data.tags) {
