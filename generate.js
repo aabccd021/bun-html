@@ -27,7 +27,6 @@ type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Eleme
 const res = await fetch(
   "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
 );
-
 const data = await res.json();
 
 console.log(`
@@ -43,13 +42,16 @@ for (const valueSet of data.valueSets) {
 }
 console.log("}");
 
-console.log(`type Attributes = {`);
 const seen = new Set();
+
+console.log(`type Attributes = {`);
+
 for (const attr of data.globalAttributes) {
   if (seen.has(attr.name)) continue;
   seen.add(attr.name);
   console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
 }
+
 for (const tag of data.tags) {
   for (const attr of tag.attributes) {
     if (seen.has(attr.name)) continue;
@@ -57,6 +59,7 @@ for (const tag of data.tags) {
     console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
   }
 }
+
 console.log(`}`);
 
 console.log(`\ntype GlobalAttributes = `);
