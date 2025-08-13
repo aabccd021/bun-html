@@ -76,10 +76,15 @@ for (const valueSet of data.valueSets) {
 console.log("}");
 
 console.log(`type Attributes = {`);
-const seen = new Set();
+
+/**
+ * @type {string[]}
+ */
+const seen = [];
+
 for (const attr of data.globalAttributes) {
-  if (seen.has(attr.name)) continue;
-  seen.add(attr.name);
+  if (seen.includes(attr.name)) continue;
+  seen.push(attr.name);
 
   let valueSet = attr.valueSet;
   if (valueSet === undefined) {
@@ -90,8 +95,8 @@ for (const attr of data.globalAttributes) {
 }
 for (const tag of data.tags) {
   for (const attr of tag.attributes) {
-    if (seen.has(attr.name)) continue;
-    seen.add(attr.name);
+    if (seen.includes(attr.name)) continue;
+    seen.push(attr.name);
 
     let valueSet = attr.valueSet;
     if (valueSet === undefined) {
@@ -108,9 +113,6 @@ for (const attr of data.globalAttributes) {
   console.log(`  | "${attr.name}"`);
 }
 
-/**
- * @param {ITagData} tag
- */
 for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
 
