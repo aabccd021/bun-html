@@ -24,42 +24,10 @@ type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: El
 
 type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;`);
 
-/**
- * @typedef {Object} ITagData
- * @property {string} name
- * @property {IAttributeData[]} attributes
- * @property {true} [void]
- */
-
-/**
- * @typedef {Object} IAttributeData
- * @property {string} name
- * @property {string} [valueSet]
- */
-
-/**
- * @typedef {Object} IValueData
- * @property {string} name
- */
-
-/**
- * @typedef {Object} IValueSet
- * @property {string} name
- * @property {IValueData[]} values
- */
-
-/**
- * @typedef {Object} HTMLDataV1
- * @property {ITagData[]} tags
- * @property {IAttributeData[]} globalAttributes
- * @property {IValueSet[]} valueSets
- */
-
 const res = await fetch(
   "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
 );
 
-/** @type {HTMLDataV1} */
 const data = await res.json();
 
 console.log(`
@@ -76,34 +44,17 @@ for (const valueSet of data.valueSets) {
 console.log("}");
 
 console.log(`type Attributes = {`);
-
-/**
- * @type {string[]}
- */
-const seen = [];
-
+const seen = new Set();
 for (const attr of data.globalAttributes) {
-  if (seen.includes(attr.name)) continue;
-  seen.push(attr.name);
-
-  let valueSet = attr.valueSet;
-  if (valueSet === undefined) {
-    valueSet = "default";
-  }
-
-  console.log(`  "${attr.name}"?: ValueSets["${valueSet}"];`);
+  if (seen.has(attr.name)) continue;
+  seen.add(attr.name);
+  console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
 }
 for (const tag of data.tags) {
   for (const attr of tag.attributes) {
-    if (seen.includes(attr.name)) continue;
-    seen.push(attr.name);
-
-    let valueSet = attr.valueSet;
-    if (valueSet === undefined) {
-      valueSet = "default";
-    }
-
-    console.log(`  "${attr.name}"?: ValueSets["${valueSet}"];`);
+    if (seen.has(attr.name)) continue;
+    seen.add(attr.name);
+    console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
   }
 }
 console.log(`}`);
@@ -115,24 +66,15 @@ for (const attr of data.globalAttributes) {
 
 for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
-
-  let voidStr = "";
-  if (tag.void) {
-    voidStr = "Void";
-  }
-
-  let funcName = tag.name;
-  if (funcName === "var") {
-    funcName = "var_";
-  }
-
-  console.log(`\ntype ${capName} = ${voidStr}El<`);
-  if (tag.attributes.length === 0) {
-    console.log(`  never`);
-  } else {
+  const typeStr = tag.void ? "VoidEl" : "El";
+  const funcName = tag.name === "var" ? "var_" : tag.name;
+  console.log(`\ntype ${capName} = ${typeStr}<`);
+  if (tag.attributes.length > 0) {
     for (const attr of tag.attributes) {
       console.log(`  | "${attr.name}"`);
     }
+  } else {
+    console.log(`  never`);
   }
   console.log(`>;`);
   console.log(`export const ${funcName}: ${capName};`);
