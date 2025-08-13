@@ -3,12 +3,10 @@ const res = await fetch(
 );
 const data = await res.json();
 
-const valueSetsStr = data.valueSets
-  .map((vs) => {
-    const values = vs.values.map((item) => `"${item.name}"`).join(" | ");
-    return `  "${vs.name}": ${values};`;
-  })
-  .join("\n");
+function valueSetStr(vs) {
+  const values = vs.values.map((item) => `"${item.name}"`).join(" | ");
+  return `  "${vs.name}": ${values};`;
+}
 
 function attrsStr(attrs) {
   if (attrs.length === 0) return "{}";
@@ -56,7 +54,7 @@ type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
 type ValueSet = {
   "default": string | number | boolean | null;
   "v": boolean;
-} & {\n${valueSetsStr}\n}
+} & {\n${data.valueSets.map(valueSetStr).join("\n")}\n};
 
 type GlobalAttributes = ${attrsStr(data.globalAttributes)};
 

@@ -67,7 +67,7 @@ type ValueSet = {
   "enterkeyhint": "enter" | "done" | "go" | "next" | "previous" | "search" | "send";
   "popover": "auto" | "hint" | "manual";
   "fetchpriority": "high" | "low" | "auto";
-}
+};
 
 type GlobalAttributes = {
   "accesskey"?: ValueSet["default"]
