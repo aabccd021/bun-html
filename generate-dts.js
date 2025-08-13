@@ -3,22 +3,34 @@ const res = await fetch(
 );
 const data = await res.json();
 
-const valueSets = Object.fromEntries([
+const valueSets = [
   ...data.valueSets.map((vs) => [vs.name, vs.values.map((item) => `"${item.name}"`).join(" | ")]),
   ["default", "string | number | boolean | null"],
   ["v", "boolean"],
-]);
+]
+  .map(([name, values]) => [`  "${name}": ${values};`])
+  .join("\n");
 
 function attrsStr(attrs) {
   if (attrs.length === 0) return "{}";
   const uniqueAttrs = Object.fromEntries(attrs.map(({ name, valueSet }) => [name, valueSet]));
   const result = Object.entries(uniqueAttrs)
-    .map(([name, valueSet]) => `  "${name}"?: ${valueSets[valueSet ?? "default"]};`)
+    .map(([name, valueSet]) => `  "${name}"?: ValueSet["${valueSet ?? "default"}"]`)
     .join("\n");
   return `{\n${result}\n}`;
 }
 
-let result = `type render = (element: Element) => string;
+const tagsStr = data.tags
+  .map((tag) => {
+    const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
+    return (
+      `type ${name} = ${tag.void ? "VoidEl" : "El"}<${attrsStr(tag.attributes)}>;` +
+      `\nexport const ${name}: ${name};`
+    );
+  })
+  .join("\n\n");
+
+const result = `type render = (element: Element) => string;
 
 export const render: render;
 
@@ -44,13 +56,10 @@ type El<A> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 
 type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
 
-type GlobalAttributes = ${attrsStr(data.globalAttributes)};
-`;
+type ValueSet = {\n${valueSets}\n}
 
-for (const tag of data.tags) {
-  const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrsStr(tag.attributes)}>;`;
-  result += `\nexport const ${name}: ${name};`;
-}
+type GlobalAttributes = ${attrsStr(data.globalAttributes)};
+
+${tagsStr}`;
 
 console.log(result);

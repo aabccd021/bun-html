@@ -46,6 +46,12 @@ import {
 }
 
 {
+  console.log("invalid attribute name should throw type error");
+  // @ts-expect-error
+  p({ foo: "bar" }, []);
+}
+
+{
   console.log("void element (meta)");
   const element = meta({ charset: "utf-8" });
   if (render(element) !== '<meta charset="utf-8">') throw new Error();
