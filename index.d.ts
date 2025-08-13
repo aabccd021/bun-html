@@ -69,6 +69,7 @@ type ValueSets = {
   "popover": "auto" | "hint" | "manual";
   "fetchpriority": "high" | "low" | "auto";
 }
+
 type Attributes = {
   "accesskey"?: ValueSets["default"];
   "autocapitalize"?: ValueSets["default"];

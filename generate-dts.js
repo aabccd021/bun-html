@@ -45,7 +45,7 @@ console.log("}");
 const tagAttributes = data.tags.flatMap((tag) => tag.attributes);
 const processedTags = new Set();
 
-console.log(`type Attributes = {`);
+console.log(`\ntype Attributes = {`);
 for (const attribute of [...data.globalAttributes, ...tagAttributes]) {
   if (processedTags.has(attribute.name)) continue;
   processedTags.add(attribute.name);
