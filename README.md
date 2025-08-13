@@ -73,6 +73,16 @@ ol({ type: "foo" }, []);
 p({ foo: "bar" }, []);
 ```
 
+## Development
+
+```sh
+# format everything
+nix fmt
+
+# check everything
+nix flake check
+```
+
 ## LICENCE
 
 ```
