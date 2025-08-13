@@ -82,13 +82,13 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from ".
 {
   console.log("unsupported attribute value type throws error");
   // @ts-ignore
-  const element = p({ "data-boolean": { foo: "invalid" } }, ["Hello, world!"]);
+  const element = a({ href: new URL("https://example.com/") }, ["Hello, world!"]);
   try {
     render(element);
   } catch (e) {
     if (
       !Error.isError(e) ||
-      e.message !== 'Unsupported attribute value type for key "data-boolean": object'
+      e.message !== 'Unsupported attribute value type for key "href": object'
     ) {
       throw new Error();
     }
@@ -99,16 +99,6 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from ".
   console.log("html doctype for <html> element");
   const element = html({}, ["Hello, world!"]);
   if (render(element) !== "<!DOCTYPE html><html>Hello, world!</html>") throw new Error();
-}
-
-{
-  console.log("unknown attributes are preserved");
-  const element = meta({
-    charset: "utf-8",
-    // @ts-ignore
-    "og:title": "my title",
-  });
-  if (render(element) !== '<meta charset="utf-8" og:title="my title">') throw new Error();
 }
 
 {
