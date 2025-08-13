@@ -12,7 +12,7 @@ npm install bun-html
 bun install git@github.com:aabccd021/bun-html.git
 ```
 
-## Usage
+## Basic Usage
 
 ```js
 import { div, input, meta, p, render, unsafeHtml } from "bun-html";
@@ -40,6 +40,7 @@ console.log(render(element));
 ```
 
 Output:
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -54,6 +55,21 @@ Output:
   <strong>this is unsafe</strong>
   <div>Header</div>
 </html>
+```
+
+## Type Safety
+
+```ts
+ol({ type: "1" }, []);
+input({ type: "radio" });
+source({ type: "foo" });
+
+// @ts-expect-error
+input({ type: "1" });
+// @ts-expect-error
+ol({ type: "foo" }, []);
+// @ts-expect-error
+p({ foo: "bar" }, []);
 ```
 
 ## LICENCE

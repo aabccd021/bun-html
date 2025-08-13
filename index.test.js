@@ -72,20 +72,21 @@ import {
 {
   console.log("some attributes has specific value sets");
   ol({ type: "1" }, []);
+  input({ type: "radio" });
+
+  // @ts-expect-error
+  input({ type: "1" });
   // @ts-expect-error
   ol({ type: "foo" }, []);
 
-  input({ type: "radio" });
-  // @ts-expect-error
-  input({ type: "1" });
-
   source({ type: "foo" });
+
+  // @ts-expect-error
+  p({ foo: "bar" }, []);
 }
 
 {
   console.log("invalid attribute name should throw type error");
-  // @ts-expect-error
-  p({ foo: "bar" }, []);
 }
 
 {
