@@ -18,7 +18,7 @@ npm install tiny-html
 Import the element helpers and renderer:
 
 ```js
-import { a, button, div, head, html, meta, p, render, unsafeHtml } from "index";
+import { a, button, div, head, html, meta, p, render, unsafeHtml } from "tiny-html";
 ```
 
 ### Creating Basic Elements
