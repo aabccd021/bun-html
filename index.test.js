@@ -1,4 +1,18 @@
-import { a, button, div, head, html, meta, ol, p, render, unsafeHtml, var_ } from "./index.js";
+import {
+  a,
+  button,
+  div,
+  head,
+  html,
+  input,
+  meta,
+  ol,
+  p,
+  render,
+  source,
+  unsafeHtml,
+  var_,
+} from "./index.js";
 
 {
   console.log("simple element with attribute and text");
@@ -19,10 +33,16 @@ import { a, button, div, head, html, meta, ol, p, render, unsafeHtml, var_ } fro
 }
 
 {
-  console.log("ol type should be constrained");
+  console.log("some attributes has specific value sets");
   ol({ type: "1" }, []);
   // @ts-expect-error
   ol({ type: "foo" }, []);
+
+  input({ type: "radio" });
+  // @ts-expect-error
+  input({ type: "1" });
+
+  source({ type: "foo" });
 }
 
 {
