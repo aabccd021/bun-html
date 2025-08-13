@@ -54,11 +54,13 @@ for (const [name, newValue] of allAttributes) {
     oldValue === undefined || oldValue === "default" ? (newValue ?? "default") : oldValue;
 }
 
+const attributesStr = Object.entries(attributes)
+  .map(([name, vs]) => `"${name}"?: ValueSets["${vs}"]`)
+  .join(";\n  ");
+
 result += `
 type Attributes = {
-  ${Object.entries(attributes)
-    .map(([name, vs]) => `"${name}"?: ValueSets["${vs}"]`)
-    .join(";\n  ")}
+  ${attributesStr}
 }
 
 type GlobalAttributeNames = ${union(data.globalAttributes)};`;
