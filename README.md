@@ -14,7 +14,6 @@ bun install git@github.com:aabccd021/bun-html.git
 
 ## Usage
 
-
 ```js
 import { div, input, meta, p, render, unsafeHtml } from "bun-html";
 
