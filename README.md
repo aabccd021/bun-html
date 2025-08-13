@@ -17,42 +17,43 @@ bun install git@github.com:aabccd021/bun-html.git
 ```js
 import { div, input, meta, p, render, unsafeHtml } from "bun-html";
 
-{
-  console.log("example");
+const showSidebar = false;
+const showHeader = true;
 
-  const showSidebar = false;
-  const showHeader = true;
+const element = html({}, [
+  meta({ "data-note": "No child" }),
+  p({}, [
+    p({}, ["Grand child"])
+  ]),
+  meta({ "data-xss": `"&'<>\`` }),
+  input({ type: "checkbox", checked: true }),
+  input({ type: "checkbox", checked: false }),
+  meta({ "data-undefined": undefined }),
+  undefined,
+  false,
+  unsafeHtml("<strong>this is unsafe</strong>"),
+  showHeader && div({}, ["Header"]),
+  showSidebar && div({}, ["Sidebar"]),
+]);
 
-  const element = div({}, [
-    meta({ "data-note": "No child" }),
-    p({}, [p({}, ["Grand child"])]),
-    meta({ "data-xss": `"&'<>\`` }),
-    input({ type: "checkbox", checked: true }),
-    input({ type: "checkbox", checked: false }),
-    meta({ "data-undefined": undefined }),
-    undefined,
-    false,
-    unsafeHtml("<strong>this is unsafe</strong>"),
-    showHeader && div({}, ["Header"]),
-    showSidebar && div({}, ["Sidebar"]),
-  ]);
-  const expected = [
-    "<div>",
-      '<meta data-note="No child">',
-      "<p>",
-          "<p>Grand child</p>",
-      "</p>",
-      '<meta data-xss="&quot;&amp;&#x27;&lt;&gt;&#x60;">',
-      '<input type="checkbox" checked>',
-      '<input type="checkbox">',
-      "<meta>",
-      "<strong>this is unsafe</strong>",
-      "<div>Header</div>",
-    "</div>",
-  ].join("");
+console.log(render(element));
+```
 
-  if (render(element) !== expected) throw new Error();
-}
+Output:
+```html
+<!DOCTYPE html>
+<html>
+  <meta data-note="No child">
+  <p>
+    <p>Grand child</p>
+  </p>
+  <meta data-xss="&quot;&amp;&#x27;&lt;&gt;&#x60;">
+  <input type="checkbox" checked>
+  <input type="checkbox">
+  <meta>
+  <strong>this is unsafe</strong>
+  <div>Header</div>
+</html>
 ```
 
 ## LICENCE
