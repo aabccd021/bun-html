@@ -79,7 +79,7 @@ p({ foo: "bar" }, []);
 # format everything
 nix fmt
 
-# check everything
+# check everything (test, typecheck, format, lint)
 nix flake check
 
 # enter a devshell with language servers, then open editor
