@@ -42,19 +42,13 @@ for (const valueSet of data.valueSets) {
 console.log("}");
 
 const seen = new Set();
+const tagAttributes = data.tags.flatMap((tag) => tag.attributes);
 
 console.log(`type Attributes = {`);
-for (const attribute of data.globalAttributes) {
+for (const attribute of [...data.globalAttributes, ...tagAttributes]) {
   if (seen.has(attribute.name)) continue;
   seen.add(attribute.name);
   console.log(`  "${attribute.name}"?: ValueSets["${attribute.valueSet ?? "default"}"];`);
-}
-for (const tag of data.tags) {
-  for (const attribute of tag.attributes) {
-    if (seen.has(attribute.name)) continue;
-    seen.add(attribute.name);
-    console.log(`  "${attribute.name}"?: ValueSets["${attribute.valueSet ?? "default"}"];`);
-  }
 }
 console.log(`}`);
 
