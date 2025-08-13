@@ -29,46 +29,35 @@ const res = await fetch(
 );
 const data = await res.json();
 
+function union(arr) {
+  return arr.map((item) => `"${item.name}"`).join(" | ");
+}
+
 console.log(`
 type ValueSets = {
   "default": string | number | boolean | null;
   "v": boolean;`);
 for (const valueSet of data.valueSets) {
-  console.log(`  "${valueSet.name}": `);
-  for (const value of valueSet.values) {
-    console.log(`      | "${value.name}"`);
-  }
+  console.log(`  "${valueSet.name}": ${union(valueSet.values)};`);
 }
 console.log("}");
 
-const seen = new Set();
 const tagAttributes = data.tags.flatMap((tag) => tag.attributes);
+const processedTags = new Set();
 
 console.log(`type Attributes = {`);
 for (const attribute of [...data.globalAttributes, ...tagAttributes]) {
-  if (seen.has(attribute.name)) continue;
-  seen.add(attribute.name);
+  if (processedTags.has(attribute.name)) continue;
+  processedTags.add(attribute.name);
   console.log(`  "${attribute.name}"?: ValueSets["${attribute.valueSet ?? "default"}"];`);
 }
 console.log(`}`);
 
-console.log(`\ntype GlobalAttributeNames = `);
-for (const attribute of data.globalAttributes) {
-  console.log(`  | "${attribute.name}"`);
-}
+console.log(`\ntype GlobalAttributeNames = ${union(data.globalAttributes)};`);
 
 for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
-  const typeStr = tag.void ? "VoidEl" : "El";
-  const funcName = tag.name === "var" ? "var_" : tag.name;
-  console.log(`\ntype ${capName} = ${typeStr}<`);
-  if (tag.attributes.length > 0) {
-    for (const attribute of tag.attributes) {
-      console.log(`  | "${attribute.name}"`);
-    }
-  } else {
-    console.log(`  never`);
-  }
-  console.log(`>;`);
-  console.log(`export const ${funcName}: ${capName};`);
+  const attrNames = tag.attributes.length > 0 ? union(tag.attributes) : "never";
+  console.log(`\ntype ${capName} = ${tag.void ? "VoidEl" : "El"}<${attrNames}>;`);
+  console.log(`export const ${tag.name === "var" ? "var_" : tag.name}: ${capName};`);
 }
