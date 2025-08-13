@@ -1,6 +1,8 @@
 {
   "name": "bun-html",
-  "version": "1.0.30",
+  "author": "aabccd021",
+  "description": "Tiny HTML DSL and renderer",
+  "version": "1.0.31",
   "license": "BSD-0",
   "type": "module",
   "main": "index.js",
