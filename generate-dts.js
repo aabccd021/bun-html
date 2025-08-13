@@ -11,7 +11,7 @@ type AttributeValues = string | number | boolean | null | undefined;
 type Element = string | false | undefined | {
     tag: string;
     attributes: Record<string, AttributeValues>;
-    children?: Array<Element> | undefined;
+    children?: Array<Element>;
 } | {
     value: string;
 };
