@@ -1,6 +1,7 @@
 {
   "name": "bun-html",
-  "version": "1.0.26",
+  "version": "1.0.28",
+  "type": "module",
   "files": [
     "index.js",
     "index.d.ts"
