@@ -23,7 +23,7 @@ function escapeHTML(value) {
 }
 
 /**
- * @param {[string, string|number|boolean|null|undefined]} value
+ * @param {[string, import("./tiny-html").AttributeValues]} value
  * @returns {string}
  */
 function serializeAttribute([unsafeKey, value]) {
