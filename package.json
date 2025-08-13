@@ -1,8 +1,6 @@
 {
   "name": "bun-html",
-  "version": "1.0.24",
-  "license": "BSD-0",
-  "type": "module",
+  "version": "1.0.25",
   "files": [
     "index.js",
     "index.d.ts"
