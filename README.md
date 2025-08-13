@@ -1,6 +1,6 @@
-# tiny-html
+# bun-html
 
-**tiny-html** is a tiny HTML DSL and renderer.
+**bun-html** is a tiny HTML DSL and renderer.
 
 ## TODO
 - fix readme examples
@@ -10,7 +10,7 @@
 ## Installation
 
 ```sh
-npm install tiny-html
+npm install bun-html
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ npm install tiny-html
 Import the element helpers and renderer:
 
 ```js
-import { a, button, div, head, html, meta, p, render, unsafeHtml } from "tiny-html";
+import { a, button, div, head, html, meta, p, render, unsafeHtml } from "bun-html";
 ```
 
 ### Creating Basic Elements

@@ -1,10 +1,15 @@
 {
   "name": "bun-html",
-  "version": "1.0.29",
+  "version": "1.0.30",
+  "license": "BSD-0",
   "type": "module",
   "main": "index.js",
   "files": [
     "index.js",
     "index.d.ts"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aabccd021/bun-html.git"
+  }
 }
