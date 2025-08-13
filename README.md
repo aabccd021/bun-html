@@ -81,6 +81,9 @@ nix fmt
 
 # check everything
 nix flake check
+
+# enter a devshell with language servers, then open editor
+nix develop --command vi index.js
 ```
 
 ## LICENCE
