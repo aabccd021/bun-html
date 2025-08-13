@@ -7,38 +7,41 @@ const res = await fetch(
 );
 const data = await res.json();
 
-let result = `type render = (element: Element) => string;
+let result = `type render = (element: Element) => string
 
-export const render: render;
+export const render: render
 
 type unsafeHtml = (value: string) => Element
 
-export const unsafeHtml: unsafeHtml;
+export const unsafeHtml: unsafeHtml
 
-type AttributeValues = string | number | boolean | null | undefined;
+type AttributeValues = string | number | boolean | null | undefined
 
 type Element = string | false | undefined | {
-    tag: string;
-    attributes: Record<string, AttributeValues>;
-    children?: Array<Element>;
+    tag: string
+    attributes: Record<string, AttributeValues>
+    children?: Array<Element>
 } | {
-    value: string;
-};
-
-type ElAttributes<A extends keyof Attributes> = Pick<Attributes, GlobalAttributeNames | A> & {
-  [k in \`data-\${string}\`]?: ValueSets["default"]; 
+    value: string
 }
 
-type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
+type ElAttributes<A extends keyof Attributes> = Pick<Attributes, GlobalAttributeNames | A> & {
+  [k in \`data-\${string}\`]?: ValueSets["default"] 
+}
 
-type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;
+type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element
+
+type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element
+
+type DefaultValueSets = {
+  "default": string | number | boolean | null
+  "v": boolean
+}
 `;
 
-result += "\ntype ValueSets = {";
-result += '\n  "default": string | number | boolean | null;';
-result += '\n  "v": boolean;';
-result += data.valueSets.map((vs) => `"${vs.name}": ${union(vs.values)};`).join("\n  ");
-result += "\n}";
+const valueSetStr = data.valueSets.map((vs) => `  "${vs.name}": ${union(vs.values)}`).join("\n");
+
+result += `\ntype ValueSets = DefaultValueSets & {\n${valueSetStr}\n}`;
 
 const allAttributes = [
   ...data.globalAttributes.map((a) => [a.name, a.valueSet]),
@@ -53,17 +56,17 @@ for (const [name, newValue] of allAttributes) {
 }
 
 const attributesStr = Object.entries(attributes)
-  .map(([name, vs]) => `  "${name}"?: ValueSets["${vs}"];`)
+  .map(([name, vs]) => `  "${name}"?: ValueSets["${vs}"]`)
   .join("\n");
 
 result += `\n\ntype Attributes = {\n${attributesStr}\n}`;
-result += `\n\ntype GlobalAttributeNames = ${union(data.globalAttributes)};`;
+result += `\n\ntype GlobalAttributeNames = ${union(data.globalAttributes)}`;
 
 for (const tag of data.tags) {
   const attrs = tag.attributes.length > 0 ? union(tag.attributes) : "never";
   const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrs}>;`;
-  result += `\nexport const ${name}: ${name};`;
+  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrs}>`;
+  result += `\nexport const ${name}: ${name}`;
 }
 
 console.log(result);
