@@ -1,3 +1,29 @@
+console.log(`type Render = (element: Element) => string;
+
+export const render: Render;
+
+type UnsafeHtml = (value: string) => Element
+
+export const unsafeHtml: UnsafeHtml;
+
+type AttributeValues = string | number | boolean | null | undefined;
+
+type Element = string | false | undefined | {
+    tag: string;
+    attributes: Record<string, AttributeValues>;
+    children?: Array<Element> | undefined;
+} | {
+    value: string;
+};
+
+type ElAttributes<A extends keyof Attributes> = {
+  [k in \`data-\${string}\`]?: ValueSets["default"];
+} & Pick<Attributes, GlobalAttributes | A>
+
+type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
+
+type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;`);
+
 /**
  * @typedef {Object} ITagData
  * @property {string} name
@@ -36,53 +62,48 @@ const res = await fetch(
 /** @type {HTMLDataV1} */
 const data = await res.json();
 
-const valueSets = Object.fromEntries(
-  data.valueSets.map(({ name, values }) => {
-    return [name, values.map((value) => `"${value.name}"`).join(" | ")];
-  }),
-);
+console.log(`
+type ValueSets = {
+  "default": string | number | boolean | null;
+  "v": boolean;`);
 
-/**
- * @param {string|undefined} attr
- */
-function attrValue(attr) {
-  if (attr === undefined) return "string | number | boolean | null";
-  if (attr === "v") return "boolean";
-  const valueSet = valueSets[attr];
-  if (valueSet !== undefined) return valueSet;
-  throw new Error();
+for (const valueSet of data.valueSets) {
+  const valuesStr = valueSet.values.map((value) => `  "${value.name}"`).join(" | ");
+  console.log(`  "${valueSet.name}": ${valuesStr};`);
 }
+console.log("}");
+
+console.log(`type Attributes = {`);
+const seen = new Set();
+for (const attr of data.globalAttributes) {
+  if (seen.has(attr.name)) continue;
+  seen.add(attr.name);
+  console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
+}
+for (const tag of data.tags) {
+  for (const attr of tag.attributes) {
+    if (seen.has(attr.name)) continue;
+    seen.add(attr.name);
+    console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
+  }
+}
+console.log(`}`);
+
+const globalAttributes = data.globalAttributes.map((attr) => `"${attr.name}"`).join(" | ");
+console.log(`\ntype GlobalAttributes = ${globalAttributes}`);
 
 /**
  * @param {ITagData} tag
  */
-function element(tag) {
-  const seen = new Set();
-  const attributes = [];
-  for (const attr of [...tag.attributes, ...data.globalAttributes]) {
-    if (seen.has(attr.name)) continue;
-    seen.add(attr.name);
-    attributes.push(` * @property {${attrValue(attr.valueSet)}} [${attr.name}]\n`);
-  }
+for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
+  let attrNames = tag.attributes
+    .map((attr) => attr.name)
+    .map((i) => `"${i}"`)
+    .join(" | ");
+  attrNames = attrNames === "" ? "never" : attrNames;
+  const voidStr = tag.void ? "Void" : "";
   const funcName = tag.name === "var" ? "var_" : tag.name;
-  return `
-/**
- * @typedef {Object} ${capName}Attributes
- * @property {DataAttribute} [data]
-${attributes.join("")}
- */
-
-/**
- * @param {${capName}Attributes} attributes
-${tag.void ? "" : " * @param {Element[]} children"}
- * @returns {Element}
- */
-export function ${funcName}(attributes${tag.void ? "" : ", children"}) {
-  return { tag: "${tag.name}", attributes${tag.void ? "" : ", children"} };
-}`;
+  console.log(`\ntype ${capName} = ${voidStr}El<${attrNames}>;`);
+  console.log(`export const ${funcName}: ${capName};`);
 }
-
-const elements = data.tags.map(element).join("\n");
-
-console.log(`/** @import { Element, DataAttribute } from './tiny-html.js';\n${elements}`);

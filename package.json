@@ -7,6 +7,6 @@
   "main": "tiny-html.js",
   "files": [
     "tiny-html.js",
-    "gen.js"
+    "tiny-html.d.ts"
   ]
 }

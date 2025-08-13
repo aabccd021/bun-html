@@ -1,14 +1,20 @@
-import { a, button, div, head, html, meta, p, render, unsafeHtml } from "./tiny-html.js";
+import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from "./tiny-html.js";
 
 {
   console.info("> simple element");
-  const element = p({ data: { hello: "world" } }, ["Hello, world!"]);
+  const element = p({ "data-hello": "world" }, ["Hello, world!"]);
   if (render(element) !== '<p data-hello="world">Hello, world!</p>') throw new Error();
 }
 
 {
+  console.info("> var");
+  const element = var_({}, ["Hello, world!"]);
+  if (render(element) !== "<var>Hello, world!</var>") throw new Error();
+}
+
+{
   console.info("> no child");
-  const element = p({ data: { hello: "world" } }, []);
+  const element = p({ "data-hello": "world" }, []);
   if (render(element) !== '<p data-hello="world"></p>') throw new Error();
 }
 
@@ -45,19 +51,19 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml } from "./tiny-
 
 {
   console.info("> number attribute");
-  const element = p({ data: { number: 42 } }, ["Hello, world!"]);
+  const element = p({ "data-number": 42 }, ["Hello, world!"]);
   if (render(element) !== '<p data-number="42">Hello, world!</p>') throw new Error();
 }
 
 {
   console.info("> true attribute");
-  const element = p({ data: { boolean: true } }, ["Hello, world!"]);
+  const element = p({ "data-boolean": true }, ["Hello, world!"]);
   if (render(element) !== "<p data-boolean>Hello, world!</p>") throw new Error();
 }
 
 {
   console.info("> false attribute");
-  const element = p({ data: { boolean: false } }, ["Hello, world!"]);
+  const element = p({ "data-boolean": false }, ["Hello, world!"]);
   if (render(element) !== "<p>Hello, world!</p>") throw new Error();
 }
 
@@ -80,7 +86,10 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml } from "./tiny-
   try {
     render(element);
   } catch (e) {
-    if (!Error.isError(e) || e.message !== "Unsupported attribute: data-boolean") {
+    if (
+      !Error.isError(e) ||
+      e.message !== 'Unsupported attribute value type for key "data-boolean": object'
+    ) {
       throw new Error();
     }
   }
@@ -142,7 +151,7 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml } from "./tiny-
 
 {
   console.info("> xss on data attribute key");
-  const element = p({}, [meta({ data: { "><script>console.log('orld')</script><meta": "bar" } })]);
+  const element = p({}, [meta({ "data-><script>console.log('orld')</script><meta": "bar" })]);
   if (
     render(element) !==
     '<p><meta data-&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta="bar"></p>'
@@ -152,7 +161,7 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml } from "./tiny-
 
 {
   console.info("> xss on data attribute value");
-  const element = p({}, [meta({ data: { foo: "><script>console.log('orld')</script><meta" } })]);
+  const element = p({}, [meta({ "data-foo": "><script>console.log('orld')</script><meta" })]);
   if (
     render(element) !==
     '<p><meta data-foo="&gt;&lt;script&gt;console.log(&#x27;orld&#x27;)&lt;/script&gt;&lt;meta"></p>'
