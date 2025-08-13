@@ -68,8 +68,10 @@ type ValueSets = {
   "v": boolean;`);
 
 for (const valueSet of data.valueSets) {
-  const valuesStr = valueSet.values.map((value) => `  "${value.name}"`).join(" | ");
-  console.log(`  "${valueSet.name}": ${valuesStr};`);
+  console.log(`  "${valueSet.name}": `);
+  for (const value of valueSet.values) {
+    console.log(`      | "${value.name}"`);
+  }
 }
 console.log("}");
 
@@ -89,21 +91,28 @@ for (const tag of data.tags) {
 }
 console.log(`}`);
 
-const globalAttributes = data.globalAttributes.map((attr) => `"${attr.name}"`).join(" | ");
-console.log(`\ntype GlobalAttributes = ${globalAttributes}`);
+console.log(`\ntype GlobalAttributes = `);
+for (const attr of data.globalAttributes) {
+  console.log(`  | "${attr.name}"`);
+}
 
 /**
  * @param {ITagData} tag
  */
 for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
-  let attrNames = tag.attributes
-    .map((attr) => attr.name)
-    .map((i) => `"${i}"`)
-    .join(" | ");
-  attrNames = attrNames === "" ? "never" : attrNames;
+  // let attrNames = tag.attributes.map((attr) => attr.name).map((i) => `"${i}"`).join(" | ");
+  // attrNames = attrNames === "" ? "never" : attrNames;
   const voidStr = tag.void ? "Void" : "";
   const funcName = tag.name === "var" ? "var_" : tag.name;
-  console.log(`\ntype ${capName} = ${voidStr}El<${attrNames}>;`);
+  console.log(`\ntype ${capName} = ${voidStr}El<`);
+  if (tag.attributes.length === 0) {
+    console.log(`  never`);
+  } else {
+    for (const attr of tag.attributes) {
+      console.log(`  | "${attr.name}"`);
+    }
+  }
+  console.log(`>;`);
   console.log(`export const ${funcName}: ${capName};`);
 }

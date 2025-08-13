@@ -18,6 +18,7 @@
         programs.biome.formatUnsafe = true;
         programs.biome.settings.formatter.indentStyle = "space";
         programs.biome.settings.formatter.lineWidth = 100;
+        settings.global.excludes = [ "**/*.d.ts" ];
       };
 
       tsc = pkgs.runCommand "tsc" { } ''
