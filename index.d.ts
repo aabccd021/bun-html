@@ -1,12 +1,12 @@
-type render = (element: Element) => string
+type render = (element: Element) => string;
 
-export const render: render
+export const render: render;
 
-type unsafeHtml = (value: string) => Element
+type unsafeHtml = (value: string) => Element;
 
-export const unsafeHtml: unsafeHtml
+export const unsafeHtml: unsafeHtml;
 
-type AttributeValues = string | number | boolean | null | undefined
+type AttributeValues = string | number | boolean | null | undefined;
 
 type Element = string | false | undefined | {
     tag: string
@@ -14,716 +14,912 @@ type Element = string | false | undefined | {
     children?: Array<Element>
 } | {
     value: string
-}
-
-type ElAttributes<A extends keyof Attributes> = Pick<Attributes, GlobalAttributeNames | A> & {
-  [k in `data-${string}`]?: ValueSets["default"] 
-}
-
-type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element
-
-type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element
-
-type DefaultValueSets = {
-  "default": string | number | boolean | null
-  "v": boolean
-}
-
-type ValueSets = DefaultValueSets & {
-  "b": "true" | "false"
-  "u": "true" | "false" | "undefined"
-  "o": "on" | "off"
-  "y": "yes" | "no"
-  "w": "soft" | "hard"
-  "d": "ltr" | "rtl" | "auto"
-  "m": "get" | "post" | "dialog"
-  "fm": "get" | "post"
-  "s": "row" | "col" | "rowgroup" | "colgroup"
-  "t": "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "submit" | "image" | "reset" | "button"
-  "im": "verbatim" | "latin" | "latin-name" | "latin-prose" | "full-width-latin" | "kana" | "kana-name" | "katakana" | "numeric" | "tel" | "email" | "url"
-  "bt": "button" | "submit" | "reset"
-  "lt": "1" | "a" | "A" | "i" | "I"
-  "mt": "context" | "toolbar"
-  "mit": "command" | "checkbox" | "radio"
-  "et": "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain"
-  "tk": "subtitles" | "captions" | "descriptions" | "chapters" | "metadata"
-  "pl": "none" | "metadata" | "auto"
-  "sh": "circle" | "default" | "poly" | "rect"
-  "xo": "anonymous" | "use-credentials"
-  "target": "_self" | "_blank" | "_parent" | "_top"
-  "sb": "allow-forms" | "allow-modals" | "allow-pointer-lock" | "allow-popups" | "allow-popups-to-escape-sandbox" | "allow-same-origin" | "allow-scripts" | "allow-top-navigation"
-  "tristate": "true" | "false" | "mixed" | "undefined"
-  "inputautocomplete": "additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work"
-  "autocomplete": "inline" | "list" | "both" | "none"
-  "current": "page" | "step" | "location" | "date" | "time" | "true" | "false"
-  "dropeffect": "copy" | "move" | "link" | "execute" | "popup" | "none"
-  "invalid": "grammar" | "false" | "spelling" | "true"
-  "live": "off" | "polite" | "assertive"
-  "orientation": "vertical" | "horizontal" | "undefined"
-  "relevant": "additions" | "removals" | "text" | "all" | "additions text"
-  "sort": "ascending" | "descending" | "none" | "other"
-  "roles": "alert" | "alertdialog" | "button" | "checkbox" | "dialog" | "gridcell" | "link" | "log" | "marquee" | "menuitem" | "menuitemcheckbox" | "menuitemradio" | "option" | "progressbar" | "radio" | "scrollbar" | "searchbox" | "slider" | "spinbutton" | "status" | "switch" | "tab" | "tabpanel" | "textbox" | "timer" | "tooltip" | "treeitem" | "combobox" | "grid" | "listbox" | "menu" | "menubar" | "radiogroup" | "tablist" | "tree" | "treegrid" | "application" | "article" | "cell" | "columnheader" | "definition" | "directory" | "document" | "feed" | "figure" | "group" | "heading" | "img" | "list" | "listitem" | "math" | "none" | "note" | "presentation" | "region" | "row" | "rowgroup" | "rowheader" | "separator" | "table" | "term" | "text" | "toolbar" | "banner" | "complementary" | "contentinfo" | "form" | "main" | "navigation" | "region" | "search" | "doc-abstract" | "doc-acknowledgments" | "doc-afterword" | "doc-appendix" | "doc-backlink" | "doc-biblioentry" | "doc-bibliography" | "doc-biblioref" | "doc-chapter" | "doc-colophon" | "doc-conclusion" | "doc-cover" | "doc-credit" | "doc-credits" | "doc-dedication" | "doc-endnote" | "doc-endnotes" | "doc-epigraph" | "doc-epilogue" | "doc-errata" | "doc-example" | "doc-footnote" | "doc-foreword" | "doc-glossary" | "doc-glossref" | "doc-index" | "doc-introduction" | "doc-noteref" | "doc-notice" | "doc-pagebreak" | "doc-pagelist" | "doc-part" | "doc-preface" | "doc-prologue" | "doc-pullquote" | "doc-qna" | "doc-subtitle" | "doc-tip" | "doc-toc"
-  "metanames": "application-name" | "author" | "description" | "format-detection" | "generator" | "keywords" | "publisher" | "referrer" | "robots" | "theme-color" | "viewport"
-  "haspopup": "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog"
-  "decoding": "sync" | "async" | "auto"
-  "loading": "eager" | "lazy"
-  "referrerpolicy": "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url"
-  "enterkeyhint": "enter" | "done" | "go" | "next" | "previous" | "search" | "send"
-  "popover": "auto" | "hint" | "manual"
-  "fetchpriority": "high" | "low" | "auto"
-}
-
-type Attributes = {
-  "accesskey"?: ValueSets["default"]
-  "autocapitalize"?: ValueSets["default"]
-  "autocorrect"?: ValueSets["o"]
-  "autofocus"?: ValueSets["v"]
-  "class"?: ValueSets["default"]
-  "contenteditable"?: ValueSets["default"]
-  "contextmenu"?: ValueSets["default"]
-  "dir"?: ValueSets["d"]
-  "draggable"?: ValueSets["b"]
-  "dropzone"?: ValueSets["default"]
-  "enterkeyhint"?: ValueSets["enterkeyhint"]
-  "exportparts"?: ValueSets["default"]
-  "hidden"?: ValueSets["v"]
-  "id"?: ValueSets["default"]
-  "inert"?: ValueSets["default"]
-  "inputmode"?: ValueSets["im"]
-  "is"?: ValueSets["default"]
-  "itemid"?: ValueSets["default"]
-  "itemprop"?: ValueSets["default"]
-  "itemref"?: ValueSets["default"]
-  "itemscope"?: ValueSets["v"]
-  "itemtype"?: ValueSets["default"]
-  "lang"?: ValueSets["default"]
-  "nonce"?: ValueSets["default"]
-  "part"?: ValueSets["default"]
-  "popover"?: ValueSets["popover"]
-  "role"?: ValueSets["roles"]
-  "slot"?: ValueSets["default"]
-  "spellcheck"?: ValueSets["b"]
-  "style"?: ValueSets["default"]
-  "tabindex"?: ValueSets["default"]
-  "title"?: ValueSets["default"]
-  "translate"?: ValueSets["y"]
-  "virtualkeyboardpolicy"?: ValueSets["b"]
-  "onabort"?: ValueSets["default"]
-  "onblur"?: ValueSets["default"]
-  "oncanplay"?: ValueSets["default"]
-  "oncanplaythrough"?: ValueSets["default"]
-  "onchange"?: ValueSets["default"]
-  "onclick"?: ValueSets["default"]
-  "oncontextmenu"?: ValueSets["default"]
-  "ondblclick"?: ValueSets["default"]
-  "ondrag"?: ValueSets["default"]
-  "ondragend"?: ValueSets["default"]
-  "ondragenter"?: ValueSets["default"]
-  "ondragleave"?: ValueSets["default"]
-  "ondragover"?: ValueSets["default"]
-  "ondragstart"?: ValueSets["default"]
-  "ondrop"?: ValueSets["default"]
-  "ondurationchange"?: ValueSets["default"]
-  "onemptied"?: ValueSets["default"]
-  "onended"?: ValueSets["default"]
-  "onerror"?: ValueSets["default"]
-  "onfocus"?: ValueSets["default"]
-  "onformchange"?: ValueSets["default"]
-  "onforminput"?: ValueSets["default"]
-  "oninput"?: ValueSets["default"]
-  "oninvalid"?: ValueSets["default"]
-  "onkeydown"?: ValueSets["default"]
-  "onkeypress"?: ValueSets["default"]
-  "onkeyup"?: ValueSets["default"]
-  "onload"?: ValueSets["default"]
-  "onloadeddata"?: ValueSets["default"]
-  "onloadedmetadata"?: ValueSets["default"]
-  "onloadstart"?: ValueSets["default"]
-  "onmousedown"?: ValueSets["default"]
-  "onmousemove"?: ValueSets["default"]
-  "onmouseout"?: ValueSets["default"]
-  "onmouseover"?: ValueSets["default"]
-  "onmouseup"?: ValueSets["default"]
-  "onmousewheel"?: ValueSets["default"]
-  "onmouseenter"?: ValueSets["default"]
-  "onmouseleave"?: ValueSets["default"]
-  "onpause"?: ValueSets["default"]
-  "onplay"?: ValueSets["default"]
-  "onplaying"?: ValueSets["default"]
-  "onprogress"?: ValueSets["default"]
-  "onratechange"?: ValueSets["default"]
-  "onreset"?: ValueSets["default"]
-  "onresize"?: ValueSets["default"]
-  "onreadystatechange"?: ValueSets["default"]
-  "onscroll"?: ValueSets["default"]
-  "onseeked"?: ValueSets["default"]
-  "onseeking"?: ValueSets["default"]
-  "onselect"?: ValueSets["default"]
-  "onshow"?: ValueSets["default"]
-  "onstalled"?: ValueSets["default"]
-  "onsubmit"?: ValueSets["default"]
-  "onsuspend"?: ValueSets["default"]
-  "ontimeupdate"?: ValueSets["default"]
-  "onvolumechange"?: ValueSets["default"]
-  "onwaiting"?: ValueSets["default"]
-  "onpointercancel"?: ValueSets["default"]
-  "onpointerdown"?: ValueSets["default"]
-  "onpointerenter"?: ValueSets["default"]
-  "onpointerleave"?: ValueSets["default"]
-  "onpointerlockchange"?: ValueSets["default"]
-  "onpointerlockerror"?: ValueSets["default"]
-  "onpointermove"?: ValueSets["default"]
-  "onpointerout"?: ValueSets["default"]
-  "onpointerover"?: ValueSets["default"]
-  "onpointerup"?: ValueSets["default"]
-  "aria-activedescendant"?: ValueSets["default"]
-  "aria-atomic"?: ValueSets["b"]
-  "aria-autocomplete"?: ValueSets["autocomplete"]
-  "aria-busy"?: ValueSets["b"]
-  "aria-checked"?: ValueSets["tristate"]
-  "aria-colcount"?: ValueSets["default"]
-  "aria-colindex"?: ValueSets["default"]
-  "aria-colspan"?: ValueSets["default"]
-  "aria-controls"?: ValueSets["default"]
-  "aria-current"?: ValueSets["current"]
-  "aria-describedby"?: ValueSets["default"]
-  "aria-disabled"?: ValueSets["b"]
-  "aria-dropeffect"?: ValueSets["dropeffect"]
-  "aria-errormessage"?: ValueSets["default"]
-  "aria-expanded"?: ValueSets["u"]
-  "aria-flowto"?: ValueSets["default"]
-  "aria-grabbed"?: ValueSets["u"]
-  "aria-haspopup"?: ValueSets["haspopup"]
-  "aria-hidden"?: ValueSets["b"]
-  "aria-invalid"?: ValueSets["invalid"]
-  "aria-label"?: ValueSets["default"]
-  "aria-labelledby"?: ValueSets["default"]
-  "aria-level"?: ValueSets["default"]
-  "aria-live"?: ValueSets["live"]
-  "aria-modal"?: ValueSets["b"]
-  "aria-multiline"?: ValueSets["b"]
-  "aria-multiselectable"?: ValueSets["b"]
-  "aria-orientation"?: ValueSets["orientation"]
-  "aria-owns"?: ValueSets["default"]
-  "aria-placeholder"?: ValueSets["default"]
-  "aria-posinset"?: ValueSets["default"]
-  "aria-pressed"?: ValueSets["tristate"]
-  "aria-readonly"?: ValueSets["b"]
-  "aria-relevant"?: ValueSets["relevant"]
-  "aria-required"?: ValueSets["b"]
-  "aria-roledescription"?: ValueSets["default"]
-  "aria-rowcount"?: ValueSets["default"]
-  "aria-rowindex"?: ValueSets["default"]
-  "aria-rowspan"?: ValueSets["default"]
-  "aria-selected"?: ValueSets["u"]
-  "aria-setsize"?: ValueSets["default"]
-  "aria-sort"?: ValueSets["sort"]
-  "aria-valuemax"?: ValueSets["default"]
-  "aria-valuemin"?: ValueSets["default"]
-  "aria-valuenow"?: ValueSets["default"]
-  "aria-valuetext"?: ValueSets["default"]
-  "aria-details"?: ValueSets["default"]
-  "aria-keyshortcuts"?: ValueSets["default"]
-  "manifest"?: ValueSets["default"]
-  "version"?: ValueSets["default"]
-  "xmlns"?: ValueSets["default"]
-  "profile"?: ValueSets["default"]
-  "href"?: ValueSets["default"]
-  "target"?: ValueSets["target"]
-  "crossorigin"?: ValueSets["xo"]
-  "rel"?: ValueSets["default"]
-  "media"?: ValueSets["default"]
-  "hreflang"?: ValueSets["default"]
-  "type"?: ValueSets["lt"]
-  "sizes"?: ValueSets["default"]
-  "as"?: ValueSets["default"]
-  "importance"?: ValueSets["default"]
-  "integrity"?: ValueSets["default"]
-  "referrerpolicy"?: ValueSets["referrerpolicy"]
-  "name"?: ValueSets["default"]
-  "http-equiv"?: ValueSets["default"]
-  "content"?: ValueSets["default"]
-  "charset"?: ValueSets["default"]
-  "scheme"?: ValueSets["default"]
-  "scoped"?: ValueSets["v"]
-  "onafterprint"?: ValueSets["default"]
-  "onbeforeprint"?: ValueSets["default"]
-  "onbeforeunload"?: ValueSets["default"]
-  "onhashchange"?: ValueSets["default"]
-  "onlanguagechange"?: ValueSets["default"]
-  "onmessage"?: ValueSets["default"]
-  "onoffline"?: ValueSets["default"]
-  "ononline"?: ValueSets["default"]
-  "onpagehide"?: ValueSets["default"]
-  "onpageshow"?: ValueSets["default"]
-  "onpopstate"?: ValueSets["default"]
-  "onstorage"?: ValueSets["default"]
-  "onunload"?: ValueSets["default"]
-  "alink"?: ValueSets["default"]
-  "background"?: ValueSets["default"]
-  "bgcolor"?: ValueSets["default"]
-  "bottommargin"?: ValueSets["default"]
-  "leftmargin"?: ValueSets["default"]
-  "link"?: ValueSets["default"]
-  "onredo"?: ValueSets["default"]
-  "onundo"?: ValueSets["default"]
-  "rightmargin"?: ValueSets["default"]
-  "text"?: ValueSets["default"]
-  "topmargin"?: ValueSets["default"]
-  "vlink"?: ValueSets["default"]
-  "align"?: ValueSets["default"]
-  "color"?: ValueSets["default"]
-  "noshade"?: ValueSets["default"]
-  "size"?: ValueSets["default"]
-  "width"?: ValueSets["default"]
-  "cols"?: ValueSets["default"]
-  "wrap"?: ValueSets["w"]
-  "cite"?: ValueSets["default"]
-  "reversed"?: ValueSets["v"]
-  "start"?: ValueSets["default"]
-  "compact"?: ValueSets["default"]
-  "value"?: ValueSets["default"]
-  "nowrap"?: ValueSets["default"]
-  "download"?: ValueSets["default"]
-  "ping"?: ValueSets["default"]
-  "datetime"?: ValueSets["default"]
-  "clear"?: ValueSets["default"]
-  "alt"?: ValueSets["default"]
-  "src"?: ValueSets["default"]
-  "srcset"?: ValueSets["default"]
-  "usemap"?: ValueSets["default"]
-  "ismap"?: ValueSets["v"]
-  "height"?: ValueSets["default"]
-  "decoding"?: ValueSets["decoding"]
-  "loading"?: ValueSets["loading"]
-  "fetchpriority"?: ValueSets["fetchpriority"]
-  "intrinsicsize"?: ValueSets["default"]
-  "srcdoc"?: ValueSets["default"]
-  "sandbox"?: ValueSets["sb"]
-  "seamless"?: ValueSets["v"]
-  "allowfullscreen"?: ValueSets["v"]
-  "allow"?: ValueSets["default"]
-  "allowpaymentrequest"?: ValueSets["default"]
-  "csp"?: ValueSets["default"]
-  "data"?: ValueSets["default"]
-  "typemustmatch"?: ValueSets["v"]
-  "form"?: ValueSets["default"]
-  "archive"?: ValueSets["default"]
-  "border"?: ValueSets["default"]
-  "classid"?: ValueSets["default"]
-  "codebase"?: ValueSets["default"]
-  "codetype"?: ValueSets["default"]
-  "declare"?: ValueSets["default"]
-  "standby"?: ValueSets["default"]
-  "valuetype"?: ValueSets["default"]
-  "poster"?: ValueSets["default"]
-  "preload"?: ValueSets["pl"]
-  "autoplay"?: ValueSets["v"]
-  "mediagroup"?: ValueSets["default"]
-  "loop"?: ValueSets["v"]
-  "muted"?: ValueSets["v"]
-  "controls"?: ValueSets["v"]
-  "default"?: ValueSets["v"]
-  "kind"?: ValueSets["tk"]
-  "label"?: ValueSets["default"]
-  "srclang"?: ValueSets["default"]
-  "coords"?: ValueSets["default"]
-  "shape"?: ValueSets["sh"]
-  "span"?: ValueSets["default"]
-  "colspan"?: ValueSets["default"]
-  "rowspan"?: ValueSets["default"]
-  "headers"?: ValueSets["default"]
-  "abbr"?: ValueSets["default"]
-  "axis"?: ValueSets["default"]
-  "scope"?: ValueSets["s"]
-  "sorted"?: ValueSets["default"]
-  "accept-charset"?: ValueSets["default"]
-  "action"?: ValueSets["default"]
-  "autocomplete"?: ValueSets["o"]
-  "enctype"?: ValueSets["et"]
-  "method"?: ValueSets["m"]
-  "novalidate"?: ValueSets["v"]
-  "accept"?: ValueSets["default"]
-  "for"?: ValueSets["default"]
-  "checked"?: ValueSets["v"]
-  "dirname"?: ValueSets["default"]
-  "disabled"?: ValueSets["v"]
-  "formaction"?: ValueSets["default"]
-  "formenctype"?: ValueSets["et"]
-  "formmethod"?: ValueSets["fm"]
-  "formnovalidate"?: ValueSets["v"]
-  "formtarget"?: ValueSets["default"]
-  "list"?: ValueSets["default"]
-  "max"?: ValueSets["default"]
-  "maxlength"?: ValueSets["default"]
-  "min"?: ValueSets["default"]
-  "minlength"?: ValueSets["default"]
-  "multiple"?: ValueSets["v"]
-  "pattern"?: ValueSets["default"]
-  "placeholder"?: ValueSets["default"]
-  "popovertarget"?: ValueSets["default"]
-  "popovertargetaction"?: ValueSets["default"]
-  "readonly"?: ValueSets["v"]
-  "required"?: ValueSets["v"]
-  "step"?: ValueSets["default"]
-  "selected"?: ValueSets["v"]
-  "rows"?: ValueSets["default"]
-  "low"?: ValueSets["default"]
-  "high"?: ValueSets["default"]
-  "optimum"?: ValueSets["default"]
-  "open"?: ValueSets["v"]
-  "async"?: ValueSets["v"]
-  "defer"?: ValueSets["v"]
-  "nomodule"?: ValueSets["default"]
-  "moz-opaque"?: ValueSets["default"]
-}
-
-type GlobalAttributeNames = "accesskey" | "autocapitalize" | "autocorrect" | "autofocus" | "class" | "contenteditable" | "contextmenu" | "dir" | "draggable" | "dropzone" | "enterkeyhint" | "exportparts" | "hidden" | "id" | "inert" | "inputmode" | "is" | "itemid" | "itemprop" | "itemref" | "itemscope" | "itemtype" | "lang" | "nonce" | "part" | "popover" | "role" | "slot" | "spellcheck" | "style" | "tabindex" | "title" | "translate" | "virtualkeyboardpolicy" | "onabort" | "onblur" | "oncanplay" | "oncanplaythrough" | "onchange" | "onclick" | "oncontextmenu" | "ondblclick" | "ondrag" | "ondragend" | "ondragenter" | "ondragleave" | "ondragover" | "ondragstart" | "ondrop" | "ondurationchange" | "onemptied" | "onended" | "onerror" | "onfocus" | "onformchange" | "onforminput" | "oninput" | "oninvalid" | "onkeydown" | "onkeypress" | "onkeyup" | "onload" | "onloadeddata" | "onloadedmetadata" | "onloadstart" | "onmousedown" | "onmousemove" | "onmouseout" | "onmouseover" | "onmouseup" | "onmousewheel" | "onmouseenter" | "onmouseleave" | "onpause" | "onplay" | "onplaying" | "onprogress" | "onratechange" | "onreset" | "onresize" | "onreadystatechange" | "onscroll" | "onseeked" | "onseeking" | "onselect" | "onshow" | "onstalled" | "onsubmit" | "onsuspend" | "ontimeupdate" | "onvolumechange" | "onwaiting" | "onpointercancel" | "onpointerdown" | "onpointerenter" | "onpointerleave" | "onpointerlockchange" | "onpointerlockerror" | "onpointermove" | "onpointerout" | "onpointerover" | "onpointerup" | "aria-activedescendant" | "aria-atomic" | "aria-autocomplete" | "aria-busy" | "aria-checked" | "aria-colcount" | "aria-colindex" | "aria-colspan" | "aria-controls" | "aria-current" | "aria-describedby" | "aria-disabled" | "aria-dropeffect" | "aria-errormessage" | "aria-expanded" | "aria-flowto" | "aria-grabbed" | "aria-haspopup" | "aria-hidden" | "aria-invalid" | "aria-label" | "aria-labelledby" | "aria-level" | "aria-live" | "aria-modal" | "aria-multiline" | "aria-multiselectable" | "aria-orientation" | "aria-owns" | "aria-placeholder" | "aria-posinset" | "aria-pressed" | "aria-readonly" | "aria-relevant" | "aria-required" | "aria-roledescription" | "aria-rowcount" | "aria-rowindex" | "aria-rowspan" | "aria-selected" | "aria-setsize" | "aria-sort" | "aria-valuemax" | "aria-valuemin" | "aria-valuenow" | "aria-valuetext" | "aria-details" | "aria-keyshortcuts"
-
-type html = El<"manifest" | "version" | "xmlns">
-export const html: html
-
-type head = El<"profile">
-export const head: head
-
-type title = El<never>
-export const title: title
-
-type base = VoidEl<"href" | "target">
-export const base: base
-
-type link = VoidEl<"href" | "crossorigin" | "rel" | "media" | "hreflang" | "type" | "sizes" | "as" | "importance" | "importance" | "integrity" | "referrerpolicy" | "title">
-export const link: link
-
-type meta = VoidEl<"name" | "http-equiv" | "content" | "charset" | "scheme">
-export const meta: meta
-
-type style = El<"media" | "nonce" | "type" | "scoped" | "title">
-export const style: style
-
-type body = El<"onafterprint" | "onbeforeprint" | "onbeforeunload" | "onhashchange" | "onlanguagechange" | "onmessage" | "onoffline" | "ononline" | "onpagehide" | "onpageshow" | "onpopstate" | "onstorage" | "onunload" | "alink" | "background" | "bgcolor" | "bottommargin" | "leftmargin" | "link" | "onblur" | "onerror" | "onfocus" | "onload" | "onredo" | "onresize" | "onundo" | "rightmargin" | "text" | "topmargin" | "vlink">
-export const body: body
-
-type article = El<never>
-export const article: article
-
-type section = El<never>
-export const section: section
-
-type nav = El<never>
-export const nav: nav
-
-type aside = El<never>
-export const aside: aside
-
-type h1 = El<never>
-export const h1: h1
-
-type h2 = El<never>
-export const h2: h2
-
-type h3 = El<never>
-export const h3: h3
-
-type h4 = El<never>
-export const h4: h4
-
-type h5 = El<never>
-export const h5: h5
-
-type h6 = El<never>
-export const h6: h6
-
-type header = El<never>
-export const header: header
-
-type footer = El<never>
-export const footer: footer
-
-type address = El<never>
-export const address: address
-
-type p = El<never>
-export const p: p
-
-type hr = VoidEl<"align" | "color" | "noshade" | "size" | "width">
-export const hr: hr
-
-type pre = El<"cols" | "width" | "wrap">
-export const pre: pre
-
-type blockquote = El<"cite">
-export const blockquote: blockquote
-
-type ol = El<"reversed" | "start" | "type" | "compact">
-export const ol: ol
-
-type ul = El<"compact">
-export const ul: ul
-
-type li = El<"value" | "type">
-export const li: li
-
-type dl = El<never>
-export const dl: dl
-
-type dt = El<never>
-export const dt: dt
-
-type dd = El<"nowrap">
-export const dd: dd
-
-type figure = El<never>
-export const figure: figure
-
-type figcaption = El<never>
-export const figcaption: figcaption
-
-type main = El<never>
-export const main: main
-
-type div = El<never>
-export const div: div
-
-type a = El<"href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "referrerpolicy">
-export const a: a
-
-type em = El<never>
-export const em: em
-
-type strong = El<never>
-export const strong: strong
-
-type small = El<never>
-export const small: small
-
-type s = El<never>
-export const s: s
-
-type cite = El<never>
-export const cite: cite
-
-type q = El<"cite">
-export const q: q
-
-type dfn = El<never>
-export const dfn: dfn
-
-type abbr = El<never>
-export const abbr: abbr
-
-type ruby = El<never>
-export const ruby: ruby
-
-type rb = El<never>
-export const rb: rb
-
-type rt = El<never>
-export const rt: rt
-
-type rp = El<never>
-export const rp: rp
-
-type time = El<"datetime">
-export const time: time
-
-type code = El<never>
-export const code: code
-
-type var_ = El<never>
-export const var_: var_
-
-type samp = El<never>
-export const samp: samp
-
-type kbd = El<never>
-export const kbd: kbd
-
-type sub = El<never>
-export const sub: sub
-
-type sup = El<never>
-export const sup: sup
-
-type i = El<never>
-export const i: i
-
-type b = El<never>
-export const b: b
-
-type u = El<never>
-export const u: u
-
-type mark = El<never>
-export const mark: mark
-
-type bdi = El<never>
-export const bdi: bdi
-
-type bdo = El<"dir">
-export const bdo: bdo
-
-type span = El<never>
-export const span: span
-
-type br = VoidEl<"clear">
-export const br: br
-
-type wbr = VoidEl<never>
-export const wbr: wbr
-
-type ins = El<"cite" | "datetime">
-export const ins: ins
-
-type del = El<"cite" | "datetime">
-export const del: del
-
-type picture = El<never>
-export const picture: picture
-
-type img = VoidEl<"alt" | "src" | "srcset" | "crossorigin" | "usemap" | "ismap" | "width" | "height" | "decoding" | "loading" | "fetchpriority" | "referrerpolicy" | "sizes" | "importance" | "importance" | "intrinsicsize">
-export const img: img
-
-type iframe = El<"src" | "srcdoc" | "name" | "sandbox" | "seamless" | "allowfullscreen" | "width" | "height" | "allow" | "allowpaymentrequest" | "allowpaymentrequest" | "csp" | "importance" | "referrerpolicy">
-export const iframe: iframe
-
-type embed = VoidEl<"src" | "type" | "width" | "height">
-export const embed: embed
-
-type object_ = El<"data" | "type" | "typemustmatch" | "name" | "usemap" | "form" | "width" | "height" | "archive" | "border" | "classid" | "codebase" | "codetype" | "declare" | "standby" | "tabindex">
-export const object_: object_
-
-type param = VoidEl<"name" | "value" | "type" | "valuetype">
-export const param: param
-
-type video = El<"src" | "crossorigin" | "poster" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls" | "width" | "height">
-export const video: video
-
-type audio = El<"src" | "crossorigin" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls">
-export const audio: audio
-
-type source = VoidEl<"src" | "type" | "sizes" | "srcset" | "media">
-export const source: source
-
-type track = VoidEl<"default" | "kind" | "label" | "src" | "srclang">
-export const track: track
-
-type map = El<"name">
-export const map: map
-
-type area = VoidEl<"alt" | "coords" | "shape" | "href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "accesskey">
-export const area: area
-
-type table = El<"border" | "align">
-export const table: table
-
-type caption = El<"align">
-export const caption: caption
-
-type colgroup = El<"span" | "align">
-export const colgroup: colgroup
-
-type col = VoidEl<"span" | "align">
-export const col: col
-
-type tbody = El<"align">
-export const tbody: tbody
-
-type thead = El<"align">
-export const thead: thead
-
-type tfoot = El<"align">
-export const tfoot: tfoot
-
-type tr = El<"align">
-export const tr: tr
-
-type td = El<"colspan" | "rowspan" | "headers" | "abbr" | "align" | "axis" | "bgcolor">
-export const td: td
-
-type th = El<"colspan" | "rowspan" | "headers" | "scope" | "sorted" | "abbr" | "align" | "axis" | "bgcolor">
-export const th: th
-
-type form = El<"accept-charset" | "action" | "autocomplete" | "enctype" | "method" | "name" | "novalidate" | "target" | "accept" | "autocapitalize">
-export const form: form
-
-type label = El<"form" | "for">
-export const label: label
-
-type input = VoidEl<"accept" | "alt" | "autocomplete" | "autofocus" | "checked" | "dirname" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "height" | "inputmode" | "list" | "max" | "maxlength" | "min" | "minlength" | "multiple" | "name" | "pattern" | "placeholder" | "popovertarget" | "popovertargetaction" | "readonly" | "required" | "size" | "src" | "step" | "type" | "value" | "width">
-export const input: input
-
-type button = El<"autofocus" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "name" | "popovertarget" | "popovertargetaction" | "type" | "value" | "autocomplete">
-export const button: button
-
-type select = El<"autocomplete" | "autofocus" | "disabled" | "form" | "multiple" | "name" | "required" | "size">
-export const select: select
-
-type datalist = El<never>
-export const datalist: datalist
-
-type optgroup = El<"disabled" | "label">
-export const optgroup: optgroup
-
-type option = El<"disabled" | "label" | "selected" | "value">
-export const option: option
-
-type textarea = El<"autocomplete" | "autofocus" | "cols" | "dirname" | "disabled" | "form" | "inputmode" | "maxlength" | "minlength" | "name" | "placeholder" | "readonly" | "required" | "rows" | "wrap" | "autocapitalize" | "spellcheck">
-export const textarea: textarea
-
-type output = El<"for" | "form" | "name">
-export const output: output
-
-type progress = El<"value" | "max">
-export const progress: progress
-
-type meter = El<"value" | "min" | "max" | "low" | "high" | "optimum" | "form">
-export const meter: meter
-
-type fieldset = El<"disabled" | "form" | "name">
-export const fieldset: fieldset
-
-type legend = El<never>
-export const legend: legend
-
-type details = El<"open">
-export const details: details
-
-type summary = El<never>
-export const summary: summary
-
-type dialog = El<"open">
-export const dialog: dialog
-
-type script = El<"src" | "type" | "charset" | "async" | "defer" | "crossorigin" | "nonce" | "integrity" | "nomodule" | "referrerpolicy" | "text">
-export const script: script
-
-type noscript = El<never>
-export const noscript: noscript
-
-type template = El<never>
-export const template: template
-
-type canvas = El<"width" | "height" | "moz-opaque">
-export const canvas: canvas
-
-type slot = El<"name">
-export const slot: slot
-
-type data = El<"value">
-export const data: data
-
-type hgroup = El<never>
-export const hgroup: hgroup
-
-type menu = El<never>
-export const menu: menu
-
-type search = El<never>
-export const search: search
-
-type fencedframe = El<"allow" | "height" | "width">
-export const fencedframe: fencedframe
-
-type selectedcontent = El<never>
-export const selectedcontent: selectedcontent
+};
+
+type ElAttributes<A> = GlobalAttributes & A & {
+  [k in `data-${string}`]?: AttributeValues
+};
+
+type El<A> = (attributes: ElAttributes<A>, children: Element[]) => Element;
+
+type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
+
+type GlobalAttributes = {
+  "accesskey"?: string | number | boolean | null;
+  "autocapitalize"?: string | number | boolean | null;
+  "autocorrect"?: "on" | "off";
+  "autofocus"?: string | number | boolean | null;
+  "class"?: string | number | boolean | null;
+  "contenteditable"?: string | number | boolean | null;
+  "contextmenu"?: string | number | boolean | null;
+  "dir"?: "ltr" | "rtl" | "auto";
+  "draggable"?: "true" | "false";
+  "dropzone"?: string | number | boolean | null;
+  "enterkeyhint"?: "enter" | "done" | "go" | "next" | "previous" | "search" | "send";
+  "exportparts"?: string | number | boolean | null;
+  "hidden"?: boolean;
+  "id"?: string | number | boolean | null;
+  "inert"?: string | number | boolean | null;
+  "inputmode"?: string | number | boolean | null;
+  "is"?: string | number | boolean | null;
+  "itemid"?: string | number | boolean | null;
+  "itemprop"?: string | number | boolean | null;
+  "itemref"?: string | number | boolean | null;
+  "itemscope"?: boolean;
+  "itemtype"?: string | number | boolean | null;
+  "lang"?: string | number | boolean | null;
+  "nonce"?: string | number | boolean | null;
+  "part"?: string | number | boolean | null;
+  "popover"?: "auto" | "hint" | "manual";
+  "role"?: "alert" | "alertdialog" | "button" | "checkbox" | "dialog" | "gridcell" | "link" | "log" | "marquee" | "menuitem" | "menuitemcheckbox" | "menuitemradio" | "option" | "progressbar" | "radio" | "scrollbar" | "searchbox" | "slider" | "spinbutton" | "status" | "switch" | "tab" | "tabpanel" | "textbox" | "timer" | "tooltip" | "treeitem" | "combobox" | "grid" | "listbox" | "menu" | "menubar" | "radiogroup" | "tablist" | "tree" | "treegrid" | "application" | "article" | "cell" | "columnheader" | "definition" | "directory" | "document" | "feed" | "figure" | "group" | "heading" | "img" | "list" | "listitem" | "math" | "none" | "note" | "presentation" | "region" | "row" | "rowgroup" | "rowheader" | "separator" | "table" | "term" | "text" | "toolbar" | "banner" | "complementary" | "contentinfo" | "form" | "main" | "navigation" | "region" | "search" | "doc-abstract" | "doc-acknowledgments" | "doc-afterword" | "doc-appendix" | "doc-backlink" | "doc-biblioentry" | "doc-bibliography" | "doc-biblioref" | "doc-chapter" | "doc-colophon" | "doc-conclusion" | "doc-cover" | "doc-credit" | "doc-credits" | "doc-dedication" | "doc-endnote" | "doc-endnotes" | "doc-epigraph" | "doc-epilogue" | "doc-errata" | "doc-example" | "doc-footnote" | "doc-foreword" | "doc-glossary" | "doc-glossref" | "doc-index" | "doc-introduction" | "doc-noteref" | "doc-notice" | "doc-pagebreak" | "doc-pagelist" | "doc-part" | "doc-preface" | "doc-prologue" | "doc-pullquote" | "doc-qna" | "doc-subtitle" | "doc-tip" | "doc-toc";
+  "slot"?: string | number | boolean | null;
+  "spellcheck"?: "true" | "false";
+  "style"?: string | number | boolean | null;
+  "tabindex"?: string | number | boolean | null;
+  "title"?: string | number | boolean | null;
+  "translate"?: "yes" | "no";
+  "virtualkeyboardpolicy"?: "true" | "false";
+  "onabort"?: string | number | boolean | null;
+  "onblur"?: string | number | boolean | null;
+  "oncanplay"?: string | number | boolean | null;
+  "oncanplaythrough"?: string | number | boolean | null;
+  "onchange"?: string | number | boolean | null;
+  "onclick"?: string | number | boolean | null;
+  "oncontextmenu"?: string | number | boolean | null;
+  "ondblclick"?: string | number | boolean | null;
+  "ondrag"?: string | number | boolean | null;
+  "ondragend"?: string | number | boolean | null;
+  "ondragenter"?: string | number | boolean | null;
+  "ondragleave"?: string | number | boolean | null;
+  "ondragover"?: string | number | boolean | null;
+  "ondragstart"?: string | number | boolean | null;
+  "ondrop"?: string | number | boolean | null;
+  "ondurationchange"?: string | number | boolean | null;
+  "onemptied"?: string | number | boolean | null;
+  "onended"?: string | number | boolean | null;
+  "onerror"?: string | number | boolean | null;
+  "onfocus"?: string | number | boolean | null;
+  "onformchange"?: string | number | boolean | null;
+  "onforminput"?: string | number | boolean | null;
+  "oninput"?: string | number | boolean | null;
+  "oninvalid"?: string | number | boolean | null;
+  "onkeydown"?: string | number | boolean | null;
+  "onkeypress"?: string | number | boolean | null;
+  "onkeyup"?: string | number | boolean | null;
+  "onload"?: string | number | boolean | null;
+  "onloadeddata"?: string | number | boolean | null;
+  "onloadedmetadata"?: string | number | boolean | null;
+  "onloadstart"?: string | number | boolean | null;
+  "onmousedown"?: string | number | boolean | null;
+  "onmousemove"?: string | number | boolean | null;
+  "onmouseout"?: string | number | boolean | null;
+  "onmouseover"?: string | number | boolean | null;
+  "onmouseup"?: string | number | boolean | null;
+  "onmousewheel"?: string | number | boolean | null;
+  "onmouseenter"?: string | number | boolean | null;
+  "onmouseleave"?: string | number | boolean | null;
+  "onpause"?: string | number | boolean | null;
+  "onplay"?: string | number | boolean | null;
+  "onplaying"?: string | number | boolean | null;
+  "onprogress"?: string | number | boolean | null;
+  "onratechange"?: string | number | boolean | null;
+  "onreset"?: string | number | boolean | null;
+  "onresize"?: string | number | boolean | null;
+  "onreadystatechange"?: string | number | boolean | null;
+  "onscroll"?: string | number | boolean | null;
+  "onseeked"?: string | number | boolean | null;
+  "onseeking"?: string | number | boolean | null;
+  "onselect"?: string | number | boolean | null;
+  "onshow"?: string | number | boolean | null;
+  "onstalled"?: string | number | boolean | null;
+  "onsubmit"?: string | number | boolean | null;
+  "onsuspend"?: string | number | boolean | null;
+  "ontimeupdate"?: string | number | boolean | null;
+  "onvolumechange"?: string | number | boolean | null;
+  "onwaiting"?: string | number | boolean | null;
+  "onpointercancel"?: string | number | boolean | null;
+  "onpointerdown"?: string | number | boolean | null;
+  "onpointerenter"?: string | number | boolean | null;
+  "onpointerleave"?: string | number | boolean | null;
+  "onpointerlockchange"?: string | number | boolean | null;
+  "onpointerlockerror"?: string | number | boolean | null;
+  "onpointermove"?: string | number | boolean | null;
+  "onpointerout"?: string | number | boolean | null;
+  "onpointerover"?: string | number | boolean | null;
+  "onpointerup"?: string | number | boolean | null;
+  "aria-activedescendant"?: string | number | boolean | null;
+  "aria-atomic"?: "true" | "false";
+  "aria-autocomplete"?: "inline" | "list" | "both" | "none";
+  "aria-busy"?: "true" | "false";
+  "aria-checked"?: "true" | "false" | "mixed" | "undefined";
+  "aria-colcount"?: string | number | boolean | null;
+  "aria-colindex"?: string | number | boolean | null;
+  "aria-colspan"?: string | number | boolean | null;
+  "aria-controls"?: string | number | boolean | null;
+  "aria-current"?: "page" | "step" | "location" | "date" | "time" | "true" | "false";
+  "aria-describedby"?: string | number | boolean | null;
+  "aria-disabled"?: "true" | "false";
+  "aria-dropeffect"?: "copy" | "move" | "link" | "execute" | "popup" | "none";
+  "aria-errormessage"?: string | number | boolean | null;
+  "aria-expanded"?: "true" | "false" | "undefined";
+  "aria-flowto"?: string | number | boolean | null;
+  "aria-grabbed"?: "true" | "false" | "undefined";
+  "aria-haspopup"?: "false" | "true" | "menu" | "listbox" | "tree" | "grid" | "dialog";
+  "aria-hidden"?: "true" | "false";
+  "aria-invalid"?: "grammar" | "false" | "spelling" | "true";
+  "aria-label"?: string | number | boolean | null;
+  "aria-labelledby"?: string | number | boolean | null;
+  "aria-level"?: string | number | boolean | null;
+  "aria-live"?: "off" | "polite" | "assertive";
+  "aria-modal"?: "true" | "false";
+  "aria-multiline"?: "true" | "false";
+  "aria-multiselectable"?: "true" | "false";
+  "aria-orientation"?: "vertical" | "horizontal" | "undefined";
+  "aria-owns"?: string | number | boolean | null;
+  "aria-placeholder"?: string | number | boolean | null;
+  "aria-posinset"?: string | number | boolean | null;
+  "aria-pressed"?: "true" | "false" | "mixed" | "undefined";
+  "aria-readonly"?: "true" | "false";
+  "aria-relevant"?: "additions" | "removals" | "text" | "all" | "additions text";
+  "aria-required"?: "true" | "false";
+  "aria-roledescription"?: string | number | boolean | null;
+  "aria-rowcount"?: string | number | boolean | null;
+  "aria-rowindex"?: string | number | boolean | null;
+  "aria-rowspan"?: string | number | boolean | null;
+  "aria-selected"?: "true" | "false" | "undefined";
+  "aria-setsize"?: string | number | boolean | null;
+  "aria-sort"?: "ascending" | "descending" | "none" | "other";
+  "aria-valuemax"?: string | number | boolean | null;
+  "aria-valuemin"?: string | number | boolean | null;
+  "aria-valuenow"?: string | number | boolean | null;
+  "aria-valuetext"?: string | number | boolean | null;
+  "aria-details"?: string | number | boolean | null;
+  "aria-keyshortcuts"?: string | number | boolean | null;
+};
+
+type html = El<{
+  "manifest"?: string | number | boolean | null;
+  "version"?: string | number | boolean | null;
+  "xmlns"?: string | number | boolean | null;
+}>;
+export const html: html;
+
+type head = El<{
+  "profile"?: string | number | boolean | null;
+}>;
+export const head: head;
+
+type title = El<{}>;
+export const title: title;
+
+type base = VoidEl<{
+  "href"?: string | number | boolean | null;
+  "target"?: "_self" | "_blank" | "_parent" | "_top";
+}>;
+export const base: base;
+
+type link = VoidEl<{
+  "href"?: string | number | boolean | null;
+  "crossorigin"?: "anonymous" | "use-credentials";
+  "rel"?: string | number | boolean | null;
+  "media"?: string | number | boolean | null;
+  "hreflang"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "sizes"?: string | number | boolean | null;
+  "as"?: string | number | boolean | null;
+  "importance"?: string | number | boolean | null;
+  "integrity"?: string | number | boolean | null;
+  "referrerpolicy"?: string | number | boolean | null;
+  "title"?: string | number | boolean | null;
+}>;
+export const link: link;
+
+type meta = VoidEl<{
+  "name"?: string | number | boolean | null;
+  "http-equiv"?: string | number | boolean | null;
+  "content"?: string | number | boolean | null;
+  "charset"?: string | number | boolean | null;
+  "scheme"?: string | number | boolean | null;
+}>;
+export const meta: meta;
+
+type style = El<{
+  "media"?: string | number | boolean | null;
+  "nonce"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "scoped"?: boolean;
+  "title"?: string | number | boolean | null;
+}>;
+export const style: style;
+
+type body = El<{
+  "onafterprint"?: string | number | boolean | null;
+  "onbeforeprint"?: string | number | boolean | null;
+  "onbeforeunload"?: string | number | boolean | null;
+  "onhashchange"?: string | number | boolean | null;
+  "onlanguagechange"?: string | number | boolean | null;
+  "onmessage"?: string | number | boolean | null;
+  "onoffline"?: string | number | boolean | null;
+  "ononline"?: string | number | boolean | null;
+  "onpagehide"?: string | number | boolean | null;
+  "onpageshow"?: string | number | boolean | null;
+  "onpopstate"?: string | number | boolean | null;
+  "onstorage"?: string | number | boolean | null;
+  "onunload"?: string | number | boolean | null;
+  "alink"?: string | number | boolean | null;
+  "background"?: string | number | boolean | null;
+  "bgcolor"?: string | number | boolean | null;
+  "bottommargin"?: string | number | boolean | null;
+  "leftmargin"?: string | number | boolean | null;
+  "link"?: string | number | boolean | null;
+  "onblur"?: string | number | boolean | null;
+  "onerror"?: string | number | boolean | null;
+  "onfocus"?: string | number | boolean | null;
+  "onload"?: string | number | boolean | null;
+  "onredo"?: string | number | boolean | null;
+  "onresize"?: string | number | boolean | null;
+  "onundo"?: string | number | boolean | null;
+  "rightmargin"?: string | number | boolean | null;
+  "text"?: string | number | boolean | null;
+  "topmargin"?: string | number | boolean | null;
+  "vlink"?: string | number | boolean | null;
+}>;
+export const body: body;
+
+type article = El<{}>;
+export const article: article;
+
+type section = El<{}>;
+export const section: section;
+
+type nav = El<{}>;
+export const nav: nav;
+
+type aside = El<{}>;
+export const aside: aside;
+
+type h1 = El<{}>;
+export const h1: h1;
+
+type h2 = El<{}>;
+export const h2: h2;
+
+type h3 = El<{}>;
+export const h3: h3;
+
+type h4 = El<{}>;
+export const h4: h4;
+
+type h5 = El<{}>;
+export const h5: h5;
+
+type h6 = El<{}>;
+export const h6: h6;
+
+type header = El<{}>;
+export const header: header;
+
+type footer = El<{}>;
+export const footer: footer;
+
+type address = El<{}>;
+export const address: address;
+
+type p = El<{}>;
+export const p: p;
+
+type hr = VoidEl<{
+  "align"?: string | number | boolean | null;
+  "color"?: string | number | boolean | null;
+  "noshade"?: string | number | boolean | null;
+  "size"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+}>;
+export const hr: hr;
+
+type pre = El<{
+  "cols"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+  "wrap"?: string | number | boolean | null;
+}>;
+export const pre: pre;
+
+type blockquote = El<{
+  "cite"?: string | number | boolean | null;
+}>;
+export const blockquote: blockquote;
+
+type ol = El<{
+  "reversed"?: boolean;
+  "start"?: string | number | boolean | null;
+  "type"?: "1" | "a" | "A" | "i" | "I";
+  "compact"?: string | number | boolean | null;
+}>;
+export const ol: ol;
+
+type ul = El<{
+  "compact"?: string | number | boolean | null;
+}>;
+export const ul: ul;
+
+type li = El<{
+  "value"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+}>;
+export const li: li;
+
+type dl = El<{}>;
+export const dl: dl;
+
+type dt = El<{}>;
+export const dt: dt;
+
+type dd = El<{
+  "nowrap"?: string | number | boolean | null;
+}>;
+export const dd: dd;
+
+type figure = El<{}>;
+export const figure: figure;
+
+type figcaption = El<{}>;
+export const figcaption: figcaption;
+
+type main = El<{}>;
+export const main: main;
+
+type div = El<{}>;
+export const div: div;
+
+type a = El<{
+  "href"?: string | number | boolean | null;
+  "target"?: "_self" | "_blank" | "_parent" | "_top";
+  "download"?: string | number | boolean | null;
+  "ping"?: string | number | boolean | null;
+  "rel"?: string | number | boolean | null;
+  "hreflang"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "referrerpolicy"?: string | number | boolean | null;
+}>;
+export const a: a;
+
+type em = El<{}>;
+export const em: em;
+
+type strong = El<{}>;
+export const strong: strong;
+
+type small = El<{}>;
+export const small: small;
+
+type s = El<{}>;
+export const s: s;
+
+type cite = El<{}>;
+export const cite: cite;
+
+type q = El<{
+  "cite"?: string | number | boolean | null;
+}>;
+export const q: q;
+
+type dfn = El<{}>;
+export const dfn: dfn;
+
+type abbr = El<{}>;
+export const abbr: abbr;
+
+type ruby = El<{}>;
+export const ruby: ruby;
+
+type rb = El<{}>;
+export const rb: rb;
+
+type rt = El<{}>;
+export const rt: rt;
+
+type rp = El<{}>;
+export const rp: rp;
+
+type time = El<{
+  "datetime"?: string | number | boolean | null;
+}>;
+export const time: time;
+
+type code = El<{}>;
+export const code: code;
+
+type var_ = El<{}>;
+export const var_: var_;
+
+type samp = El<{}>;
+export const samp: samp;
+
+type kbd = El<{}>;
+export const kbd: kbd;
+
+type sub = El<{}>;
+export const sub: sub;
+
+type sup = El<{}>;
+export const sup: sup;
+
+type i = El<{}>;
+export const i: i;
+
+type b = El<{}>;
+export const b: b;
+
+type u = El<{}>;
+export const u: u;
+
+type mark = El<{}>;
+export const mark: mark;
+
+type bdi = El<{}>;
+export const bdi: bdi;
+
+type bdo = El<{
+  "dir"?: string | number | boolean | null;
+}>;
+export const bdo: bdo;
+
+type span = El<{}>;
+export const span: span;
+
+type br = VoidEl<{
+  "clear"?: string | number | boolean | null;
+}>;
+export const br: br;
+
+type wbr = VoidEl<{}>;
+export const wbr: wbr;
+
+type ins = El<{
+  "cite"?: string | number | boolean | null;
+  "datetime"?: string | number | boolean | null;
+}>;
+export const ins: ins;
+
+type del = El<{
+  "cite"?: string | number | boolean | null;
+  "datetime"?: string | number | boolean | null;
+}>;
+export const del: del;
+
+type picture = El<{}>;
+export const picture: picture;
+
+type img = VoidEl<{
+  "alt"?: string | number | boolean | null;
+  "src"?: string | number | boolean | null;
+  "srcset"?: string | number | boolean | null;
+  "crossorigin"?: "anonymous" | "use-credentials";
+  "usemap"?: string | number | boolean | null;
+  "ismap"?: boolean;
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "decoding"?: "sync" | "async" | "auto";
+  "loading"?: "eager" | "lazy";
+  "fetchpriority"?: "high" | "low" | "auto";
+  "referrerpolicy"?: "no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url";
+  "sizes"?: string | number | boolean | null;
+  "importance"?: string | number | boolean | null;
+  "intrinsicsize"?: string | number | boolean | null;
+}>;
+export const img: img;
+
+type iframe = El<{
+  "src"?: string | number | boolean | null;
+  "srcdoc"?: string | number | boolean | null;
+  "name"?: string | number | boolean | null;
+  "sandbox"?: "allow-forms" | "allow-modals" | "allow-pointer-lock" | "allow-popups" | "allow-popups-to-escape-sandbox" | "allow-same-origin" | "allow-scripts" | "allow-top-navigation";
+  "seamless"?: boolean;
+  "allowfullscreen"?: boolean;
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "allow"?: string | number | boolean | null;
+  "allowpaymentrequest"?: string | number | boolean | null;
+  "csp"?: string | number | boolean | null;
+  "importance"?: string | number | boolean | null;
+  "referrerpolicy"?: string | number | boolean | null;
+}>;
+export const iframe: iframe;
+
+type embed = VoidEl<{
+  "src"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+}>;
+export const embed: embed;
+
+type object_ = El<{
+  "data"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "typemustmatch"?: boolean;
+  "name"?: string | number | boolean | null;
+  "usemap"?: string | number | boolean | null;
+  "form"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "archive"?: string | number | boolean | null;
+  "border"?: string | number | boolean | null;
+  "classid"?: string | number | boolean | null;
+  "codebase"?: string | number | boolean | null;
+  "codetype"?: string | number | boolean | null;
+  "declare"?: string | number | boolean | null;
+  "standby"?: string | number | boolean | null;
+  "tabindex"?: string | number | boolean | null;
+}>;
+export const object_: object_;
+
+type param = VoidEl<{
+  "name"?: string | number | boolean | null;
+  "value"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "valuetype"?: string | number | boolean | null;
+}>;
+export const param: param;
+
+type video = El<{
+  "src"?: string | number | boolean | null;
+  "crossorigin"?: "anonymous" | "use-credentials";
+  "poster"?: string | number | boolean | null;
+  "preload"?: "none" | "metadata" | "auto";
+  "autoplay"?: boolean;
+  "mediagroup"?: string | number | boolean | null;
+  "loop"?: boolean;
+  "muted"?: boolean;
+  "controls"?: boolean;
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+}>;
+export const video: video;
+
+type audio = El<{
+  "src"?: string | number | boolean | null;
+  "crossorigin"?: "anonymous" | "use-credentials";
+  "preload"?: "none" | "metadata" | "auto";
+  "autoplay"?: boolean;
+  "mediagroup"?: string | number | boolean | null;
+  "loop"?: boolean;
+  "muted"?: boolean;
+  "controls"?: boolean;
+}>;
+export const audio: audio;
+
+type source = VoidEl<{
+  "src"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "sizes"?: string | number | boolean | null;
+  "srcset"?: string | number | boolean | null;
+  "media"?: string | number | boolean | null;
+}>;
+export const source: source;
+
+type track = VoidEl<{
+  "default"?: boolean;
+  "kind"?: "subtitles" | "captions" | "descriptions" | "chapters" | "metadata";
+  "label"?: string | number | boolean | null;
+  "src"?: string | number | boolean | null;
+  "srclang"?: string | number | boolean | null;
+}>;
+export const track: track;
+
+type map = El<{
+  "name"?: string | number | boolean | null;
+}>;
+export const map: map;
+
+type area = VoidEl<{
+  "alt"?: string | number | boolean | null;
+  "coords"?: string | number | boolean | null;
+  "shape"?: "circle" | "default" | "poly" | "rect";
+  "href"?: string | number | boolean | null;
+  "target"?: "_self" | "_blank" | "_parent" | "_top";
+  "download"?: string | number | boolean | null;
+  "ping"?: string | number | boolean | null;
+  "rel"?: string | number | boolean | null;
+  "hreflang"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "accesskey"?: string | number | boolean | null;
+}>;
+export const area: area;
+
+type table = El<{
+  "border"?: string | number | boolean | null;
+  "align"?: string | number | boolean | null;
+}>;
+export const table: table;
+
+type caption = El<{
+  "align"?: string | number | boolean | null;
+}>;
+export const caption: caption;
+
+type colgroup = El<{
+  "span"?: string | number | boolean | null;
+  "align"?: string | number | boolean | null;
+}>;
+export const colgroup: colgroup;
+
+type col = VoidEl<{
+  "span"?: string | number | boolean | null;
+  "align"?: string | number | boolean | null;
+}>;
+export const col: col;
+
+type tbody = El<{
+  "align"?: string | number | boolean | null;
+}>;
+export const tbody: tbody;
+
+type thead = El<{
+  "align"?: string | number | boolean | null;
+}>;
+export const thead: thead;
+
+type tfoot = El<{
+  "align"?: string | number | boolean | null;
+}>;
+export const tfoot: tfoot;
+
+type tr = El<{
+  "align"?: string | number | boolean | null;
+}>;
+export const tr: tr;
+
+type td = El<{
+  "colspan"?: string | number | boolean | null;
+  "rowspan"?: string | number | boolean | null;
+  "headers"?: string | number | boolean | null;
+  "abbr"?: string | number | boolean | null;
+  "align"?: string | number | boolean | null;
+  "axis"?: string | number | boolean | null;
+  "bgcolor"?: string | number | boolean | null;
+}>;
+export const td: td;
+
+type th = El<{
+  "colspan"?: string | number | boolean | null;
+  "rowspan"?: string | number | boolean | null;
+  "headers"?: string | number | boolean | null;
+  "scope"?: "row" | "col" | "rowgroup" | "colgroup";
+  "sorted"?: string | number | boolean | null;
+  "abbr"?: string | number | boolean | null;
+  "align"?: string | number | boolean | null;
+  "axis"?: string | number | boolean | null;
+  "bgcolor"?: string | number | boolean | null;
+}>;
+export const th: th;
+
+type form = El<{
+  "accept-charset"?: string | number | boolean | null;
+  "action"?: string | number | boolean | null;
+  "autocomplete"?: "on" | "off";
+  "enctype"?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+  "method"?: "get" | "post" | "dialog";
+  "name"?: string | number | boolean | null;
+  "novalidate"?: boolean;
+  "target"?: "_self" | "_blank" | "_parent" | "_top";
+  "accept"?: string | number | boolean | null;
+  "autocapitalize"?: string | number | boolean | null;
+}>;
+export const form: form;
+
+type label = El<{
+  "form"?: string | number | boolean | null;
+  "for"?: string | number | boolean | null;
+}>;
+export const label: label;
+
+type input = VoidEl<{
+  "accept"?: string | number | boolean | null;
+  "alt"?: string | number | boolean | null;
+  "autocomplete"?: "additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work";
+  "autofocus"?: boolean;
+  "checked"?: boolean;
+  "dirname"?: string | number | boolean | null;
+  "disabled"?: boolean;
+  "form"?: string | number | boolean | null;
+  "formaction"?: string | number | boolean | null;
+  "formenctype"?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+  "formmethod"?: "get" | "post";
+  "formnovalidate"?: boolean;
+  "formtarget"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "inputmode"?: "verbatim" | "latin" | "latin-name" | "latin-prose" | "full-width-latin" | "kana" | "kana-name" | "katakana" | "numeric" | "tel" | "email" | "url";
+  "list"?: string | number | boolean | null;
+  "max"?: string | number | boolean | null;
+  "maxlength"?: string | number | boolean | null;
+  "min"?: string | number | boolean | null;
+  "minlength"?: string | number | boolean | null;
+  "multiple"?: boolean;
+  "name"?: string | number | boolean | null;
+  "pattern"?: string | number | boolean | null;
+  "placeholder"?: string | number | boolean | null;
+  "popovertarget"?: string | number | boolean | null;
+  "popovertargetaction"?: string | number | boolean | null;
+  "readonly"?: boolean;
+  "required"?: boolean;
+  "size"?: string | number | boolean | null;
+  "src"?: string | number | boolean | null;
+  "step"?: string | number | boolean | null;
+  "type"?: "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "submit" | "image" | "reset" | "button";
+  "value"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+}>;
+export const input: input;
+
+type button = El<{
+  "autofocus"?: boolean;
+  "disabled"?: boolean;
+  "form"?: string | number | boolean | null;
+  "formaction"?: string | number | boolean | null;
+  "formenctype"?: "application/x-www-form-urlencoded" | "multipart/form-data" | "text/plain";
+  "formmethod"?: "get" | "post";
+  "formnovalidate"?: boolean;
+  "formtarget"?: string | number | boolean | null;
+  "name"?: string | number | boolean | null;
+  "popovertarget"?: string | number | boolean | null;
+  "popovertargetaction"?: string | number | boolean | null;
+  "type"?: "button" | "submit" | "reset";
+  "value"?: string | number | boolean | null;
+  "autocomplete"?: string | number | boolean | null;
+}>;
+export const button: button;
+
+type select = El<{
+  "autocomplete"?: "additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work";
+  "autofocus"?: boolean;
+  "disabled"?: boolean;
+  "form"?: string | number | boolean | null;
+  "multiple"?: boolean;
+  "name"?: string | number | boolean | null;
+  "required"?: boolean;
+  "size"?: string | number | boolean | null;
+}>;
+export const select: select;
+
+type datalist = El<{}>;
+export const datalist: datalist;
+
+type optgroup = El<{
+  "disabled"?: boolean;
+  "label"?: string | number | boolean | null;
+}>;
+export const optgroup: optgroup;
+
+type option = El<{
+  "disabled"?: boolean;
+  "label"?: string | number | boolean | null;
+  "selected"?: boolean;
+  "value"?: string | number | boolean | null;
+}>;
+export const option: option;
+
+type textarea = El<{
+  "autocomplete"?: "additional-name" | "address-level1" | "address-level2" | "address-level3" | "address-level4" | "address-line1" | "address-line2" | "address-line3" | "bday" | "bday-year" | "bday-day" | "bday-month" | "billing" | "cc-additional-name" | "cc-csc" | "cc-exp" | "cc-exp-month" | "cc-exp-year" | "cc-family-name" | "cc-given-name" | "cc-name" | "cc-number" | "cc-type" | "country" | "country-name" | "current-password" | "email" | "family-name" | "fax" | "given-name" | "home" | "honorific-prefix" | "honorific-suffix" | "impp" | "language" | "mobile" | "name" | "new-password" | "nickname" | "off" | "on" | "organization" | "organization-title" | "pager" | "photo" | "postal-code" | "sex" | "shipping" | "street-address" | "tel-area-code" | "tel" | "tel-country-code" | "tel-extension" | "tel-local" | "tel-local-prefix" | "tel-local-suffix" | "tel-national" | "transaction-amount" | "transaction-currency" | "url" | "username" | "work";
+  "autofocus"?: boolean;
+  "cols"?: string | number | boolean | null;
+  "dirname"?: string | number | boolean | null;
+  "disabled"?: boolean;
+  "form"?: string | number | boolean | null;
+  "inputmode"?: "verbatim" | "latin" | "latin-name" | "latin-prose" | "full-width-latin" | "kana" | "kana-name" | "katakana" | "numeric" | "tel" | "email" | "url";
+  "maxlength"?: string | number | boolean | null;
+  "minlength"?: string | number | boolean | null;
+  "name"?: string | number | boolean | null;
+  "placeholder"?: string | number | boolean | null;
+  "readonly"?: boolean;
+  "required"?: boolean;
+  "rows"?: string | number | boolean | null;
+  "wrap"?: "soft" | "hard";
+  "autocapitalize"?: string | number | boolean | null;
+  "spellcheck"?: string | number | boolean | null;
+}>;
+export const textarea: textarea;
+
+type output = El<{
+  "for"?: string | number | boolean | null;
+  "form"?: string | number | boolean | null;
+  "name"?: string | number | boolean | null;
+}>;
+export const output: output;
+
+type progress = El<{
+  "value"?: string | number | boolean | null;
+  "max"?: string | number | boolean | null;
+}>;
+export const progress: progress;
+
+type meter = El<{
+  "value"?: string | number | boolean | null;
+  "min"?: string | number | boolean | null;
+  "max"?: string | number | boolean | null;
+  "low"?: string | number | boolean | null;
+  "high"?: string | number | boolean | null;
+  "optimum"?: string | number | boolean | null;
+  "form"?: string | number | boolean | null;
+}>;
+export const meter: meter;
+
+type fieldset = El<{
+  "disabled"?: boolean;
+  "form"?: string | number | boolean | null;
+  "name"?: string | number | boolean | null;
+}>;
+export const fieldset: fieldset;
+
+type legend = El<{}>;
+export const legend: legend;
+
+type details = El<{
+  "open"?: boolean;
+}>;
+export const details: details;
+
+type summary = El<{}>;
+export const summary: summary;
+
+type dialog = El<{
+  "open"?: string | number | boolean | null;
+}>;
+export const dialog: dialog;
+
+type script = El<{
+  "src"?: string | number | boolean | null;
+  "type"?: string | number | boolean | null;
+  "charset"?: string | number | boolean | null;
+  "async"?: boolean;
+  "defer"?: boolean;
+  "crossorigin"?: "anonymous" | "use-credentials";
+  "nonce"?: string | number | boolean | null;
+  "integrity"?: string | number | boolean | null;
+  "nomodule"?: string | number | boolean | null;
+  "referrerpolicy"?: string | number | boolean | null;
+  "text"?: string | number | boolean | null;
+}>;
+export const script: script;
+
+type noscript = El<{}>;
+export const noscript: noscript;
+
+type template = El<{}>;
+export const template: template;
+
+type canvas = El<{
+  "width"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "moz-opaque"?: string | number | boolean | null;
+}>;
+export const canvas: canvas;
+
+type slot = El<{
+  "name"?: string | number | boolean | null;
+}>;
+export const slot: slot;
+
+type data = El<{
+  "value"?: string | number | boolean | null;
+}>;
+export const data: data;
+
+type hgroup = El<{}>;
+export const hgroup: hgroup;
+
+type menu = El<{}>;
+export const menu: menu;
+
+type search = El<{}>;
+export const search: search;
+
+type fencedframe = El<{
+  "allow"?: string | number | boolean | null;
+  "height"?: string | number | boolean | null;
+  "width"?: string | number | boolean | null;
+}>;
+export const fencedframe: fencedframe;
+
+type selectedcontent = El<{}>;
+export const selectedcontent: selectedcontent;

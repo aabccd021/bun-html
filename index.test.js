@@ -1,4 +1,4 @@
-import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from "./index.js";
+import { a, button, div, head, html, meta, ol, p, render, unsafeHtml, var_ } from "./index.js";
 
 {
   console.log("simple element with attribute and text");
@@ -16,6 +16,13 @@ import { a, button, div, head, html, meta, p, render, unsafeHtml, var_ } from ".
   console.log("element with no children");
   const element = p({ "data-hello": "world" }, []);
   if (render(element) !== '<p data-hello="world"></p>') throw new Error();
+}
+
+{
+  console.log("ol type should be constrained");
+  ol({ type: "1" }, []);
+  // @ts-expect-error
+  ol({ type: "foo" }, []);
 }
 
 {
