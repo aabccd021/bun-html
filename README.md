@@ -2,6 +2,11 @@
 
 **tiny-html** is a tiny HTML DSL and renderer.
 
+## TODO
+- fix readme examples
+- add tips to readme
+- use git dependencies
+
 ## Installation
 
 ```sh
