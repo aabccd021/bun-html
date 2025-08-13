@@ -64,9 +64,9 @@ type Attributes = {
 type GlobalAttributeNames = ${union(data.globalAttributes)};`;
 
 for (const tag of data.tags) {
-  const attrNames = tag.attributes.length > 0 ? union(tag.attributes) : "never";
+  const attrs = tag.attributes.length > 0 ? union(tag.attributes) : "never";
   const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
-  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrNames}>;`;
+  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrs}>;`;
   result += `\nexport const ${name}: ${name};`;
 }
 
