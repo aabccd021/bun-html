@@ -3,6 +3,7 @@
     // Environment Settings
     "target": "esnext",
     "module": "preserve",
+    "lib": ["esnext", "webworker"],
     "moduleDetection": "force",
     "checkJs": true,
     "allowJs": true,
