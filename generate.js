@@ -80,13 +80,25 @@ const seen = new Set();
 for (const attr of data.globalAttributes) {
   if (seen.has(attr.name)) continue;
   seen.add(attr.name);
-  console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
+
+  let valueSet = attr.valueSet;
+  if (valueSet === undefined) {
+    valueSet = "default";
+  }
+
+  console.log(`  "${attr.name}"?: ValueSets["${valueSet}"];`);
 }
 for (const tag of data.tags) {
   for (const attr of tag.attributes) {
     if (seen.has(attr.name)) continue;
     seen.add(attr.name);
-    console.log(`  "${attr.name}"?: ValueSets["${attr.valueSet ?? "default"}"];`);
+
+    let valueSet = attr.valueSet;
+    if (valueSet === undefined) {
+      valueSet = "default";
+    }
+
+    console.log(`  "${attr.name}"?: ValueSets["${valueSet}"];`);
   }
 }
 console.log(`}`);
@@ -101,10 +113,17 @@ for (const attr of data.globalAttributes) {
  */
 for (const tag of data.tags) {
   const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
-  // let attrNames = tag.attributes.map((attr) => attr.name).map((i) => `"${i}"`).join(" | ");
-  // attrNames = attrNames === "" ? "never" : attrNames;
-  const voidStr = tag.void ? "Void" : "";
-  const funcName = tag.name === "var" ? "var_" : tag.name;
+
+  let voidStr = "";
+  if (tag.void) {
+    voidStr = "Void";
+  }
+
+  let funcName = tag.name;
+  if (funcName === "var") {
+    funcName = "var_";
+  }
+
   console.log(`\ntype ${capName} = ${voidStr}El<`);
   if (tag.attributes.length === 0) {
     console.log(`  never`);
