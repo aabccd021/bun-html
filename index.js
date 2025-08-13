@@ -49,7 +49,7 @@ function serializeAttribute([unsafeKey, value]) {
 }
 
 /**
- * @type {import("./index").Render}
+ * @type {import("./index").render}
  */
 export const render = (element) => {
   if (element === false || element === undefined) {
@@ -77,587 +77,587 @@ export const render = (element) => {
 };
 
 /**
- * @type {import("./index").UnsafeHtml}
+ * @type {import("./index").unsafeHtml}
  */
 export const unsafeHtml = (value) => ({ value });
 
 /**
- * @type {import("./index").Html}
+ * @type {import("./index").html}
  */
 export const html = (attributes, children) => ({ tag: "html", attributes, children });
 
 /**
- * @type {import("./index").Head}
+ * @type {import("./index").head}
  */
 export const head = (attributes, children) => ({ tag: "head", attributes, children });
 
 /**
- * @type {import("./index").Title}
+ * @type {import("./index").title}
  */
 export const title = (attributes, children) => ({ tag: "title", attributes, children });
 
 /**
- * @type {import("./index").Base}
+ * @type {import("./index").base}
  */
 export const base = (attributes) => ({ tag: "base", attributes });
 
 /**
- * @type {import("./index").Link}
+ * @type {import("./index").link}
  */
 export const link = (attributes) => ({ tag: "link", attributes });
 
 /**
- * @type {import("./index").Meta}
+ * @type {import("./index").meta}
  */
 export const meta = (attributes) => ({ tag: "meta", attributes });
 
 /**
- * @type {import("./index").Style}
+ * @type {import("./index").style}
  */
 export const style = (attributes, children) => ({ tag: "style", attributes, children });
 
 /**
- * @type {import("./index").Body}
+ * @type {import("./index").body}
  */
 export const body = (attributes, children) => ({ tag: "body", attributes, children });
 
 /**
- * @type {import("./index").Article}
+ * @type {import("./index").article}
  */
 export const article = (attributes, children) => ({ tag: "article", attributes, children });
 
 /**
- * @type {import("./index").Section}
+ * @type {import("./index").section}
  */
 export const section = (attributes, children) => ({ tag: "section", attributes, children });
 
 /**
- * @type {import("./index").Nav}
+ * @type {import("./index").nav}
  */
 export const nav = (attributes, children) => ({ tag: "nav", attributes, children });
 
 /**
- * @type {import("./index").Aside}
+ * @type {import("./index").aside}
  */
 export const aside = (attributes, children) => ({ tag: "aside", attributes, children });
 
 /**
- * @type {import("./index").H1}
+ * @type {import("./index").h1}
  */
 export const h1 = (attributes, children) => ({ tag: "h1", attributes, children });
 
 /**
- * @type {import("./index").H2}
+ * @type {import("./index").h2}
  */
 export const h2 = (attributes, children) => ({ tag: "h2", attributes, children });
 
 /**
- * @type {import("./index").H3}
+ * @type {import("./index").h3}
  */
 export const h3 = (attributes, children) => ({ tag: "h3", attributes, children });
 
 /**
- * @type {import("./index").H4}
+ * @type {import("./index").h4}
  */
 export const h4 = (attributes, children) => ({ tag: "h4", attributes, children });
 
 /**
- * @type {import("./index").H5}
+ * @type {import("./index").h5}
  */
 export const h5 = (attributes, children) => ({ tag: "h5", attributes, children });
 
 /**
- * @type {import("./index").H6}
+ * @type {import("./index").h6}
  */
 export const h6 = (attributes, children) => ({ tag: "h6", attributes, children });
 
 /**
- * @type {import("./index").Header}
+ * @type {import("./index").header}
  */
 export const header = (attributes, children) => ({ tag: "header", attributes, children });
 
 /**
- * @type {import("./index").Footer}
+ * @type {import("./index").footer}
  */
 export const footer = (attributes, children) => ({ tag: "footer", attributes, children });
 
 /**
- * @type {import("./index").Address}
+ * @type {import("./index").address}
  */
 export const address = (attributes, children) => ({ tag: "address", attributes, children });
 
 /**
- * @type {import("./index").P}
+ * @type {import("./index").p}
  */
 export const p = (attributes, children) => ({ tag: "p", attributes, children });
 
 /**
- * @type {import("./index").Hr}
+ * @type {import("./index").hr}
  */
 export const hr = (attributes) => ({ tag: "hr", attributes });
 
 /**
- * @type {import("./index").Pre}
+ * @type {import("./index").pre}
  */
 export const pre = (attributes, children) => ({ tag: "pre", attributes, children });
 
 /**
- * @type {import("./index").Blockquote}
+ * @type {import("./index").blockquote}
  */
 export const blockquote = (attributes, children) => ({ tag: "blockquote", attributes, children });
 
 /**
- * @type {import("./index").Ol}
+ * @type {import("./index").ol}
  */
 export const ol = (attributes, children) => ({ tag: "ol", attributes, children });
 
 /**
- * @type {import("./index").Ul}
+ * @type {import("./index").ul}
  */
 export const ul = (attributes, children) => ({ tag: "ul", attributes, children });
 
 /**
- * @type {import("./index").Li}
+ * @type {import("./index").li}
  */
 export const li = (attributes, children) => ({ tag: "li", attributes, children });
 
 /**
- * @type {import("./index").Dl}
+ * @type {import("./index").dl}
  */
 export const dl = (attributes, children) => ({ tag: "dl", attributes, children });
 
 /**
- * @type {import("./index").Dt}
+ * @type {import("./index").dt}
  */
 export const dt = (attributes, children) => ({ tag: "dt", attributes, children });
 
 /**
- * @type {import("./index").Dd}
+ * @type {import("./index").dd}
  */
 export const dd = (attributes, children) => ({ tag: "dd", attributes, children });
 
 /**
- * @type {import("./index").Figure}
+ * @type {import("./index").figure}
  */
 export const figure = (attributes, children) => ({ tag: "figure", attributes, children });
 
 /**
- * @type {import("./index").Figcaption}
+ * @type {import("./index").figcaption}
  */
 export const figcaption = (attributes, children) => ({ tag: "figcaption", attributes, children });
 
 /**
- * @type {import("./index").Main}
+ * @type {import("./index").main}
  */
 export const main = (attributes, children) => ({ tag: "main", attributes, children });
 
 /**
- * @type {import("./index").Div}
+ * @type {import("./index").div}
  */
 export const div = (attributes, children) => ({ tag: "div", attributes, children });
 
 /**
- * @type {import("./index").A}
+ * @type {import("./index").a}
  */
 export const a = (attributes, children) => ({ tag: "a", attributes, children });
 
 /**
- * @type {import("./index").Em}
+ * @type {import("./index").em}
  */
 export const em = (attributes, children) => ({ tag: "em", attributes, children });
 
 /**
- * @type {import("./index").Strong}
+ * @type {import("./index").strong}
  */
 export const strong = (attributes, children) => ({ tag: "strong", attributes, children });
 
 /**
- * @type {import("./index").Small}
+ * @type {import("./index").small}
  */
 export const small = (attributes, children) => ({ tag: "small", attributes, children });
 
 /**
- * @type {import("./index").S}
+ * @type {import("./index").s}
  */
 export const s = (attributes, children) => ({ tag: "s", attributes, children });
 
 /**
- * @type {import("./index").Cite}
+ * @type {import("./index").cite}
  */
 export const cite = (attributes, children) => ({ tag: "cite", attributes, children });
 
 /**
- * @type {import("./index").Q}
+ * @type {import("./index").q}
  */
 export const q = (attributes, children) => ({ tag: "q", attributes, children });
 
 /**
- * @type {import("./index").Dfn}
+ * @type {import("./index").dfn}
  */
 export const dfn = (attributes, children) => ({ tag: "dfn", attributes, children });
 
 /**
- * @type {import("./index").Abbr}
+ * @type {import("./index").abbr}
  */
 export const abbr = (attributes, children) => ({ tag: "abbr", attributes, children });
 
 /**
- * @type {import("./index").Ruby}
+ * @type {import("./index").ruby}
  */
 export const ruby = (attributes, children) => ({ tag: "ruby", attributes, children });
 
 /**
- * @type {import("./index").Rb}
+ * @type {import("./index").rb}
  */
 export const rb = (attributes, children) => ({ tag: "rb", attributes, children });
 
 /**
- * @type {import("./index").Rt}
+ * @type {import("./index").rt}
  */
 export const rt = (attributes, children) => ({ tag: "rt", attributes, children });
 
 /**
- * @type {import("./index").Rp}
+ * @type {import("./index").rp}
  */
 export const rp = (attributes, children) => ({ tag: "rp", attributes, children });
 
 /**
- * @type {import("./index").Time}
+ * @type {import("./index").time}
  */
 export const time = (attributes, children) => ({ tag: "time", attributes, children });
 
 /**
- * @type {import("./index").Code}
+ * @type {import("./index").code}
  */
 export const code = (attributes, children) => ({ tag: "code", attributes, children });
 
 /**
- * @type {import("./index").Var}
+ * @type {import("./index").var_}
  */
 export const var_ = (attributes, children) => ({ tag: "var", attributes, children });
 
 /**
- * @type {import("./index").Samp}
+ * @type {import("./index").samp}
  */
 export const samp = (attributes, children) => ({ tag: "samp", attributes, children });
 
 /**
- * @type {import("./index").Kbd}
+ * @type {import("./index").kbd}
  */
 export const kbd = (attributes, children) => ({ tag: "kbd", attributes, children });
 
 /**
- * @type {import("./index").Sub}
+ * @type {import("./index").sub}
  */
 export const sub = (attributes, children) => ({ tag: "sub", attributes, children });
 
 /**
- * @type {import("./index").Sup}
+ * @type {import("./index").sup}
  */
 export const sup = (attributes, children) => ({ tag: "sup", attributes, children });
 
 /**
- * @type {import("./index").I}
+ * @type {import("./index").i}
  */
 export const i = (attributes, children) => ({ tag: "i", attributes, children });
 
 /**
- * @type {import("./index").B}
+ * @type {import("./index").b}
  */
 export const b = (attributes, children) => ({ tag: "b", attributes, children });
 
 /**
- * @type {import("./index").U}
+ * @type {import("./index").u}
  */
 export const u = (attributes, children) => ({ tag: "u", attributes, children });
 
 /**
- * @type {import("./index").Mark}
+ * @type {import("./index").mark}
  */
 export const mark = (attributes, children) => ({ tag: "mark", attributes, children });
 
 /**
- * @type {import("./index").Bdi}
+ * @type {import("./index").bdi}
  */
 export const bdi = (attributes, children) => ({ tag: "bdi", attributes, children });
 
 /**
- * @type {import("./index").Bdo}
+ * @type {import("./index").bdo}
  */
 export const bdo = (attributes, children) => ({ tag: "bdo", attributes, children });
 
 /**
- * @type {import("./index").Span}
+ * @type {import("./index").span}
  */
 export const span = (attributes, children) => ({ tag: "span", attributes, children });
 
 /**
- * @type {import("./index").Br}
+ * @type {import("./index").br}
  */
 export const br = (attributes) => ({ tag: "br", attributes });
 
 /**
- * @type {import("./index").Wbr}
+ * @type {import("./index").wbr}
  */
 export const wbr = (attributes) => ({ tag: "wbr", attributes });
 
 /**
- * @type {import("./index").Ins}
+ * @type {import("./index").ins}
  */
 export const ins = (attributes, children) => ({ tag: "ins", attributes, children });
 
 /**
- * @type {import("./index").Del}
+ * @type {import("./index").del}
  */
 export const del = (attributes, children) => ({ tag: "del", attributes, children });
 
 /**
- * @type {import("./index").Picture}
+ * @type {import("./index").picture}
  */
 export const picture = (attributes, children) => ({ tag: "picture", attributes, children });
 
 /**
- * @type {import("./index").Img}
+ * @type {import("./index").img}
  */
 export const img = (attributes) => ({ tag: "img", attributes });
 
 /**
- * @type {import("./index").Iframe}
+ * @type {import("./index").iframe}
  */
 export const iframe = (attributes, children) => ({ tag: "iframe", attributes, children });
 
 /**
- * @type {import("./index").Embed}
+ * @type {import("./index").embed}
  */
 export const embed = (attributes) => ({ tag: "embed", attributes });
 
 /**
- * @type {import("./index").Object}
+ * @type {import("./index").object_}
  */
-export const object = (attributes, children) => ({ tag: "object", attributes, children });
+export const object_ = (attributes, children) => ({ tag: "object", attributes, children });
 
 /**
- * @type {import("./index").Param}
+ * @type {import("./index").param}
  */
 export const param = (attributes) => ({ tag: "param", attributes });
 
 /**
- * @type {import("./index").Video}
+ * @type {import("./index").video}
  */
 export const video = (attributes, children) => ({ tag: "video", attributes, children });
 
 /**
- * @type {import("./index").Audio}
+ * @type {import("./index").audio}
  */
 export const audio = (attributes, children) => ({ tag: "audio", attributes, children });
 
 /**
- * @type {import("./index").Source}
+ * @type {import("./index").source}
  */
 export const source = (attributes) => ({ tag: "source", attributes });
 
 /**
- * @type {import("./index").Track}
+ * @type {import("./index").track}
  */
 export const track = (attributes) => ({ tag: "track", attributes });
 
 /**
- * @type {import("./index").Map}
+ * @type {import("./index").map}
  */
 export const map = (attributes, children) => ({ tag: "map", attributes, children });
 
 /**
- * @type {import("./index").Area}
+ * @type {import("./index").area}
  */
 export const area = (attributes) => ({ tag: "area", attributes });
 
 /**
- * @type {import("./index").Table}
+ * @type {import("./index").table}
  */
 export const table = (attributes, children) => ({ tag: "table", attributes, children });
 
 /**
- * @type {import("./index").Caption}
+ * @type {import("./index").caption}
  */
 export const caption = (attributes, children) => ({ tag: "caption", attributes, children });
 
 /**
- * @type {import("./index").Colgroup}
+ * @type {import("./index").colgroup}
  */
 export const colgroup = (attributes, children) => ({ tag: "colgroup", attributes, children });
 
 /**
- * @type {import("./index").Col}
+ * @type {import("./index").col}
  */
 export const col = (attributes) => ({ tag: "col", attributes });
 
 /**
- * @type {import("./index").Tbody}
+ * @type {import("./index").tbody}
  */
 export const tbody = (attributes, children) => ({ tag: "tbody", attributes, children });
 
 /**
- * @type {import("./index").Thead}
+ * @type {import("./index").thead}
  */
 export const thead = (attributes, children) => ({ tag: "thead", attributes, children });
 
 /**
- * @type {import("./index").Tfoot}
+ * @type {import("./index").tfoot}
  */
 export const tfoot = (attributes, children) => ({ tag: "tfoot", attributes, children });
 
 /**
- * @type {import("./index").Tr}
+ * @type {import("./index").tr}
  */
 export const tr = (attributes, children) => ({ tag: "tr", attributes, children });
 
 /**
- * @type {import("./index").Td}
+ * @type {import("./index").td}
  */
 export const td = (attributes, children) => ({ tag: "td", attributes, children });
 
 /**
- * @type {import("./index").Th}
+ * @type {import("./index").th}
  */
 export const th = (attributes, children) => ({ tag: "th", attributes, children });
 
 /**
- * @type {import("./index").Form}
+ * @type {import("./index").form}
  */
 export const form = (attributes, children) => ({ tag: "form", attributes, children });
 
 /**
- * @type {import("./index").Label}
+ * @type {import("./index").label}
  */
 export const label = (attributes, children) => ({ tag: "label", attributes, children });
 
 /**
- * @type {import("./index").Input}
+ * @type {import("./index").input}
  */
 export const input = (attributes) => ({ tag: "input", attributes });
 
 /**
- * @type {import("./index").Button}
+ * @type {import("./index").button}
  */
 export const button = (attributes, children) => ({ tag: "button", attributes, children });
 
 /**
- * @type {import("./index").Select}
+ * @type {import("./index").select}
  */
 export const select = (attributes, children) => ({ tag: "select", attributes, children });
 
 /**
- * @type {import("./index").Datalist}
+ * @type {import("./index").datalist}
  */
 export const datalist = (attributes, children) => ({ tag: "datalist", attributes, children });
 
 /**
- * @type {import("./index").Optgroup}
+ * @type {import("./index").optgroup}
  */
 export const optgroup = (attributes, children) => ({ tag: "optgroup", attributes, children });
 
 /**
- * @type {import("./index").Option}
+ * @type {import("./index").option}
  */
 export const option = (attributes, children) => ({ tag: "option", attributes, children });
 
 /**
- * @type {import("./index").Textarea}
+ * @type {import("./index").textarea}
  */
 export const textarea = (attributes, children) => ({ tag: "textarea", attributes, children });
 
 /**
- * @type {import("./index").Output}
+ * @type {import("./index").output}
  */
 export const output = (attributes, children) => ({ tag: "output", attributes, children });
 
 /**
- * @type {import("./index").Progress}
+ * @type {import("./index").progress}
  */
 export const progress = (attributes, children) => ({ tag: "progress", attributes, children });
 
 /**
- * @type {import("./index").Meter}
+ * @type {import("./index").meter}
  */
 export const meter = (attributes, children) => ({ tag: "meter", attributes, children });
 
 /**
- * @type {import("./index").Fieldset}
+ * @type {import("./index").fieldset}
  */
 export const fieldset = (attributes, children) => ({ tag: "fieldset", attributes, children });
 
 /**
- * @type {import("./index").Legend}
+ * @type {import("./index").legend}
  */
 export const legend = (attributes, children) => ({ tag: "legend", attributes, children });
 
 /**
- * @type {import("./index").Details}
+ * @type {import("./index").details}
  */
 export const details = (attributes, children) => ({ tag: "details", attributes, children });
 
 /**
- * @type {import("./index").Summary}
+ * @type {import("./index").summary}
  */
 export const summary = (attributes, children) => ({ tag: "summary", attributes, children });
 
 /**
- * @type {import("./index").Dialog}
+ * @type {import("./index").dialog}
  */
 export const dialog = (attributes, children) => ({ tag: "dialog", attributes, children });
 
 /**
- * @type {import("./index").Script}
+ * @type {import("./index").script}
  */
 export const script = (attributes, children) => ({ tag: "script", attributes, children });
 
 /**
- * @type {import("./index").Noscript}
+ * @type {import("./index").noscript}
  */
 export const noscript = (attributes, children) => ({ tag: "noscript", attributes, children });
 
 /**
- * @type {import("./index").Template}
+ * @type {import("./index").template}
  */
 export const template = (attributes, children) => ({ tag: "template", attributes, children });
 
 /**
- * @type {import("./index").Canvas}
+ * @type {import("./index").canvas}
  */
 export const canvas = (attributes, children) => ({ tag: "canvas", attributes, children });
 
 /**
- * @type {import("./index").Slot}
+ * @type {import("./index").slot}
  */
 export const slot = (attributes, children) => ({ tag: "slot", attributes, children });
 
 /**
- * @type {import("./index").Data}
+ * @type {import("./index").data}
  */
 export const data = (attributes, children) => ({ tag: "data", attributes, children });
 
 /**
- * @type {import("./index").Hgroup}
+ * @type {import("./index").hgroup}
  */
 export const hgroup = (attributes, children) => ({ tag: "hgroup", attributes, children });
 
 /**
- * @type {import("./index").Menu}
+ * @type {import("./index").menu}
  */
 export const menu = (attributes, children) => ({ tag: "menu", attributes, children });
 
 /**
- * @type {import("./index").Search}
+ * @type {import("./index").search}
  */
 export const search = (attributes, children) => ({ tag: "search", attributes, children });
 
 /**
- * @type {import("./index").Fencedframe}
+ * @type {import("./index").fencedframe}
  */
 export const fencedframe = (attributes, children) => ({ tag: "fencedframe", attributes, children });
 
 /**
- * @type {import("./index").Selectedcontent}
+ * @type {import("./index").selectedcontent}
  */
 export const selectedcontent = (attributes, children) => ({
   tag: "selectedcontent",

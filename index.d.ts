@@ -1,10 +1,10 @@
-type Render = (element: Element) => string;
+type render = (element: Element) => string;
 
-export const render: Render;
+export const render: render;
 
-type UnsafeHtml = (value: string) => Element
+type unsafeHtml = (value: string) => Element
 
-export const unsafeHtml: UnsafeHtml;
+export const unsafeHtml: unsafeHtml;
 
 type AttributeValues = string | number | boolean | null | undefined;
 
@@ -74,7 +74,7 @@ type Attributes = {
   "accesskey"?: ValueSets["default"];
   "autocapitalize"?: ValueSets["default"];
   "autocorrect"?: ValueSets["o"];
-  "autofocus"?: ValueSets["default"];
+  "autofocus"?: ValueSets["v"];
   "class"?: ValueSets["default"];
   "contenteditable"?: ValueSets["default"];
   "contextmenu"?: ValueSets["default"];
@@ -86,7 +86,7 @@ type Attributes = {
   "hidden"?: ValueSets["v"];
   "id"?: ValueSets["default"];
   "inert"?: ValueSets["default"];
-  "inputmode"?: ValueSets["default"];
+  "inputmode"?: ValueSets["im"];
   "is"?: ValueSets["default"];
   "itemid"?: ValueSets["default"];
   "itemprop"?: ValueSets["default"];
@@ -231,12 +231,12 @@ type Attributes = {
   "rel"?: ValueSets["default"];
   "media"?: ValueSets["default"];
   "hreflang"?: ValueSets["default"];
-  "type"?: ValueSets["default"];
+  "type"?: ValueSets["lt"];
   "sizes"?: ValueSets["default"];
   "as"?: ValueSets["default"];
   "importance"?: ValueSets["default"];
   "integrity"?: ValueSets["default"];
-  "referrerpolicy"?: ValueSets["default"];
+  "referrerpolicy"?: ValueSets["referrerpolicy"];
   "name"?: ValueSets["default"];
   "http-equiv"?: ValueSets["default"];
   "content"?: ValueSets["default"];
@@ -274,7 +274,7 @@ type Attributes = {
   "size"?: ValueSets["default"];
   "width"?: ValueSets["default"];
   "cols"?: ValueSets["default"];
-  "wrap"?: ValueSets["default"];
+  "wrap"?: ValueSets["w"];
   "cite"?: ValueSets["default"];
   "reversed"?: ValueSets["v"];
   "start"?: ValueSets["default"];
@@ -372,355 +372,355 @@ type Attributes = {
   "async"?: ValueSets["v"];
   "defer"?: ValueSets["v"];
   "nomodule"?: ValueSets["default"];
-  "moz-opaque"?: ValueSets["default"];
+  "moz-opaque"?: ValueSets["default"]
 }
 
 type GlobalAttributeNames = "accesskey" | "autocapitalize" | "autocorrect" | "autofocus" | "class" | "contenteditable" | "contextmenu" | "dir" | "draggable" | "dropzone" | "enterkeyhint" | "exportparts" | "hidden" | "id" | "inert" | "inputmode" | "is" | "itemid" | "itemprop" | "itemref" | "itemscope" | "itemtype" | "lang" | "nonce" | "part" | "popover" | "role" | "slot" | "spellcheck" | "style" | "tabindex" | "title" | "translate" | "virtualkeyboardpolicy" | "onabort" | "onblur" | "oncanplay" | "oncanplaythrough" | "onchange" | "onclick" | "oncontextmenu" | "ondblclick" | "ondrag" | "ondragend" | "ondragenter" | "ondragleave" | "ondragover" | "ondragstart" | "ondrop" | "ondurationchange" | "onemptied" | "onended" | "onerror" | "onfocus" | "onformchange" | "onforminput" | "oninput" | "oninvalid" | "onkeydown" | "onkeypress" | "onkeyup" | "onload" | "onloadeddata" | "onloadedmetadata" | "onloadstart" | "onmousedown" | "onmousemove" | "onmouseout" | "onmouseover" | "onmouseup" | "onmousewheel" | "onmouseenter" | "onmouseleave" | "onpause" | "onplay" | "onplaying" | "onprogress" | "onratechange" | "onreset" | "onresize" | "onreadystatechange" | "onscroll" | "onseeked" | "onseeking" | "onselect" | "onshow" | "onstalled" | "onsubmit" | "onsuspend" | "ontimeupdate" | "onvolumechange" | "onwaiting" | "onpointercancel" | "onpointerdown" | "onpointerenter" | "onpointerleave" | "onpointerlockchange" | "onpointerlockerror" | "onpointermove" | "onpointerout" | "onpointerover" | "onpointerup" | "aria-activedescendant" | "aria-atomic" | "aria-autocomplete" | "aria-busy" | "aria-checked" | "aria-colcount" | "aria-colindex" | "aria-colspan" | "aria-controls" | "aria-current" | "aria-describedby" | "aria-disabled" | "aria-dropeffect" | "aria-errormessage" | "aria-expanded" | "aria-flowto" | "aria-grabbed" | "aria-haspopup" | "aria-hidden" | "aria-invalid" | "aria-label" | "aria-labelledby" | "aria-level" | "aria-live" | "aria-modal" | "aria-multiline" | "aria-multiselectable" | "aria-orientation" | "aria-owns" | "aria-placeholder" | "aria-posinset" | "aria-pressed" | "aria-readonly" | "aria-relevant" | "aria-required" | "aria-roledescription" | "aria-rowcount" | "aria-rowindex" | "aria-rowspan" | "aria-selected" | "aria-setsize" | "aria-sort" | "aria-valuemax" | "aria-valuemin" | "aria-valuenow" | "aria-valuetext" | "aria-details" | "aria-keyshortcuts";
 
-type Html = El<"manifest" | "version" | "xmlns">;
-export const html: Html;
+type html = El<"manifest" | "version" | "xmlns">;
+export const html: html;
 
-type Head = El<"profile">;
-export const head: Head;
+type head = El<"profile">;
+export const head: head;
 
-type Title = El<never>;
-export const title: Title;
+type title = El<never>;
+export const title: title;
 
-type Base = VoidEl<"href" | "target">;
-export const base: Base;
+type base = VoidEl<"href" | "target">;
+export const base: base;
 
-type Link = VoidEl<"href" | "crossorigin" | "rel" | "media" | "hreflang" | "type" | "sizes" | "as" | "importance" | "importance" | "integrity" | "referrerpolicy" | "title">;
-export const link: Link;
+type link = VoidEl<"href" | "crossorigin" | "rel" | "media" | "hreflang" | "type" | "sizes" | "as" | "importance" | "importance" | "integrity" | "referrerpolicy" | "title">;
+export const link: link;
 
-type Meta = VoidEl<"name" | "http-equiv" | "content" | "charset" | "scheme">;
-export const meta: Meta;
+type meta = VoidEl<"name" | "http-equiv" | "content" | "charset" | "scheme">;
+export const meta: meta;
 
-type Style = El<"media" | "nonce" | "type" | "scoped" | "title">;
-export const style: Style;
+type style = El<"media" | "nonce" | "type" | "scoped" | "title">;
+export const style: style;
 
-type Body = El<"onafterprint" | "onbeforeprint" | "onbeforeunload" | "onhashchange" | "onlanguagechange" | "onmessage" | "onoffline" | "ononline" | "onpagehide" | "onpageshow" | "onpopstate" | "onstorage" | "onunload" | "alink" | "background" | "bgcolor" | "bottommargin" | "leftmargin" | "link" | "onblur" | "onerror" | "onfocus" | "onload" | "onredo" | "onresize" | "onundo" | "rightmargin" | "text" | "topmargin" | "vlink">;
-export const body: Body;
+type body = El<"onafterprint" | "onbeforeprint" | "onbeforeunload" | "onhashchange" | "onlanguagechange" | "onmessage" | "onoffline" | "ononline" | "onpagehide" | "onpageshow" | "onpopstate" | "onstorage" | "onunload" | "alink" | "background" | "bgcolor" | "bottommargin" | "leftmargin" | "link" | "onblur" | "onerror" | "onfocus" | "onload" | "onredo" | "onresize" | "onundo" | "rightmargin" | "text" | "topmargin" | "vlink">;
+export const body: body;
 
-type Article = El<never>;
-export const article: Article;
+type article = El<never>;
+export const article: article;
 
-type Section = El<never>;
-export const section: Section;
+type section = El<never>;
+export const section: section;
 
-type Nav = El<never>;
-export const nav: Nav;
+type nav = El<never>;
+export const nav: nav;
 
-type Aside = El<never>;
-export const aside: Aside;
+type aside = El<never>;
+export const aside: aside;
 
-type H1 = El<never>;
-export const h1: H1;
+type h1 = El<never>;
+export const h1: h1;
 
-type H2 = El<never>;
-export const h2: H2;
+type h2 = El<never>;
+export const h2: h2;
 
-type H3 = El<never>;
-export const h3: H3;
+type h3 = El<never>;
+export const h3: h3;
 
-type H4 = El<never>;
-export const h4: H4;
+type h4 = El<never>;
+export const h4: h4;
 
-type H5 = El<never>;
-export const h5: H5;
+type h5 = El<never>;
+export const h5: h5;
 
-type H6 = El<never>;
-export const h6: H6;
+type h6 = El<never>;
+export const h6: h6;
 
-type Header = El<never>;
-export const header: Header;
+type header = El<never>;
+export const header: header;
 
-type Footer = El<never>;
-export const footer: Footer;
+type footer = El<never>;
+export const footer: footer;
 
-type Address = El<never>;
-export const address: Address;
+type address = El<never>;
+export const address: address;
 
-type P = El<never>;
-export const p: P;
+type p = El<never>;
+export const p: p;
 
-type Hr = VoidEl<"align" | "color" | "noshade" | "size" | "width">;
-export const hr: Hr;
+type hr = VoidEl<"align" | "color" | "noshade" | "size" | "width">;
+export const hr: hr;
 
-type Pre = El<"cols" | "width" | "wrap">;
-export const pre: Pre;
+type pre = El<"cols" | "width" | "wrap">;
+export const pre: pre;
 
-type Blockquote = El<"cite">;
-export const blockquote: Blockquote;
+type blockquote = El<"cite">;
+export const blockquote: blockquote;
 
-type Ol = El<"reversed" | "start" | "type" | "compact">;
-export const ol: Ol;
+type ol = El<"reversed" | "start" | "type" | "compact">;
+export const ol: ol;
 
-type Ul = El<"compact">;
-export const ul: Ul;
+type ul = El<"compact">;
+export const ul: ul;
 
-type Li = El<"value" | "type">;
-export const li: Li;
+type li = El<"value" | "type">;
+export const li: li;
 
-type Dl = El<never>;
-export const dl: Dl;
+type dl = El<never>;
+export const dl: dl;
 
-type Dt = El<never>;
-export const dt: Dt;
+type dt = El<never>;
+export const dt: dt;
 
-type Dd = El<"nowrap">;
-export const dd: Dd;
+type dd = El<"nowrap">;
+export const dd: dd;
 
-type Figure = El<never>;
-export const figure: Figure;
+type figure = El<never>;
+export const figure: figure;
 
-type Figcaption = El<never>;
-export const figcaption: Figcaption;
+type figcaption = El<never>;
+export const figcaption: figcaption;
 
-type Main = El<never>;
-export const main: Main;
+type main = El<never>;
+export const main: main;
 
-type Div = El<never>;
-export const div: Div;
+type div = El<never>;
+export const div: div;
 
-type A = El<"href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "referrerpolicy">;
-export const a: A;
+type a = El<"href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "referrerpolicy">;
+export const a: a;
 
-type Em = El<never>;
-export const em: Em;
+type em = El<never>;
+export const em: em;
 
-type Strong = El<never>;
-export const strong: Strong;
+type strong = El<never>;
+export const strong: strong;
 
-type Small = El<never>;
-export const small: Small;
+type small = El<never>;
+export const small: small;
 
-type S = El<never>;
-export const s: S;
+type s = El<never>;
+export const s: s;
 
-type Cite = El<never>;
-export const cite: Cite;
+type cite = El<never>;
+export const cite: cite;
 
-type Q = El<"cite">;
-export const q: Q;
+type q = El<"cite">;
+export const q: q;
 
-type Dfn = El<never>;
-export const dfn: Dfn;
+type dfn = El<never>;
+export const dfn: dfn;
 
-type Abbr = El<never>;
-export const abbr: Abbr;
+type abbr = El<never>;
+export const abbr: abbr;
 
-type Ruby = El<never>;
-export const ruby: Ruby;
+type ruby = El<never>;
+export const ruby: ruby;
 
-type Rb = El<never>;
-export const rb: Rb;
+type rb = El<never>;
+export const rb: rb;
 
-type Rt = El<never>;
-export const rt: Rt;
+type rt = El<never>;
+export const rt: rt;
 
-type Rp = El<never>;
-export const rp: Rp;
+type rp = El<never>;
+export const rp: rp;
 
-type Time = El<"datetime">;
-export const time: Time;
+type time = El<"datetime">;
+export const time: time;
 
-type Code = El<never>;
-export const code: Code;
+type code = El<never>;
+export const code: code;
 
-type Var = El<never>;
-export const var_: Var;
+type var_ = El<never>;
+export const var_: var_;
 
-type Samp = El<never>;
-export const samp: Samp;
+type samp = El<never>;
+export const samp: samp;
 
-type Kbd = El<never>;
-export const kbd: Kbd;
+type kbd = El<never>;
+export const kbd: kbd;
 
-type Sub = El<never>;
-export const sub: Sub;
+type sub = El<never>;
+export const sub: sub;
 
-type Sup = El<never>;
-export const sup: Sup;
+type sup = El<never>;
+export const sup: sup;
 
-type I = El<never>;
-export const i: I;
+type i = El<never>;
+export const i: i;
 
-type B = El<never>;
-export const b: B;
+type b = El<never>;
+export const b: b;
 
-type U = El<never>;
-export const u: U;
+type u = El<never>;
+export const u: u;
 
-type Mark = El<never>;
-export const mark: Mark;
+type mark = El<never>;
+export const mark: mark;
 
-type Bdi = El<never>;
-export const bdi: Bdi;
+type bdi = El<never>;
+export const bdi: bdi;
 
-type Bdo = El<"dir">;
-export const bdo: Bdo;
+type bdo = El<"dir">;
+export const bdo: bdo;
 
-type Span = El<never>;
-export const span: Span;
+type span = El<never>;
+export const span: span;
 
-type Br = VoidEl<"clear">;
-export const br: Br;
+type br = VoidEl<"clear">;
+export const br: br;
 
-type Wbr = VoidEl<never>;
-export const wbr: Wbr;
+type wbr = VoidEl<never>;
+export const wbr: wbr;
 
-type Ins = El<"cite" | "datetime">;
-export const ins: Ins;
+type ins = El<"cite" | "datetime">;
+export const ins: ins;
 
-type Del = El<"cite" | "datetime">;
-export const del: Del;
+type del = El<"cite" | "datetime">;
+export const del: del;
 
-type Picture = El<never>;
-export const picture: Picture;
+type picture = El<never>;
+export const picture: picture;
 
-type Img = VoidEl<"alt" | "src" | "srcset" | "crossorigin" | "usemap" | "ismap" | "width" | "height" | "decoding" | "loading" | "fetchpriority" | "referrerpolicy" | "sizes" | "importance" | "importance" | "intrinsicsize">;
-export const img: Img;
+type img = VoidEl<"alt" | "src" | "srcset" | "crossorigin" | "usemap" | "ismap" | "width" | "height" | "decoding" | "loading" | "fetchpriority" | "referrerpolicy" | "sizes" | "importance" | "importance" | "intrinsicsize">;
+export const img: img;
 
-type Iframe = El<"src" | "srcdoc" | "name" | "sandbox" | "seamless" | "allowfullscreen" | "width" | "height" | "allow" | "allowpaymentrequest" | "allowpaymentrequest" | "csp" | "importance" | "referrerpolicy">;
-export const iframe: Iframe;
+type iframe = El<"src" | "srcdoc" | "name" | "sandbox" | "seamless" | "allowfullscreen" | "width" | "height" | "allow" | "allowpaymentrequest" | "allowpaymentrequest" | "csp" | "importance" | "referrerpolicy">;
+export const iframe: iframe;
 
-type Embed = VoidEl<"src" | "type" | "width" | "height">;
-export const embed: Embed;
+type embed = VoidEl<"src" | "type" | "width" | "height">;
+export const embed: embed;
 
-type Object = El<"data" | "type" | "typemustmatch" | "name" | "usemap" | "form" | "width" | "height" | "archive" | "border" | "classid" | "codebase" | "codetype" | "declare" | "standby" | "tabindex">;
-export const object: Object;
+type object_ = El<"data" | "type" | "typemustmatch" | "name" | "usemap" | "form" | "width" | "height" | "archive" | "border" | "classid" | "codebase" | "codetype" | "declare" | "standby" | "tabindex">;
+export const object_: object_;
 
-type Param = VoidEl<"name" | "value" | "type" | "valuetype">;
-export const param: Param;
+type param = VoidEl<"name" | "value" | "type" | "valuetype">;
+export const param: param;
 
-type Video = El<"src" | "crossorigin" | "poster" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls" | "width" | "height">;
-export const video: Video;
+type video = El<"src" | "crossorigin" | "poster" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls" | "width" | "height">;
+export const video: video;
 
-type Audio = El<"src" | "crossorigin" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls">;
-export const audio: Audio;
+type audio = El<"src" | "crossorigin" | "preload" | "autoplay" | "mediagroup" | "loop" | "muted" | "controls">;
+export const audio: audio;
 
-type Source = VoidEl<"src" | "type" | "sizes" | "srcset" | "media">;
-export const source: Source;
+type source = VoidEl<"src" | "type" | "sizes" | "srcset" | "media">;
+export const source: source;
 
-type Track = VoidEl<"default" | "kind" | "label" | "src" | "srclang">;
-export const track: Track;
+type track = VoidEl<"default" | "kind" | "label" | "src" | "srclang">;
+export const track: track;
 
-type Map = El<"name">;
-export const map: Map;
+type map = El<"name">;
+export const map: map;
 
-type Area = VoidEl<"alt" | "coords" | "shape" | "href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "accesskey">;
-export const area: Area;
+type area = VoidEl<"alt" | "coords" | "shape" | "href" | "target" | "download" | "ping" | "rel" | "hreflang" | "type" | "accesskey">;
+export const area: area;
 
-type Table = El<"border" | "align">;
-export const table: Table;
+type table = El<"border" | "align">;
+export const table: table;
 
-type Caption = El<"align">;
-export const caption: Caption;
+type caption = El<"align">;
+export const caption: caption;
 
-type Colgroup = El<"span" | "align">;
-export const colgroup: Colgroup;
+type colgroup = El<"span" | "align">;
+export const colgroup: colgroup;
 
-type Col = VoidEl<"span" | "align">;
-export const col: Col;
+type col = VoidEl<"span" | "align">;
+export const col: col;
 
-type Tbody = El<"align">;
-export const tbody: Tbody;
+type tbody = El<"align">;
+export const tbody: tbody;
 
-type Thead = El<"align">;
-export const thead: Thead;
+type thead = El<"align">;
+export const thead: thead;
 
-type Tfoot = El<"align">;
-export const tfoot: Tfoot;
+type tfoot = El<"align">;
+export const tfoot: tfoot;
 
-type Tr = El<"align">;
-export const tr: Tr;
+type tr = El<"align">;
+export const tr: tr;
 
-type Td = El<"colspan" | "rowspan" | "headers" | "abbr" | "align" | "axis" | "bgcolor">;
-export const td: Td;
+type td = El<"colspan" | "rowspan" | "headers" | "abbr" | "align" | "axis" | "bgcolor">;
+export const td: td;
 
-type Th = El<"colspan" | "rowspan" | "headers" | "scope" | "sorted" | "abbr" | "align" | "axis" | "bgcolor">;
-export const th: Th;
+type th = El<"colspan" | "rowspan" | "headers" | "scope" | "sorted" | "abbr" | "align" | "axis" | "bgcolor">;
+export const th: th;
 
-type Form = El<"accept-charset" | "action" | "autocomplete" | "enctype" | "method" | "name" | "novalidate" | "target" | "accept" | "autocapitalize">;
-export const form: Form;
+type form = El<"accept-charset" | "action" | "autocomplete" | "enctype" | "method" | "name" | "novalidate" | "target" | "accept" | "autocapitalize">;
+export const form: form;
 
-type Label = El<"form" | "for">;
-export const label: Label;
+type label = El<"form" | "for">;
+export const label: label;
 
-type Input = VoidEl<"accept" | "alt" | "autocomplete" | "autofocus" | "checked" | "dirname" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "height" | "inputmode" | "list" | "max" | "maxlength" | "min" | "minlength" | "multiple" | "name" | "pattern" | "placeholder" | "popovertarget" | "popovertargetaction" | "readonly" | "required" | "size" | "src" | "step" | "type" | "value" | "width">;
-export const input: Input;
+type input = VoidEl<"accept" | "alt" | "autocomplete" | "autofocus" | "checked" | "dirname" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "height" | "inputmode" | "list" | "max" | "maxlength" | "min" | "minlength" | "multiple" | "name" | "pattern" | "placeholder" | "popovertarget" | "popovertargetaction" | "readonly" | "required" | "size" | "src" | "step" | "type" | "value" | "width">;
+export const input: input;
 
-type Button = El<"autofocus" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "name" | "popovertarget" | "popovertargetaction" | "type" | "value" | "autocomplete">;
-export const button: Button;
+type button = El<"autofocus" | "disabled" | "form" | "formaction" | "formenctype" | "formmethod" | "formnovalidate" | "formtarget" | "name" | "popovertarget" | "popovertargetaction" | "type" | "value" | "autocomplete">;
+export const button: button;
 
-type Select = El<"autocomplete" | "autofocus" | "disabled" | "form" | "multiple" | "name" | "required" | "size">;
-export const select: Select;
+type select = El<"autocomplete" | "autofocus" | "disabled" | "form" | "multiple" | "name" | "required" | "size">;
+export const select: select;
 
-type Datalist = El<never>;
-export const datalist: Datalist;
+type datalist = El<never>;
+export const datalist: datalist;
 
-type Optgroup = El<"disabled" | "label">;
-export const optgroup: Optgroup;
+type optgroup = El<"disabled" | "label">;
+export const optgroup: optgroup;
 
-type Option = El<"disabled" | "label" | "selected" | "value">;
-export const option: Option;
+type option = El<"disabled" | "label" | "selected" | "value">;
+export const option: option;
 
-type Textarea = El<"autocomplete" | "autofocus" | "cols" | "dirname" | "disabled" | "form" | "inputmode" | "maxlength" | "minlength" | "name" | "placeholder" | "readonly" | "required" | "rows" | "wrap" | "autocapitalize" | "spellcheck">;
-export const textarea: Textarea;
+type textarea = El<"autocomplete" | "autofocus" | "cols" | "dirname" | "disabled" | "form" | "inputmode" | "maxlength" | "minlength" | "name" | "placeholder" | "readonly" | "required" | "rows" | "wrap" | "autocapitalize" | "spellcheck">;
+export const textarea: textarea;
 
-type Output = El<"for" | "form" | "name">;
-export const output: Output;
+type output = El<"for" | "form" | "name">;
+export const output: output;
 
-type Progress = El<"value" | "max">;
-export const progress: Progress;
+type progress = El<"value" | "max">;
+export const progress: progress;
 
-type Meter = El<"value" | "min" | "max" | "low" | "high" | "optimum" | "form">;
-export const meter: Meter;
+type meter = El<"value" | "min" | "max" | "low" | "high" | "optimum" | "form">;
+export const meter: meter;
 
-type Fieldset = El<"disabled" | "form" | "name">;
-export const fieldset: Fieldset;
+type fieldset = El<"disabled" | "form" | "name">;
+export const fieldset: fieldset;
 
-type Legend = El<never>;
-export const legend: Legend;
+type legend = El<never>;
+export const legend: legend;
 
-type Details = El<"open">;
-export const details: Details;
+type details = El<"open">;
+export const details: details;
 
-type Summary = El<never>;
-export const summary: Summary;
+type summary = El<never>;
+export const summary: summary;
 
-type Dialog = El<"open">;
-export const dialog: Dialog;
+type dialog = El<"open">;
+export const dialog: dialog;
 
-type Script = El<"src" | "type" | "charset" | "async" | "defer" | "crossorigin" | "nonce" | "integrity" | "nomodule" | "referrerpolicy" | "text">;
-export const script: Script;
+type script = El<"src" | "type" | "charset" | "async" | "defer" | "crossorigin" | "nonce" | "integrity" | "nomodule" | "referrerpolicy" | "text">;
+export const script: script;
 
-type Noscript = El<never>;
-export const noscript: Noscript;
+type noscript = El<never>;
+export const noscript: noscript;
 
-type Template = El<never>;
-export const template: Template;
+type template = El<never>;
+export const template: template;
 
-type Canvas = El<"width" | "height" | "moz-opaque">;
-export const canvas: Canvas;
+type canvas = El<"width" | "height" | "moz-opaque">;
+export const canvas: canvas;
 
-type Slot = El<"name">;
-export const slot: Slot;
+type slot = El<"name">;
+export const slot: slot;
 
-type Data = El<"value">;
-export const data: Data;
+type data = El<"value">;
+export const data: data;
 
-type Hgroup = El<never>;
-export const hgroup: Hgroup;
+type hgroup = El<never>;
+export const hgroup: hgroup;
 
-type Menu = El<never>;
-export const menu: Menu;
+type menu = El<never>;
+export const menu: menu;
 
-type Search = El<never>;
-export const search: Search;
+type search = El<never>;
+export const search: search;
 
-type Fencedframe = El<"allow" | "height" | "width">;
-export const fencedframe: Fencedframe;
+type fencedframe = El<"allow" | "height" | "width">;
+export const fencedframe: fencedframe;
 
-type Selectedcontent = El<never>;
-export const selectedcontent: Selectedcontent;
+type selectedcontent = El<never>;
+export const selectedcontent: selectedcontent;

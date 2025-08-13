@@ -1,10 +1,19 @@
-console.log(`type Render = (element: Element) => string;
+function union(arr) {
+  return arr.map((item) => `"${item.name}"`).join(" | ");
+}
 
-export const render: Render;
+const res = await fetch(
+  "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
+);
+const data = await res.json();
 
-type UnsafeHtml = (value: string) => Element
+let result = `type render = (element: Element) => string;
 
-export const unsafeHtml: UnsafeHtml;
+export const render: render;
+
+type unsafeHtml = (value: string) => Element
+
+export const unsafeHtml: unsafeHtml;
 
 type AttributeValues = string | number | boolean | null | undefined;
 
@@ -22,42 +31,43 @@ type ElAttributes<A extends keyof Attributes> = Pick<Attributes, GlobalAttribute
 
 type El<A extends keyof Attributes> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 
-type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;`);
+type VoidEl<A extends keyof Attributes> = (attributes: ElAttributes<A>) => Element;
+`;
 
-const res = await fetch(
-  "https://raw.githubusercontent.com/microsoft/vscode-custom-data/refs/heads/main/web-data/data/browsers.html-data.json",
-);
-const data = await res.json();
-
-function union(arr) {
-  return arr.map((item) => `"${item.name}"`).join(" | ");
-}
-
-console.log(`
+result += `
 type ValueSets = {
   "default": string | number | boolean | null;
-  "v": boolean;`);
-for (const valueSet of data.valueSets) {
-  console.log(`  "${valueSet.name}": ${union(valueSet.values)};`);
+  "v": boolean;
+  ${data.valueSets.map((vs) => `"${vs.name}": ${union(vs.values)};`).join("\n  ")}
 }
-console.log("}");
+`;
 
-const tagAttributes = data.tags.flatMap((tag) => tag.attributes);
-const processedTags = new Set();
+const allAttributes = [
+  ...data.globalAttributes.map((a) => [a.name, a.valueSet]),
+  ...data.tags.flatMap((tag) => tag.attributes.map((a) => [a.name, a.valueSet])),
+];
 
-console.log(`\ntype Attributes = {`);
-for (const attribute of [...data.globalAttributes, ...tagAttributes]) {
-  if (processedTags.has(attribute.name)) continue;
-  processedTags.add(attribute.name);
-  console.log(`  "${attribute.name}"?: ValueSets["${attribute.valueSet ?? "default"}"];`);
+const attributes = {};
+for (const [name, newValue] of allAttributes) {
+  const oldValue = attributes[name];
+  attributes[name] =
+    oldValue === undefined || oldValue === "default" ? (newValue ?? "default") : oldValue;
 }
-console.log(`}`);
 
-console.log(`\ntype GlobalAttributeNames = ${union(data.globalAttributes)};`);
+result += `
+type Attributes = {
+  ${Object.entries(attributes)
+    .map(([name, vs]) => `"${name}"?: ValueSets["${vs}"]`)
+    .join(";\n  ")}
+}
+
+type GlobalAttributeNames = ${union(data.globalAttributes)};`;
 
 for (const tag of data.tags) {
-  const capName = tag.name.charAt(0).toUpperCase() + tag.name.slice(1);
   const attrNames = tag.attributes.length > 0 ? union(tag.attributes) : "never";
-  console.log(`\ntype ${capName} = ${tag.void ? "VoidEl" : "El"}<${attrNames}>;`);
-  console.log(`export const ${tag.name === "var" ? "var_" : tag.name}: ${capName};`);
+  const name = tag.name === "var" ? "var_" : tag.name === "object" ? "object_" : tag.name;
+  result += `\n\ntype ${name} = ${tag.void ? "VoidEl" : "El"}<${attrNames}>;`;
+  result += `\nexport const ${name}: ${name};`;
 }
+
+console.log(result);
