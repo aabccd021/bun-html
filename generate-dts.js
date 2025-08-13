@@ -43,9 +43,9 @@ type ElAttributes<A> = GlobalAttributes & A & {
 type El<A> = (attributes: ElAttributes<A>, children: Element[]) => Element;
 
 type VoidEl<A> = (attributes: ElAttributes<A>) => Element;
-`;
 
-result += `\ntype GlobalAttributes = ${attrsStr(data.globalAttributes)};`;
+type GlobalAttributes = ${attrsStr(data.globalAttributes)};
+`;
 
 for (const tag of data.tags) {
   const attrs = attrsStr(tag.attributes);
