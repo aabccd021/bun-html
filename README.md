@@ -5,11 +5,9 @@
 ## Installation
 
 ```sh
-# nodejs + npm
-npm install bun-html
-
-# bun + git
-bun install git@github.com:aabccd021/bun-html.git
+pnpm install bun-html@github:aabccd021/bun-html
+yarn install bun-html@github:aabccd021/bun-html
+bun install bun-html@github:aabccd021/bun-html
 ```
 
 ## Basic Usage
