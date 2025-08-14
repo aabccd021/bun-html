@@ -1,6 +1,6 @@
 # tiny-html-builder
 
-**tiny-html-builder** is a tiny ...
+**tiny-html-builder** is a tiny and type-safe HTML builder for JavaScript and TypeScript.
 
 ## Installation
 
