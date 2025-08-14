@@ -20,9 +20,7 @@ const showHeader = true;
 
 const element = html({}, [
   meta({ "data-note": "No child" }),
-  p({}, [
-    p({}, ["Grand child"])
-  ]),
+  p({}, [p({}, ["Grand child"])]),
   meta({ "data-xss": `"&'<>\`` }),
   input({ type: "checkbox", checked: true }),
   input({ type: "checkbox", checked: false }),
