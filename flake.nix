@@ -23,7 +23,7 @@
 
       packages.format = treefmtEval.config.build.check self;
 
-      packages.test = pkgs.runCommand "tests" { } ''
+      packages.test = pkgs.runCommand "test" { } ''
         cd ${./.}
         ${pkgs.typescript}/bin/tsc
         ${pkgs.nodejs}/bin/node ./index.test.js
