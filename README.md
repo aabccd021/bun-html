@@ -1,19 +1,19 @@
-# bun-html
+# tiny-html-builder
 
-**bun-html** is a tiny and type-safe HTML templating library.
+**tiny-html-builder** is a tiny ...
 
 ## Installation
 
 ```sh
-pnpm install bun-html@github:aabccd021/bun-html
-yarn add bun-html@github:aabccd021/bun-html
-bun install bun-html@github:aabccd021/bun-html
+pnpm install tiny-html-builder@github:aabccd021/tiny-html-builder
+yarn add tiny-html-builder@github:aabccd021/tiny-html-builder
+bun install tiny-html-builder@github:aabccd021/tiny-html-builder
 ```
 
 ## Basic Usage
 
 ```js
-import { div, html, input, meta, p, render, unsafeHtml } from "bun-html";
+import { div, html, input, meta, p, render, unsafeHtml } from "tiny-html-builder";
 
 const showSidebar = false;
 const showHeader = true;
@@ -80,8 +80,8 @@ p({ foo: "bar" }, []);
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
 
 # clone and enter the repository
-git clone --depth 1 https://github.com/aabccd021/bun-html.git
-cd bun-html
+git clone --depth 1 https://github.com/aabccd021/tiny-html-builder.git
+cd tiny-html-builder
 
 # format everything
 nix fmt
