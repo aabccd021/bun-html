@@ -11,3 +11,4 @@ jobs:
       - run: nix run nixpkgs#biome -- format *.js --indent-style=space --line-width=100
       - run: nix run nixpkgs#biome -- lint *.js --skip complexity/noUselessLoneBlockStatements
       - run: nix run nixpkgs#typescript -- index.* --allowJs --checkJs --module preserve --lib esnext,webworker --target esnext --noEmit
+      - run: nix run nixpkgs#nodejs -- index.test.js
