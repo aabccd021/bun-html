@@ -12,7 +12,7 @@ import {
   source,
   unsafeHtml,
   var_,
-} from "./index.js";
+} from ".";
 
 {
   console.log("example");
